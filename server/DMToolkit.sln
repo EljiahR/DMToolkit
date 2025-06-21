@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMToolkit.API", "src\DMToolkit.API.csproj", "{CECE2C01-6932-4408-BA55-EB03EB370131}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMToolkit.Tests", "tests\DMToolkit.Tests.csproj", "{40DC60B6-DFE2-4A03-B59E-87B78EE8FACD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CECE2C01-6932-4408-BA55-EB03EB370131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CECE2C01-6932-4408-BA55-EB03EB370131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CECE2C01-6932-4408-BA55-EB03EB370131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CECE2C01-6932-4408-BA55-EB03EB370131}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40DC60B6-DFE2-4A03-B59E-87B78EE8FACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40DC60B6-DFE2-4A03-B59E-87B78EE8FACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40DC60B6-DFE2-4A03-B59E-87B78EE8FACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40DC60B6-DFE2-4A03-B59E-87B78EE8FACD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
