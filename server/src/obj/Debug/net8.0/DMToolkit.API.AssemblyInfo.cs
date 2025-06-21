@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DMToolkit.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5fd5198577c5e411d3b48eb0b9aff8bd545e8dba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7acc33fa81f1b8f5fc89c0f278a76bfaab636b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("DMToolkit.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DMToolkit.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

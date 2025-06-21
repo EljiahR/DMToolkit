@@ -1,3 +1,4 @@
+using DMTools;
 namespace DMTools.Seed;
 
 public class Data
@@ -42,7 +43,7 @@ public class Data
             "Origin",
             "Origin"
         )
-            
+
     ];
     public static WeaponProperty[] WeaponProperties = [
         new("Thrown", "Weapon can be thrown without penalty", new(null, 20, 60)),
@@ -77,11 +78,11 @@ public class Data
         )
     ];
     public static Ammunition[] Ammo = [new("Bolt", 20)];
-    public static CoinPouch[] CoinPouchs = [new(0,0,0,50), new(0,0,0,12)];
-    public static ITools[] Tools = [new ToolCategory("Gaming Set", [new("Dice", 0f, new(0,1)), new("Dragon Chess", 0f, new(0,0,0,1))])];
+    public static CoinPouch[] CoinPouchs = [new(0, 0, 0, 50), new(0, 0, 0, 12)];
+    public static ITools[] Tools = [new ToolCategory("Gaming Set", [new("Dice", 0f, new(0, 1)), new("Dragon Chess", 0f, new(0, 0, 0, 1))])];
     public static CharacterClass[] Classes = [new("Fighter")];
     public static Subclass[] Subclasses = [new("Champion", Classes[0])];
-    public static Background[] Backgrounds = [new Background("Guard", ["Strength", "Intelligence", "Wisdom"], OriginFeatures[0],  ["Athletics", "Perception"], Tools[0], [[Weapons[0], Weapons[1], Ammo[0], CoinPouchs[1]], [CoinPouchs[0]]], "Guard")];
+    public static Background[] Backgrounds = [new Background("Guard", ["Strength", "Intelligence", "Wisdom"], OriginFeatures[0], ["Athletics", "Perception"], Tools[0], [[Weapons[0], Weapons[1], Ammo[0], CoinPouchs[1]], [CoinPouchs[0]]], "Guard")];
     public static Species[] AllSpecies = [new("Human", "Humanoid", 30, ["Medium", "Small"], SpeciesFeatures.Take(3).ToArray())];
     public static Lineage[] AllLineages = [];
 }
