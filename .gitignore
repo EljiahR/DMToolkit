@@ -1,0 +1,13 @@
+# Node
+/client/node_modules
+
+# Vite
+/client/dist
+
+# ASP.Net
+/server/bin
+/server/obj
+
+# OS
+.DS_Store
+Thumbs.db
