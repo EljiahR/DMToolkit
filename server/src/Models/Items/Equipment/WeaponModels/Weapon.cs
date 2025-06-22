@@ -1,7 +1,7 @@
-using DMTools.Models.Currency;
-using DMTools.Models.GameModels;
+using DMToolkit.Models.Currency;
+using DMToolkit.Models.GameModels;
 
-namespace DMTools.Models.Items.Equipment.WeaponModels;
+namespace DMToolkit.Models.Items.Equipment.WeaponModels;
 
 public class Weapon : Item
 {

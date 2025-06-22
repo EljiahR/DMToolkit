@@ -1,6 +1,6 @@
-using DMTools.Models.Attributes.AbilityScores;
+using DMToolkit.Models.Attributes.AbilityScores;
 
-namespace DMTools.Models.Attributes;
+namespace DMToolkit.Models.Attributes;
 
 public class Skill
 {

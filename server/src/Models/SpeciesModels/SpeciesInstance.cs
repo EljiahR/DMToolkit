@@ -1,6 +1,6 @@
-using DMTools.Models.Features;
+using DMToolkit.Models.Features;
 
-namespace DMTools.Models.SpeciesModels;
+namespace DMToolkit.Models.SpeciesModels;
 
 // Not sure if entirely necessary but just to be safe
 public class SpeciesInstance 

@@ -1,6 +1,6 @@
-using DMTools.Models.Features;
+using DMToolkit.Models.Features;
 
-namespace DMTools.Models.SpeciesModels;
+namespace DMToolkit.Models.SpeciesModels;
 
 public class Species
 {

@@ -1,4 +1,4 @@
-namespace DMTools.Models.ClassModels;
+namespace DMToolkit.Models.ClassModels;
 
 public class CharacterClass
 {

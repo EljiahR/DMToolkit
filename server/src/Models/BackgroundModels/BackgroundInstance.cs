@@ -1,6 +1,6 @@
-using DMTools.Models.Items;
+using DMToolkit.Models.Items;
 
-namespace DMTools.Models.BackgroundModels;
+namespace DMToolkit.Models.BackgroundModels;
 
 public class BackgroundInstance
 {

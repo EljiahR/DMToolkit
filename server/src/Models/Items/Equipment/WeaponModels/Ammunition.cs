@@ -1,4 +1,4 @@
-namespace DMTools.Models.Items.Equipment.WeaponModels;
+namespace DMToolkit.Models.Items.Equipment.WeaponModels;
 
 public class Ammunition : Item
 {

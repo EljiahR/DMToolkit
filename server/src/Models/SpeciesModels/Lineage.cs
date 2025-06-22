@@ -1,6 +1,6 @@
-using DMTools.Models.Features;
+using DMToolkit.Models.Features;
 
-namespace DMTools.Models.SpeciesModels;
+namespace DMToolkit.Models.SpeciesModels;
 
 // This might not be needed at all
 public class Lineage

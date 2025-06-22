@@ -1,4 +1,4 @@
-namespace DMTools.Models.Attributes.AbilityScores;
+namespace DMToolkit.Models.Attributes.AbilityScores;
 
 public class Wisdom : AbilityScoreBase
 {
@@ -12,5 +12,4 @@ public class Wisdom : AbilityScoreBase
     })
     {
     }
-
 }

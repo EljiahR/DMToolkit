@@ -1,5 +1,13 @@
-using DMTools;
-namespace DMTools.Seed;
+using DMToolkit.Models.BackgroundModels;
+using DMToolkit.Models.ClassModels;
+using DMToolkit.Models.Features;
+using DMToolkit.Models.GameModels;
+using DMToolkit.Models.Items.Equipment.WeaponModels;
+using DMToolkit.Models.Items.Generic;
+using DMToolkit.Models.Items.ToolModels;
+using DMToolkit.Models.SpeciesModels;
+
+namespace DMToolkit.Seed;
 
 public class Data
 {

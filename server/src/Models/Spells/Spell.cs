@@ -1,4 +1,4 @@
-namespace DMTools.Models.Spells;
+namespace DMToolkit.Models.Spells;
 
 // Very incomplete
 public class Spell

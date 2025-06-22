@@ -1,6 +1,6 @@
-using DMTools.Models.Currency;
+using DMToolkit.Models.Currency;
 
-namespace DMTools.Models.Items.ToolModels;
+namespace DMToolkit.Models.Items.ToolModels;
 
 public class Tool : Item, ITools
 {

@@ -1,4 +1,4 @@
-namespace DMTools.Models.GameModels;
+namespace DMToolkit.Models.GameModels;
 
 public abstract class Property // Temp until I can think of how to implement these, might even cram everything into feats
 {

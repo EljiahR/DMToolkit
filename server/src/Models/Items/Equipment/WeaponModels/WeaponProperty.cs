@@ -1,6 +1,6 @@
-using DMTools.Models.GameModels;
+using DMToolkit.Models.GameModels;
 
-namespace DMTools.Models.Items.Equipment.WeaponModels;
+namespace DMToolkit.Models.Items.Equipment.WeaponModels;
 
 public class WeaponProperty : Property
 {

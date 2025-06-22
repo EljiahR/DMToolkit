@@ -1,4 +1,4 @@
-namespace DMTools.Models.Features;
+namespace DMToolkit.Models.Features;
 
 public class FeatureInstance // All features will be an instance to account for features that require a choice to be made
 {

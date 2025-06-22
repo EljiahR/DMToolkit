@@ -1,6 +1,6 @@
-using DMTools.Models.Features;
+using DMToolkit.Models.Features;
 
-namespace DMTools.Models.ClassModels;
+namespace DMToolkit.Models.ClassModels;
 
 public class ClassInstance
 {

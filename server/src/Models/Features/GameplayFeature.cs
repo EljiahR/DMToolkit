@@ -1,4 +1,4 @@
-namespace DMTools.Models.Features;
+namespace DMToolkit.Models.Features;
 
 public class GameplayFeature : Feature // features that affect gameplay in more direct ways
 {

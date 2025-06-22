@@ -1,4 +1,4 @@
-namespace DMTools.Models.Features;
+namespace DMToolkit.Models.Features;
 
 public class ParentFeature : Feature // features that are made up of multiple effects that may as well be seperate features
 {

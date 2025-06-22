@@ -1,4 +1,4 @@
-namespace DMTools.Models.Items.Generic;
+namespace DMToolkit.Models.Items.Generic;
 
 public class CoinPouch : Item
 {

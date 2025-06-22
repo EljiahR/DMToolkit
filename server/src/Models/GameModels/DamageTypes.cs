@@ -1,4 +1,4 @@
-namespace DMTools.Models.GameModels;
+namespace DMToolkit.Models.GameModels;
 
 public enum DamageTypes
 {

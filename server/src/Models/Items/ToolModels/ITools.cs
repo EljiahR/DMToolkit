@@ -1,4 +1,4 @@
-namespace DMTools.Models.Items.ToolModels;
+namespace DMToolkit.Models.Items.ToolModels;
 
 public interface ITools
 {

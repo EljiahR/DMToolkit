@@ -1,4 +1,4 @@
-namespace DMTools.Models.Attributes.AbilityScores;
+namespace DMToolkit.Models.Attributes.AbilityScores;
 
 public class Dexterity : AbilityScoreBase
 {

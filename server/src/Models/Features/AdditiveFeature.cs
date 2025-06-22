@@ -1,4 +1,4 @@
-namespace DMTools.Models.Features;
+namespace DMToolkit.Models.Features;
 
 public class AdditiveFeature: Feature // features that add a set amount to something
 {

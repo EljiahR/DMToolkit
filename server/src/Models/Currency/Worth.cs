@@ -1,4 +1,4 @@
-namespace DMTools.Models.Currency;
+namespace DMToolkit.Models.Currency;
 
 public class Worth 
 {

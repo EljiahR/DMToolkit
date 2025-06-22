@@ -1,7 +1,7 @@
-using DMTools.Models.Currency;
-using DMTools.Models.Items;
+using DMToolkit.Models.Currency;
+using DMToolkit.Models.Items;
 
-namespace DMTools.Models.Items.Equipment;
+namespace DMToolkit.Models.Items.Equipment;
 
 public enum ArmorType
 {

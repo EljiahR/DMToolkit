@@ -1,6 +1,6 @@
-using DMTools.Models.Currency;
+using DMToolkit.Models.Currency;
 
-namespace DMTools.Models.Items;
+namespace DMToolkit.Models.Items;
 
 public abstract class Item
 {

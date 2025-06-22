@@ -1,8 +1,8 @@
-using DMTools.Models.Features;
-using DMTools.Models.Items;
-using DMTools.Models.Items.ToolModels;
+using DMToolkit.Models.Features;
+using DMToolkit.Models.Items;
+using DMToolkit.Models.Items.ToolModels;
 
-namespace DMTools.Models.BackgroundModels;
+namespace DMToolkit.Models.BackgroundModels;
 
 public class Background
 {

@@ -1,4 +1,4 @@
-namespace DMTools.Models.Features;
+namespace DMToolkit.Models.Features;
 
 public class ProficiencyFeature : Feature // features that add your proficiency bonus to a stat
 {

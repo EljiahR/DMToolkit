@@ -1,14 +1,14 @@
-using DMTools.Models.Attributes.AbilityScores;
-using DMTools.Models.BackgroundModels;
-using DMTools.Models.ClassModels;
-using DMTools.Models.Currency;
-using DMTools.Models.Items.Equipment;
-using DMTools.Models.Features;
-using DMTools.Models.Items;
-using DMTools.Models.SpeciesModels;
-using DMTools.Models.Spells;
+using DMToolkit.Models.Attributes.AbilityScores;
+using DMToolkit.Models.BackgroundModels;
+using DMToolkit.Models.ClassModels;
+using DMToolkit.Models.Currency;
+using DMToolkit.Models.Items.Equipment;
+using DMToolkit.Models.Features;
+using DMToolkit.Models.Items;
+using DMToolkit.Models.SpeciesModels;
+using DMToolkit.Models.Spells;
 
-namespace DMTools.Models;
+namespace DMToolkit.Models;
 
 public class PlayerCharacter
 {
