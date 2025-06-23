@@ -6,7 +6,7 @@ describe("HomePage", () => {
     it("renders", () => {
         render(<HomePage />);
 
-        screen.debug();
+        expect(screen.getByText(/this is a toolkit/i)).toBeInTheDocument();
     });
     
     it("displays the login form, a link to register, and an option to continue anonymous", () => {
