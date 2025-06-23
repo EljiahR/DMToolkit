@@ -3,10 +3,9 @@ import { render, screen } from '@testing-library/react';
 import HomePage from '../../src/pages/HomePage';
 
 describe("HomePage", () => {
-    
     it("renders", () => {
         render(<HomePage />);
-        
+
         screen.debug();
     });
     
