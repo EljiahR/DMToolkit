@@ -4,7 +4,7 @@ import App from "../../src/App"
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-describe("Routes", () => {
+describe("Routes with Navbar at '/'", () => {
     it("renders the layout component at index with HomePage and Navbar", () => {
         renderWithRouter(<App />, { initialEntries: ['/']});
                 
