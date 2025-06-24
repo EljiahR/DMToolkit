@@ -20,4 +20,19 @@ describe("Routes", () => {
 
         expect(screen.getByText(/sign in/i)).toBeInTheDocument();
     });
+
+    it("follows the home -> signin redirect -> create a character flow when selecting the create character button in navbar", async () => {
+        renderWithRouter(<App />, { initialEntries: ['/']});
+
+        // Clicking the Create Character button at home screen
+        const createCharacterButton = screen.getByRole("button", {name: /create character/i});
+        await userEvent.click(createCharacterButton);
+
+        // Arriving at the SignInPage and clicking the Continue without account button
+        const anonymousButton = screen.getByRole("button", {name: /continue without account/i});
+        await userEvent.click(anonymousButton);
+
+        // Arriving at the CreatePlayerCharacterPage
+        expect(screen.getByText(/create a new player character/i)).toBeInTheDocument();
+    });
 });

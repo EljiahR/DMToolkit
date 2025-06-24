@@ -6,7 +6,7 @@ const Navbar = () => {
             <Link to="/">
                 <button type="button">Home</button>
             </Link>
-            <Link to="/sign-in">
+            <Link to="/sign-in?redirectUrl=/create-a-character">
                 <button type="button">Create Character</button>
             </Link>
         </nav>

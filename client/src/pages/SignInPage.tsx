@@ -1,8 +1,8 @@
-import SignInForm from "../components/SignInForm"
+import AuthForm from "../components/AuthForm"
 
 const SignInPage = () => {
     return (
-        <SignInForm />
+        <AuthForm />
     )
 }
 
