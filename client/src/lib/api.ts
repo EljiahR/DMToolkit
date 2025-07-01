@@ -1,4 +1,5 @@
 import axios from "axios";
+import type { RegisterErrors, Token } from "./types";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -7,16 +8,16 @@ export const api = axios.create({
 });
 
 export const apiLogin = async (email: string, password: string) => {
-    const response = await api.post("/login", {email, password}, {params: {useCookies: false}});
+    const response = await api.post<Token>("/login", {email, password}, {params: {useCookies: false}});
     return response.data;
 }; 
 
 export const apiRegister = async (email: string, password: string) => {
-    const response = await api.post("/register", {email, password});
+    const response = await api.post<RegisterErrors | null>("/register", {email, password});
     return response.data;
 }; 
 
 export const apiRefreshToken = async (refreshToken: string) => {
-    const response = await api.post<{accessToken: string, refreshToken: string}>("/refresh", { refreshToken });
+    const response = await api.post<Token>("/refresh", { refreshToken });
     return response.data;
 }
