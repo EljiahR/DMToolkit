@@ -25,7 +25,7 @@
         {
             "label": "Test Client",
             "type": "shell",
-            "command": "npm run test",
+            "command": "npm run test:run",
             "options": {
                 "cwd": "${workspaceFolder}/client"
             }
@@ -35,7 +35,7 @@
             "type": "shell",
             "command": "dotnet test",
             "options": {
-                "cwd": "${workspaceFolder}/server/src"
+                "cwd": "${workspaceFolder}/server/tests"
             }
         },
         {

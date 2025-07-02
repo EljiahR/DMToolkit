@@ -1,10 +1,14 @@
-public class DiceTest 
+using DMToolkit.Models.GameModels;
+
+namespace DMToolkit.Tests;
+
+public class DiceTest
 {
     [Fact]
     public void RollingDice_ShouldReturnValueWithinRange()
     {
         // Arrange
-        Dice dice = new(4,2); // 2d4 (simulating 2 4-sided dice)
+        Dice dice = new(4, 2); // 2d4 (simulating 2 4-sided dice)
 
         // Act
         var result = dice.Roll();
