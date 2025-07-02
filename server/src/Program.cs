@@ -3,9 +3,36 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var allowedOrigins = new List<string?>
+{
+    builder.Configuration["AllowedOrigin"] ?? "https://jubilant-waddle-5gx5765p94734v49-5173.app.github.dev",
+    builder.Configuration["DevelopmentOrigin"]
+};
+
+Console.WriteLine(allowedOrigins[0]);
+
 // Add services to the container.
 builder.Services.AddDbContext<DMDbContext>(options =>
     options.UseSqlite("Data Source=dm.db"));
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowClient",
+        policy =>
+        {
+            policy.WithOrigins(allowedOrigins.Where(o => !string.IsNullOrWhiteSpace(o)).ToArray()!)
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        });
+    options.AddPolicy("AllowAnyOrigins",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 builder.Services.AddIdentityApiEndpoints<DMUser>().AddEntityFrameworkStores<DMDbContext>();
 
@@ -26,9 +53,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseAuthorization();
-
 app.UseHttpsRedirection();
+app.UseCors("AllowClient");
+app.UseAuthentication();
+app.UseAuthorization();
 
 var summaries = new[]
 {

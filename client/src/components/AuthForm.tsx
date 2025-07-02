@@ -1,11 +1,17 @@
 import { Link, useNavigate, useSearchParams } from "react-router";
+import { useAuth } from "./AuthProvider";
+import { useState } from "react";
 
 const AuthForm = () => {
     const [searchParams] = useSearchParams();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const { login } = useAuth();
     
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        await login(email, password);
     }
 
     const handleAnonymous = () => {
@@ -16,11 +22,11 @@ const AuthForm = () => {
     return (
         <div id="auth-section">
             <form id="sign-in-form" onSubmit={(e) => handleFormSubmit(e)}>
-                <label htmlFor="sign-in-username">Username</label>
-                <input id="sign-in-username" type="text" />
+                <label htmlFor="sign-in-email">Username</label>
+                <input id="sign-in-email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
 
                 <label htmlFor="sign-in-password">Password</label>
-                <input id="sign-in-password" type="password" />
+                <input id="sign-in-password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
                 <button type="submit">Sign In</button>
             </form>
