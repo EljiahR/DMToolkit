@@ -3,14 +3,11 @@ import { apiLogin, apiRegister } from "../lib/api";
 import { useAppDispatch } from "../lib/redux/hooks";
 import { clearAccessToken, setAccessToken } from "../lib/redux/authSlice";
 
-type JwtPayload = {
-    exp: number
-};
-
 type AuthContextType = {
     login: (email: string, password: string) => Promise<any>;
     logout: () => void;
     register: (email: string, password: string) => Promise<any>;
+    status: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -33,8 +30,12 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) 
         localStorage.removeItem("refreshToken");
     };
 
+    const status = () => {
+        // TBD
+    }
+
     return (
-        <AuthContext.Provider value={{ login, register, logout }}>
+        <AuthContext.Provider value={{ login, register, logout, status }}>
             {children}
         </AuthContext.Provider>
     );

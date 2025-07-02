@@ -1,3 +1,7 @@
 export interface AuthSlice {
-    accessToken: string | null
+    accessToken: string | null;
+}
+
+export interface UserSlice {
+    username: string | null
 }
