@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import CreatePlayerCharacterPage from "./pages/CreatePlayerCharacterPage";
 import Layout from "./Layout";
 import SignInPage from "./pages/SignInPage";
+import { TestProtectedPage } from "./pages/TestProtectedPage";
 
 const App = () => {
     return ( 
@@ -12,6 +13,7 @@ const App = () => {
                 <Route path="create-a-character" element={<CreatePlayerCharacterPage />} />
             </Route>
             <Route path="/sign-in" element={<SignInPage />} />
+            <Route path="/protected-test" element={<TestProtectedPage />} />
         </Routes>
     );
 }

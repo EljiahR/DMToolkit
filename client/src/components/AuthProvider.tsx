@@ -1,7 +1,8 @@
 import React, { createContext, useContext } from "react";
-import { apiLogin, apiRegister } from "../lib/api";
-import { useAppDispatch } from "../lib/redux/hooks";
+import { apiInfo, apiLogin, apiRegister } from "../lib/api";
+import { useAppDispatch, useAppSelector } from "../lib/redux/hooks";
 import { clearAccessToken, setAccessToken } from "../lib/redux/authSlice";
+import { setUser } from "../lib/redux/userSlice";
 
 type AuthContextType = {
     login: (email: string, password: string) => Promise<any>;
@@ -14,6 +15,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
     const dispatch = useAppDispatch();
+    const accessToken = useAppSelector((state) => state.auth.accessToken);
     
     const login = async (email: string, password: string) => {
         const data = await apiLogin(email, password);
@@ -30,8 +32,13 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) 
         localStorage.removeItem("refreshToken");
     };
 
-    const status = () => {
-        // TBD
+    const status = async () => {
+        if (accessToken) {
+            const data = await apiInfo(accessToken);
+            dispatch(setUser(data.email));
+        } else {
+            throw new Error;
+        }
     }
 
     return (

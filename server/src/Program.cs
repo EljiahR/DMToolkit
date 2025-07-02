@@ -5,11 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 var allowedOrigins = new List<string?>
 {
-    builder.Configuration["AllowedOrigin"] ?? "http://localhost:5173",
+    builder.Configuration["AllowedOrigin"] ?? "https://jubilant-waddle-5gx5765p94734v49-5173.app.github.dev",
     builder.Configuration["DevelopmentOrigin"]
 };
 
-Console.WriteLine(builder.Configuration["AllowedOrigin"]);
+Console.WriteLine(allowedOrigins[0]);
 
 // Add services to the container.
 builder.Services.AddDbContext<DMDbContext>(options =>

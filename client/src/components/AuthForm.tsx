@@ -12,7 +12,6 @@ const AuthForm = () => {
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         await login(email, password);
-
     }
 
     const handleAnonymous = () => {

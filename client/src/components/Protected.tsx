@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "./AuthProvider";
-import { useAppDispatch } from "../lib/redux/hooks";
-import { setUser } from "../lib/redux/userSlice";
 
 const authenticationStates = {
     loading: 0,
@@ -10,12 +8,7 @@ const authenticationStates = {
     unauthorized: 2
 } as const;
 
-interface Props {
-    children: React.ReactNode
-}
-
-export const ChatHomePage = ({ children }: Props) => {
-    const dispatch = useAppDispatch();
+export const Protected: React.FC<{children: React.ReactNode}> = ({children}) => {
     const navigate = useNavigate();
     const [authenticationState, setAuthenticationState] = useState<number>(authenticationStates.loading);
     const { status } = useAuth();
@@ -24,7 +17,6 @@ export const ChatHomePage = ({ children }: Props) => {
         const checkAuthStatus = async () => {
             try {
                 await status();
-                dispatch(setUser("data"));
                 setAuthenticationState(authenticationStates.authorized);
             } catch (error) {
                 setAuthenticationState(authenticationStates.unauthorized);
@@ -40,7 +32,7 @@ export const ChatHomePage = ({ children }: Props) => {
     return (
         authenticationState == authenticationStates.loading ? 
             <div>Loading...</div> : 
-            {children} 
+            <>{children}</>
               
     )
 }

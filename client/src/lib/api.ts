@@ -21,3 +21,8 @@ export const apiRefreshToken = async (refreshToken: string) => {
     const response = await api.post<Token>("/refresh", { refreshToken });
     return response.data;
 }
+
+export const apiInfo = async (accessToken: string) => {
+    const response = await api.get<{email: string, isEmailConfirmed: boolean}>("/manage/info", {headers: {Authorization: `Bearer ${accessToken}`}})
+    return response.data;
+}
