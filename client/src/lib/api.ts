@@ -8,7 +8,7 @@ export const api = axios.create({
 });
 
 export const apiLogin = async (email: string, password: string) => {
-    const response = await api.post<Token>("/login", {email, password}, {params: {useCookies: false}});
+    const response = await api.post<Token>("/login", { email, password }, { withCredentials: true });
     return response.data;
 }; 
 
