@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Start Vite",
+            "label": "Start Client",
             "type": "shell",
             "command": "npm run dev",
             "options": {
@@ -10,7 +10,7 @@
             }
         },
         {
-            "label": "Start ASP.Net API",
+            "label": "Start Server",
             "type": "shell",
             "command": "dotnet run",
             "options": {
@@ -19,7 +19,28 @@
         },
         {
             "label": "Start All",
-            "dependsOn": ["Start Vite", "Start ASP.Net API"],
+            "dependsOn": ["Start Client", "Start Server"],
+            "dependsOrder": "parallel"
+        },
+        {
+            "label": "Test Client",
+            "type": "shell",
+            "command": "npm run test",
+            "options": {
+                "cwd": "${workspaceFolder}/client"
+            }
+        },
+        {
+            "label": "Test Server",
+            "type": "shell",
+            "command": "dotnet test",
+            "options": {
+                "cwd": "${workspaceFolder}/server/src"
+            }
+        },
+        {
+            "label": "Test All",
+            "dependsOn": ["Test Client", "Test Server"],
             "dependsOrder": "parallel"
         }
     ]
