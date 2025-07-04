@@ -8,6 +8,12 @@ describe("CreatePlayerCharacter page", () => {
         renderWithAll(<CreatePlayerCharacterPage />, { initialEntries: ['/']});
 
         expect(screen.getByText(/create a new player character/i)).toBeInTheDocument();
+        expect(screen.getByRole("button", { name: /create a character/i})).toBeInTheDocument();
     });
-    
-})
+   
+    it("displays a functioning section for selecting a class", () => {
+        renderWithAll(<CreatePlayerCharacterPage />, { initialEntries: ['/']});
+
+        expect(screen.getAllByRole("combobox", { name: /select a class/i})).toBeInTheDocument();
+    });
+});
