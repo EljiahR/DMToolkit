@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { RegisterErrors, Token } from "./types";
+import type { RegisterErrors, Token } from "./types/apiResponses";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 

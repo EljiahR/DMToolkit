@@ -5,7 +5,7 @@ This guide outlines the step-by-step flow for building a Level 1 character using
 
 ---
 
-## 📘 Overview
+## Overview
 
 - Characters begin at **Level 1**
 - Class and Origin define most of the mechanical identity
