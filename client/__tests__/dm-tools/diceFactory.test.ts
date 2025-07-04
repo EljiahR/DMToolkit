@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import diceFactory, { type Dice } from "../../src/lib/dm-tools/diceFactory";
+import diceFactory from "../../src/lib/dm-tools/diceFactory";
 
 
 describe("diceFactory", () => {

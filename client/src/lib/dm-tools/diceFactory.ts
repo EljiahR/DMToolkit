@@ -5,7 +5,7 @@ export type Dice = {
     roll: () => number;
 }
 
-export default function(numberOfSides: number, numberOfDice: number) {
+export default function(numberOfSides: number, numberOfDice: number): Dice {
     return {
         numberOfSides,
         numberOfDice,
