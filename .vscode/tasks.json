@@ -31,6 +31,14 @@
             }
         },
         {
+            "label": "Test Client Watch",
+            "type": "shell",
+            "command": "npm run test",
+            "options": {
+                "cwd": "${workspaceFolder}/client"
+            }
+        },
+        {
             "label": "Test Server",
             "type": "shell",
             "command": "dotnet test",

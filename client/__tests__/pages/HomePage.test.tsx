@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { screen } from '@testing-library/react';
-import renderWithAll from "../renderWithAll";
+import renderWithAll from "../renderOptions/renderWithAll";
 import HomePage from "../../src/pages/HomePage";
 
 describe("HomePage", () => {

@@ -1,5 +1,5 @@
 export default function() {
     return (
-        <div></div>
+        <div>Description</div>
     )
 }

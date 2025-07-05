@@ -2,23 +2,30 @@ import { describe, it } from "vitest";
 import CharacterClass from "../../../src/components/CreateCharacterPage/CharacterClass";
 import { render, screen, type RenderResult } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { characterClasses } from "../../seedData/characterClasses";
+import { useState } from "react";
 
 
 describe("CharacterAbilityScores component", () => {
     var classComponent: RenderResult;
     beforeEach(() => {
-        classComponent = render(<CharacterClass />);
+        const ComponentWrapper = () => {
+            const [selectedClass, setSelectedClass] = useState(0);
+            return <CharacterClass classes={characterClasses} selectedClass={selectedClass} setSelectedClass={setSelectedClass} />
+        }
+        classComponent = render(<ComponentWrapper />);
     });
     
     it("renders", () => {
-        expect(screen.getByText(/class/i)).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: /class/i })).toBeInTheDocument();
     });
 
     it("allows the user to select from a list of classes, displaying more information on select", async () => {
-        const classComboBox = screen.getByRole("combobox", { name: /choose a class/i});
-        await userEvent.selectOptions(classComboBox, "barbarian");
-
-        expect(screen.getByText(/barbarian/i)).toBeInTheDocument();
-        expect(screen.getByText(/a tall human tribesman strides through a blizzard/i)).toBeInTheDocument();
+        const classComboBox = screen.getByLabelText(/select a class/i);
+       
+        await userEvent.selectOptions(classComboBox, "1");
+        
+        expect(screen.getByRole("heading", { name: /wizard/i })).toBeInTheDocument();
+        expect(screen.getByText(/wizards are defined by their exhaustive study/i)).toBeInTheDocument();
     });
 });

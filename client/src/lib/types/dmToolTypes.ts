@@ -1,6 +1,7 @@
 export type CharacterClass = {
     name: string;
-    subclass: Subclass;
+    description: string;
+    subclass?: Subclass;
     level: number;
     features: Feature[];
 

@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import App from "../../src/App"
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import renderWithStoreAndRouter from "../renderWithAll";
+import renderWithStoreAndRouter from "../renderOptions/renderWithAll";
 
 vi.mock("./AuthProvider", () => ({}));
 

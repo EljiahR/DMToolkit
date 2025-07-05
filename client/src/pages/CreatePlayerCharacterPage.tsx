@@ -1,6 +1,9 @@
 const CreatePlayerCharacterPage = () => {
     return (
-        <div>Create a new Player Character</div>
+        <div>
+            <h2>Create a new Player Character</h2>
+            <button>Start</button>
+        </div>
     )
 };
 
