@@ -29,16 +29,7 @@ Pick a **Class** that defines your character’s core mechanics, role in the par
 
 ---
 
-## Step 2: Choose an Origin
-
-Your **Origin** is made up of:
-- **Species**
-- **Background**
-- **Languages**
-
-Each contributes to your character’s story and starting traits.
-
-### Species
+## Step 2: Choose a Species
 
 Species define biological and cultural traits. Each species comes with a set of inherent features like movement speed, size, senses, and resistances.
 
@@ -50,7 +41,9 @@ Species define biological and cultural traits. Each species comes with a set of 
 - **Tiefling** – Infernal legacy, resistance to fire
 - **Orc** – Powerful build, aggressive instincts
 
-### Background
+---
+
+## Step 3: Choose a Background
 
 Backgrounds provide narrative flavor and mechanical benefits. They include skill proficiencies, a 1st-level feat, and a language or tool.
 
@@ -80,7 +73,7 @@ Some campaigns may allow extra languages depending on feats or DM preference.
 
 ---
 
-## Step 3: Assign Ability Scores
+## Step 4: Assign Ability Scores
 
 Choose how to assign your six core ability scores:  
 **Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma**
@@ -93,11 +86,11 @@ Choose how to assign your six core ability scores:
 - **Manual Entry**: Input your own values (e.g., rolled offline)
 
 > In the 2025 edition, Species no longer grant fixed ability score bonuses.  
-> Instead, choose either **+2 and +1** to any two stats or **+1 to three**.
+> Instead, Background now determines ability score bonuses.
 
 ---
 
-## Step 4: Choose an Alignment
+## Step 5: Choose an Alignment
 
 Optional step that can inform roleplay or interaction with certain spells/magic items.
 
@@ -116,7 +109,7 @@ Some tables ignore alignment altogether or use **Ideals, Bonds, and Flaws** inst
 
 ---
 
-## Step 5: Describe Your Character
+## Step 6: Describe Your Character
 
 This is where you give your character personality and visual flavor.
 

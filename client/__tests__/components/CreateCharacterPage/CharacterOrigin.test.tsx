@@ -1,11 +1,17 @@
 import { describe, it } from "vitest";
 import CharacterOrigin from "../../../src/components/CreateCharacterPage/CharacterOrigin";
-import { render, screen } from "@testing-library/react";
+import { render, screen, type RenderResult } from "@testing-library/react";
 
-describe("CharacterAbilityScores component", () => {
+describe("CharacterOrigin component", () => {
+    var originComponent: RenderResult;
+    
+    beforeEach(() => {
+        originComponent = render(<CharacterOrigin />);
+    })
+    
     it("renders", () => {
-        render(<CharacterOrigin />);
-
-        expect(screen.getByText(/origin/i)).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: /origin/i })).toBeInTheDocument();
     });
+
+    it("")
 })
