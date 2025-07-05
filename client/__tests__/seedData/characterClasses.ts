@@ -1,5 +1,5 @@
 import type { CharacterClass } from "../../src/lib/types/dmToolTypes";
-import { barbarianDescription, wizardDescription } from "./classDescriptions";
+import { barbarianDescription, wizardDescription } from "./descriptions";
 
 export const characterClasses: CharacterClass[] = [
     {

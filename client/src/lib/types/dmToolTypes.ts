@@ -16,7 +16,7 @@ export type Feature = {
     description: string;
     category: string;
     prerequisiteType: string;
-    PrerequisiteAmount: number;
+    prerequisiteAmount: number;
 }
 
 export type Lineage = {
