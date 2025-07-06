@@ -1,11 +1,16 @@
 import type { Lineage, Species } from "../../src/lib/types/dmToolTypes";
-import { versatileFeature } from "./characterFeatures";
-import { humanDescription } from "./descriptions";
+import { elfDescription, humanDescription } from "./descriptions";
 
-export const humanHuman: Lineage = {
+export const versatile: Lineage = {
     name: "Human",
     description: "",
-    feature: versatileFeature
+    features: []
+}
+
+export const woodElf: Lineage = {
+    name: "Wood Elf",
+    description: "",
+    features: []
 }
 
 export const characterSpecies: Species[] = [
@@ -16,6 +21,15 @@ export const characterSpecies: Species[] = [
         speed: 30,
         size: "Medium",
         features: [],
-        lineage: humanHuman
+        lineage: versatile
+    },
+    {
+        name: "Elf",
+        description: elfDescription,
+        type: "Humanoid",
+        speed: 30,
+        size: "Medium",
+        features: [],
+        lineage: woodElf
     }
 ];

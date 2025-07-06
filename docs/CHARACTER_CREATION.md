@@ -1,7 +1,7 @@
 # Character Creation Workflow  
-*Based on the 2025 Edition (One D&D) Rules Preview*
+*Based on the 2024 Edition (One D&D) Rules Preview*
 
-This guide outlines the step-by-step flow for building a Level 1 character using the updated structure from the upcoming 2025 revision to Dungeons & Dragons. The design follows the philosophy of "play before details" and puts emphasis on Origins, flexible ability scores, and fast customization.
+This guide outlines the step-by-step flow for building a Level 1 character using the updated structure from the upcoming 2024 revision to Dungeons & Dragons. The design follows the philosophy of "play before details" and puts emphasis on Origins, flexible ability scores, and fast customization.
 
 ---
 
@@ -29,21 +29,7 @@ Pick a **Class** that defines your character’s core mechanics, role in the par
 
 ---
 
-## Step 2: Choose a Species
-
-Species define biological and cultural traits. Each species comes with a set of inherent features like movement speed, size, senses, and resistances.
-
-**Examples:**
-- **Human** – Versatile and adaptable
-- **Elf** – Keen senses, fey ancestry, trance
-- **Dwarf** – Hardy, stonecunning, poison resistance
-- **Dragonborn** – Breath weapon and elemental resistance
-- **Tiefling** – Infernal legacy, resistance to fire
-- **Orc** – Powerful build, aggressive instincts
-
----
-
-## Step 3: Choose a Background
+## Step 2: Choose a Background
 
 Backgrounds provide narrative flavor and mechanical benefits. They include skill proficiencies, a 1st-level feat, and a language or tool.
 
@@ -54,22 +40,19 @@ Backgrounds provide narrative flavor and mechanical benefits. They include skill
 - **Sage** – Academic knowledge and research
 - **Folk Hero** – Defender of the common people
 
-### Languages
+---
 
-Your character typically knows:
-- **Common**
-- One language from their **Species**
-- One additional language or tool from their **Background**
+## Step 3: Choose a Species
+
+Species define biological and cultural traits. Each species comes with a set of inherent features like movement speed, size, senses, and resistances.
 
 **Examples:**
-- **Elvish**
-- **Dwarvish**
-- **Orcish**
-- **Draconic**
-- **Infernal**
-- **Thieves' Cant**
-
-Some campaigns may allow extra languages depending on feats or DM preference.
+- **Human** – Versatile and adaptable
+- **Elf** – Keen senses, fey ancestry, trance
+- **Dwarf** – Hardy, stonecunning, poison resistance
+- **Dragonborn** – Breath weapon and elemental resistance
+- **Tiefling** – Infernal legacy, resistance to fire
+- **Orc** – Powerful build, aggressive instincts
 
 ---
 
@@ -85,7 +68,7 @@ Choose how to assign your six core ability scores:
 - **Class Default**: Pre-made stat layouts ideal for your class
 - **Manual Entry**: Input your own values (e.g., rolled offline)
 
-> In the 2025 edition, Species no longer grant fixed ability score bonuses.  
+> In the 2024 edition, Species no longer grant fixed ability score bonuses.  
 > Instead, Background now determines ability score bonuses.
 
 ---

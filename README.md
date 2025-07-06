@@ -1,6 +1,6 @@
 # DM Toolkit
 
-A full-stack tool for managing characters, NPCs, combat, encounters, and worlbuilding in DnD 2025e
+A full-stack tool for managing characters, NPCs, combat, encounters, and worlbuilding in DnD 2024e
 
 ## Structure
 

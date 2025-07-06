@@ -22,7 +22,7 @@ export type Feature = {
 export type Lineage = {
     name: string;
     description: string;
-    feature: Feature;
+    features: Feature[];
 }
 
 export type Species = {
