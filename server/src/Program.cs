@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var allowedOrigins = new List<string?>
 {
-    builder.Configuration["AllowedOrigin"] ?? "https://jubilant-waddle-5gx5765p94734v49-5173.app.github.dev",
+    builder.Configuration["AllowedOrigin"] ?? "https://shiny-space-guacamole-g4q6xp94p9472ww7g-5173.app.github.dev",
     builder.Configuration["DevelopmentOrigin"]
 };
 
