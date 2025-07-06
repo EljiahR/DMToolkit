@@ -10,8 +10,8 @@ describe("CharacterAbilityScores component", () => {
     var classComponent: RenderResult;
     beforeEach(() => {
         const ComponentWrapper = () => {
-            const [selectedClass, setSelectedClass] = useState(0);
-            return <CharacterClass classes={characterClasses} selectedClass={selectedClass} setSelectedClass={setSelectedClass} />
+            const [selectedClassId, setSelectedClassId] = useState(characterClasses[0].id);
+            return <CharacterClass classes={characterClasses} selectedClassId={selectedClassId} setSelectedClassId={setSelectedClassId} />
         }
         classComponent = render(<ComponentWrapper />);
     });
@@ -23,7 +23,7 @@ describe("CharacterAbilityScores component", () => {
     it("allows the user to select from a list of classes, displaying more information on select", async () => {
         const classComboBox = screen.getByLabelText(/select a class/i);
        
-        await userEvent.selectOptions(classComboBox, "1");
+        await userEvent.selectOptions(classComboBox, characterClasses[1].id);
         
         expect(screen.getByRole("heading", { name: /wizard/i })).toBeInTheDocument();
         expect(screen.getByText(/wizards are defined by their exhaustive study/i)).toBeInTheDocument();

@@ -1,35 +1,41 @@
-import type { Lineage, Species } from "../../src/lib/types/dmToolTypes";
+import type { LineageBase, SpeciesBase } from "../../src/lib/types/dmToolTypes";
 import { elfDescription, humanDescription } from "./descriptions";
 
-export const versatile: Lineage = {
+export const versatile: LineageBase = {
+    id: "humanhuman",
     name: "Human",
     description: "",
-    features: []
+    features: [],
+    speciesId: "hboi"
 }
 
-export const woodElf: Lineage = {
+export const woodElf: LineageBase = {
+    id: "hardfairyboy",
     name: "Wood Elf",
     description: "",
-    features: []
+    features: [],
+    speciesId: "fairyman"
 }
 
-export const characterSpecies: Species[] = [
+export const characterSpecies: SpeciesBase[] = [
     {
+        id: "hboi",
         name: "Human",
         description: humanDescription,
         type: "Humanoid",
         speed: 30,
         size: "Medium",
         features: [],
-        lineage: versatile
+        lineages: [versatile]
     },
     {
+        id: "fairyman",
         name: "Elf",
         description: elfDescription,
         type: "Humanoid",
         speed: 30,
         size: "Medium",
         features: [],
-        lineage: woodElf
+        lineages: [woodElf]
     }
 ];

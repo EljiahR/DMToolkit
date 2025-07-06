@@ -1,17 +1,19 @@
-import type { CharacterClass } from "../../src/lib/types/dmToolTypes";
+import type { CharacterClassBase } from "../../src/lib/types/dmToolTypes";
 import { barbarianDescription, wizardDescription } from "./descriptions";
 
-export const characterClasses: CharacterClass[] = [
+export const characterClasses: CharacterClassBase[] = [
     {
+        id: "beefcake",
         name: "Barbarian",
         description: barbarianDescription,
-        level: 1,
-        features: []
+        features: [],
+        subclasses: []
     },
     {
+        id: "cheating",
         name: "Wizard",
         description: wizardDescription,
-        level: 1,
-        features: []
+        features: [],
+        subclasses: []
     }
 ];

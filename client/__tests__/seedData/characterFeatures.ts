@@ -1,6 +1,7 @@
-import type { Feature } from "../../src/lib/types/dmToolTypes";
+import type { FeatureBase } from "../../src/lib/types/dmToolTypes";
 
-export const versatileFeature: Feature = {
+export const versatileFeature: FeatureBase = {
+    id: "candoanything",
     name: "Versatile",
     description: "",
     category: "",
