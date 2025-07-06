@@ -4,6 +4,7 @@ export type CharacterClassBase = {
     description: string;
     subclasses: SubclassBase[];
     features: FeatureBase[];
+    defaultScoreArray: number[];
 };
 
 export type CharacterClass = {

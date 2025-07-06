@@ -7,13 +7,15 @@ export const characterClasses: CharacterClassBase[] = [
         name: "Barbarian",
         description: barbarianDescription,
         features: [],
-        subclasses: []
+        subclasses: [],
+        defaultScoreArray: []
     },
     {
         id: "cheating",
         name: "Wizard",
         description: wizardDescription,
         features: [],
-        subclasses: []
+        subclasses: [],
+        defaultScoreArray: []
     }
 ];
