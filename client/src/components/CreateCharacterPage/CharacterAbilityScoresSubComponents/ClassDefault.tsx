@@ -2,9 +2,9 @@ import type { AbilityScoreProps } from "../CharacterAbilityScores";
 
 export default function({ scores, setScores }: AbilityScoreProps) {
     return (
-        <div id="standard-array-display">
-            <h3>Standard Array</h3>
-            <div id="standard-array"></div>
+        <div id="class-default-display">
+            <h3>Class Default</h3>
+            <div id="class-default"></div>
         </div>
     )
 }
