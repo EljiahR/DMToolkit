@@ -1,17 +1,15 @@
-export interface AbilityScoreProps {
-    scores: {
-        str: number,
-        dex: number,
-        con: number,
-        int: number,
-        wis: number,
-        cha: number
-    };
-    setScores: (score: string, amount: number) => void;
-}
+import type { AbilityScoreProps } from "../../pages/CreatePlayerCharacterPage";
+import StandardArray from "./CharacterAbilityScoresSubComponents/StandardArray";
 
-export default function() {
+export default function({scores, handleScores}: AbilityScoreProps) {  
     return (
-        <div>Ability Scores</div>
+        <div>
+            <h2>Ability Scores</h2>
+            <label htmlFor="score-method">Select the method</label>
+            <select id="score-method"></select>
+            <div id="selected-score-method">
+                <StandardArray scores={scores} handleScores={handleScores} />
+            </div>
+        </div>
     )
 }
