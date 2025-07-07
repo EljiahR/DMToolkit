@@ -1,9 +1,14 @@
 import { useState } from "react";
-import type { AbilityScoreProps } from "../../../pages/CreatePlayerCharacterPage";
-import { DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
-import { SortableContext, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
+import type { AbilityScore, AbilityScoreProps } from "../../../pages/CreatePlayerCharacterPage";
+import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from "@dnd-kit/core";
+import { arrayMove, arraySwap, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
-export default function({ scores, handleScores }: AbilityScoreProps) {
+interface Props extends AbilityScoreProps {
+    handleScoreSwap: (scoreOne: string, scoreTwo: string) => void;
+}
+
+export default function({ scores, handleScores, handleScoreSwap }: Props) {
     const [items, setItems] = useState(["str", "dex", "con", "int", "wis", "cha"]);
     const sensors = useSensors(
         useSensor(PointerSensor),
@@ -11,17 +16,47 @@ export default function({ scores, handleScores }: AbilityScoreProps) {
             coordinateGetter: sortableKeyboardCoordinates
         })
     );
+
+    const handleDragEnd = (event: DragEndEvent) => {
+        const {active, over} = event;
+        if (over != null && active.id !== over.id) {
+            setItems((items) => {
+                const oldIndex = items.indexOf(active.id.toString());
+                const newIndex = items.indexOf(over.id.toString());
+                
+                return arraySwap(items, oldIndex, newIndex);
+            });
+
+            handleScoreSwap(active.id.toString(), over.id.toString());
+        }
+    }
     
     return (
         <div id="standard-array-display">
             <h3>Standard Array</h3>
             <div id="standard-array">
-                <DndContext>
-                    <SortableContext>
-                        
+                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                    <SortableContext items={items}>
+                        {items.map(score => <SortableScore key={score} score={scores[score]} />)}
                     </SortableContext>
                 </DndContext>
             </div>
         </div>
+    )
+}
+
+interface SortableScoreProps {
+    score: AbilityScore;
+}
+
+const SortableScore = ({score}: SortableScoreProps) => {
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: score.id});
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition
+    };
+
+    return (
+        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>{`${score.name}: ${score.amount}`}</div>
     )
 }

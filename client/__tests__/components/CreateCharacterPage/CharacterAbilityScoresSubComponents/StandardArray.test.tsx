@@ -12,23 +12,60 @@ describe("StandardArray", () => {
     beforeEach(() => {
         const ComponentWrapper = () => {
             const [scores, setScores] = useState<AbilityScores>({
-                str: 15,
-                dex: 14,
-                con: 13,
-                int: 12,
-                wis: 10,
-                cha: 8
-            });
+                "str": {
+                    id: "str",
+                    name: "Strength",
+                    amount: 15,
+                    bonus: 0
+                },
+                "dex": {
+                    id: "dex",
+                    name: "Dexterity",
+                    amount: 14,
+                    bonus: 0
+                },
+                "con": {
+                    id: "con",
+                    name: "Constitution",
+                    amount: 13,
+                    bonus: 0
+                },
+                "int": {
+                    id: "int",
+                    name: "Intelligence",
+                    amount: 12,
+                    bonus: 0
+                },
+                "wis": {
+                    id: "wis",
+                    name: "Wisdom",
+                    amount: 10,
+                    bonus: 0
+                },
+                "cha": {
+                    id: "cha",
+                    name: "Charisma",
+                    amount: 8,
+                    bonus: 0
+            }});
 
             const handleScores = (score: string, amount: number) => {
                 setScores({
                     ...scores,
-                    [score as keyof AbilityScores]: amount
+                    [score as keyof AbilityScores]: {...scores[score as keyof AbilityScores], amount}
                 })
             };
 
+                const handleScoreSwap = (scoreOne: string, scoreTwo: string) => {
+                    setScores({
+                        ...scores,
+                        [scoreOne as keyof AbilityScores]: {...scores[scoreOne as keyof AbilityScores], amount: scores[scoreTwo].amount},
+                        [scoreTwo as keyof AbilityScores]: {...scores[scoreTwo as keyof AbilityScores], amount: scores[scoreOne].amount}
+                    });
+                }
+
             return (
-                <StandardArray scores={scores} handleScores={handleScores} />
+                <StandardArray scores={scores} handleScores={handleScores} handleScoreSwap={handleScoreSwap} />
             )
         };
 
@@ -41,14 +78,25 @@ describe("StandardArray", () => {
 
     it("allows the user to switch scores by tapping one then the one they wish to change", async () => {
         const strDiv = screen.getByText(/strength/i);
-        const dexDiv = screen.getByText(/dexterity/i);
+        const chaDiv = screen.getByText(/charisma/i);
 
         await userEvent.click(strDiv);
-        await userEvent.click(dexDiv);
+        await userEvent.click(chaDiv);
 
-        expect(screen.getByText(/dexterity: 15/i)).toBeInTheDocument();
-        expect(screen.getByText(/strength: 14/i)).toBeInTheDocument();
+        expect(screen.getByText(/charisma: 15/i)).toBeInTheDocument();
+        expect(screen.getByText(/strength: 8/i)).toBeInTheDocument();
     });
+
+    it("allows the user to select and move scores with keyboard with either the space key or enter", async () => {
+        const strDiv = screen.getByText(/strength/i);
+
+        strDiv.focus();
+        await userEvent.keyboard('{enter/}');
+        await userEvent.keyboard('{arrowdown}');
+        await userEvent.keyboard('{enter}');
+
+        expect(screen.getByText(/strength: 14/i)).toBeInTheDocument();
+    })
 
     // it also allows drag and drop but, goddam, not finding anything reasonable to test it atm
 });
