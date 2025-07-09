@@ -3,13 +3,14 @@ import { describe } from "vitest";
 import PointBuy from "../../../../src/components/CreateCharacterPage/CharacterAbilityScoresSubComponents/PointBuy";
 import { useState } from "react";
 import type { AbilityScores } from "../../../../src/pages/CreatePlayerCharacterPage";
-import { zeroScores } from "./defaultScores";
+import { baseScores } from "./defaultScores";
+import userEvent from "@testing-library/user-event";
 
 describe("PointBuy", () => {
     var pointComponent: RenderResult;
     beforeEach(() => {
         const ComponentWrapper = () => {
-            const [scores, setScores] = useState<AbilityScores>(zeroScores);
+            const [scores, setScores] = useState<AbilityScores>(baseScores);
 
             return <PointBuy scores={scores} setScores={setScores} />
         };
@@ -18,10 +19,37 @@ describe("PointBuy", () => {
 
     });
 
-    it("renders with a default score of 0 in all categories", () => {
+    it("renders with a default score of 8 and 27 points remaining in all categories", () => {
         expect(screen.getByRole("heading", { name: /point buy/i })).toBeInTheDocument();
-        expect(screen.getByText(/strength: 0/i)).toBeInTheDocument();
+        expect(screen.getByText(/strength: 8/i)).toBeInTheDocument();
+        expect(screen.getByText(/points remaining: 27/i)).toBeInTheDocument();
     });
 
+    it("allows the user to increase a stat", async () => {
+        const scorePlusButtons = screen.getAllByRole("button", { name: /\+/i});
 
+        await userEvent.click(scorePlusButtons[0]);
+
+        expect(screen.getByText(/strength: 9/i)).toBeInTheDocument();
+        expect(screen.getByText(/points remaining: 26/i)).toBeInTheDocument();
+    });
+
+    it("allows the user to decrease a stat", async () => {
+        const scorePlusButtons = screen.getAllByRole("button", { name: /\+/i});
+        const scoreMinusButtons = screen.getAllByRole("button", { name: /\-/i});
+
+        await userEvent.click(scorePlusButtons[0]);
+        await userEvent.click(scoreMinusButtons[0]);
+        
+        expect(screen.getByText(/strength: 8/i)).toBeInTheDocument();
+        expect(screen.getByText(/points remaining: 27/i)).toBeInTheDocument();
+    });
+
+    it("does not allow the user to go below 8 in a stat", async () => {
+        const scoreMinusButtons = screen.getAllByRole("button", { name: /\-/i});
+
+        await userEvent.click(scoreMinusButtons[0]);
+        expect(screen.getByText(/strength: 8/i)).toBeInTheDocument();
+        expect(screen.getByText(/points remaining: 27/i)).toBeInTheDocument();
+    });
 });
