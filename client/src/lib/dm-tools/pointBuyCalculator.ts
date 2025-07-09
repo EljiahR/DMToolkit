@@ -4,7 +4,7 @@ interface ScoreCosts {
     [key: number]: number
 }
 
-const scoreCosts: ScoreCosts = {
+export const scoreCosts: ScoreCosts = {
     8: 0,
     9: 1,
     10: 2,

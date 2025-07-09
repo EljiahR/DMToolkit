@@ -52,4 +52,26 @@ describe("PointBuy", () => {
         expect(screen.getByText(/strength: 8/i)).toBeInTheDocument();
         expect(screen.getByText(/points remaining: 27/i)).toBeInTheDocument();
     });
+
+    it("does not allow the user to go above 15 in a stat", async () => {
+        const scorePlusButtons = screen.getAllByRole("button", { name: /\+/i});
+
+        for(var i = 0; i < 8; i++)
+            await userEvent.click(scorePlusButtons[0]);
+
+        expect(screen.getByText(/strength: 15/i)).toBeInTheDocument();
+    });
+
+    it("does not allow the user to use more than the alloted 27pts", async () => {
+        const scorePlusButtons = screen.getAllByRole("button", { name: /\+/i});
+
+        for(var i = 0; i < 7; i++) {
+            await userEvent.click(scorePlusButtons[0]);
+            await userEvent.click(scorePlusButtons[1]);
+            await userEvent.click(scorePlusButtons[2]);
+        }
+        await userEvent.click(scorePlusButtons[3]);
+
+        expect(screen.getByText(/intelligence: 8/i)).toBeInTheDocument();
+    });
 });
