@@ -1,14 +1,11 @@
-import { useState } from "react";
-import type { AbilityScore, AbilityScoreProps } from "../../../pages/CreatePlayerCharacterPage";
+import { useEffect, useState } from "react";
+import type { AbilityScore, AbilityScoreProps, AbilityScores } from "../../../pages/CreatePlayerCharacterPage";
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from "@dnd-kit/core";
 import { arraySwap, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { standardScores } from "../../../../__tests__/components/CreateCharacterPage/CharacterAbilityScoresSubComponents/defaultScores";
 
-interface Props extends Omit<AbilityScoreProps, "handleScores"> {
-    handleScoreSwap: (scoreOne: string, scoreTwo: string) => void;
-}
-
-export default function({ scores, handleScoreSwap }: Props) {
+export default function({ scores, setScores }: AbilityScoreProps) {
     const [items, setItems] = useState(["str", "dex", "con", "int", "wis", "cha"]);
     const sensors = useSensors(
         useSensor(PointerSensor),
@@ -16,6 +13,18 @@ export default function({ scores, handleScoreSwap }: Props) {
             coordinateGetter: sortableKeyboardCoordinates
         })
     );
+
+    useEffect(() => {
+        setScores(standardScores);
+    }, []);
+
+    const handleScoreSwap = (scoreOne: string, scoreTwo: string) => {
+        setScores({
+            ...scores,
+            [scoreOne as keyof AbilityScores]: {...scores[scoreOne as keyof AbilityScores], amount: scores[scoreTwo].amount},
+            [scoreTwo as keyof AbilityScores]: {...scores[scoreTwo as keyof AbilityScores], amount: scores[scoreOne].amount}
+        });
+    }
 
     const handleDragEnd = (event: DragEndEvent) => {
         const {active, over} = event;

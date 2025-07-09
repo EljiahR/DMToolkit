@@ -19,7 +19,7 @@ export type AbilityScores = {
 
 export interface AbilityScoreProps {
     scores: AbilityScores
-    handleScores: (score: string, amount: number) => void;
+    setScores: (newScores: AbilityScores) => void;
 }
 
 const CreatePlayerCharacterPage = () => {
@@ -62,21 +62,6 @@ const CreatePlayerCharacterPage = () => {
         }
     });
 
-    const handleScores = (score: string, amount: number) => {
-        setScores({
-            ...scores,
-            [score as keyof AbilityScores]: {...scores[score as keyof AbilityScores], amount}
-        });
-    };
-
-    const handleScoreSwap = (scoreOne: string, scoreTwo: string) => {
-        setScores({
-            ...scores,
-            [scoreOne as keyof AbilityScores]: {...scores[scoreOne as keyof AbilityScores], amount: scores[scoreTwo].amount},
-            [scoreTwo as keyof AbilityScores]: {...scores[scoreTwo as keyof AbilityScores], amount: scores[scoreOne].amount}
-        });
-    }
-    
     return (
         <div>
             <h2>Create a new Player Character</h2>
