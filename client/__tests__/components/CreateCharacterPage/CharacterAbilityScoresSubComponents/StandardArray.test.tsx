@@ -49,23 +49,16 @@ describe("StandardArray", () => {
                     bonus: 0
             }});
 
-            const handleScores = (score: string, amount: number) => {
+            const handleScoreSwap = (scoreOne: string, scoreTwo: string) => {
                 setScores({
                     ...scores,
-                    [score as keyof AbilityScores]: {...scores[score as keyof AbilityScores], amount}
-                })
-            };
-
-                const handleScoreSwap = (scoreOne: string, scoreTwo: string) => {
-                    setScores({
-                        ...scores,
-                        [scoreOne as keyof AbilityScores]: {...scores[scoreOne as keyof AbilityScores], amount: scores[scoreTwo].amount},
-                        [scoreTwo as keyof AbilityScores]: {...scores[scoreTwo as keyof AbilityScores], amount: scores[scoreOne].amount}
-                    });
-                }
+                    [scoreOne as keyof AbilityScores]: {...scores[scoreOne as keyof AbilityScores], amount: scores[scoreTwo].amount},
+                    [scoreTwo as keyof AbilityScores]: {...scores[scoreTwo as keyof AbilityScores], amount: scores[scoreOne].amount}
+                });
+            }
 
             return (
-                <StandardArray scores={scores} handleScores={handleScores} handleScoreSwap={handleScoreSwap} />
+                <StandardArray scores={scores} handleScoreSwap={handleScoreSwap} />
             )
         };
 
@@ -88,10 +81,10 @@ describe("StandardArray", () => {
     });
 
     it("allows the user to select and move scores with keyboard with either the space key or enter", async () => {
-        const strDiv = screen.getByText(/strength/i);
-
-        strDiv.focus();
-        await userEvent.keyboard('{enter/}');
+        
+        await userEvent.keyboard('{tab}');
+        await userEvent.keyboard('{tab}');
+        await userEvent.keyboard('{enter}');
         await userEvent.keyboard('{arrowdown}');
         await userEvent.keyboard('{enter}');
 

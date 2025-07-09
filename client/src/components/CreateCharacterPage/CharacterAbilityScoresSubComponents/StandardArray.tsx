@@ -1,14 +1,14 @@
 import { useState } from "react";
 import type { AbilityScore, AbilityScoreProps } from "../../../pages/CreatePlayerCharacterPage";
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from "@dnd-kit/core";
-import { arrayMove, arraySwap, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
+import { arraySwap, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-interface Props extends AbilityScoreProps {
+interface Props extends Omit<AbilityScoreProps, "handleScores"> {
     handleScoreSwap: (scoreOne: string, scoreTwo: string) => void;
 }
 
-export default function({ scores, handleScores, handleScoreSwap }: Props) {
+export default function({ scores, handleScoreSwap }: Props) {
     const [items, setItems] = useState(["str", "dex", "con", "int", "wis", "cha"]);
     const sensors = useSensors(
         useSensor(PointerSensor),
