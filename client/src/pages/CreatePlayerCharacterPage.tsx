@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { BackgroundBase, CharacterClassBase, SpeciesBase } from "../lib/types/dmToolTypes";
 
 export type AbilityScore = {
     id: string;
@@ -22,7 +23,14 @@ export interface AbilityScoreProps {
     setScores: React.Dispatch<React.SetStateAction<AbilityScores>>
 }
 
+export interface AbilityScoreWithClassScoresProps extends AbilityScoreProps {
+    classDefaultScores: AbilityScores;
+}
+
 const CreatePlayerCharacterPage = () => {
+    const [selectedClass, setSelectedClass] = useState<CharacterClassBase | null>(null);
+    const [selectedBackground, setSelectedBackground] = useState<BackgroundBase | null>(null);
+    const [selectedSpecies, setSelectedSpecies] = useState<SpeciesBase | null>(null);
     const [scores, setScores] = useState<AbilityScores>({
         "str": {
             id: "str",
