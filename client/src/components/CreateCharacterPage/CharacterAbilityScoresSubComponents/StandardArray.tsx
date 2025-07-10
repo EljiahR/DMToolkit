@@ -3,7 +3,8 @@ import type { AbilityScore, AbilityScoreProps, AbilityScores } from "../../../pa
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from "@dnd-kit/core";
 import { arraySwap, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { standardScores } from "../../../../__tests__/components/CreateCharacterPage/CharacterAbilityScoresSubComponents/defaultScores";
+
+const standardScoreSet = [15, 14, 13, 12, 10, 8];
 
 export default function({ scores, setScores }: AbilityScoreProps) {
     const [items, setItems] = useState(["str", "dex", "con", "int", "wis", "cha"]);
@@ -15,7 +16,12 @@ export default function({ scores, setScores }: AbilityScoreProps) {
     );
 
     useEffect(() => {
-        setScores(standardScores);
+        setScores((prevScores) => {
+            Object.keys(prevScores).forEach((key, index) => {
+                prevScores[key] = {...prevScores[key], amount: standardScoreSet[index]}
+            });
+            return prevScores;
+        });
     }, []);
 
     const handleScoreSwap = (scoreOne: string, scoreTwo: string) => {

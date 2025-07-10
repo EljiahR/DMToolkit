@@ -19,7 +19,7 @@ export type AbilityScores = {
 
 export interface AbilityScoreProps {
     scores: AbilityScores
-    setScores: (newScores: AbilityScores) => void;
+    setScores: React.Dispatch<React.SetStateAction<AbilityScores>>
 }
 
 const CreatePlayerCharacterPage = () => {

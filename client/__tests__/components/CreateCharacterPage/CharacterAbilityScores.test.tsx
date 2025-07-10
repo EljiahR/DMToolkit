@@ -16,7 +16,7 @@ describe("CharacterAbilityScores component", () => {
     })
     
     it("renders with the standard array as default", () => {
-        expect(screen.getByText(/abqility scores/i)).toBeInTheDocument();
+        expect(screen.getByText(/ability scores/i)).toBeInTheDocument();
         expect(screen.getByRole("heading", { name: /standard array/i })).toBeInTheDocument();
     });
 

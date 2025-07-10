@@ -1,4 +1,5 @@
 import type { AbilityScores } from "../../../../src/pages/CreatePlayerCharacterPage";
+import { rollStat } from "../../../../src/lib/dm-tools/statRoll";
 
 export const standardScores: AbilityScores = {
     "str": {
@@ -75,3 +76,43 @@ export const baseScores: AbilityScores = {
         amount: 8,
         bonus: 0
 }};
+
+export const getRandomScore = (): AbilityScores => {
+    return {
+        "str": {
+            id: "str",
+            name: "Strength",
+            amount: rollStat(),
+            bonus: 0
+        },
+        "dex": {
+            id: "dex",
+            name: "Dexterity",
+            amount: rollStat(),
+            bonus: 0
+        },
+        "con": {
+            id: "con",
+            name: "Constitution",
+            amount: rollStat(),
+            bonus: 0
+        },
+        "int": {
+            id: "int",
+            name: "Intelligence",
+            amount: rollStat(),
+            bonus: 0
+        },
+        "wis": {
+            id: "wis",
+            name: "Wisdom",
+            amount: rollStat(),
+            bonus: 0
+        },
+        "cha": {
+            id: "cha",
+            name: "Charisma",
+            amount: rollStat(),
+            bonus: 0
+    }};
+};

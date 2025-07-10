@@ -1,12 +1,16 @@
 import { useEffect, useMemo } from "react";
 import type { AbilityScore, AbilityScoreProps } from "../../../pages/CreatePlayerCharacterPage";
-import { baseScores } from "../../../../__tests__/components/CreateCharacterPage/CharacterAbilityScoresSubComponents/defaultScores";
 import { scoreCalculator, scoreCosts } from "../../../lib/dm-tools/pointBuyCalculator";
 
 export default function({ scores, setScores }: AbilityScoreProps) {
     
     useEffect(() => {
-        setScores(baseScores);
+        setScores((prevScores) => {
+            Object.keys(prevScores).forEach((key) => {
+                prevScores[key].amount = 8;
+            })
+            return prevScores;
+        });
     }, []);
 
     const scoreRemainder = useMemo(() => {
@@ -33,7 +37,7 @@ export default function({ scores, setScores }: AbilityScoreProps) {
             <div id="point-buy">
                 <div id="scores">
                     {Object.keys(scores).map((key) => {
-                        return <ScoreDisplay score={scores[key]} handleScoreChange={handleScoreChange} />
+                        return <ScoreDisplay key={`point-buy-${key}`} score={scores[key]} handleScoreChange={handleScoreChange} />
                     })}
                 </div>
                 <div id="points">{`Points remaining: ${scoreRemainder}`}</div>

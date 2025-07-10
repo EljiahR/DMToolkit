@@ -4,7 +4,7 @@ export const rollStat = () => {
     const statPoints = [];
     const dice = diceFactory(6, 1);
 
-    for(var i = 0; i < 3; i++)
+    for(var i = 0; i < 4; i++)
         statPoints.push(dice.roll());
 
     statPoints.sort();

@@ -21,6 +21,4 @@ describe("RandomRoll", () => {
     it("renders", () => {
         expect(screen.getByRole("heading", { name: /random roll/i })).toBeInTheDocument();
     });
-
-
 });
