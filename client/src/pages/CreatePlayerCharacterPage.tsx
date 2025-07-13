@@ -18,15 +18,6 @@ export type AbilityScores = {
     "cha": AbilityScore;
 }
 
-export interface AbilityScoreProps {
-    scores: AbilityScores
-    setScores: React.Dispatch<React.SetStateAction<AbilityScores>>
-}
-
-export interface AbilityScoreWithClassScoresProps extends AbilityScoreProps {
-    classDefaultScores: AbilityScores;
-}
-
 const CreatePlayerCharacterPage = () => {
     const [selectedClass, setSelectedClass] = useState<CharacterClassBase | null>(null);
     const [selectedBackground, setSelectedBackground] = useState<BackgroundBase | null>(null);
