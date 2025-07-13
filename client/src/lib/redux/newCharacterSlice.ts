@@ -102,6 +102,9 @@ export const newCharacterSlice = createSlice({
             state.scores.wis.amount = 1;
             state.scores.cha.amount = 1;
         },
+        setScoreToRandom: (state, action: PayloadAction<string>) => {
+            state.scores[action.payload].amount = rollStat();
+        },
         setScoresToRandom: (state) => {
             state.scores.str.amount = rollStat();
             state.scores.dex.amount = rollStat();
@@ -109,9 +112,26 @@ export const newCharacterSlice = createSlice({
             state.scores.int.amount = rollStat();
             state.scores.wis.amount = rollStat();
             state.scores.cha.amount = rollStat();
+        },
+        addOneToScore: (state, action: PayloadAction<string>) => {
+            state.scores[action.payload].amount += 1;
+        },
+        subtractOneFromScore: (state, action: PayloadAction<string>) => {
+            state.scores[action.payload].amount -= 1;
+        },
+        setScoresToClassDefault: (state, action: PayloadAction<number[] | undefined>) => {
+            if (state.scores == null) {
+                state.scores = standardScores;
+            }
+            state.scores.str.amount = action.payload ? action.payload[0] : state.characterClassBase?.defaultScoreArray[0] ?? 8;
+            state.scores.dex.amount = action.payload ? action.payload[1] : state.characterClassBase?.defaultScoreArray[1] ?? 8;
+            state.scores.con.amount = action.payload ? action.payload[2] : state.characterClassBase?.defaultScoreArray[2] ?? 8;
+            state.scores.int.amount = action.payload ? action.payload[3] : state.characterClassBase?.defaultScoreArray[3] ?? 8;
+            state.scores.wis.amount = action.payload ? action.payload[4] : state.characterClassBase?.defaultScoreArray[4] ?? 8;
+            state.scores.cha.amount = action.payload ? action.payload[5] : state.characterClassBase?.defaultScoreArray[5] ?? 8;
         }
     }
 });
 
-export const { setCharacterClassBase, setBackgroundBase, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoresToRandom } = newCharacterSlice.actions;
+export const { setCharacterClassBase, setBackgroundBase, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault } = newCharacterSlice.actions;
 export default newCharacterSlice.reducer;

@@ -1,21 +1,13 @@
-import { render, screen, type RenderResult } from "@testing-library/react";
+import { screen, type RenderResult } from "@testing-library/react";
 import { describe } from "vitest";
-import { useState } from "react";
-import type { AbilityScores } from "../../../../src/pages/CreatePlayerCharacterPage";
-import { barbarianScores, baseScores } from "./defaultScores";
 import ClassDefault from "../../../../src/components/CreateCharacterPage/CharacterAbilityScoresSubComponents/ClassDefault";
+import renderWithStore from "../../../renderOptions/renderWithStore";
+import { characterClasses } from "../../../seedData/characterClasses";
 
-describe("PointBuy", () => {
+describe("ClassDefault", () => {
     var pointComponent: RenderResult;
     beforeEach(() => {
-        const ComponentWrapper = () => {
-            const [scores, setScores] = useState<AbilityScores>(baseScores);
-
-            return <ClassDefault scores={scores} setScores={setScores} classDefaultScores={barbarianScores} />
-        };
-
-        pointComponent = render(<ComponentWrapper />);
-
+        pointComponent = renderWithStore(<ClassDefault />, { preloadedState: { newCharacter: { characterClassBase: characterClasses[0] }, dmTools: { characterClasses } } });
     });
 
     it("renders with the selected classes correct default", () => {

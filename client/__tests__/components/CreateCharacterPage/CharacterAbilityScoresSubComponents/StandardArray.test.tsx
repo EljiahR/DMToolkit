@@ -1,25 +1,15 @@
-import { render, type RenderResult } from "@testing-library/react";
+import { type RenderResult } from "@testing-library/react";
 import { describe, it } from "vitest";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import StandardArray from "../../../../src/components/CreateCharacterPage/CharacterAbilityScoresSubComponents/StandardArray";
-import { useState } from "react";
-import type { AbilityScores } from "../../../../src/pages/CreatePlayerCharacterPage";
-import { standardScores } from "./defaultScores";
+import renderWithStore from "../../../renderOptions/renderWithStore";
 
 describe("StandardArray", () => {
     var standardArrayRender: RenderResult;
     
     beforeEach(() => {
-        const ComponentWrapper = () => {
-            const [scores, setScores] = useState<AbilityScores>(standardScores);
-
-            return (
-                <StandardArray scores={scores} setScores={setScores} />
-            )
-        };
-
-        standardArrayRender = render(<ComponentWrapper />);
+        standardArrayRender = renderWithStore(<StandardArray />);
     })
     
     it("renders", () => {

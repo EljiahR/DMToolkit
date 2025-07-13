@@ -1,24 +1,18 @@
-import { useEffect } from "react";
-import type { AbilityScore, AbilityScoreProps } from "../../../pages/CreatePlayerCharacterPage";
+import { useLayoutEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
+import { setScore, setScoresToMinimum } from "../../../lib/redux/newCharacterSlice";
+import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
-export default function({ scores, setScores }: AbilityScoreProps) {
-    useEffect(() => {
-        setScores((prevScores) => {
-            Object.keys(prevScores).forEach((key) => {
-                prevScores[key].amount = 1;
-            })
-            return prevScores;
-        });
+export default function() {
+    const scores = useAppSelector((state) => state.newCharacter.scores);
+    const dispatch = useAppDispatch();
+    
+    useLayoutEffect(() => {
+        dispatch(setScoresToMinimum());
     }, []);
 
-    const updateScore = (scoreId: string, updatedValue: string) => {
-        var parsedValue = parseInt(updatedValue);
-        parsedValue = parsedValue > 20 ? 20 : parsedValue < 1 ? 1 : parsedValue;
-        
-        setScores({
-            ...scores,
-            [scoreId]: {...scores[scoreId], amount: parsedValue}
-        })
+    const updateScore = (scoreId: string, amount: string) => {
+        dispatch(setScore({scoreId, amount}));
     }
     
     return (

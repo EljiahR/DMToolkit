@@ -1,16 +1,15 @@
-import { useEffect, useMemo } from "react";
-import type { AbilityScore, AbilityScoreProps } from "../../../pages/CreatePlayerCharacterPage";
+import { useLayoutEffect, useMemo } from "react";
 import { scoreCalculator, scoreCosts } from "../../../lib/dm-tools/pointBuyCalculator";
+import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
+import { addOneToScore, setScoresToBase, subtractOneFromScore } from "../../../lib/redux/newCharacterSlice";
+import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
-export default function({ scores, setScores }: AbilityScoreProps) {
-    
-    useEffect(() => {
-        setScores((prevScores) => {
-            Object.keys(prevScores).forEach((key) => {
-                prevScores[key].amount = 8;
-            })
-            return prevScores;
-        });
+export default function() {
+    const scores = useAppSelector((state) => state.newCharacter.scores);
+    const dispatch = useAppDispatch();
+
+    useLayoutEffect(() => {
+        dispatch(setScoresToBase());
     }, []);
 
     const scoreRemainder = useMemo(() => {
@@ -19,15 +18,9 @@ export default function({ scores, setScores }: AbilityScoreProps) {
 
     const handleScoreChange = (score: AbilityScore, isAdditive: boolean) => {
         if (isAdditive && score.amount < 15 && scoreRemainder >= (scoreCosts[score.amount + 1] - scoreCosts[score.amount])) {
-            setScores({
-                ...scores,
-                [score.id]: {...scores[score.id], amount: scores[score.id].amount + 1}
-            });
+            dispatch(addOneToScore(score.id));
         } else if (!isAdditive && score.amount > 8) {
-            setScores({
-                ...scores,
-                [score.id]: {...scores[score.id], amount: scores[score.id].amount - 1}
-            });
+            dispatch(subtractOneFromScore(score.id));
         }
     }
 
