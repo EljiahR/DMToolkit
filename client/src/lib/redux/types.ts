@@ -1,5 +1,4 @@
-import type { AbilityScores } from "../../pages/CreatePlayerCharacterPage";
-import type { BackgroundBase, CharacterClassBase, LineageBase, SpeciesBase } from "../types/dmToolTypes";
+import type { AbilityScores, BackgroundBase, CharacterClassBase, LineageBase, SpeciesBase } from "../types/dmToolTypes";
 
 export interface AuthSlice {
     accessToken: string | null;
@@ -15,4 +14,11 @@ export interface NewCharacterSlice {
     speciesBase: SpeciesBase | null;
     lineageBase: LineageBase | null;
     scores: AbilityScores;
+}
+
+export interface DMToolsSlice {
+    characterClass: CharacterClassBase[];
+    background: BackgroundBase[];
+    species: SpeciesBase[];
+    lineages: LineageBase[];
 }

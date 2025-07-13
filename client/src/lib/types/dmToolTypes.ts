@@ -98,3 +98,20 @@ export type Background = {
     skillProficiencies: string[];
     baseId: string;
 }
+
+export type AbilityScore = {
+    id: string;
+    name: string;
+    amount: number;
+    bonus: number;
+}
+
+export type AbilityScores = {
+    [key: string]: AbilityScore;
+    "str": AbilityScore;
+    "dex": AbilityScore;
+    "con": AbilityScore;
+    "int": AbilityScore;
+    "wis": AbilityScore;
+    "cha": AbilityScore;
+}

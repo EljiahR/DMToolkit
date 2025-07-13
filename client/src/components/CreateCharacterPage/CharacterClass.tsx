@@ -1,22 +1,23 @@
-import { useMemo } from "react";
-import type { CharacterClassBase } from "../../lib/types/dmToolTypes"
+import { useLayoutEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
+import { setCharacterClassBase } from "../../lib/redux/newCharacterSlice";
 
-interface Props {
-    classes: CharacterClassBase[];
-    selectedClassId: string;
-    setSelectedClassId: (newClass: string) => void;
-}
 
-export default function({ classes, selectedClassId, setSelectedClassId }: Props) {
-    const selectedClass = useMemo(() => {
-        return classes.find(characterClass => characterClass.id == selectedClassId) ?? null;
-    }, [selectedClassId]);
+export default function() {
+    const selectedClass = useAppSelector((state) => state.newCharacter.characterClassBase);
+    const dispatch = useAppDispatch();
     
+    useLayoutEffect(() => {
+        if (selectedClass == null) {
+            dispatch(setCharacterClassBase())
+        }
+    });
+
     return (
         <div>
             <h2>Class</h2>
             <label htmlFor="class-selector">Select a class</label>
-            <select id="class-selector" value={selectedClassId} onChange={(e) => setSelectedClassId(e.target.value)}>
+            <select id="class-selector" value={selectedClass.id} onChange={(e) => setSelectedClassId(e.target.value)}>
                 {classes.map((characterClass) => {
                     return (
                         <option key={`class-${characterClass.id}`} value={characterClass.id}>{characterClass.name}</option>
