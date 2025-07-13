@@ -1,26 +1,32 @@
-import { useMemo } from "react";
-import type { LineageBase, SpeciesBase } from "../../lib/types/dmToolTypes"
+import { useLayoutEffect } from "react";
+import { useAppSelector } from "../../lib/redux/hooks"
 
-interface Props {
-    allSpecies: SpeciesBase[];
-    allLineages: LineageBase[];
-    selectedSpeciesId: string;
-    setSelectedSpeciesId: (newSpecies: string) => void;
-    selectedLineageId: string;
-    setSelectedLineageId: (newLineage: string) => void;
-}
-
-export default function({...props}: Props) {
-    const selectedSpecies = useMemo(() => {
-        return props.allSpecies.find(species => species.id == props.selectedSpeciesId) ?? null;
-    }, [props.selectedSpeciesId]);
+export default function() {
+    const allSpecies = useAppSelector((state) => state.dmTools.species);
+    const allLineages = useAppSelector((state) => state.dmTools.lineages);
+    const selectedSpecies = useAppSelector((state) => state.newCharacter.speciesBase);
+    const selectedLineage = useAppSelector((state) => state.newCharacter.lineageBase);
     
+    useLayoutEffect(() => {
+        if (allSpecies.length < 1) {
+            // TODO: Error handling
+        }
+
+        if (allLineages.length < 1) {
+            // TODO: Error handling
+        }
+        
+        if (selectedSpecies == null) {
+
+        }
+    })
+
     return (
         <div>
             <h2>Species</h2>    
             <label htmlFor="species-selector">Select a species</label>
-            <select id="species-selector" value={props.selectedSpeciesId} onChange={(e) => props.setSelectedSpeciesId(e.target.value)}>
-                {props.allSpecies.map((species) => {
+            <select id="species-selector" value={selectedSpecies ? selectedSpecies.id : ""} onChange={(e) => props.setSelectedSpeciesId(e.target.value)}>
+                {allSpecies.map((species) => {
                     return (
                         <option key={`species-${species.id}`} value={species.id}>{species.name}</option>
                     )
@@ -28,7 +34,7 @@ export default function({...props}: Props) {
             </select>
             <label htmlFor="lineage-selector">Select a lineage</label>
             <select id="lineage-selector">
-                {props.allLineages.filter(lineage => lineage.speciesId == props.selectedSpeciesId).map((lineage) => {
+                {allLineages.filter(lineage => lineage.speciesId == selectedSpecies?.id).map((lineage) => {
                     return (
                         <option key={`lineage-${lineage.id}`} value={lineage.id}>{lineage.name}</option>
                     )
