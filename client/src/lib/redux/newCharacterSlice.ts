@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { NewCharacterSlice } from "./types";
 import type { AbilityScores, BackgroundBase, CharacterClassBase, LineageBase, SpeciesBase } from "../types/dmToolTypes";
+import { rollStat } from "../dm-tools/statRoll";
 
 const standardScores: AbilityScores = {
     "str": {
@@ -65,11 +66,52 @@ export const newCharacterSlice = createSlice({
         setLineageBase: (state, action: PayloadAction<LineageBase>) => {
             state.lineageBase = action.payload;
         },
+        setScore: (state, action: PayloadAction<{scoreId: string, amount: string}>) => {
+            var filteredAmount = parseInt(action.payload.amount);
+            filteredAmount = filteredAmount > 20 ? 20 : filteredAmount < 1 ? 1 : filteredAmount;
+            state.scores[action.payload.scoreId].amount = filteredAmount;
+        },
         setScores: (state, action: PayloadAction<AbilityScores>) => {
             state.scores = action.payload;
+        },
+        swapScores: (state, action: PayloadAction<{scoreIdA: string, scoreIdB: string}>) => {
+            const { scoreIdA, scoreIdB } = action.payload;
+            [state.scores[scoreIdA].amount, state.scores[scoreIdB].amount] = [state.scores[scoreIdB].amount, state.scores[scoreIdA].amount]
+        },
+        setScoresToStandard: (state) => {
+            state.scores.str.amount = 15;
+            state.scores.dex.amount = 14;
+            state.scores.con.amount = 13;
+            state.scores.int.amount = 12;
+            state.scores.wis.amount = 10;
+            state.scores.cha.amount = 8;
+        },
+        setScoresToBase: (state) => {
+            state.scores.str.amount = 8;
+            state.scores.dex.amount = 8;
+            state.scores.con.amount = 8;
+            state.scores.int.amount = 8;
+            state.scores.wis.amount = 8;
+            state.scores.cha.amount = 8;
+        },
+        setScoresToMinimum: (state) => {
+            state.scores.str.amount = 1;
+            state.scores.dex.amount = 1;
+            state.scores.con.amount = 1;
+            state.scores.int.amount = 1;
+            state.scores.wis.amount = 1;
+            state.scores.cha.amount = 1;
+        },
+        setScoresToRandom: (state) => {
+            state.scores.str.amount = rollStat();
+            state.scores.dex.amount = rollStat();
+            state.scores.con.amount = rollStat();
+            state.scores.int.amount = rollStat();
+            state.scores.wis.amount = rollStat();
+            state.scores.cha.amount = rollStat();
         }
     }
 });
 
-export const { setCharacterClassBase, setBackgroundBase, setSpeciesBase, setLineageBase, setScores } = newCharacterSlice.actions;
+export const { setCharacterClassBase, setBackgroundBase, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoresToRandom } = newCharacterSlice.actions;
 export default newCharacterSlice.reducer;

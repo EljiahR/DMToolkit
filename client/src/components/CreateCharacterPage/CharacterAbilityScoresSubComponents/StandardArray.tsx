@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import type { AbilityScore, AbilityScoreProps, AbilityScores } from "../../../pages/CreatePlayerCharacterPage";
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from "@dnd-kit/core";
 import { arraySwap, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useAppSelector } from "../../../lib/redux/hooks";
 
 const standardScoreSet = [15, 14, 13, 12, 10, 8];
 
-export default function({ scores, setScores }: AbilityScoreProps) {
+export default function() {
+    const scores = useAppSelector((state) => state.newCharacter.scores);
+
     const [items, setItems] = useState(["str", "dex", "con", "int", "wis", "cha"]);
     const sensors = useSensors(
         useSensor(PointerSensor),
