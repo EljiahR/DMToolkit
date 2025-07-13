@@ -77,6 +77,44 @@ export const baseScores: AbilityScores = {
         bonus: 0
 }};
 
+export const empytyScores: AbilityScores = {
+    "str": {
+        id: "str",
+        name: "Strength",
+        amount: 1,
+        bonus: 0
+    },
+    "dex": {
+        id: "dex",
+        name: "Dexterity",
+        amount: 1,
+        bonus: 0
+    },
+    "con": {
+        id: "con",
+        name: "Constitution",
+        amount: 1,
+        bonus: 0
+    },
+    "int": {
+        id: "int",
+        name: "Intelligence",
+        amount: 1,
+        bonus: 0
+    },
+    "wis": {
+        id: "wis",
+        name: "Wisdom",
+        amount: 1,
+        bonus: 0
+    },
+    "cha": {
+        id: "cha",
+        name: "Charisma",
+        amount: 1,
+        bonus: 0
+}};
+
 export const getRandomScore = (): AbilityScores => {
     return {
         "str": {
