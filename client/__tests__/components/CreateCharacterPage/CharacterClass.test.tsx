@@ -1,23 +1,20 @@
 import { describe, it } from "vitest";
 import CharacterClass from "../../../src/components/CreateCharacterPage/CharacterClass";
-import { render, screen, type RenderResult } from "@testing-library/react";
+import { screen, type RenderResult } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { characterClasses } from "../../seedData/characterClasses";
-import { useState } from "react";
+import renderWithStore from "../../renderOptions/renderWithStore";
 
 
 describe("CharacterAbilityScores component", () => {
     var classComponent: RenderResult;
     beforeEach(() => {
-        const ComponentWrapper = () => {
-            const [selectedClassId, setSelectedClassId] = useState(characterClasses[0].id);
-            return <CharacterClass classes={characterClasses} selectedClassId={selectedClassId} setSelectedClassId={setSelectedClassId} />
-        }
-        classComponent = render(<ComponentWrapper />);
+        classComponent = renderWithStore(<CharacterClass />, { preloadedState: { dmTools: { characterClasses } }})
     });
     
-    it("renders", () => {
+    it("renders with the default class displayed", () => {
         expect(screen.getByRole("heading", { name: /class/i })).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: /barbarian/i })).toBeInTheDocument();
     });
 
     it("allows the user to select from a list of classes, displaying more information on select", async () => {

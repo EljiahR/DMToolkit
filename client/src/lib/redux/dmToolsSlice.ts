@@ -2,8 +2,8 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { DMToolsSlice } from "./types";
 
 const initialState: DMToolsSlice = {
-    characterClass: [],
-    background: [],
+    characterClasses: [],
+    backgrounds: [],
     species: [],
     lineages: [],
 };

@@ -4,7 +4,7 @@ import { setCharacterClassBase } from "../../lib/redux/newCharacterSlice";
 
 
 export default function() {
-    const availableClasses = useAppSelector((state) => state.dmTools.characterClass);
+    const availableClasses = useAppSelector((state) => state.dmTools.characterClasses);
     const selectedClass = useAppSelector((state) => state.newCharacter.characterClassBase);
     const dispatch = useAppDispatch();
     
@@ -32,7 +32,7 @@ export default function() {
         <div>
             <h2>Class</h2>
             <label htmlFor="class-selector">Select a class</label>
-            <select id="class-selector" value={selectedClass!.id} onChange={(e) => handleClassSelection(e.target.value)}>
+            <select id="class-selector" value={selectedClass ? selectedClass.id : ""} onChange={(e) => handleClassSelection(e.target.value)}>
                 {availableClasses.map((characterClass) => {
                     return (
                         <option key={`class-${characterClass.id}`} value={characterClass.id}>{characterClass.name}</option>

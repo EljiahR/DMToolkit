@@ -17,8 +17,8 @@ export interface NewCharacterSlice {
 }
 
 export interface DMToolsSlice {
-    characterClass: CharacterClassBase[];
-    background: BackgroundBase[];
+    characterClasses: CharacterClassBase[];
+    backgrounds: BackgroundBase[];
     species: SpeciesBase[];
     lineages: LineageBase[];
 }
