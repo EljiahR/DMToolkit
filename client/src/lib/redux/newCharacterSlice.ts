@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { NewCharacterSlice } from "./types";
 import type { AbilityScores } from "../../pages/CreatePlayerCharacterPage";
+import type { BackgroundBase, LineageBase, SpeciesBase } from "../types/dmToolTypes";
 
 const standardScores: AbilityScores = {
     "str": {
@@ -41,6 +42,9 @@ const standardScores: AbilityScores = {
 }};
 
 const initialState: NewCharacterSlice = {
+    backgroundBase: null,
+    speciesBase: null,
+    lineageBase: null,
     scores: standardScores
 };
 
@@ -48,11 +52,20 @@ export const newCharacterSlice = createSlice({
     name: "newCharacter",
     initialState,
     reducers: {
+        setBackgroundBase: (state, action: PayloadAction<BackgroundBase>) => {
+            state.backgroundBase = action.payload;
+        },
+        setSpeciesBase: (state, action: PayloadAction<SpeciesBase>) => {
+            state.speciesBase = action.payload;
+        },
+        setLineageBase: (state, action: PayloadAction<LineageBase>) => {
+            state.lineageBase = action.payload;
+        },
         setScores: (state, action: PayloadAction<AbilityScores>) => {
             state.scores = action.payload;
         }
     }
 });
 
-export const { setScores } = newCharacterSlice.actions;
+export const { setBackgroundBase, setSpeciesBase, setLineageBase, setScores } = newCharacterSlice.actions;
 export default newCharacterSlice.reducer;
