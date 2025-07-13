@@ -10,7 +10,7 @@ describe("CharacterBackground component", () => {
     
     beforeEach(() => {
         
-        backgroundComponent = renderWithStore(<CharacterBackground />, { preloadedState: {  } });
+        backgroundComponent = renderWithStore(<CharacterBackground />, { preloadedState: { dmTools: { backgrounds: characterBackgrounds } } });
     })
     
     it("renders with the default background selected", () => {
