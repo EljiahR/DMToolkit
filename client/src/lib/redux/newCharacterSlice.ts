@@ -60,6 +60,7 @@ export const newCharacterSlice = createSlice({
         },
         setSpeciesBase: (state, action: PayloadAction<SpeciesBase>) => {
             state.speciesBase = action.payload;
+            state.lineageBase = action.payload.lineages[0];
         },
         setLineageBase: (state, action: PayloadAction<LineageBase>) => {
             state.lineageBase = action.payload;

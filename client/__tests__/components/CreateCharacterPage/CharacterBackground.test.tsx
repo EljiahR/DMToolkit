@@ -1,21 +1,16 @@
 import { describe, it } from "vitest";
 import CharacterBackground from "../../../src/components/CreateCharacterPage/CharacterBackground";
-import { render, screen, type RenderResult } from "@testing-library/react";
+import { screen, type RenderResult } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { characterBackgrounds } from "../../seedData/characterBackgrounds";
-import { useState } from "react";
+import renderWithStore from "../../renderOptions/renderWithStore";
 
 describe("CharacterBackground component", () => {
     var backgroundComponent: RenderResult;
     
     beforeEach(() => {
-        const WrapperComponent = () => {
-            const [selectedBackgroundId, setSelectedBackgroundId] = useState(characterBackgrounds[0].id);
-
-            return <CharacterBackground backgrounds={characterBackgrounds} selectedBackgroundId={selectedBackgroundId} setSelectedBackgroundId={setSelectedBackgroundId} />
-        };
         
-        backgroundComponent = render(<WrapperComponent />);
+        backgroundComponent = renderWithStore(<CharacterBackground />, { preloadedState: {  } });
     })
     
     it("renders with the default background selected", () => {

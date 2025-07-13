@@ -1,12 +1,14 @@
 import { useLayoutEffect } from "react";
-import { useAppSelector } from "../../lib/redux/hooks"
+import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
+import { setLineageBase, setSpeciesBase } from "../../lib/redux/newCharacterSlice";
 
 export default function() {
     const allSpecies = useAppSelector((state) => state.dmTools.species);
     const allLineages = useAppSelector((state) => state.dmTools.lineages);
     const selectedSpecies = useAppSelector((state) => state.newCharacter.speciesBase);
     const selectedLineage = useAppSelector((state) => state.newCharacter.lineageBase);
-    
+    const dispatch = useAppDispatch();
+
     useLayoutEffect(() => {
         if (allSpecies.length < 1) {
             // TODO: Error handling
@@ -17,15 +19,30 @@ export default function() {
         }
         
         if (selectedSpecies == null) {
-
+            dispatch(setSpeciesBase(allSpecies[0]));
         }
-    })
+
+        if (selectedLineage == null) {
+            dispatch(setLineageBase(selectedSpecies ? selectedSpecies.lineages[0] : allSpecies[0].lineages[0]));
+        }
+    });
+
+    const handleSpeciesChange = (speciesId: string) => {
+        const newSpecies = allSpecies.find((speciesSingular) => speciesSingular.id === speciesId);
+
+        if (newSpecies == undefined) {
+            // TODO: Error handling ;)
+        }
+
+        // setSpeciesBase automatically handles the lineage
+        dispatch(setSpeciesBase(newSpecies!));
+    }  
 
     return (
         <div>
             <h2>Species</h2>    
             <label htmlFor="species-selector">Select a species</label>
-            <select id="species-selector" value={selectedSpecies ? selectedSpecies.id : ""} onChange={(e) => props.setSelectedSpeciesId(e.target.value)}>
+            <select id="species-selector" value={selectedSpecies ? selectedSpecies.id : ""} onChange={(e) => handleSpeciesChange(e.target.value)}>
                 {allSpecies.map((species) => {
                     return (
                         <option key={`species-${species.id}`} value={species.id}>{species.name}</option>
@@ -40,9 +57,10 @@ export default function() {
                     )
                 })}
             </select>
-            {selectedSpecies &&
+            {(selectedSpecies && selectedLineage) &&
                 <div id="species-display">
                     <h3>{selectedSpecies.name}</h3>
+                    <h4>{selectedLineage.name}</h4>
                     <p>{selectedSpecies.description}</p>
                 </div>
             }
