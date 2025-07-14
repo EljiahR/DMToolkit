@@ -14,10 +14,8 @@ export default function() {
     }
     
     useLayoutEffect(() => {
-        
-
         dispatch(setScoresToClassDefault());
-    });
+    }, []);
     
     return (
         <div id="class-default-display">

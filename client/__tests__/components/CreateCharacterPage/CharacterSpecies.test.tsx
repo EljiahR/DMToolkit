@@ -1,15 +1,13 @@
 import { describe, it } from "vitest";
 import CharacterSpecies from "../../../src/components/CreateCharacterPage/CharacterSpecies";
-import { screen, type RenderResult } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { characterSpecies, lineages } from "../../seedData/characterSpecies";
 import renderWithStore from "../../renderOptions/renderWithStore";
 
 describe("CharacterSpecies component", () => {
-    var originComponent: RenderResult;
-    
     beforeEach(() => {
-        originComponent = renderWithStore(<CharacterSpecies />, { preloadedState: { dmTools: { species: characterSpecies, lineages } }})
+        renderWithStore(<CharacterSpecies />, { preloadedState: { dmTools: { species: characterSpecies, lineages } }})
     })
     
     it("renders with the default selected species showing", () => {

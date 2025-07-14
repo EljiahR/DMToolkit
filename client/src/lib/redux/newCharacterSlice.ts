@@ -3,7 +3,7 @@ import type { NewCharacterSlice } from "./types";
 import type { AbilityScores, BackgroundBase, CharacterClassBase, LineageBase, SpeciesBase } from "../types/dmToolTypes";
 import { rollStat } from "../dm-tools/statRoll";
 
-const standardScores: AbilityScores = {
+export const standardScores: AbilityScores = {
     "str": {
         id: "str",
         name: "Strength",

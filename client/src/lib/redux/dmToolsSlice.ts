@@ -12,6 +12,7 @@ export const dmToolsSlice = createSlice({
     name: "dmTools",
     initialState,
     reducers: {
+        // @ts-ignore
         setAll: (state, action: PayloadAction<DMToolsSlice>) => {
             state = action.payload;
         }

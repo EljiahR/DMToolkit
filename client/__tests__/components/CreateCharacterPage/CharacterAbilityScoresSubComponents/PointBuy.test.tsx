@@ -1,15 +1,12 @@
-import { screen, type RenderResult } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { describe } from "vitest";
 import PointBuy from "../../../../src/components/CreateCharacterPage/CharacterAbilityScoresSubComponents/PointBuy";
 import userEvent from "@testing-library/user-event";
 import renderWithStore from "../../../renderOptions/renderWithStore";
 
 describe("PointBuy", () => {
-    var pointComponent: RenderResult;
     beforeEach(() => {
-        
-
-        pointComponent = renderWithStore(<PointBuy />);
+        renderWithStore(<PointBuy />);
 
     });
 

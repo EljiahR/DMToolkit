@@ -1,13 +1,13 @@
-import { screen, type RenderResult } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { describe } from "vitest";
 import ClassDefault from "../../../../src/components/CreateCharacterPage/CharacterAbilityScoresSubComponents/ClassDefault";
 import renderWithStore from "../../../renderOptions/renderWithStore";
 import { characterClasses } from "../../../seedData/characterClasses";
+import { standardScores } from "./defaultScores";
 
 describe("ClassDefault", () => {
-    var pointComponent: RenderResult;
     beforeEach(() => {
-        pointComponent = renderWithStore(<ClassDefault />, { preloadedState: { newCharacter: { characterClassBase: characterClasses[0] }, dmTools: { characterClasses } } });
+        renderWithStore(<ClassDefault />, { preloadedState: { newCharacter: { characterClassBase: characterClasses[0], scores: standardScores }, dmTools: { characterClasses } } });
     });
 
     it("renders with the selected classes correct default", () => {

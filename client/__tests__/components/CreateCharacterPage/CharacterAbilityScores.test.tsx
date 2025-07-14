@@ -1,14 +1,14 @@
 import { describe, it } from "vitest";
 import CharacterAbilityScores from "../../../src/components/CreateCharacterPage/CharacterAbilityScores";
-import { screen, type RenderResult } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { characterClasses } from "../../seedData/characterClasses";
 import renderWithStore from "../../renderOptions/renderWithStore";
 
 describe("CharacterAbilityScores component", () => {
-    var abilityComponent: RenderResult;
+
     beforeEach(() => {
-        abilityComponent = renderWithStore(<CharacterAbilityScores />, { preloadedState: { dmTools: { characterClasses } }});
+        renderWithStore(<CharacterAbilityScores />, { preloadedState: { dmTools: { characterClasses } }});
     })
     
     it("renders with the standard array as default", () => {

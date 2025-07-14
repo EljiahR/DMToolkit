@@ -1,4 +1,3 @@
-import { type RenderResult } from "@testing-library/react";
 import { describe, it } from "vitest";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -6,10 +5,8 @@ import StandardArray from "../../../../src/components/CreateCharacterPage/Charac
 import renderWithStore from "../../../renderOptions/renderWithStore";
 
 describe("StandardArray", () => {
-    var standardArrayRender: RenderResult;
-    
     beforeEach(() => {
-        standardArrayRender = renderWithStore(<StandardArray />);
+        renderWithStore(<StandardArray />);
     })
     
     it("renders", () => {

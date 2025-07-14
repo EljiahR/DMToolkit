@@ -1,15 +1,14 @@
 import { describe, it } from "vitest";
 import CharacterClass from "../../../src/components/CreateCharacterPage/CharacterClass";
-import { screen, type RenderResult } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { characterClasses } from "../../seedData/characterClasses";
 import renderWithStore from "../../renderOptions/renderWithStore";
 
 
 describe("CharacterAbilityScores component", () => {
-    var classComponent: RenderResult;
     beforeEach(() => {
-        classComponent = renderWithStore(<CharacterClass />, { preloadedState: { dmTools: { characterClasses } }})
+        renderWithStore(<CharacterClass />, { preloadedState: { dmTools: { characterClasses } }})
     });
     
     it("renders with the default class displayed", () => {

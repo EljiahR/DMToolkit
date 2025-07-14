@@ -1,16 +1,13 @@
 import { describe, it } from "vitest";
 import CharacterBackground from "../../../src/components/CreateCharacterPage/CharacterBackground";
-import { screen, type RenderResult } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { characterBackgrounds } from "../../seedData/characterBackgrounds";
 import renderWithStore from "../../renderOptions/renderWithStore";
 
 describe("CharacterBackground component", () => {
-    var backgroundComponent: RenderResult;
-    
     beforeEach(() => {
-        
-        backgroundComponent = renderWithStore(<CharacterBackground />, { preloadedState: { dmTools: { backgrounds: characterBackgrounds } } });
+        renderWithStore(<CharacterBackground />, { preloadedState: { dmTools: { backgrounds: characterBackgrounds } } });
     })
     
     it("renders with the default background selected", () => {

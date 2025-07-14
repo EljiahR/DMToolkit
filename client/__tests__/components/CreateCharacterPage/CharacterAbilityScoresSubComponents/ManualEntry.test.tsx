@@ -1,13 +1,12 @@
-import { screen, type RenderResult } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { describe } from "vitest";
 import ManualEntry from "../../../../src/components/CreateCharacterPage/CharacterAbilityScoresSubComponents/ManualEntry";
 import userEvent from "@testing-library/user-event";
 import renderWithStore from "../../../renderOptions/renderWithStore";
 
 describe("ManualEntry", () => {
-    var pointComponent: RenderResult;
     beforeEach(() => {
-        pointComponent = renderWithStore(<ManualEntry />);
+        renderWithStore(<ManualEntry />);
     });
 
     it("renders with a default score of 1 in all categories", () => {
