@@ -1,20 +1,13 @@
 import { describe, it } from "vitest";
 import CharacterSpecies from "../../../src/components/CreateCharacterPage/CharacterSpecies";
-import { render, screen, type RenderResult } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { characterSpecies, versatile, woodElf } from "../../seedData/characterSpecies";
-import { useState } from "react";
+import { characterSpecies, lineages } from "../../seedData/characterSpecies";
+import renderWithStore from "../../renderOptions/renderWithStore";
 
-describe("CharacterBackground component", () => {
-    var originComponent: RenderResult;
-    
+describe("CharacterSpecies component", () => {
     beforeEach(() => {
-        const ComponentWrapper = () => {
-            const [selectedSpeciesId, setSelectedSpeciesId] = useState(characterSpecies[0].id);
-            const [selectedLineageId, setSelectedLineageId] = useState(versatile.id);
-            return <CharacterSpecies allSpecies={characterSpecies} allLineages={[versatile, woodElf]} selectedSpeciesId={selectedSpeciesId} setSelectedSpeciesId={setSelectedSpeciesId} selectedLineageId={selectedLineageId} setSelectedLineageId={setSelectedLineageId} />
-        }
-        originComponent = render(<ComponentWrapper />);
+        renderWithStore(<CharacterSpecies />, { preloadedState: { dmTools: { species: characterSpecies, lineages } }})
     })
     
     it("renders with the default selected species showing", () => {
@@ -27,6 +20,6 @@ describe("CharacterBackground component", () => {
 
         await userEvent.selectOptions(speciesBox, characterSpecies[1].id);
 
-        expect(screen.getByRole("heading", { name: /elf/i })).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: /wood elf/i })).toBeInTheDocument();
     })
 });

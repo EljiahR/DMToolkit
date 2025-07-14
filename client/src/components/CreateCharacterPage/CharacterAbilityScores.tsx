@@ -1,12 +1,11 @@
 import { useState } from "react";
-import type { AbilityScoreWithClassScoresProps } from "../../pages/CreatePlayerCharacterPage";
 import StandardArray from "./CharacterAbilityScoresSubComponents/StandardArray";
 import PointBuy from "./CharacterAbilityScoresSubComponents/PointBuy";
 import RandomRoll from "./CharacterAbilityScoresSubComponents/RandomRoll";
 import ClassDefault from "./CharacterAbilityScoresSubComponents/ClassDefault";
 import ManualEntry from "./CharacterAbilityScoresSubComponents/ManualEntry";
 
-export default function({scores, setScores, classDefaultScores}: AbilityScoreWithClassScoresProps) {  
+export default function() {  
     const [selectedMethod, setSelectedMethod] = useState("standard");
     
     return (
@@ -22,15 +21,15 @@ export default function({scores, setScores, classDefaultScores}: AbilityScoreWit
             </select>
             <div id="selected-score-method">
                 {selectedMethod == "standard" ?
-                    <StandardArray scores={scores} setScores={setScores} />
+                    <StandardArray />
                 : selectedMethod == "point" ?
-                    <PointBuy scores={scores} setScores={setScores} />
+                    <PointBuy />
                 : selectedMethod == "random" ?
-                    <RandomRoll scores={scores} setScores={setScores} />
+                    <RandomRoll />
                 : selectedMethod == "class-default" ?
-                    <ClassDefault scores={scores} setScores={setScores} classDefaultScores={classDefaultScores} />
+                    <ClassDefault />
                 : selectedMethod == "manual" ?
-                    <ManualEntry scores={scores} setScores={setScores} />
+                    <ManualEntry />
                 : null
                 }
             </div>

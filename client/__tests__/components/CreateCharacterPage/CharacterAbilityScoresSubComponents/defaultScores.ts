@@ -1,5 +1,5 @@
-import type { AbilityScores } from "../../../../src/pages/CreatePlayerCharacterPage";
 import { rollStat } from "../../../../src/lib/dm-tools/statRoll";
+import type { AbilityScores } from "../../../../src/lib/types/dmToolTypes";
 
 export const standardScores: AbilityScores = {
     "str": {

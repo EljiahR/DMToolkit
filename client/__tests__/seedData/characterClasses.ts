@@ -8,7 +8,7 @@ export const characterClasses: CharacterClassBase[] = [
         description: barbarianDescription,
         features: [],
         subclasses: [],
-        defaultScoreArray: []
+        defaultScoreArray: [15, 13, 14, 12, 10, 8]
     },
     {
         id: "cheating",

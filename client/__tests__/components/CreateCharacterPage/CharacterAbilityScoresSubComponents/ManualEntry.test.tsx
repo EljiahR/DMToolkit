@@ -1,22 +1,12 @@
-import { render, screen, type RenderResult } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { describe } from "vitest";
-import { useState } from "react";
-import type { AbilityScores } from "../../../../src/pages/CreatePlayerCharacterPage";
-import { empytyScores } from "./defaultScores";
 import ManualEntry from "../../../../src/components/CreateCharacterPage/CharacterAbilityScoresSubComponents/ManualEntry";
 import userEvent from "@testing-library/user-event";
+import renderWithStore from "../../../renderOptions/renderWithStore";
 
 describe("ManualEntry", () => {
-    var pointComponent: RenderResult;
     beforeEach(() => {
-        const ComponentWrapper = () => {
-            const [scores, setScores] = useState<AbilityScores>(empytyScores);
-
-            return <ManualEntry scores={scores} setScores={setScores} />
-        };
-
-        pointComponent = render(<ComponentWrapper />);
-
+        renderWithStore(<ManualEntry />);
     });
 
     it("renders with a default score of 1 in all categories", () => {

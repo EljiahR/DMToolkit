@@ -1,21 +1,12 @@
-import { render, screen, type RenderResult } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { describe } from "vitest";
 import PointBuy from "../../../../src/components/CreateCharacterPage/CharacterAbilityScoresSubComponents/PointBuy";
-import { useState } from "react";
-import type { AbilityScores } from "../../../../src/pages/CreatePlayerCharacterPage";
-import { baseScores } from "./defaultScores";
 import userEvent from "@testing-library/user-event";
+import renderWithStore from "../../../renderOptions/renderWithStore";
 
 describe("PointBuy", () => {
-    var pointComponent: RenderResult;
     beforeEach(() => {
-        const ComponentWrapper = () => {
-            const [scores, setScores] = useState<AbilityScores>(baseScores);
-
-            return <PointBuy scores={scores} setScores={setScores} />
-        };
-
-        pointComponent = render(<ComponentWrapper />);
+        renderWithStore(<PointBuy />);
 
     });
 

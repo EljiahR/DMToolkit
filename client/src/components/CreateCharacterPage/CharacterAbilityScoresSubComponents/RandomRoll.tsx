@@ -1,30 +1,28 @@
-import { useEffect } from "react";
-import type { AbilityScore, AbilityScoreProps } from "../../../pages/CreatePlayerCharacterPage";
-import { rollStat } from "../../../lib/dm-tools/statRoll";
+import { useLayoutEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
+import { setScoresToRandom, setScoreToRandom } from "../../../lib/redux/newCharacterSlice";
+import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
-export default function({ scores, setScores }: AbilityScoreProps) {
+export default function() {
+    const scores = useAppSelector((state) => state.newCharacter.scores);
+    const dispatch = useAppDispatch();
+    
     const handleScoreReroll = (scoreId: string) => {
-        setScores({
-            ...scores,
-            [scoreId]: {...scores[scoreId], amount: rollStat()}
-        });
+        dispatch(setScoreToRandom(scoreId));
     };
 
     const handleAllReroll = () => {
-        const newScores = {...scores};
-        Object.keys(newScores).forEach((key) => {
-            newScores[key].amount = rollStat();
-        })
-        setScores(newScores);
+        dispatch(setScoresToRandom());
     };
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         handleAllReroll();
     }, []);
     
     return (
         <div id="random-roll-display">
             <h3>Random Roll</h3>
+            <button onClick={handleAllReroll}>Reroll All</button>
             <div id="random-roll">
                 {Object.keys(scores).map((key) => {
                     return <ScoreDisplay score={scores[key]} handleScoreReroll={handleScoreReroll} />

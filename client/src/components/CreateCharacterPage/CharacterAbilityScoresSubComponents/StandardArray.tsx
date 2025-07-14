@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
-import type { AbilityScore, AbilityScoreProps, AbilityScores } from "../../../pages/CreatePlayerCharacterPage";
+import { useLayoutEffect, useState } from "react";
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from "@dnd-kit/core";
 import { arraySwap, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
+import { setScoresToStandard, swapScores } from "../../../lib/redux/newCharacterSlice";
+import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
-const standardScoreSet = [15, 14, 13, 12, 10, 8];
+export default function() {
+    const scores = useAppSelector((state) => state.newCharacter.scores);
+    const dispatch = useAppDispatch();
 
-export default function({ scores, setScores }: AbilityScoreProps) {
     const [items, setItems] = useState(["str", "dex", "con", "int", "wis", "cha"]);
     const sensors = useSensors(
         useSensor(PointerSensor),
@@ -15,21 +18,12 @@ export default function({ scores, setScores }: AbilityScoreProps) {
         })
     );
 
-    useEffect(() => {
-        setScores((prevScores) => {
-            Object.keys(prevScores).forEach((key, index) => {
-                prevScores[key] = {...prevScores[key], amount: standardScoreSet[index]}
-            });
-            return prevScores;
-        });
+    useLayoutEffect(() => {
+        dispatch(setScoresToStandard());
     }, []);
 
-    const handleScoreSwap = (scoreOne: string, scoreTwo: string) => {
-        setScores({
-            ...scores,
-            [scoreOne as keyof AbilityScores]: {...scores[scoreOne as keyof AbilityScores], amount: scores[scoreTwo].amount},
-            [scoreTwo as keyof AbilityScores]: {...scores[scoreTwo as keyof AbilityScores], amount: scores[scoreOne].amount}
-        });
+    const handleScoreSwap = (scoreIdA: string, scoreIdB: string) => {
+        dispatch(swapScores({scoreIdA, scoreIdB}));
     }
 
     const handleDragEnd = (event: DragEndEvent) => {

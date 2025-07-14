@@ -1,23 +1,39 @@
-import { useMemo } from "react";
-import type { CharacterClassBase } from "../../lib/types/dmToolTypes"
+import { useLayoutEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
+import { setCharacterClassBase } from "../../lib/redux/newCharacterSlice";
 
-interface Props {
-    classes: CharacterClassBase[];
-    selectedClassId: string;
-    setSelectedClassId: (newClass: string) => void;
-}
 
-export default function({ classes, selectedClassId, setSelectedClassId }: Props) {
-    const selectedClass = useMemo(() => {
-        return classes.find(characterClass => characterClass.id == selectedClassId) ?? null;
-    }, [selectedClassId]);
+export default function() {
+    const availableClasses = useAppSelector((state) => state.dmTools.characterClasses);
+    const selectedClass = useAppSelector((state) => state.newCharacter.characterClassBase);
+    const dispatch = useAppDispatch();
     
+    useLayoutEffect(() => {
+        if (availableClasses.length < 1) {
+            // throw error or return to homepage not sure yet :)
+        }
+        
+        if (selectedClass == null) {
+            dispatch(setCharacterClassBase(availableClasses[0]));
+        }
+    });
+
+    const handleClassSelection = (classId: string) => {
+        const newClass = availableClasses.find((characterClass) => characterClass.id === classId);
+
+        if (newClass == undefined) {
+            // MORE ERROR HANDLING
+        }
+
+        dispatch(setCharacterClassBase(newClass!));
+    }
+
     return (
         <div>
             <h2>Class</h2>
             <label htmlFor="class-selector">Select a class</label>
-            <select id="class-selector" value={selectedClassId} onChange={(e) => setSelectedClassId(e.target.value)}>
-                {classes.map((characterClass) => {
+            <select id="class-selector" value={selectedClass ? selectedClass.id : ""} onChange={(e) => handleClassSelection(e.target.value)}>
+                {availableClasses.map((characterClass) => {
                     return (
                         <option key={`class-${characterClass.id}`} value={characterClass.id}>{characterClass.name}</option>
                     )

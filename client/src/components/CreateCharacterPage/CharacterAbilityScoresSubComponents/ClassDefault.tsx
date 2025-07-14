@@ -1,9 +1,20 @@
-import { useEffect } from "react";
-import type { AbilityScoreWithClassScoresProps } from "../../../pages/CreatePlayerCharacterPage";
+import { useLayoutEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
+import { setCharacterClassBase, setScoresToClassDefault } from "../../../lib/redux/newCharacterSlice";
 
-export default function({ scores, setScores, classDefaultScores }: AbilityScoreWithClassScoresProps) {
-    useEffect(() => {
-        setScores(classDefaultScores);
+export default function() {
+    const scores = useAppSelector((state) => state.newCharacter.scores);
+    const defaultClass = useAppSelector((state) => state.dmTools.characterClasses[0]);
+    const characterClass = useAppSelector((state) => state.newCharacter.characterClassBase);
+    const dispatch = useAppDispatch();
+
+    if (!characterClass || !scores) {
+        dispatch(setCharacterClassBase(defaultClass));
+        dispatch(setScoresToClassDefault(defaultClass.defaultScoreArray));
+    }
+    
+    useLayoutEffect(() => {
+        dispatch(setScoresToClassDefault());
     }, []);
     
     return (

@@ -1,18 +1,14 @@
 import { describe, it } from "vitest";
 import CharacterAbilityScores from "../../../src/components/CreateCharacterPage/CharacterAbilityScores";
-import { render, screen, type RenderResult } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { standardScores } from "./CharacterAbilityScoresSubComponents/defaultScores";
-import { useState } from "react";
+import { characterClasses } from "../../seedData/characterClasses";
+import renderWithStore from "../../renderOptions/renderWithStore";
 
 describe("CharacterAbilityScores component", () => {
-    var abilityComponent: RenderResult;
+
     beforeEach(() => {
-        const WrapperComponent = () => {
-            const [scores, setScores] = useState(standardScores);
-            return <CharacterAbilityScores scores={scores} setScores={setScores} />
-        }
-        abilityComponent = render(<WrapperComponent />);
+        renderWithStore(<CharacterAbilityScores />, { preloadedState: { dmTools: { characterClasses } }});
     })
     
     it("renders with the standard array as default", () => {
