@@ -4,6 +4,7 @@ import PointBuy from "./CharacterAbilityScoresSubComponents/PointBuy";
 import RandomRoll from "./CharacterAbilityScoresSubComponents/RandomRoll";
 import ClassDefault from "./CharacterAbilityScoresSubComponents/ClassDefault";
 import ManualEntry from "./CharacterAbilityScoresSubComponents/ManualEntry";
+import BonusAbilityScores from "./CharacterAbilityScoresSubComponents/BonusAbilityScores";
 
 export default function() {  
     const [selectedMethod, setSelectedMethod] = useState("standard");
@@ -33,6 +34,7 @@ export default function() {
                 : null
                 }
             </div>
+            <BonusAbilityScores />
         </div>
     )
 }

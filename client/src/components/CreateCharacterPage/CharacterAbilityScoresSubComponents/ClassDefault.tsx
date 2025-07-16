@@ -24,7 +24,7 @@ export default function() {
                 {Object.keys(scores).map((key) => {
                     return (
                         <div key={`$default-${key}`}>
-                            <p>{`${scores[key].name}: ${scores[key].amount}`}</p>
+                            <p>{`${scores[key].name}: ${scores[key].bonus > 0 ? `${scores[key].amount} +${scores[key].bonus}` : scores[key].amount}`}</p>
                         </div>
                     )
                 })}

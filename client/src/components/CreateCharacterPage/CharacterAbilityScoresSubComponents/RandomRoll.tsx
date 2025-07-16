@@ -40,7 +40,7 @@ interface ScoreDisplayProps {
 const ScoreDisplay = ({ score, handleScoreReroll }: ScoreDisplayProps) => {
     return (
         <div id={`${score.id}-score`}>
-            <p>{`${score.name}: ${score.amount}`}</p>
+            <p>{`${score.name}: ${score.bonus > 0 ? `${score.amount} +${score.bonus}` : score.amount}`}</p>
             <button onClick={() => handleScoreReroll(score.id)}>Roll</button>
         </div>
     )

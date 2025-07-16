@@ -47,7 +47,7 @@ interface ScoreDisplayProps {
 const ScoreDisplay = ({ score, handleScoreChange }: ScoreDisplayProps) => {
     return (
         <div id={`${score.id}-display`}>
-            <p>{`${score.name}: ${score.amount}`}</p>
+            <p>{`${score.name}: ${score.bonus > 0 ? `${score.amount} +${score.bonus}` : score.amount}`}</p>
             <div>
                 <button onClick={() => handleScoreChange(score, true)}>+</button>
                 <button onClick={() => handleScoreChange(score, false)}>-</button>

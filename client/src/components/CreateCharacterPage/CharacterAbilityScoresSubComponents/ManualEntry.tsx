@@ -39,6 +39,11 @@ const ScoreComponent = ({ score, updateScore}: ScoreComponentProps) => {
         <div>
             <label htmlFor={`${score.id}-input`}>{score.name}: </label>
             <input type="number" id={`${score.id}-input`} value={score.amount} onChange={(e) => updateScore(score.id, e.target.value)} />
+            <div>
+                {score.bonus > 0 &&
+                    `+${score.bonus}`
+                }
+            </div>
         </div>
     )
 }

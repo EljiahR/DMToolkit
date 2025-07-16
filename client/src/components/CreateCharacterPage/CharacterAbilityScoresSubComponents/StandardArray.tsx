@@ -66,6 +66,6 @@ const SortableScore = ({score}: SortableScoreProps) => {
     };
 
     return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>{`${score.name}: ${score.amount}`}</div>
+        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>{`${score.name}: ${score.bonus > 0 ? `${score.amount} +${score.bonus}` : score.amount}`}</div>
     )
 }
