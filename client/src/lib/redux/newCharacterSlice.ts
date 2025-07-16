@@ -2,6 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { NewCharacterSlice } from "./types";
 import type { AbilityScores, BackgroundBase, CharacterClassBase, LineageBase, SpeciesBase } from "../types/dmToolTypes";
 import { rollStat } from "../dm-tools/statRoll";
+import { backgroundBaseToInstance } from "../dm-tools/baseToInstanceConverters";
 
 export const standardScores: AbilityScores = {
     "str": {
@@ -44,6 +45,14 @@ export const standardScores: AbilityScores = {
 const initialState: NewCharacterSlice = {
     characterClassBase: null,
     backgroundBase: null,
+    backgroundInstance: {
+        name: "",
+        description: "",
+        abilityScores: ["", ""],
+        features: [],
+        skillProficiencies: [],
+        baseId: ""
+    },
     speciesBase: null,
     lineageBase: null,
     scores: standardScores
@@ -58,6 +67,17 @@ export const newCharacterSlice = createSlice({
         },
         setBackgroundBase: (state, action: PayloadAction<BackgroundBase>) => {
             state.backgroundBase = action.payload;
+            state.backgroundInstance = backgroundBaseToInstance(action.payload);
+        },
+        setBackgroundScores: (state, action: PayloadAction<{scoreId: string, index: number}>) => {
+            if (state.backgroundInstance) {
+                if (state.backgroundInstance.abilityScores[action.payload.index] != "") {
+                    state.scores[action.payload.scoreId].bonus = 0;
+                }
+
+                state.backgroundInstance.abilityScores[action.payload.index] = action.payload.scoreId;
+                state.scores[action.payload.scoreId].bonus = 2 - action.payload.index;
+            }
         },
         setSpeciesBase: (state, action: PayloadAction<SpeciesBase>) => {
             state.speciesBase = action.payload;
@@ -133,5 +153,5 @@ export const newCharacterSlice = createSlice({
     }
 });
 
-export const { setCharacterClassBase, setBackgroundBase, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault } = newCharacterSlice.actions;
+export const { setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault } = newCharacterSlice.actions;
 export default newCharacterSlice.reducer;

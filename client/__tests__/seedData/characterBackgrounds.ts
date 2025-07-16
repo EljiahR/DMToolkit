@@ -6,7 +6,7 @@ export const characterBackgrounds: BackgroundBase[] = [
         id: "churchlurker",
         name: "Acolyte",
         description: acolyteDescription,
-        abilityScores: [],
+        abilityScores: ["int", "wis", "cha"],
         features: [],
         skillProficiencies: []
     },
@@ -14,7 +14,7 @@ export const characterBackgrounds: BackgroundBase[] = [
         id: "ahcrap",
         name: "Criminal",
         description: criminalDescription,
-        abilityScores: [],
+        abilityScores: ["dex", "con", "int"],
         features: [],
         skillProficiencies: []
     }
