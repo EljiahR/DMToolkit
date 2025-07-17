@@ -9,6 +9,7 @@ export interface UserSlice {
 }
 
 export interface NewCharacterSlice {
+    alignment: [string, string];
     characterClassBase: CharacterClassBase |  null;
     backgroundBase: BackgroundBase | null;
     backgroundInstance: Background;
