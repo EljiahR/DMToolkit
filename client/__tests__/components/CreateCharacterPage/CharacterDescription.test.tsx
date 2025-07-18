@@ -1,6 +1,6 @@
 import { describe, it } from "vitest";
 import CharacterDescription from "../../../src/components/CreateCharacterPage/CharacterDescription";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import renderWithStore from "../../renderOptions/renderWithStore";
 import userEvent from "@testing-library/user-event";
 
