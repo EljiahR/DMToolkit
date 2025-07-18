@@ -43,6 +43,7 @@ export const standardScores: AbilityScores = {
 }};
 
 const initialState: NewCharacterSlice = {
+    alignment: "unaligned",
     characterClassBase: null,
     backgroundBase: null,
     backgroundInstance: {
@@ -62,6 +63,9 @@ export const newCharacterSlice = createSlice({
     name: "newCharacter",
     initialState,
     reducers: {
+        setAlignment: (state, action: PayloadAction<string>) => {
+            state.alignment = action.payload;
+        },
         setCharacterClassBase: (state, action: PayloadAction<CharacterClassBase>) => {
             state.characterClassBase = action.payload;
         },
@@ -153,5 +157,5 @@ export const newCharacterSlice = createSlice({
     }
 });
 
-export const { setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault } = newCharacterSlice.actions;
+export const { setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault } = newCharacterSlice.actions;
 export default newCharacterSlice.reducer;
