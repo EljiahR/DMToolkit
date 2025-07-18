@@ -68,8 +68,7 @@ Choose how to assign your six core ability scores:
 - **Class Default**: Pre-made stat layouts ideal for your class
 - **Manual Entry**: Input your own values (e.g., rolled offline)
 
-> In the 2024 edition, Species no longer grant fixed ability score bonuses.  
-> Instead, Background now determines ability score bonuses.
+> In the 2024 edition, Species no longer grant fixed ability score bonuses.
 
 ---
 
