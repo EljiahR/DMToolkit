@@ -26,7 +26,7 @@ export default function() {
             <label htmlFor="plusTwo">+2</label>
             <select id="plusTwo" value={instanceBonuses ? instanceBonuses[0] : ""} onChange={(e) => handleBonusChange(e.target.value, 0)}>
                 <option value=""></option>
-                {backgroundBase?.abilityScores.map((scoreId) => {
+                {Object.keys(playerScores).map((scoreId) => {
                     return (
                         <option value={scoreId}>{playerScores[scoreId].name}</option>
                     )
@@ -35,7 +35,7 @@ export default function() {
             <label htmlFor="plusOne">+1</label>
             <select id="plusOne" value={instanceBonuses ? instanceBonuses[1] : ""} onChange={(e) => handleBonusChange(e.target.value, 1)}>
                 <option value=""></option>
-                {backgroundBase?.abilityScores.map((scoreId) => {
+                {Object.keys(playerScores).map((scoreId) => {
                     return (
                         <option value={scoreId}>{playerScores[scoreId].name}</option>
                     )

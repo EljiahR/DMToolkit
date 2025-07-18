@@ -20,10 +20,10 @@ describe("BonusAbilityScores", () => {
         const plusOneBox: HTMLSelectElement = screen.getByLabelText(/\+1/i);
 
         await userEvent.selectOptions(plusTwoBox, "cha");
-        await userEvent.selectOptions(plusOneBox, "int");
+        await userEvent.selectOptions(plusOneBox, "str");
 
         expect(plusTwoBox.value).toBe("cha");
-        expect(plusOneBox.value).toBe("int");
+        expect(plusOneBox.value).toBe("str");
     });
 
     it("does not allow the user to select the same score in both boxes", async () => {
