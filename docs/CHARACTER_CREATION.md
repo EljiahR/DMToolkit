@@ -97,8 +97,7 @@ Some tables ignore alignment altogether or use **Ideals, Bonds, and Flaws** inst
 This is where you give your character personality and visual flavor.
 
 ### Name
-- Enter your own or use a **random name generator**
-- Optional filters: fantasy race, gender, region (e.g., “Elven feminine”, “Orcish neutral”)
+- Enter your own
 
 ### Appearance & Personality
 Choose, roll, or invent:
@@ -130,6 +129,7 @@ Your character is now ready to enter the world. Next steps like equipment, spell
 - Subclass selection and Level 3+ support
 - Spell and inventory management
 - Starting gear choices based on class and background
+- Random name generator, with optional tags
 - Feat selection beyond level 1
 - Homebrew content editor (classes, feats, backgrounds, etc.)
 - Export to printable format or VTT JSON (e.g., Foundry, Roll20)
