@@ -12,7 +12,7 @@ describe("CharacterSpecies component", () => {
     
     it("renders with the default selected species showing", () => {
         expect(screen.getByRole("heading", { name: /species/i })).toBeInTheDocument();
-        expect(screen.getByText(/found throughout the multiverse/i)).toBeInTheDocument();
+        expect(screen.getByText(/this is you/i)).toBeInTheDocument();
     });
 
     it("correctly updates page when changing selected species", async () => {

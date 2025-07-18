@@ -22,6 +22,6 @@ describe("CharacterAbilityScores component", () => {
         await userEvent.selectOptions(classComboBox, characterClasses[1].id);
         
         expect(screen.getByRole("heading", { name: /wizard/i })).toBeInTheDocument();
-        expect(screen.getByText(/wizards are defined by their exhaustive study/i)).toBeInTheDocument();
+        expect(screen.getByText(/shit from their hands/i)).toBeInTheDocument();
     });
 });
