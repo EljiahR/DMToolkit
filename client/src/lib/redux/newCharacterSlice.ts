@@ -56,7 +56,12 @@ const initialState: NewCharacterSlice = {
     },
     speciesBase: null,
     lineageBase: null,
-    scores: standardScores
+    scores: standardScores,
+    physicalDescription: "",
+    personality: "",
+    ideals: "",
+    bonds: "",
+    flaws: ""
 };
 
 export const newCharacterSlice = createSlice({
@@ -153,9 +158,24 @@ export const newCharacterSlice = createSlice({
             state.scores.int.amount = action.payload ? action.payload[3] : state.characterClassBase?.defaultScoreArray[3] ?? 8;
             state.scores.wis.amount = action.payload ? action.payload[4] : state.characterClassBase?.defaultScoreArray[4] ?? 8;
             state.scores.cha.amount = action.payload ? action.payload[5] : state.characterClassBase?.defaultScoreArray[5] ?? 8;
+        },
+        setPhysicalDescription: (state, action: PayloadAction<string>) => {
+            state.physicalDescription = action.payload;
+        },
+        setPersonality: (state, action: PayloadAction<string>) => {
+            state.personality = action.payload;
+        },
+        setIdeals: (state, action: PayloadAction<string>) => {
+            state.ideals = action.payload;
+        },
+        setBonds: (state, action: PayloadAction<string>) => {
+            state.bonds = action.payload;
+        },
+        setFlaws: (state, action: PayloadAction<string>) => {
+            state.flaws = action.payload;
         }
     }
 });
 
-export const { setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault } = newCharacterSlice.actions;
+export const { setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setIdeals, setBonds, setFlaws } = newCharacterSlice.actions;
 export default newCharacterSlice.reducer;

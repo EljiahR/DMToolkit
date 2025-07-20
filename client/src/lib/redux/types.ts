@@ -16,6 +16,11 @@ export interface NewCharacterSlice {
     speciesBase: SpeciesBase | null;
     lineageBase: LineageBase | null;
     scores: AbilityScores;
+    physicalDescription: string;
+    personality: string;
+    ideals: string;
+    bonds: string;
+    flaws: string;
 }
 
 export interface DMToolsSlice {
