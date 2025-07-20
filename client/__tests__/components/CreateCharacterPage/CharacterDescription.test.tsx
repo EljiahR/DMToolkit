@@ -37,7 +37,24 @@ describe("CharacterAbilityScores component", () => {
 
         await userEvent.click(randomButtons[0]);
         await userEvent.click(randomButtons[1]);
-
-        const firstPhysicalTrait = screen.getByLabelText(/physical traits/i)
+        const physicalTraitInput: HTMLInputElement = screen.getByLabelText(/physical traits/i);
+        const personalityTraitInput: HTMLInputElement = screen.getByLabelText(/personality traits/i);
+        
+        expect(physicalTraitInput.value).toBeTruthy();
+        expect(personalityTraitInput.value).toBeTruthy();
     });
-})
+
+    it("allows the user to input in the remaining fields", async () => {
+        const idealsInput: HTMLInputElement = screen.getByLabelText(/ideals/i);
+        const bondsInput: HTMLInputElement = screen.getByLabelText(/bonds/i);
+        const flawsInput: HTMLInputElement = screen.getByLabelText(/flaws/i);
+
+        await userEvent.type(idealsInput, "wants to just live a quiet life");
+        await userEvent.type(bondsInput, "his dad");
+        await userEvent.type(flawsInput, "likes hands a bit too much");
+
+        expect(idealsInput.value).toBe("wants to just live a quiet life");
+        expect(bondsInput.value).toBe("his dad");
+        expect(flawsInput.value).toBe("likes hands a bit too much");
+    });
+});
