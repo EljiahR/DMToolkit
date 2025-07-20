@@ -1,7 +1,7 @@
 # Character Creation Workflow  
-*Based on the 2024 Edition (One D&D) Rules Preview*
+*Inspired by the 2024 Edition (One D&D) Rules Preview*
 
-This guide outlines the step-by-step flow for building a Level 1 character using the updated structure from the 2024 revision to Dungeons & Dragons. The design follows the philosophy of "play before details" and puts emphasis on Origins, flexible ability scores, and fast customization.
+This guide outlines the step-by-step flow for building a Level 1 character for Dungeons & Dragons. The design follows the philosophy of "play before details" and puts emphasis on Origins, flexible ability scores, and fast customization.
 
 ---
 
