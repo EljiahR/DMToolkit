@@ -7,5 +7,5 @@ export const humanDescription = "There is a 99.99% this is you.";
 export const elfDescription = "Like a human, but generally taller and tends to have pointer ears.";
 
 // Backgrounds
-export const acolyteDescription = "You like church or something.";
-export const criminalDescription = "Jesus Christ, you did WHAT?."
+export const evangalistDescription = "You like church or something.";
+export const thugDescription = "Jesus Christ, you did WHAT?."
