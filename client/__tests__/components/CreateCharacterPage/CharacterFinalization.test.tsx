@@ -18,4 +18,4 @@ describe("CharacterAbilityScores component", () => {
         expect(screen.getByText(/background: thug/i)).toBeInTheDocument();
         expect(screen.getByText(/species: human/i)).toBeInTheDocument();
     });
-})
+});

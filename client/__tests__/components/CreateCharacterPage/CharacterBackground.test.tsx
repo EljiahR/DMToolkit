@@ -12,7 +12,7 @@ describe("CharacterBackground component", () => {
     
     it("renders with the default background selected", () => {
         expect(screen.getByRole("heading", { name: /background/i })).toBeInTheDocument();
-        expect(screen.getByRole("heading", { name: /acolyte/i })).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: /evangalist/i })).toBeInTheDocument();
     });
 
     it("changes the displayed background when setting the combobox", async () => {
@@ -20,6 +20,6 @@ describe("CharacterBackground component", () => {
 
         await userEvent.selectOptions(backgroundBox, characterBackgrounds[1].id);
 
-        expect(screen.getByRole("heading", { name: /criminal/i })).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: /thug/i })).toBeInTheDocument();
     });
 });
