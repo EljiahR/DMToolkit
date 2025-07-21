@@ -3,6 +3,7 @@ import type { NewCharacterSlice } from "./types";
 import type { AbilityScores, BackgroundBase, CharacterClassBase, LineageBase, SpeciesBase } from "../types/dmToolTypes";
 import { rollStat } from "../dm-tools/statRoll";
 import { backgroundBaseToInstance } from "../dm-tools/baseToInstanceConverters";
+import type { GeneratedTraits } from "../dm-tools/traitGenerator";
 
 export const standardScores: AbilityScores = {
     "str": {
@@ -43,6 +44,7 @@ export const standardScores: AbilityScores = {
 }};
 
 const initialState: NewCharacterSlice = {
+    name: "",
     alignment: "unaligned",
     characterClassBase: null,
     backgroundBase: null,
@@ -68,6 +70,9 @@ export const newCharacterSlice = createSlice({
     name: "newCharacter",
     initialState,
     reducers: {
+        setName: (state, action: PayloadAction<string>) => {
+            state.name = action.payload
+        },
         setAlignment: (state, action: PayloadAction<string>) => {
             state.alignment = action.payload;
         },
@@ -165,6 +170,10 @@ export const newCharacterSlice = createSlice({
         setPersonality: (state, action: PayloadAction<string>) => {
             state.personality = action.payload;
         },
+        setTraits: (state, action: PayloadAction<GeneratedTraits>) => {
+            state.physicalDescription = action.payload.physical;
+            state.personality = action.payload.personality;
+        },
         setIdeals: (state, action: PayloadAction<string>) => {
             state.ideals = action.payload;
         },
@@ -177,5 +186,5 @@ export const newCharacterSlice = createSlice({
     }
 });
 
-export const { setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setIdeals, setBonds, setFlaws } = newCharacterSlice.actions;
+export const { setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = newCharacterSlice.actions;
 export default newCharacterSlice.reducer;

@@ -6,11 +6,11 @@ import userEvent from "@testing-library/user-event";
 
 describe("CharacterAbilityScores component", () => {
     beforeEach(() => {
-        renderWithStore(<CharacterDescription />)
+        renderWithStore(<CharacterDescription />);
     })
     
     it("renders", () => {
-        expect(screen.getByRole("heading", { name: /describe your characer/i})).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: /describe your character/i})).toBeInTheDocument();
     });
 
     it("allows the user to change the character's name", async () => {
@@ -33,10 +33,10 @@ describe("CharacterAbilityScores component", () => {
     });
 
     it("allows the user to randomly generate physical and personality traits based on their scores", async () => {
-        const randomButtons: HTMLButtonElement[] = screen.getAllByLabelText(/randomize/i);
+        const randomTraitsButton: HTMLButtonElement = screen.getByRole("button", { name: /randomize traits/i});
 
-        await userEvent.click(randomButtons[0]);
-        await userEvent.click(randomButtons[1]);
+        await userEvent.click(randomTraitsButton);
+
         const physicalTraitInput: HTMLInputElement = screen.getByLabelText(/physical traits/i);
         const personalityTraitInput: HTMLInputElement = screen.getByLabelText(/personality traits/i);
         
