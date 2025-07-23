@@ -1,5 +1,5 @@
 import { describe, it } from "vitest";
-import CharacterFinalization from "../../../src/components/CreateCharacterPage/CharacterFinalization";
+import CharacterFinalization from "../../../src/components/CreateCharacterPage/CharacterSheet";
 import { screen } from "@testing-library/react";
 import renderWithStore from "../../renderOptions/renderWithStore";
 import { characterBackgrounds } from "../../seedData/characterBackgrounds";

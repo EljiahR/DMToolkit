@@ -57,7 +57,7 @@ describe("CreatePlayerCharacter page", () => {
         await userEvent.click(descriptionButton);
 
         // Description page
-        const summaryButton = screen.getByRole("button", { name: /summary/i });
+        const summaryButton = screen.getByRole("button", { name: /finish/i });
         const nameInput: HTMLInputElement = screen.getByLabelText(/name/i);
         const randomTraitsButton: HTMLButtonElement = screen.getByRole("button", { name: /randomize traits/i});
         await userEvent.type(nameInput, "John DnD");

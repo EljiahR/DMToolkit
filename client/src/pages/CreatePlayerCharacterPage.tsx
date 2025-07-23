@@ -4,12 +4,12 @@ import CharacterBackground from "../components/CreateCharacterPage/CharacterBack
 import CharacterSpecies from "../components/CreateCharacterPage/CharacterSpecies";
 import CharacterAlignment from "../components/CreateCharacterPage/CharacterAlignment";
 import CharacterDescription from "../components/CreateCharacterPage/CharacterDescription";
-import CharacterFinalization from "../components/CreateCharacterPage/CharacterFinalization";
+import CharacterFinalization from "../components/CreateCharacterPage/CharacterSheet";
 import CharacterAbilityScores from "../components/CreateCharacterPage/CharacterAbilityScores";
 
 export default function() {
     // Available sections: class, background, species, scores, alignment, description, summary
-    const navText = ["Start", "Classes", "Backgrounds", "Species", "Ability Scores", "Alignments", "Descriptions", "Summary"]
+    const navText = ["Start", "Classes", "Backgrounds", "Species", "Ability Scores", "Alignments", "Descriptions", "Finish"]
     const [section, setSection] = useState(0);
     return (
         <div>
