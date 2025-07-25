@@ -99,11 +99,20 @@ export type Background = {
     baseId: string;
 }
 
+export type Skill = {
+    name: string;
+    scoreId: string;
+    proficient: boolean;
+}
+
 export type AbilityScore = {
     id: string;
     name: string;
     amount: number;
     bonus: number;
+    proficient: boolean;
+    skills: Skill[];
+    getModifier: () => number;
 }
 
 export type AbilityScores = {

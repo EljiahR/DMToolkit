@@ -22,6 +22,7 @@ export interface NewCharacterSlice {
     ideals: string;
     bonds: string;
     flaws: string;
+    proficiencyBonus: number
 }
 
 export interface DMToolsSlice {

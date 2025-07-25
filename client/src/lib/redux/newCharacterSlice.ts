@@ -4,44 +4,7 @@ import type { AbilityScores, BackgroundBase, CharacterClassBase, LineageBase, Sp
 import { rollStat } from "../dm-tools/statRoll";
 import { backgroundBaseToInstance } from "../dm-tools/baseToInstanceConverters";
 import type { GeneratedTraits } from "../dm-tools/traitGenerator";
-
-export const standardScores: AbilityScores = {
-    "str": {
-        id: "str",
-        name: "Strength",
-        amount: 15,
-        bonus: 0
-    },
-    "dex": {
-        id: "dex",
-        name: "Dexterity",
-        amount: 14,
-        bonus: 0
-    },
-    "con": {
-        id: "con",
-        name: "Constitution",
-        amount: 13,
-        bonus: 0
-    },
-    "int": {
-        id: "int",
-        name: "Intelligence",
-        amount: 12,
-        bonus: 0
-    },
-    "wis": {
-        id: "wis",
-        name: "Wisdom",
-        amount: 10,
-        bonus: 0
-    },
-    "cha": {
-        id: "cha",
-        name: "Charisma",
-        amount: 8,
-        bonus: 0
-}};
+import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
 
 const initialState: NewCharacterSlice = {
     name: "",
@@ -58,12 +21,13 @@ const initialState: NewCharacterSlice = {
     },
     speciesBase: null,
     lineageBase: null,
-    scores: standardScores,
+    scores: getStandardScores(),
     physicalDescription: "",
     personality: "",
     ideals: "",
     bonds: "",
-    flaws: ""
+    flaws: "",
+    proficiencyBonus: 0
 };
 
 export const newCharacterSlice = createSlice({
@@ -155,7 +119,7 @@ export const newCharacterSlice = createSlice({
         },
         setScoresToClassDefault: (state, action: PayloadAction<number[] | undefined>) => {
             if (state.scores == null) {
-                state.scores = standardScores;
+                state.scores = getStandardScores();
             }
             state.scores.str.amount = action.payload ? action.payload[0] : state.characterClassBase?.defaultScoreArray[0] ?? 8;
             state.scores.dex.amount = action.payload ? action.payload[1] : state.characterClassBase?.defaultScoreArray[1] ?? 8;

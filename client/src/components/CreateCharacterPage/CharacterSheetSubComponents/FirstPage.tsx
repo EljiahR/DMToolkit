@@ -1,6 +1,9 @@
+import { useAppSelector } from "../../../lib/redux/hooks"
 import type { AbilityScore } from "../../../lib/types/dmToolTypes"
 
 export default function() {
+    const character = useAppSelector((state) => state.newCharacter);
+    
     return (
         <div id="first-page">
             <div id="character-info">
@@ -21,7 +24,7 @@ export default function() {
                     <p className="sheet-label">Species</p>
                 </div>
                 <div id="character-subclass">
-                    <p> className="sheet-value"</p>
+                    <p className="sheet-value"></p>
                     <p className="sheet-label">Subclass</p>
                 </div>
             </div>
@@ -95,7 +98,11 @@ export default function() {
             <div id="character-stats">
                 <div id="proficiency"></div>
                 <div id="re-roll"></div>
-                <div id="ability-scores"></div>
+                <div id="ability-scores">
+                    {Object.keys(character.scores).map((key) => 
+                        <AbilityScoreDisplay score={character.scores[key]} proficiencyBonus={character.proficiencyBonus} />
+                    )}
+                </div>
             </div>
             <div id="character-equiptment"></div>
             <div id="misc-combat"></div>
@@ -109,23 +116,39 @@ export default function() {
     )
 }
 
-const AbilityScoreDisplay = (score: AbilityScore) => {
+interface AbililtyScoreDisplayProps {
+    score: AbilityScore;
+    proficiencyBonus: number;
+}
+
+const AbilityScoreDisplay = ({score, proficiencyBonus}: AbililtyScoreDisplayProps) => {
     return (
         <div>
             <div id={`${score.id}-main`}>
+                <h3>{score.name}</h3>
                 <div id={`${score.id}-mod`}>
-                    <div></div>
-                    <div>Modifier</div>
+                    <div>{score.getModifier()}</div>
+                    <p className="sheet-label">Modifier</p>
                 </div>
                 <div id={`${score.id}-score`}>
-                    <div></div>
-                    <div>Score</div>
+                    <div>{score.amount + score.bonus}</div>
+                    <p className="sheet-label">Score</p>
                 </div>
             </div>
             <div id={`${score.id}-throws`}>
-                <div id={`${score.id}-saving-throw`}></div>
-                <div id={`${score.id}-sproficiencies`}>
+                <div id={`${score.id}-saving-throw`}>
+                    <div className="throw-toggle"></div>
+                    <div className="throw-score">{score.proficient ? score.getModifier() + proficiencyBonus : score.getModifier()}</div>
+                    <div className="throw-score-label bold">Saving Throw</div>
                 </div>
+                <div className="divider"></div>
+                {score.skills.map((skill) => 
+                    <div id={`${skill.name}-skill`}>
+                        <div className="throw-toggle"></div>
+                        <div className="throw-score">{skill.proficient ? score.getModifier() + proficiencyBonus : score.getModifier()}</div>
+                        <div className="throw-score-label">{skill.name}</div>
+                    </div>
+                )}
             </div>
         </div>
     )
