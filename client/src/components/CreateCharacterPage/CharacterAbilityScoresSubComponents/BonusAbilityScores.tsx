@@ -28,7 +28,7 @@ export default function() {
                 <option value=""></option>
                 {Object.keys(playerScores).map((scoreId) => {
                     return (
-                        <option value={scoreId}>{playerScores[scoreId].name}</option>
+                        <option key={`bonus-${scoreId}-2`} value={scoreId}>{playerScores[scoreId].name}</option>
                     )
                 })}
             </select>
@@ -37,7 +37,7 @@ export default function() {
                 <option value=""></option>
                 {Object.keys(playerScores).map((scoreId) => {
                     return (
-                        <option value={scoreId}>{playerScores[scoreId].name}</option>
+                        <option key={`bonus-${scoreId}-1`} value={scoreId}>{playerScores[scoreId].name}</option>
                     )
                 })}
             </select>

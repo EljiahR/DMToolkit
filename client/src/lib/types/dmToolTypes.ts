@@ -112,7 +112,6 @@ export type AbilityScore = {
     bonus: number;
     proficient: boolean;
     skills: Skill[];
-    getModifier: () => number;
 }
 
 export type AbilityScores = {
@@ -123,4 +122,21 @@ export type AbilityScores = {
     "int": AbilityScore;
     "wis": AbilityScore;
     "cha": AbilityScore;
+}
+
+export type Character = {
+    name: string;
+    alignment: string;
+    characterClassBase: CharacterClassBase |  null;
+    backgroundBase: BackgroundBase | null;
+    backgroundInstance: Background;
+    speciesBase: SpeciesBase | null;
+    lineageBase: LineageBase | null;
+    scores: AbilityScores;
+    physicalDescription: string;
+    personality: string;
+    ideals: string;
+    bonds: string;
+    flaws: string;
+    proficiencyBonus: number
 }

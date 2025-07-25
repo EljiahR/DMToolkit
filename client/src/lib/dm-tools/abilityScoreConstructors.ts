@@ -19,10 +19,7 @@ const scoreGenerator = (scoreName: string, scoreId: string, amount: number, skil
         amount,
         bonus: 0,
         proficient: false,
-        skills: skillsGenerator(skillNames, scoreId),
-        getModifier: function(): number {
-            return Math.floor((this.amount + this.bonus) / 2) - 5
-        }
+        skills: skillsGenerator(skillNames, scoreId)
     }
 }
 
@@ -36,3 +33,7 @@ export const getStandardScores = (scores: [number, number, number, number, numbe
         "cha": scoreGenerator("Charisma", "cha", scores[5], ["Deception", "Intimidation", "Performance", "Persuasion"]),
     };
 };
+
+export const getScoreModifier = (score: AbilityScore): number => {
+        return Math.floor((score.amount + score.bonus) / 2) - 5
+}

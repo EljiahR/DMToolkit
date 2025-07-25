@@ -25,7 +25,7 @@ export default function() {
             <button onClick={handleAllReroll}>Reroll All</button>
             <div id="random-roll">
                 {Object.keys(scores).map((key) => {
-                    return <ScoreDisplay score={scores[key]} handleScoreReroll={handleScoreReroll} />
+                    return <ScoreDisplay key={`${key}-score`} score={scores[key]} handleScoreReroll={handleScoreReroll} />
                 })}
             </div>
         </div>

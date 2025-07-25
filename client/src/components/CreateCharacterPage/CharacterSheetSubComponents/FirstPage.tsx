@@ -1,3 +1,4 @@
+import { getScoreModifier } from "../../../lib/dm-tools/abilityScoreConstructors";
 import { useAppSelector } from "../../../lib/redux/hooks"
 import type { AbilityScore } from "../../../lib/types/dmToolTypes"
 
@@ -127,7 +128,7 @@ const AbilityScoreDisplay = ({score, proficiencyBonus}: AbililtyScoreDisplayProp
             <div id={`${score.id}-main`}>
                 <h3>{score.name}</h3>
                 <div id={`${score.id}-mod`}>
-                    <div>{score.getModifier()}</div>
+                    <div>{getScoreModifier(score)}</div>
                     <p className="sheet-label">Modifier</p>
                 </div>
                 <div id={`${score.id}-score`}>
@@ -138,14 +139,14 @@ const AbilityScoreDisplay = ({score, proficiencyBonus}: AbililtyScoreDisplayProp
             <div id={`${score.id}-throws`}>
                 <div id={`${score.id}-saving-throw`}>
                     <div className="throw-toggle"></div>
-                    <div className="throw-score">{score.proficient ? score.getModifier() + proficiencyBonus : score.getModifier()}</div>
+                    <div className="throw-score">{score.proficient ? getScoreModifier(score) + proficiencyBonus : getScoreModifier(score)}</div>
                     <div className="throw-score-label bold">Saving Throw</div>
                 </div>
                 <div className="divider"></div>
                 {score.skills.map((skill) => 
                     <div id={`${skill.name}-skill`}>
                         <div className="throw-toggle"></div>
-                        <div className="throw-score">{skill.proficient ? score.getModifier() + proficiencyBonus : score.getModifier()}</div>
+                        <div className="throw-score">{skill.proficient ? getScoreModifier(score) + proficiencyBonus : getScoreModifier(score)}</div>
                         <div className="throw-score-label">{skill.name}</div>
                     </div>
                 )}

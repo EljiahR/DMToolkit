@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import CharacterClass from "../components/CreateCharacterPage/CharacterClass";
 import CharacterBackground from "../components/CreateCharacterPage/CharacterBackground";
 import CharacterSpecies from "../components/CreateCharacterPage/CharacterSpecies";
@@ -7,27 +7,38 @@ import CharacterDescription from "../components/CreateCharacterPage/CharacterDes
 import CharacterFinalization from "../components/CreateCharacterPage/CharacterSheet";
 import CharacterAbilityScores from "../components/CreateCharacterPage/CharacterAbilityScores";
 
+const StartSection = () => {
+    return (
+        <div>
+            <h2>Create a new Player Character</h2>
+        </div>
+    )
+}
+
+type Components = {
+    [key: string]: React.FC;
+} 
+
+const components: Components = {
+    "Start": StartSection,
+    "Classes": CharacterClass,
+    "Backgrounds": CharacterBackground,
+    "Species": CharacterSpecies,
+    "Ability Scores": CharacterAbilityScores,
+    "Alignments": CharacterAlignment,
+    "Descriptions": CharacterDescription,
+    "Finish": CharacterFinalization
+}
+
 export default function() {
     // Available sections: class, background, species, scores, alignment, description, summary
     const navText = ["Start", "Classes", "Backgrounds", "Species", "Ability Scores", "Alignments", "Descriptions", "Finish"]
     const [section, setSection] = useState(0);
+    const ActiveSection = components[navText[section]];
+    
     return (
         <div>
-            {section == 1 ? 
-                <CharacterClass /> :
-            section == 2 ?
-                <CharacterBackground /> :
-            section == 3 ? 
-                <CharacterSpecies /> :
-            section == 4 ? 
-                <CharacterAbilityScores /> :
-            section == 5 ?
-                <CharacterAlignment /> :
-            section == 6 ?
-                <CharacterDescription /> :
-            section == 7 ? 
-                <CharacterFinalization /> :
-                <StartSection />}
+            {<ActiveSection />}
             <div id="section-nav">
                 {section > 0 && 
                     <button onClick={() => setSection(section - 1)}>&lt; {navText[section - 1]}</button>
@@ -43,10 +54,3 @@ export default function() {
     )
 };
 
-const StartSection = () => {
-    return (
-        <div>
-            <h2>Create a new Player Character</h2>
-        </div>
-    )
-}

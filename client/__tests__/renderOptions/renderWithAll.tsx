@@ -1,10 +1,19 @@
 import { Provider } from 'react-redux'
 import { MemoryRouter } from "react-router";
 import { render } from "@testing-library/react";
-import { store } from '../../src/lib/redux/store';
-import { AuthProvider } from '../../src/components/AuthProvider';
+import authReducer from "../../src/lib/redux/authSlice";
+import userReducer from "../../src/lib/redux/userSlice";
+import newCharacterReducer from "../../src/lib/redux/newCharacterSlice";
+import dmToolsReducuer from "../../src/lib/redux/dmToolsSlice";import { AuthProvider } from '../../src/components/AuthProvider';
+import { configureStore } from '@reduxjs/toolkit';
 
-const renderWithAll = (ui: React.ReactElement, { initialEntries = ['/'], ...renderOptions } = {}) => {
+const renderWithAll = (ui: React.ReactElement, { initialEntries = ['/'], preloadedState = {}, store = configureStore({ 
+    reducer: {
+        auth: authReducer,
+        user: userReducer,
+        newCharacter: newCharacterReducer,
+        dmTools: dmToolsReducuer
+    }, preloadedState }), ...renderOptions } = {}) => {
  return render(
     <Provider store={store}>
         <AuthProvider>

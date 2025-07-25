@@ -1,12 +1,11 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { NewCharacterSlice } from "./types";
-import type { AbilityScores, BackgroundBase, CharacterClassBase, LineageBase, SpeciesBase } from "../types/dmToolTypes";
+import type { AbilityScores, BackgroundBase, Character, CharacterClassBase, LineageBase, SpeciesBase } from "../types/dmToolTypes";
 import { rollStat } from "../dm-tools/statRoll";
 import { backgroundBaseToInstance } from "../dm-tools/baseToInstanceConverters";
 import type { GeneratedTraits } from "../dm-tools/traitGenerator";
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
 
-const initialState: NewCharacterSlice = {
+const initialState: Character = {
     name: "",
     alignment: "unaligned",
     characterClassBase: null,

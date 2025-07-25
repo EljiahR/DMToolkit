@@ -1,4 +1,4 @@
-import type { AbilityScores, Background, BackgroundBase, CharacterClassBase, LineageBase, SpeciesBase } from "../types/dmToolTypes";
+import type { BackgroundBase, CharacterClassBase, LineageBase, SpeciesBase } from "../types/dmToolTypes";
 
 export interface AuthSlice {
     accessToken: string | null;
@@ -6,23 +6,6 @@ export interface AuthSlice {
 
 export interface UserSlice {
     username: string | null;
-}
-
-export interface NewCharacterSlice {
-    name: string;
-    alignment: string;
-    characterClassBase: CharacterClassBase |  null;
-    backgroundBase: BackgroundBase | null;
-    backgroundInstance: Background;
-    speciesBase: SpeciesBase | null;
-    lineageBase: LineageBase | null;
-    scores: AbilityScores;
-    physicalDescription: string;
-    personality: string;
-    ideals: string;
-    bonds: string;
-    flaws: string;
-    proficiencyBonus: number
 }
 
 export interface DMToolsSlice {

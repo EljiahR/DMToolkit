@@ -14,7 +14,7 @@ export default function() {
             <h2>Ability Scores</h2>
             <label htmlFor="score-method">Select the method</label>
             <select id="score-method" value={selectedMethod} onChange={(e) => setSelectedMethod(e.target.value)}>
-                <option value="standard" selected>Standard Array</option>
+                <option value="standard">Standard Array</option>
                 <option value="point">Point Buy</option>
                 <option value="random">Random Roll</option>
                 <option value="class-default">Class Default</option>
