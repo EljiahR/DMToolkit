@@ -4,7 +4,7 @@ import { setScore, setScoresToMinimum } from "../../../lib/redux/newCharacterSli
 import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
 export default function() {
-    const scores = useAppSelector((state) => state.newCharacter.scores);
+    const scores = useAppSelector((state) => state.selectedCharacter.scores);
     const dispatch = useAppDispatch();
     
     useLayoutEffect(() => {

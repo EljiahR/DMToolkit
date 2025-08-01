@@ -4,7 +4,5 @@ export const versatileFeature: FeatureBase = {
     id: "candoanything",
     name: "Versatile",
     description: "",
-    category: "",
-    prerequisiteAmount: 0,
-    prerequisiteType: ""
+    availableEffects: []
 }   

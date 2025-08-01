@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
 import { setAlignment } from "../../lib/redux/newCharacterSlice";
 
 export default function() {
-    const characterAlignment = useAppSelector((state) => state.newCharacter.alignment);
+    const characterAlignment = useAppSelector((state) => state.selectedCharacter.alignment);
     const dispatch = useAppDispatch();
     
     const handleAlignmentChange = (newAlignment: string) => {

@@ -7,7 +7,7 @@ import { setScoresToStandard, swapScores } from "../../../lib/redux/newCharacter
 import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
 export default function() {
-    const scores = useAppSelector((state) => state.newCharacter.scores);
+    const scores = useAppSelector((state) => state.selectedCharacter.scores);
     const dispatch = useAppDispatch();
 
     const [items, setItems] = useState(["str", "dex", "con", "int", "wis", "cha"]);

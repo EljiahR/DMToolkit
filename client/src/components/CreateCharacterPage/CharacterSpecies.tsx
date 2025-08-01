@@ -5,8 +5,8 @@ import { setLineageBase, setSpeciesBase } from "../../lib/redux/newCharacterSlic
 export default function() {
     const allSpecies = useAppSelector((state) => state.dmTools.species);
     const allLineages = useAppSelector((state) => state.dmTools.lineages);
-    const selectedSpecies = useAppSelector((state) => state.newCharacter.speciesBase);
-    const selectedLineage = useAppSelector((state) => state.newCharacter.lineageBase);
+    const selectedSpecies = useAppSelector((state) => state.selectedCharacter.speciesBase);
+    const selectedLineage = useAppSelector((state) => state.selectedCharacter.lineageBase);
     const dispatch = useAppDispatch();
 
     useLayoutEffect(() => {

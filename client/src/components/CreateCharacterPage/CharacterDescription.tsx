@@ -3,13 +3,13 @@ import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
 import { setBonds, setFlaws, setIdeals, setName, setPersonality, setPhysicalDescription, setTraits } from "../../lib/redux/newCharacterSlice";
 
 export default function() {
-    const name = useAppSelector((state) => state.newCharacter.name);
-    const scores = useAppSelector((state) => state.newCharacter.scores);
-    const physicalDescription = useAppSelector((state) => state.newCharacter.physicalDescription);
-    const personality = useAppSelector((state) => state.newCharacter.personality);
-    const ideals = useAppSelector((state) => state.newCharacter.ideals);
-    const bonds = useAppSelector((state) => state.newCharacter.bonds);
-    const flaws = useAppSelector((state) => state.newCharacter.flaws);
+    const name = useAppSelector((state) => state.selectedCharacter.name);
+    const scores = useAppSelector((state) => state.selectedCharacter.scores);
+    const physicalDescription = useAppSelector((state) => state.selectedCharacter.physicalDescription);
+    const personality = useAppSelector((state) => state.selectedCharacter.personality);
+    const ideals = useAppSelector((state) => state.selectedCharacter.ideals);
+    const bonds = useAppSelector((state) => state.selectedCharacter.bonds);
+    const flaws = useAppSelector((state) => state.selectedCharacter.flaws);
     const dispatch = useAppDispatch();
     
     const handleRandomizeTraits = () => {

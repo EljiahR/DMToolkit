@@ -4,7 +4,7 @@ import { setBackgroundBase } from "../../lib/redux/newCharacterSlice";
 
 export default function() {
     const backgrounds = useAppSelector((state) => state.dmTools.backgrounds);
-    const selectedBackground = useAppSelector((state) => state.newCharacter.backgroundBase);
+    const selectedBackground = useAppSelector((state) => state.selectedCharacter.backgroundBase);
     const dispatch = useAppDispatch();
 
     useLayoutEffect(() => {

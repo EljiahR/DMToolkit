@@ -5,7 +5,7 @@ import { setCharacterClassBase } from "../../lib/redux/newCharacterSlice";
 
 export default function() {
     const availableClasses = useAppSelector((state) => state.dmTools.characterClasses);
-    const selectedClass = useAppSelector((state) => state.newCharacter.characterClassBase);
+    const selectedClass = useAppSelector((state) => state.selectedCharacter.characterClassBase);
     const dispatch = useAppDispatch();
     
     useLayoutEffect(() => {

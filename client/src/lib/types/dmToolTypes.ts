@@ -63,7 +63,7 @@ export interface SpeciesBase {
     id: string;
     name: string;
     description: string;
-    interface: string;
+    type: string;
     speed: number;
     size: string;
     features: FeatureBase[];
@@ -73,7 +73,7 @@ export interface SpeciesBase {
 export interface Species {
     name: string;
     description: string;
-    interface: string;
+    type: string;
     speed: number;
     size: string;
     features: Feature[];

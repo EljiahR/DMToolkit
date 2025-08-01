@@ -1,7 +1,7 @@
 import { useAppSelector } from "../../lib/redux/hooks"
 
 export default function() {
-    const newCharacter = useAppSelector((state) => state.newCharacter);
+    const newCharacter = useAppSelector((state) => state.selectedCharacter);
 
     return (
         <div>

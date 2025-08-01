@@ -29,8 +29,8 @@ const initialState: Character = {
     proficiencyBonus: 0
 };
 
-export const newCharacterSlice = createSlice({
-    name: "newCharacter",
+export const selectedCharacterSlice = createSlice({
+    name: "selectedCharacter",
     initialState,
     reducers: {
         setName: (state, action: PayloadAction<string>) => {
@@ -149,5 +149,5 @@ export const newCharacterSlice = createSlice({
     }
 });
 
-export const { setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = newCharacterSlice.actions;
-export default newCharacterSlice.reducer;
+export const { setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
+export default selectedCharacterSlice.reducer;

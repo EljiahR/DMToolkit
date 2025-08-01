@@ -3,7 +3,7 @@ import { useAppSelector } from "../../../lib/redux/hooks"
 import type { AbilityScore } from "../../../lib/types/dmToolTypes"
 
 export default function() {
-    const character = useAppSelector((state) => state.newCharacter);
+    const character = useAppSelector((state) => state.selectedCharacter);
     
     return (
         <div id="first-page">

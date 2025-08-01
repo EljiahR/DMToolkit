@@ -3,9 +3,9 @@ import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
 import { setCharacterClassBase, setScoresToClassDefault } from "../../../lib/redux/newCharacterSlice";
 
 export default function() {
-    const scores = useAppSelector((state) => state.newCharacter.scores);
+    const scores = useAppSelector((state) => state.selectedCharacter.scores);
     const defaultClass = useAppSelector((state) => state.dmTools.characterClasses[0]);
-    const characterClass = useAppSelector((state) => state.newCharacter.characterClassBase);
+    const characterClass = useAppSelector((state) => state.selectedCharacter.characterClassBase);
     const dispatch = useAppDispatch();
 
     if (!characterClass || !scores) {

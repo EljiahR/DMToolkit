@@ -5,9 +5,9 @@ import { setBackgroundBase, setBackgroundScores } from "../../../lib/redux/newCh
 export default function() {
     const dispatch = useAppDispatch();
     const allBackgrounds = useAppSelector((state) => state.dmTools.backgrounds);
-    const backgroundBase = useAppSelector((state) => state.newCharacter.backgroundBase);
-    const playerScores = useAppSelector((state) => state.newCharacter.scores);
-    const instanceBonuses = useAppSelector((state) => state.newCharacter.backgroundInstance?.abilityScores);
+    const backgroundBase = useAppSelector((state) => state.selectedCharacter.backgroundBase);
+    const playerScores = useAppSelector((state) => state.selectedCharacter.scores);
+    const instanceBonuses = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScores);
 
     useLayoutEffect(() => {
         if (backgroundBase == null) {

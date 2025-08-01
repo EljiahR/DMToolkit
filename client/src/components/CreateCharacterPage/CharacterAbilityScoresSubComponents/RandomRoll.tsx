@@ -4,7 +4,7 @@ import { setScoresToRandom, setScoreToRandom } from "../../../lib/redux/newChara
 import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
 export default function() {
-    const scores = useAppSelector((state) => state.newCharacter.scores);
+    const scores = useAppSelector((state) => state.selectedCharacter.scores);
     const dispatch = useAppDispatch();
     
     const handleScoreReroll = (scoreId: string) => {
