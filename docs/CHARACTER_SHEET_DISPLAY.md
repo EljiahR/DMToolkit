@@ -9,7 +9,6 @@ This document outlines the breakdown of the character sheet for mobile-first dev
 **Includes:**
 - Character Name
 - Class & Level
-- Background
 - Origin (Species + Background)
 - Alignment
 - Personality Traits, Ideals, Bonds, Flaws
