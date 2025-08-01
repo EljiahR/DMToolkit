@@ -1,4 +1,4 @@
-export type CharacterClassBase = {
+export interface CharacterClassBase {
     id: string;
     name: string;
     description: string;
@@ -7,7 +7,7 @@ export type CharacterClassBase = {
     defaultScoreArray: number[];
 };
 
-export type CharacterClass = {
+export interface CharacterClass {
     name: string;
     description: string;
     level: number;
@@ -16,35 +16,35 @@ export type CharacterClass = {
     baseId: string;
 }
 
-export type SubclassBase = {
+export interface SubclassBase {
     id: string;
     name: string;
 }
 
-export type Subclass = {
+export interface Subclass {
     name: string;
     baseId: string;
 }
 
-export type FeatureBase = {
+export interface FeatEffect {
+    id: string;
+    type: string;
+    data: Record<string, any>;
+}
+
+export interface FeatureBase {
     id: string;
     name: string;
     description: string;
-    category: string;
-    prerequisiteType: string;
-    prerequisiteAmount: number;
+    availableEffects: FeatEffect[][];
 }
 
-export type Feature = {
-    name: string;
-    description: string;
-    category: string;
-    prerequisiteType: string;
-    prerequisiteAmount: number;
+export interface Feature {
     baseId: string;
+    effects: FeatEffect[];
 }
 
-export type LineageBase = {
+export interface LineageBase {
     id: string;
     name: string;
     description: string;
@@ -52,28 +52,28 @@ export type LineageBase = {
     speciesId: string;
 }
 
-export type Lineage = {
+export interface Lineage {
     name: string;
     description: string;
     features: Feature[];
     baseId: string;
 }
 
-export type SpeciesBase = {
+export interface SpeciesBase {
     id: string;
     name: string;
     description: string;
-    type: string;
+    interface: string;
     speed: number;
     size: string;
     features: FeatureBase[];
     lineages: LineageBase[]
 }
 
-export type Species = {
+export interface Species {
     name: string;
     description: string;
-    type: string;
+    interface: string;
     speed: number;
     size: string;
     features: Feature[];
@@ -81,7 +81,7 @@ export type Species = {
     baseId: string;
 }
 
-export type BackgroundBase = {
+export interface BackgroundBase {
     id: string;
     name: string;
     description: string;
@@ -90,7 +90,7 @@ export type BackgroundBase = {
     skillProficiencies: string[];
 }
 
-export type Background = {
+export interface Background {
     name: string;
     description: string;
     abilityScores: string[];
@@ -99,13 +99,13 @@ export type Background = {
     baseId: string;
 }
 
-export type Skill = {
+export interface Skill {
     name: string;
     scoreId: string;
     proficient: boolean;
 }
 
-export type AbilityScore = {
+export interface AbilityScore {
     id: string;
     name: string;
     amount: number;
@@ -114,7 +114,7 @@ export type AbilityScore = {
     skills: Skill[];
 }
 
-export type AbilityScores = {
+export interface AbilityScores {
     [key: string]: AbilityScore;
     "str": AbilityScore;
     "dex": AbilityScore;
@@ -124,7 +124,7 @@ export type AbilityScores = {
     "cha": AbilityScore;
 }
 
-export type Character = {
+export interface Character {
     name: string;
     alignment: string;
     characterClassBase: CharacterClassBase |  null;
