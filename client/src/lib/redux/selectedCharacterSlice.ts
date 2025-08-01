@@ -1,9 +1,10 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { AbilityScores, BackgroundBase, Character, CharacterClassBase, LineageBase, SpeciesBase } from "../types/dmToolTypes";
+import { createSelector, createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { AbilityScores, BackgroundBase, Character, CharacterClassBase, FeatEffect, LineageBase, SpeciesBase } from "../types/dmToolTypes";
 import { rollStat } from "../dm-tools/statRoll";
 import { backgroundBaseToInstance } from "../dm-tools/baseToInstanceConverters";
 import type { GeneratedTraits } from "../dm-tools/traitGenerator";
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
+import type { RootState } from "./store";
 
 const initialState: Character = {
     name: "",
@@ -45,16 +46,6 @@ export const selectedCharacterSlice = createSlice({
         setBackgroundBase: (state, action: PayloadAction<BackgroundBase>) => {
             state.backgroundBase = action.payload;
             state.backgroundInstance = backgroundBaseToInstance(action.payload);
-        },
-        setBackgroundScores: (state, action: PayloadAction<{scoreId: string, index: number}>) => {
-            if (state.backgroundInstance) {
-                if (state.backgroundInstance.abilityScores[action.payload.index] != "") {
-                    state.scores[action.payload.scoreId].bonus = 0;
-                }
-
-                state.backgroundInstance.abilityScores[action.payload.index] = action.payload.scoreId;
-                state.scores[action.payload.scoreId].bonus = 2 - action.payload.index;
-            }
         },
         setSpeciesBase: (state, action: PayloadAction<SpeciesBase>) => {
             state.speciesBase = action.payload;
@@ -149,5 +140,19 @@ export const selectedCharacterSlice = createSlice({
     }
 });
 
-export const { setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
+export const selectAllFeatEffects = (state: RootState) => {
+    const featEffects: FeatEffect[] = [];
+    state.selectedCharacter.backgroundInstance.features.forEach(feat => {
+        featEffects.push(...feat.effects);
+    });
+    return featEffects;
+};
+export const selectAllAbilityScoreFeatEffects = createSelector(
+    [selectAllFeatEffects],
+    (allFeatEffects) => {
+        return allFeatEffects.filter((featEffect) => featEffect.type == "abilityScoreBonus");
+    }
+);
+
+export const { setName, setAlignment, setCharacterClassBase, setBackgroundBase, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

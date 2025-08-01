@@ -17,7 +17,6 @@ const scoreGenerator = (scoreName: string, scoreId: string, amount: number, skil
         id: scoreId,
         name: scoreName,
         amount,
-        bonus: 0,
         proficient: false,
         skills: skillsGenerator(skillNames, scoreId)
     }
@@ -35,5 +34,5 @@ export const getStandardScores = (scores: [number, number, number, number, numbe
 };
 
 export const getScoreModifier = (score: AbilityScore): number => {
-        return Math.floor((score.amount + score.bonus) / 2) - 5
+        return Math.floor((score.amount) / 2) - 5
 }

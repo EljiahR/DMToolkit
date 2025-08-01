@@ -109,7 +109,6 @@ export interface AbilityScore {
     id: string;
     name: string;
     amount: number;
-    bonus: number;
     proficient: boolean;
     skills: Skill[];
 }
