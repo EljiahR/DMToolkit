@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks";
-import { setBackgroundBase } from "../../lib/redux/newCharacterSlice";
+import { setBackgroundBase } from "../../lib/redux/selectedCharacterSlice";
 
 export default function() {
     const backgrounds = useAppSelector((state) => state.dmTools.backgrounds);

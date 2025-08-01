@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
-import { setCharacterClassBase } from "../../lib/redux/newCharacterSlice";
+import { setCharacterClassBase } from "../../lib/redux/selectedCharacterSlice";
 
 
 export default function() {

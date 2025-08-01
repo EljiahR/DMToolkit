@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
-import { setCharacterClassBase, setScoresToClassDefault } from "../../../lib/redux/newCharacterSlice";
+import { setCharacterClassBase, setScoresToClassDefault } from "../../../lib/redux/selectedCharacterSlice";
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);

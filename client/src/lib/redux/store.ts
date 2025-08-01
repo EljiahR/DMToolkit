@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import userReducer from "./userSlice";
-import selectedCharacterReducer from "./newCharacterSlice";
+import selectedCharacterReducer from "./selectedCharacterSlice";
 import dmToolsReducuer from "./dmToolsSlice";
 
 export const store = configureStore({

@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
-import { setLineageBase, setSpeciesBase } from "../../lib/redux/newCharacterSlice";
+import { setLineageBase, setSpeciesBase } from "../../lib/redux/selectedCharacterSlice";
 
 export default function() {
     const allSpecies = useAppSelector((state) => state.dmTools.species);

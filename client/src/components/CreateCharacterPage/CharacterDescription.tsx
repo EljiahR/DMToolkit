@@ -1,6 +1,6 @@
 import traitGenerator from "../../lib/dm-tools/traitGenerator";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
-import { setBonds, setFlaws, setIdeals, setName, setPersonality, setPhysicalDescription, setTraits } from "../../lib/redux/newCharacterSlice";
+import { setBonds, setFlaws, setIdeals, setName, setPersonality, setPhysicalDescription, setTraits } from "../../lib/redux/selectedCharacterSlice";
 
 export default function() {
     const name = useAppSelector((state) => state.selectedCharacter.name);

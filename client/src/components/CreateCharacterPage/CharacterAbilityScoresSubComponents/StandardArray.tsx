@@ -3,7 +3,7 @@ import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, us
 import { arraySwap, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
-import { setScoresToStandard, swapScores } from "../../../lib/redux/newCharacterSlice";
+import { setScoresToStandard, swapScores } from "../../../lib/redux/selectedCharacterSlice";
 import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
 export default function() {

@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
-import { setScore, setScoresToMinimum } from "../../../lib/redux/newCharacterSlice";
+import { setScore, setScoresToMinimum } from "../../../lib/redux/selectedCharacterSlice";
 import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
 export default function() {

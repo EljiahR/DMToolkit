@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
-import { setScoresToRandom, setScoreToRandom } from "../../../lib/redux/newCharacterSlice";
+import { setScoresToRandom, setScoreToRandom } from "../../../lib/redux/selectedCharacterSlice";
 import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
 export default function() {

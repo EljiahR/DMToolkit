@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks"
-import { setBackgroundBase, setBackgroundScores } from "../../../lib/redux/newCharacterSlice";
+import { setBackgroundBase, setBackgroundScores } from "../../../lib/redux/selectedCharacterSlice";
 
 export default function() {
     const dispatch = useAppDispatch();
