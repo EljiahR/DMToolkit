@@ -1,6 +1,6 @@
 import { createSelector, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { AbilityScores, BackgroundBase, Character, CharacterClassBase, FeatEffect, LineageBase, SpeciesBase } from "../types/dmToolTypes";
-import { rollStat } from "../dm-tools/statRoll";
+import { rollStat } from "../dm-tools/stats";
 import { backgroundBaseToInstance } from "../dm-tools/baseToInstanceConverters";
 import type { GeneratedTraits } from "../dm-tools/traitGenerator";
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
@@ -147,10 +147,18 @@ export const selectAllFeatEffects = (state: RootState) => {
     });
     return featEffects;
 };
+
 export const selectAllAbilityScoreFeatEffects = createSelector(
     [selectAllFeatEffects],
     (allFeatEffects) => {
         return allFeatEffects.filter((featEffect) => featEffect.type == "abilityScoreBonus");
+    }
+);
+
+export const selectAllInitiativeBonuseFeatEffects = createSelector(
+    [selectAllFeatEffects],
+    (allFeatEffects) => {
+        return allFeatEffects.filter((featEffect) => featEffect.type == "initiativeBonus");
     }
 );
 

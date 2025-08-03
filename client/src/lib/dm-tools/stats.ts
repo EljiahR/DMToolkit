@@ -12,3 +12,5 @@ export const rollStat = () => {
 
     return statPoints.reduce((total, num) => total + num, 0);
 }
+
+export const getModifier = (scoreTotal: number) => Math.floor(scoreTotal / 2) - 2;
