@@ -13,7 +13,7 @@ export interface CharacterClass {
     level: number;
     subclass: Subclass;
     features: Feature[];
-    baseId: string;
+    base: CharacterClassBase;
 }
 
 export interface SubclassBase {
@@ -23,7 +23,7 @@ export interface SubclassBase {
 
 export interface Subclass {
     name: string;
-    baseId: string;
+    base: SubclassBase;
 }
 
 export interface FeatEffect {
@@ -40,8 +40,8 @@ export interface FeatureBase {
 }
 
 export interface Feature {
-    baseId: string;
     effects: FeatEffect[];
+    base: FeatureBase;
 }
 
 export interface LineageBase {
@@ -56,7 +56,7 @@ export interface Lineage {
     name: string;
     description: string;
     features: Feature[];
-    baseId: string;
+    base: LineageBase;
 }
 
 export interface SpeciesBase {
@@ -67,7 +67,7 @@ export interface SpeciesBase {
     speed: number;
     size: string;
     features: FeatureBase[];
-    lineages: LineageBase[]
+    lineages: LineageBase[];
 }
 
 export interface Species {
@@ -78,7 +78,7 @@ export interface Species {
     size: string;
     features: Feature[];
     lineage: Lineage;
-    baseId: string;
+    base: SpeciesBase;
 }
 
 export interface BackgroundBase {
@@ -96,7 +96,7 @@ export interface Background {
     abilityScores: string[];
     features: Feature[];
     skillProficiencies: string[];
-    baseId: string;
+    base: BackgroundBase;
 }
 
 export interface Skill {
@@ -126,11 +126,11 @@ export interface AbilityScores {
 export interface Character {
     name: string;
     alignment: string;
-    characterClassBase: CharacterClassBase |  null;
-    backgroundBase: BackgroundBase | null;
+    characterClassBase: CharacterClassBase;
+    backgroundBase: BackgroundBase;
     backgroundInstance: Background;
-    speciesBase: SpeciesBase | null;
-    lineageBase: LineageBase | null;
+    speciesBase: SpeciesBase;
+    lineageBase: LineageBase;
     scores: AbilityScores;
     physicalDescription: string;
     personality: string;
