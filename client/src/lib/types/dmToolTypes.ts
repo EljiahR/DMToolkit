@@ -139,3 +139,11 @@ export interface Character {
     flaws: string;
     proficiencyBonus: number
 }
+
+export interface allBasesDto {
+    features: FeatureBase[];
+    classes: CharacterClassBase[];
+    backgrounds: BackgroundBase[];
+    species: SpeciesBase[];
+    lineages: LineageBase[];
+}

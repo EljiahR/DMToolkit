@@ -170,7 +170,7 @@ export interface CharacterDto {
     proficiencyBonus: number
 }
 
-export interface allBases {
+export interface allBasesDto {
     features: FeatureBaseDto[];
     classes: CharacterClassBaseDto[];
     backgrounds: BackgroundBaseDto[];
