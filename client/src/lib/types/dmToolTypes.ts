@@ -56,7 +56,7 @@ export interface Lineage {
     name: string;
     description: string;
     features: Feature[];
-    base: LineageBase;
+    baseId: string;
 }
 
 export interface SpeciesBase {
@@ -92,7 +92,6 @@ export interface BackgroundBase {
 
 export interface Background {
     name: string;
-    description: string;
     abilityScores: string[];
     features: Feature[];
     skillProficiencies: string[];
@@ -126,18 +125,16 @@ export interface AbilityScores {
 export interface Character {
     name: string;
     alignment: string;
-    characterClassBase: CharacterClassBase;
-    backgroundBase: BackgroundBase;
-    backgroundInstance: Background;
-    speciesBase: SpeciesBase;
-    lineageBase: LineageBase;
+    characterClass: CharacterClass;
+    background: Background;
+    species: Species;
     scores: AbilityScores;
     physicalDescription: string;
     personality: string;
     ideals: string;
     bonds: string;
     flaws: string;
-    proficiencyBonus: number
+    proficiencyBonus: number;
 }
 
 export interface allBasesDto {

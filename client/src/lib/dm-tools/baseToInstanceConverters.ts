@@ -1,12 +1,11 @@
-import type { Background, BackgroundBase } from "../types/dmToolTypes";
+import type { Background, BackgroundBase, Feature } from "../types/dmToolTypes";
 
-export const backgroundBaseToInstance = (base: BackgroundBase): Background => {
+export const backgroundBaseToInstance = (base: BackgroundBase, abilityScores: [string, string], features: Feature[], skillProficiencies: string[]): Background => {
     return {
         name: base.name,
-        description: base.description,
-        abilityScores: ["", ""],
-        features: [],
-        skillProficiencies: [],
-        baseId: base.id,
+        abilityScores,
+        features,
+        skillProficiencies,
+        base
     };
 }
