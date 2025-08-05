@@ -1,5 +1,5 @@
-import type { BackgroundBaseDto, FeatEffectDto, FeatureBaseDto, SubclassBaseDto } from "../types/apiResponses";
-import type { BackgroundBase, FeatureBase, SubclassBase } from "../types/dmToolTypes";
+import type { BackgroundBaseDto, CharacterClassBaseDto, FeatEffectDto, FeatureBaseDto, SubclassBaseDto } from "../types/apiResponses";
+import type { BackgroundBase, CharacterClassBase, FeatureBase, SubclassBase } from "../types/dmToolTypes";
 
 // Bases
 
@@ -30,3 +30,13 @@ export const subclassBaseToBo = (subclassDto: SubclassBaseDto): SubclassBase => 
     }
 }
 
+export const characterClassBaseToBo = (classDto: CharacterClassBaseDto, subclassBases: SubclassBase[], featureBases: FeatureBase[]): CharacterClassBase => {
+    return {
+        id: classDto.id,
+        name: classDto.name,
+        description: classDto.description,
+        subclasses: subclassBases.filter((subclassBase) => classDto.subclassIds.includes(subclassBase.id)),
+        features: featureBases.filter((featureBase) => classDto.featureIds.includes(featureBase.id)),
+        defaultScoreArray: classDto.defaultScoreArray
+    }
+}
