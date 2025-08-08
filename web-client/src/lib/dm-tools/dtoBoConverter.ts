@@ -1,5 +1,5 @@
-import type { BackgroundBaseDto, CharacterClassBaseDto, CharacterDto, FeatEffectDto, FeatureBaseDto, LineageBaseDto, SpeciesBaseDto, SubclassBaseDto } from "../types/apiResponses";
-import type { BackgroundBase, Character, CharacterClassBase, FeatureBase, LineageBase, SpeciesBase, SubclassBase } from "../types/dmToolTypes";
+import type { BackgroundBaseDto, CharacterClassBaseDto, CharacterClassDto, CharacterDto, FeatEffectDto, FeatureBaseDto, LineageBaseDto, SpeciesBaseDto, SubclassBaseDto, SubclassDto } from "../types/apiResponses";
+import type { BackgroundBase, Character, CharacterClass, CharacterClassBase, FeatureBase, LineageBase, SpeciesBase, Subclass, SubclassBase } from "../types/dmToolTypes";
 
 // Bases
 
@@ -61,6 +61,21 @@ export const speciesBaseToBo = (speciesDto: SpeciesBaseDto, featureBases: Featur
         size: speciesDto.size,
         features: featureBases.filter((featureBase) => speciesDto.featureIds.includes(featureBase.id)),
         lineages: lineageBases.filter((lineageBase) => speciesDto.lineageIds.includes(lineageBase.id))
+    }
+}
+
+// Instances
+export const subclassInstanceToBo = (subclassDto: SubclassDto, subclasses: SubclassBase[]): Subclass => {
+    return {
+        base: subclasses.find((subclass) => subclassDto.baseId == subclass.id)!
+    }
+}
+
+export const classInstanceToBo = (classDto : CharacterClassDto, subclasses: SubclassBase[], featureBases: FeatureBase[]): CharacterClass => {
+    return {
+        level: classDto.level,
+        subclass: subclassInstanceToBo(classDto.subclass, subclasses),
+        features: featureBases.filter((featureBase) => classDto.featureIds.includes(featureBase.id)),
     }
 }
 

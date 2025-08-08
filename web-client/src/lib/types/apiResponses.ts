@@ -42,7 +42,7 @@ export interface CharacterClassDto {
     name: string;
     description: string;
     level: number;
-    subclassId: string;
+    subclass: SubclassDto;
     featureIds: string[];
     baseId: string;
 }
@@ -53,7 +53,6 @@ export interface SubclassBaseDto {
 }
 
 export interface SubclassDto {
-    name: string;
     baseId: string;
 }
 

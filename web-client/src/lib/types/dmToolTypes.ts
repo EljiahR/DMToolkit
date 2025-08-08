@@ -8,8 +8,6 @@ export interface CharacterClassBase {
 };
 
 export interface CharacterClass {
-    name: string;
-    description: string;
     level: number;
     subclass: Subclass;
     features: Feature[];
@@ -22,7 +20,6 @@ export interface SubclassBase {
 }
 
 export interface Subclass {
-    name: string;
     base: SubclassBase;
 }
 
