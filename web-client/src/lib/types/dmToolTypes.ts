@@ -8,6 +8,7 @@ export interface CharacterClassBase {
 };
 
 export interface CharacterClass {
+    id: string;
     level: number;
     subclass: Subclass;
     features: Feature[];
@@ -17,10 +18,14 @@ export interface CharacterClass {
 export interface SubclassBase {
     id: string;
     name: string;
+    description: string;
+    features: FeatureBase[];
 }
 
 export interface Subclass {
+    id: string;
     base: SubclassBase;
+    features: Feature[];
 }
 
 export interface FeatEffect {
@@ -37,6 +42,7 @@ export interface FeatureBase {
 }
 
 export interface Feature {
+    id: string;
     effects: FeatEffect[];
     base: FeatureBase;
 }
@@ -50,10 +56,9 @@ export interface LineageBase {
 }
 
 export interface Lineage {
-    name: string;
-    description: string;
+    id: string;
     features: Feature[];
-    baseId: string;
+    base: LineageBase;
 }
 
 export interface SpeciesBase {
@@ -68,11 +73,7 @@ export interface SpeciesBase {
 }
 
 export interface Species {
-    name: string;
-    description: string;
-    type: string;
-    speed: number;
-    size: string;
+    id: string;
     features: Feature[];
     lineage: Lineage;
     base: SpeciesBase;
@@ -88,7 +89,7 @@ export interface BackgroundBase {
 }
 
 export interface Background {
-    name: string;
+    id: string;
     abilityScores: string[];
     features: Feature[];
     skillProficiencies: string[];
@@ -96,6 +97,7 @@ export interface Background {
 }
 
 export interface Skill {
+    id: string;
     name: string;
     scoreId: string;
     proficient: boolean;
@@ -120,6 +122,7 @@ export interface AbilityScores {
 }
 
 export interface Character {
+    id: string;
     name: string;
     alignment: string;
     characterClass: CharacterClass;
@@ -134,7 +137,7 @@ export interface Character {
     proficiencyBonus: number;
 }
 
-export interface allBasesDto {
+export interface allBases {
     features: FeatureBase[];
     classes: CharacterClassBase[];
     backgrounds: BackgroundBase[];

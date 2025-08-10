@@ -116,11 +116,13 @@ export interface FeatEffectDto {
 }
 
 export interface FeatureDto {
+    id: string;
     effectIds: string[];
     baseId: string;
 }
 
 export interface LineageDto {
+    id: string;
     name: string;
     description: string;
     features: FeatureDto[];
@@ -162,6 +164,7 @@ export interface SkillDto {
 
 export interface AbilityScoreDto {
     id: string;
+    key: string;
     name: string;
     amount: number;
     proficient: boolean;
@@ -169,6 +172,7 @@ export interface AbilityScoreDto {
 }
 
 export interface CharacterDto {
+    id: string;
     name: string;
     alignment: string;
     characterClass: CharacterClassDto;
