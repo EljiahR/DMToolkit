@@ -5,9 +5,9 @@ import { setBackgroundBase, setBackgroundScores } from "../../../lib/redux/selec
 export default function() {
     const dispatch = useAppDispatch();
     const allBackgrounds = useAppSelector((state) => state.dmTools.backgrounds);
-    const backgroundBase = useAppSelector((state) => state.selectedCharacter.backgroundBase);
+    const backgroundBase = useAppSelector((state) => state.selectedCharacter.background.base);
     const playerScores = useAppSelector((state) => state.selectedCharacter.scores);
-    const instanceBonuses = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScores);
+    const instanceBonuses = useAppSelector((state) => state.selectedCharacter.background.abilityScores);
 
     useLayoutEffect(() => {
         if (backgroundBase == null) {

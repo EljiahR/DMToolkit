@@ -102,7 +102,7 @@ export interface CharacterClassDto {
     name: string;
     description: string;
     level: number;
-    subclass: SubclassDto;
+    subclass: SubclassDto | null;
     subclassInstanceId: string;
     features: FeatureDto[];
     featureInstanceIds: string[];

@@ -6,8 +6,8 @@ import type { AbilityScore } from "../../lib/types/dmToolTypes"
 export default function() {
     const proficiencyBonus = useAppSelector((state) => state.selectedCharacter.proficiencyBonus);
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
-    const speed = useAppSelector((state) => state.selectedCharacter.speciesBase?.speed);
-    const size = useAppSelector((state) => state.selectedCharacter.speciesBase?.size);
+    const speed = useAppSelector((state) => state.selectedCharacter.species.base.speed);
+    const size = useAppSelector((state) => state.selectedCharacter.species.base.size);
     const allAbilityScoreFeatEffects = useAppSelector(selectAllAbilityScoreFeatEffects);
     const allInitiativeFeatEffects = useAppSelector(selectAllInitiativeBonuseFeatEffects);
     

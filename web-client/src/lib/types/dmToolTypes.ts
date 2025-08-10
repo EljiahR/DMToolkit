@@ -10,7 +10,7 @@ export interface CharacterClassBase {
 export interface CharacterClass {
     id: string;
     level: number;
-    subclass: Subclass;
+    subclass: Subclass | null;
     features: Feature[];
     base: CharacterClassBase;
 }

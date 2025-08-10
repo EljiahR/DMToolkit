@@ -1,7 +1,7 @@
 import { createSelector, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { AbilityScores, BackgroundBase, Character, CharacterClassBase, FeatEffect, LineageBase, SpeciesBase } from "../types/dmToolTypes";
 import { rollStat } from "../dm-tools/stats";
-import { backgroundBaseToInstance } from "../dm-tools/baseToInstanceConverters";
+import { backgroundBaseReset, classBaseReset, lineageBaseReset, speciesBaseReset } from "../dm-tools/baseResetConverters";
 import type { GeneratedTraits } from "../dm-tools/traitGenerator";
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
 import type { RootState } from "./store";
@@ -9,15 +9,12 @@ import type { RootState } from "./store";
 const initialState: Character = {
     name: "",
     alignment: "unaligned",
-    characterClassBase: null,
-    backgroundBase: null,
-    backgroundInstance: {
-        name: "",
-        description: "",
+    characterClass: null,
+    background: {
         abilityScores: ["", ""],
         features: [],
         skillProficiencies: [],
-        baseId: ""
+        base: {}
     },
     speciesBase: null,
     lineageBase: null,
@@ -41,18 +38,16 @@ export const selectedCharacterSlice = createSlice({
             state.alignment = action.payload;
         },
         setCharacterClassBase: (state, action: PayloadAction<CharacterClassBase>) => {
-            state.characterClassBase = action.payload;
+            state.characterClass = classBaseReset(action.payload, state.characterClass.id);
         },
         setBackgroundBase: (state, action: PayloadAction<BackgroundBase>) => {
-            state.backgroundBase = action.payload;
-            state.backgroundInstance = backgroundBaseToInstance(action.payload);
+            state.background = backgroundBaseReset(action.payload, state.background.id);
         },
         setSpeciesBase: (state, action: PayloadAction<SpeciesBase>) => {
-            state.speciesBase = action.payload;
-            state.lineageBase = action.payload.lineages[0];
+            state.species = speciesBaseReset(action.payload, state.species.id, state.species.lineage.id);
         },
         setLineageBase: (state, action: PayloadAction<LineageBase>) => {
-            state.lineageBase = action.payload;
+            state.species.lineage= lineageBaseReset(action.payload, state.species.lineage.id)
         },
         setScore: (state, action: PayloadAction<{scoreId: string, amount: string}>) => {
             var filteredAmount = parseInt(action.payload.amount);
@@ -111,12 +106,12 @@ export const selectedCharacterSlice = createSlice({
             if (state.scores == null) {
                 state.scores = getStandardScores();
             }
-            state.scores.str.amount = action.payload ? action.payload[0] : state.characterClassBase?.defaultScoreArray[0] ?? 8;
-            state.scores.dex.amount = action.payload ? action.payload[1] : state.characterClassBase?.defaultScoreArray[1] ?? 8;
-            state.scores.con.amount = action.payload ? action.payload[2] : state.characterClassBase?.defaultScoreArray[2] ?? 8;
-            state.scores.int.amount = action.payload ? action.payload[3] : state.characterClassBase?.defaultScoreArray[3] ?? 8;
-            state.scores.wis.amount = action.payload ? action.payload[4] : state.characterClassBase?.defaultScoreArray[4] ?? 8;
-            state.scores.cha.amount = action.payload ? action.payload[5] : state.characterClassBase?.defaultScoreArray[5] ?? 8;
+            state.scores.str.amount = action.payload ? action.payload[0] : state.characterClass.base.defaultScoreArray[0] ?? 8;
+            state.scores.dex.amount = action.payload ? action.payload[1] : state.characterClass.base.defaultScoreArray[1] ?? 8;
+            state.scores.con.amount = action.payload ? action.payload[2] : state.characterClass.base.defaultScoreArray[2] ?? 8;
+            state.scores.int.amount = action.payload ? action.payload[3] : state.characterClass.base.defaultScoreArray[3] ?? 8;
+            state.scores.wis.amount = action.payload ? action.payload[4] : state.characterClass.base.defaultScoreArray[4] ?? 8;
+            state.scores.cha.amount = action.payload ? action.payload[5] : state.characterClass.base.defaultScoreArray[5] ?? 8;
         },
         setPhysicalDescription: (state, action: PayloadAction<string>) => {
             state.physicalDescription = action.payload;
@@ -142,7 +137,7 @@ export const selectedCharacterSlice = createSlice({
 
 export const selectAllFeatEffects = (state: RootState) => {
     const featEffects: FeatEffect[] = [];
-    state.selectedCharacter.backgroundInstance.features.forEach(feat => {
+    state.selectedCharacter.background.features.forEach(feat => {
         featEffects.push(...feat.effects);
     });
     return featEffects;

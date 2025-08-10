@@ -7,11 +7,11 @@ export default function() {
         <div>
             <div id="basic-overview">
                 <h3>{selectedCharacter.name}</h3>
-                <p>{selectedCharacter.characterClassBase?.name}</p>
+                <p>{selectedCharacter.characterClass.base.name}</p>
             </div>
             <div id="origin">
-                <p>{selectedCharacter.speciesBase?.name}</p>
-                <p>{selectedCharacter.backgroundBase?.name}</p>
+                <p>{selectedCharacter.species.base.name}</p>
+                <p>{selectedCharacter.background.base.name}</p>
             </div>
             <div id="alignment">
                 <p>{selectedCharacter.alignment}</p>
