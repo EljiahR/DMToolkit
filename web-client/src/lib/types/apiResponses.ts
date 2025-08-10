@@ -123,8 +123,6 @@ export interface FeatureDto {
 
 export interface LineageDto {
     id: string;
-    name: string;
-    description: string;
     features: FeatureDto[];
     featureInstanceIds: string[];
     speciesInstanceId: string;
@@ -133,14 +131,10 @@ export interface LineageDto {
 
 export interface SpeciesDto {
     id: string;
-    name: string;
-    description: string;
-    type: string;
-    speed: number;
-    size: string;
     features: FeatureDto[];
     featureInstanceIds: string[];
     lineage: LineageDto;
+    lineageInstanceId: string;
     baseId: string;
 }
 
@@ -158,7 +152,6 @@ export interface BackgroundDto {
 export interface SkillDto {
     id: string;
     name: string;
-    scoreId: string;
     proficient: boolean;
 }
 
@@ -169,6 +162,7 @@ export interface AbilityScoreDto {
     amount: number;
     proficient: boolean;
     skills: SkillDto[];
+    skillIds: string[];
 }
 
 export interface CharacterDto {

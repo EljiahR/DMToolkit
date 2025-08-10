@@ -99,7 +99,6 @@ export interface Background {
 export interface Skill {
     id: string;
     name: string;
-    scoreId: string;
     proficient: boolean;
 }
 
