@@ -5,7 +5,7 @@ import { setCharacterClassBase } from "../../lib/redux/selectedCharacterSlice";
 
 export default function() {
     const availableClasses = useAppSelector((state) => state.dmTools.characterClasses);
-    const selectedClass = useAppSelector((state) => state.selectedCharacter.characterClassBase);
+    const selectedClassBase = useAppSelector((state) => state.selectedCharacter.characterClass.base);
     const dispatch = useAppDispatch();
     
     useLayoutEffect(() => {
@@ -13,7 +13,7 @@ export default function() {
             // throw error or return to homepage not sure yet :)
         }
         
-        if (selectedClass == null) {
+        if (selectedClassBase == null || selectedClassBase.id == "default") {
             dispatch(setCharacterClassBase(availableClasses[0]));
         }
     });
@@ -32,17 +32,17 @@ export default function() {
         <div>
             <h2>Class</h2>
             <label htmlFor="class-selector">Select a class</label>
-            <select id="class-selector" value={selectedClass ? selectedClass.id : ""} onChange={(e) => handleClassSelection(e.target.value)}>
+            <select id="class-selector" value={selectedClassBase ? selectedClassBase.id : ""} onChange={(e) => handleClassSelection(e.target.value)}>
                 {availableClasses.map((characterClass) => {
                     return (
                         <option key={`class-${characterClass.id}`} value={characterClass.id}>{characterClass.name}</option>
                     )
                 })}
             </select>
-            {selectedClass &&
+            {selectedClassBase &&
             <div id="class-display">
-                <h3>{selectedClass.name}</h3>
-                <p>{selectedClass.description}</p>
+                <h3>{selectedClassBase.name}</h3>
+                <p>{selectedClassBase.description}</p>
             </div>
             }
         </div>

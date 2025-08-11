@@ -5,6 +5,7 @@ import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
+    const bonuses = useAppSelector((state) => state.selectedCharacter.background.abilityScores);
     const dispatch = useAppDispatch();
     
     useLayoutEffect(() => {
@@ -21,7 +22,7 @@ export default function() {
             <div id="manual-entry">
                 {Object.keys(scores).map((key) => {
                     return (
-                        <ScoreComponent key={`manual-${key}`} score={scores[key]} updateScore={updateScore} />
+                        <ScoreComponent key={`manual-${key}`} score={scores[key]} updateScore={updateScore} bonus={bonuses.includes(key) ? 2 - bonuses.indexOf(key) : 0} />
                     )
                 })}
             </div>
@@ -32,16 +33,17 @@ export default function() {
 interface ScoreComponentProps {
     score: AbilityScore;
     updateScore: (scoreId: string, updatedValue: string) => void;
+    bonus: number;
 }
 
-const ScoreComponent = ({ score, updateScore}: ScoreComponentProps) => {
+const ScoreComponent = ({ score, updateScore, bonus}: ScoreComponentProps) => {
     return (
         <div>
             <label htmlFor={`${score.id}-input`}>{score.name}: </label>
             <input type="number" id={`${score.id}-input`} value={score.amount} onChange={(e) => updateScore(score.id, e.target.value)} />
             <div>
-                {score.bonus > 0 &&
-                    `+${score.bonus}`
+                {bonus > 0 &&
+                    `+${bonus}`
                 }
             </div>
         </div>

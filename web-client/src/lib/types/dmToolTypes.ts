@@ -90,7 +90,7 @@ export interface BackgroundBase {
 
 export interface Background {
     id: string;
-    abilityScores: string[];
+    abilityScores: [string, string];
     features: Feature[];
     skillProficiencies: string[];
     base: BackgroundBase;
@@ -100,6 +100,7 @@ export interface Skill {
     id: string;
     name: string;
     proficient: boolean;
+    scoreId: string;
 }
 
 export interface AbilityScore {

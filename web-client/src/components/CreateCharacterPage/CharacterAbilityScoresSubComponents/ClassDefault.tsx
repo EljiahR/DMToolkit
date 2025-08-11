@@ -5,10 +5,11 @@ import { setCharacterClassBase, setScoresToClassDefault } from "../../../lib/red
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
     const defaultClass = useAppSelector((state) => state.dmTools.characterClasses[0]);
-    const characterClass = useAppSelector((state) => state.selectedCharacter.characterClassBase);
+    const characterClassBase = useAppSelector((state) => state.selectedCharacter.characterClass.base);
+    const bonuses = useAppSelector((state) => state.selectedCharacter.background.abilityScores);
     const dispatch = useAppDispatch();
 
-    if (!characterClass || !scores) {
+    if (!characterClassBase || !scores) {
         dispatch(setCharacterClassBase(defaultClass));
         dispatch(setScoresToClassDefault(defaultClass.defaultScoreArray));
     }
@@ -24,7 +25,7 @@ export default function() {
                 {Object.keys(scores).map((key) => {
                     return (
                         <div key={`$default-${key}`}>
-                            <p>{`${scores[key].name}: ${scores[key].bonus > 0 ? `${scores[key].amount} +${scores[key].bonus}` : scores[key].amount}`}</p>
+                            <p>{`${scores[key].name}: ${bonuses.includes(key) ? `${scores[key].amount} +${2 - bonuses.indexOf(key)}` : scores[key].amount}`}</p>
                         </div>
                     )
                 })}

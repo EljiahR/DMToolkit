@@ -4,10 +4,12 @@ import ClassDefault from "../../../../src/components/CreateCharacterPage/Charact
 import renderWithStore from "../../../renderOptions/renderWithStore";
 import { characterClasses } from "../../../seedData/characterClasses";
 import { standardScores } from "./defaultScores";
+import { backgroundBaseReset, classBaseReset } from "../../../../src/lib/dm-tools/baseResetConverters";
+import { characterBackgrounds } from "../../../seedData/characterBackgrounds";
 
 describe("ClassDefault", () => {
     beforeEach(() => {
-        renderWithStore(<ClassDefault />, { preloadedState: { newCharacter: { characterClassBase: characterClasses[0], scores: standardScores }, dmTools: { characterClasses } } });
+        renderWithStore(<ClassDefault />, { preloadedState: { selectedCharacter: { characterClass: classBaseReset(characterClasses[0], "0"), scores: standardScores, background: backgroundBaseReset(characterBackgrounds[0], "0") }, dmTools: { characterClasses } } });
     });
 
     it("renders with the selected classes correct default", () => {

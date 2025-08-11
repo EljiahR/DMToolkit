@@ -6,6 +6,7 @@ import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
+    const bonuses = useAppSelector((state) => state.selectedCharacter.background.abilityScores);
     const dispatch = useAppDispatch();
 
     useLayoutEffect(() => {
@@ -30,7 +31,7 @@ export default function() {
             <div id="point-buy">
                 <div id="scores">
                     {Object.keys(scores).map((key) => {
-                        return <ScoreDisplay key={`point-buy-${key}`} score={scores[key]} handleScoreChange={handleScoreChange} />
+                        return <ScoreDisplay key={`point-buy-${key}`} score={scores[key]} handleScoreChange={handleScoreChange} bonus={bonuses.includes(key) ? 2 - bonuses.indexOf(key) : 0} />
                     })}
                 </div>
                 <div id="points">{`Points remaining: ${scoreRemainder}`}</div>
@@ -42,12 +43,13 @@ export default function() {
 interface ScoreDisplayProps {
     score: AbilityScore;
     handleScoreChange: (score: AbilityScore, isAdditive: boolean) => void;
+    bonus: number
 }
 
-const ScoreDisplay = ({ score, handleScoreChange }: ScoreDisplayProps) => {
+const ScoreDisplay = ({ score, handleScoreChange, bonus }: ScoreDisplayProps) => {
     return (
         <div id={`${score.id}-display`}>
-            <p>{`${score.name}: ${score.bonus > 0 ? `${score.amount} +${score.bonus}` : score.amount}`}</p>
+            <p>{`${score.name}: ${bonus > 0 ? `${score.amount} +${bonus}` : score.amount}`}</p>
             <div>
                 <button onClick={() => handleScoreChange(score, true)}>+</button>
                 <button onClick={() => handleScoreChange(score, false)}>-</button>

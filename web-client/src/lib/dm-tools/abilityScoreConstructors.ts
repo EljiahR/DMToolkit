@@ -5,6 +5,7 @@ import type { AbilityScore, AbilityScores, Skill } from "../types/dmToolTypes";
 const skillsGenerator = (names: string[], scoreId: string): Skill[] => {
     return names.map((name) => {
         return {
+            id: name,
             name,
             scoreId,
             proficient: false

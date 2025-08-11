@@ -1,31 +1,14 @@
 import { createSelector, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { AbilityScores, BackgroundBase, Character, CharacterClassBase, FeatEffect, LineageBase, SpeciesBase } from "../types/dmToolTypes";
+import type { AbilityScores, BackgroundBase, CharacterClassBase, FeatEffect, LineageBase, SpeciesBase } from "../types/dmToolTypes";
 import { rollStat } from "../dm-tools/stats";
 import { backgroundBaseReset, classBaseReset, lineageBaseReset, speciesBaseReset } from "../dm-tools/baseResetConverters";
 import type { GeneratedTraits } from "../dm-tools/traitGenerator";
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
 import type { RootState } from "./store";
+import type { ZeroOrOne } from "../types/miscTypes";
+import { generateEmptyCharacter } from "./initialCharacterSliceState";
 
-const initialState: Character = {
-    name: "",
-    alignment: "unaligned",
-    characterClass: null,
-    background: {
-        abilityScores: ["", ""],
-        features: [],
-        skillProficiencies: [],
-        base: {}
-    },
-    speciesBase: null,
-    lineageBase: null,
-    scores: getStandardScores(),
-    physicalDescription: "",
-    personality: "",
-    ideals: "",
-    bonds: "",
-    flaws: "",
-    proficiencyBonus: 0
-};
+const initialState = generateEmptyCharacter();
 
 export const selectedCharacterSlice = createSlice({
     name: "selectedCharacter",
@@ -42,6 +25,9 @@ export const selectedCharacterSlice = createSlice({
         },
         setBackgroundBase: (state, action: PayloadAction<BackgroundBase>) => {
             state.background = backgroundBaseReset(action.payload, state.background.id);
+        },
+        setBackgroundScores: (state, action: PayloadAction<{scoreId: string, index: ZeroOrOne}>) => {
+            state.background.abilityScores[action.payload.index] = action.payload.scoreId;
         },
         setSpeciesBase: (state, action: PayloadAction<SpeciesBase>) => {
             state.species = speciesBaseReset(action.payload, state.species.id, state.species.lineage.id);
@@ -157,5 +143,5 @@ export const selectAllInitiativeBonuseFeatEffects = createSelector(
     }
 );
 
-export const { setName, setAlignment, setCharacterClassBase, setBackgroundBase, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
+export const { setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

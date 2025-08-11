@@ -89,7 +89,7 @@ export const classInstanceToBo = (classDto : CharacterClassDto, classBases: Char
     return {
         id: classDto.id,
         level: classDto.level,
-        subclass: subclassInstanceToBo(classDto.subclass, subclasses, effects, featureBases),
+        subclass: classDto.subclass == null ? null : subclassInstanceToBo(classDto.subclass, subclasses, effects, featureBases),
         features: featureInstancesToBo(classDto.features, effects, featureBases),
         base: classBases.find((classBase) => classBase.id == classDto.baseId)!
     }

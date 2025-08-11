@@ -5,6 +5,7 @@ import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
+    const bonuses = useAppSelector((state) => state.selectedCharacter.background.abilityScores);
     const dispatch = useAppDispatch();
     
     const handleScoreReroll = (scoreId: string) => {
@@ -25,7 +26,7 @@ export default function() {
             <button onClick={handleAllReroll}>Reroll All</button>
             <div id="random-roll">
                 {Object.keys(scores).map((key) => {
-                    return <ScoreDisplay key={`${key}-score`} score={scores[key]} handleScoreReroll={handleScoreReroll} />
+                    return <ScoreDisplay key={`${key}-score`} score={scores[key]} handleScoreReroll={handleScoreReroll} bonus={bonuses.includes(key) ? 2 - bonuses.indexOf(key) : 0} />
                 })}
             </div>
         </div>
@@ -35,12 +36,13 @@ export default function() {
 interface ScoreDisplayProps {
     score: AbilityScore;
     handleScoreReroll: (scoreId: string) => void;
+    bonus: number;
 }
 
-const ScoreDisplay = ({ score, handleScoreReroll }: ScoreDisplayProps) => {
+const ScoreDisplay = ({ score, handleScoreReroll, bonus }: ScoreDisplayProps) => {
     return (
         <div id={`${score.id}-score`}>
-            <p>{`${score.name}: ${score.bonus > 0 ? `${score.amount} +${score.bonus}` : score.amount}`}</p>
+            <p>{`${score.name}: ${bonus > 0 ? `${score.amount} +${bonus}` : score.amount}`}</p>
             <button onClick={() => handleScoreReroll(score.id)}>Roll</button>
         </div>
     )

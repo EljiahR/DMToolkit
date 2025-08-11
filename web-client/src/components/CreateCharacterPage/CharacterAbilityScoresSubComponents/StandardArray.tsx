@@ -8,6 +8,7 @@ import type { AbilityScore } from "../../../lib/types/dmToolTypes";
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
+    const bonuses = useAppSelector((state) => state.selectedCharacter.background.abilityScores);
     const dispatch = useAppDispatch();
 
     const [items, setItems] = useState(["str", "dex", "con", "int", "wis", "cha"]);
@@ -46,7 +47,7 @@ export default function() {
             <div id="standard-array">
                 <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                     <SortableContext items={items}>
-                        {items.map(score => <SortableScore key={score} score={scores[score]} />)}
+                        {items.map(score => <SortableScore key={score} score={scores[score]} bonus={bonuses.includes(score) ? 2 - bonuses.indexOf(score) : 0} />)}
                     </SortableContext>
                 </DndContext>
             </div>
@@ -56,9 +57,10 @@ export default function() {
 
 interface SortableScoreProps {
     score: AbilityScore;
+    bonus: number;
 }
 
-const SortableScore = ({score}: SortableScoreProps) => {
+const SortableScore = ({ score, bonus }: SortableScoreProps) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: score.id});
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -66,6 +68,6 @@ const SortableScore = ({score}: SortableScoreProps) => {
     };
 
     return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>{`${score.name}: ${score.bonus > 0 ? `${score.amount} +${score.bonus}` : score.amount}`}</div>
+        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>{`${score.name}: ${bonus > 0 ? `${score.amount} +${bonus}` : score.amount}`}</div>
     )
 }

@@ -5,6 +5,7 @@ import { setBonds, setFlaws, setIdeals, setName, setPersonality, setPhysicalDesc
 export default function() {
     const name = useAppSelector((state) => state.selectedCharacter.name);
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
+    const bonuses = useAppSelector((state) => state.selectedCharacter.background.abilityScores);
     const physicalDescription = useAppSelector((state) => state.selectedCharacter.physicalDescription);
     const personality = useAppSelector((state) => state.selectedCharacter.personality);
     const ideals = useAppSelector((state) => state.selectedCharacter.ideals);
@@ -13,7 +14,7 @@ export default function() {
     const dispatch = useAppDispatch();
     
     const handleRandomizeTraits = () => {
-        dispatch(setTraits(traitGenerator(scores)));
+        dispatch(setTraits(traitGenerator(scores, bonuses)));
     };
 
     return (

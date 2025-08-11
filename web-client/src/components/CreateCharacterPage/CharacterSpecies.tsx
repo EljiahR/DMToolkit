@@ -5,8 +5,8 @@ import { setLineageBase, setSpeciesBase } from "../../lib/redux/selectedCharacte
 export default function() {
     const allSpecies = useAppSelector((state) => state.dmTools.species);
     const allLineages = useAppSelector((state) => state.dmTools.lineages);
-    const selectedSpecies = useAppSelector((state) => state.selectedCharacter.speciesBase);
-    const selectedLineage = useAppSelector((state) => state.selectedCharacter.lineageBase);
+    const selectedSpeciesBase = useAppSelector((state) => state.selectedCharacter.species.base);
+    const selectedLineageBase = useAppSelector((state) => state.selectedCharacter.species.lineage.base);
     const dispatch = useAppDispatch();
 
     useLayoutEffect(() => {
@@ -18,12 +18,12 @@ export default function() {
             // TODO: Error handling
         }
         
-        if (selectedSpecies == null) {
+        if (selectedSpeciesBase == null || selectedSpeciesBase.id == "default") {
             dispatch(setSpeciesBase(allSpecies[0]));
         }
 
-        if (selectedLineage == null) {
-            dispatch(setLineageBase(selectedSpecies ? selectedSpecies.lineages[0] : allSpecies[0].lineages[0]));
+        if (selectedLineageBase == null || selectedLineageBase.id == "default") {
+            dispatch(setLineageBase(selectedSpeciesBase ? selectedSpeciesBase.lineages[0] : allSpecies[0].lineages[0]));
         }
     });
 
@@ -42,7 +42,7 @@ export default function() {
         <div>
             <h2>Species</h2>    
             <label htmlFor="species-selector">Select a species</label>
-            <select id="species-selector" value={selectedSpecies ? selectedSpecies.id : ""} onChange={(e) => handleSpeciesChange(e.target.value)}>
+            <select id="species-selector" value={selectedSpeciesBase ? selectedSpeciesBase.id : ""} onChange={(e) => handleSpeciesChange(e.target.value)}>
                 {allSpecies.map((species) => {
                     return (
                         <option key={`species-${species.id}`} value={species.id}>{species.name}</option>
@@ -51,17 +51,17 @@ export default function() {
             </select>
             <label htmlFor="lineage-selector">Select a lineage</label>
             <select id="lineage-selector">
-                {allLineages.filter(lineage => lineage.speciesId == selectedSpecies?.id).map((lineage) => {
+                {allLineages.filter(lineage => lineage.speciesId == selectedSpeciesBase.id).map((lineage) => {
                     return (
                         <option key={`lineage-${lineage.id}`} value={lineage.id}>{lineage.name}</option>
                     )
                 })}
             </select>
-            {(selectedSpecies && selectedLineage) &&
+            {(selectedSpeciesBase && selectedLineageBase) &&
                 <div id="species-display">
-                    <h3>{selectedSpecies.name}</h3>
-                    <h4>{selectedLineage.name}</h4>
-                    <p>{selectedSpecies.description}</p>
+                    <h3>{selectedSpeciesBase.name}</h3>
+                    <h4>{selectedLineageBase.name}</h4>
+                    <p>{selectedSpeciesBase.description}</p>
                 </div>
             }
             

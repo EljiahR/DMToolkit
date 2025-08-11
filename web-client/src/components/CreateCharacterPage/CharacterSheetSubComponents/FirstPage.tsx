@@ -4,6 +4,7 @@ import type { AbilityScore } from "../../../lib/types/dmToolTypes"
 
 export default function() {
     const character = useAppSelector((state) => state.selectedCharacter);
+    const bonuses = character.background.abilityScores;
     
     return (
         <div id="first-page">
@@ -101,7 +102,7 @@ export default function() {
                 <div id="re-roll"></div>
                 <div id="ability-scores">
                     {Object.keys(character.scores).map((key) => 
-                        <AbilityScoreDisplay score={character.scores[key]} proficiencyBonus={character.proficiencyBonus} />
+                        <AbilityScoreDisplay score={character.scores[key]} proficiencyBonus={character.proficiencyBonus} bonus={bonuses.includes(key) ? 2 - bonuses.indexOf(key) : 0} />
                     )}
                 </div>
             </div>
@@ -120,9 +121,10 @@ export default function() {
 interface AbililtyScoreDisplayProps {
     score: AbilityScore;
     proficiencyBonus: number;
+    bonus: number
 }
 
-const AbilityScoreDisplay = ({score, proficiencyBonus}: AbililtyScoreDisplayProps) => {
+const AbilityScoreDisplay = ({ score, proficiencyBonus, bonus }: AbililtyScoreDisplayProps) => {
     return (
         <div>
             <div id={`${score.id}-main`}>
@@ -132,7 +134,7 @@ const AbilityScoreDisplay = ({score, proficiencyBonus}: AbililtyScoreDisplayProp
                     <p className="sheet-label">Modifier</p>
                 </div>
                 <div id={`${score.id}-score`}>
-                    <div>{score.amount + score.bonus}</div>
+                    <div>{score.amount + bonus}</div>
                     <p className="sheet-label">Score</p>
                 </div>
             </div>

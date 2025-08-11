@@ -54,12 +54,12 @@ export type GeneratedTraits = {
     personality: string;
 }
 
-export default function(scores: AbilityScores): GeneratedTraits {
+export default function(scores: AbilityScores, bonuses: [string, string]): GeneratedTraits {
     const d4 = diceFactory(4, 1);
     var physicalTraits: string[] = [];
     var personalityTraits: string[] = [];
     Object.keys(scores).forEach((key) => {
-        const scoreTotal = scores[key].amount + scores[key].bonus;
+        const scoreTotal = scores[key].amount + (bonuses.includes(key) ?  2 - bonuses.indexOf(key) : 0);
 
         if (scoreTotal >= 12) {
             const newTrait = allScoreTraits[key].high[d4.roll() - 1];

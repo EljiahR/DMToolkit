@@ -1,6 +1,7 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks"
 import { setBackgroundBase, setBackgroundScores } from "../../../lib/redux/selectedCharacterSlice";
+import type { ZeroOrOne } from "../../../lib/types/miscTypes";
 
 export default function() {
     const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ export default function() {
         }
     }, []);
 
-    const handleBonusChange = (scoreId: string, index: number) => {
+    const handleBonusChange = (scoreId: string, index: ZeroOrOne) => {
         if (instanceBonuses && instanceBonuses[0] != scoreId && instanceBonuses[1] != scoreId) {
             dispatch(setBackgroundScores({scoreId, index}));
         }

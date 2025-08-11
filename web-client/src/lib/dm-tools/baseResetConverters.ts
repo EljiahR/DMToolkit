@@ -14,7 +14,7 @@ export const classBaseReset = (characterClass: CharacterClassBase, id: string): 
 export const backgroundBaseReset = (base: BackgroundBase, id: string): Background => {
     return {
         id,
-        abilityScores: [],
+        abilityScores: ["", ""],
         features: [],
         skillProficiencies: [],
         base

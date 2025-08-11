@@ -142,7 +142,7 @@ export interface BackgroundDto {
     id: string;
     name: string;
     description: string;
-    abilityScores: string[];
+    abilityScores: [string, string];
     features: FeatureDto[];
     featureInstanceIds: string[];
     skillProficiencies: string[];
@@ -153,6 +153,7 @@ export interface SkillDto {
     id: string;
     name: string;
     proficient: boolean;
+    scoreId: string;
 }
 
 export interface AbilityScoreDto {

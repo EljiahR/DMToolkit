@@ -2,11 +2,11 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Start Client",
+            "label": "Start Web Client",
             "type": "shell",
             "command": "npm run dev",
             "options": {
-                "cwd": "${workspaceFolder}/client"
+                "cwd": "${workspaceFolder}/web-client"
             }
         },
         {
@@ -19,23 +19,23 @@
         },
         {
             "label": "Start All",
-            "dependsOn": ["Start Client", "Start Server"],
+            "dependsOn": ["Start Web Client", "Start Server"],
             "dependsOrder": "parallel"
         },
         {
-            "label": "Test Client",
+            "label": "Test Web Client",
             "type": "shell",
             "command": "npm run test:run",
             "options": {
-                "cwd": "${workspaceFolder}/client"
+                "cwd": "${workspaceFolder}/web-client"
             }
         },
         {
-            "label": "Test Client Watch",
+            "label": "Test Web Client Watch",
             "type": "shell",
             "command": "npm run test",
             "options": {
-                "cwd": "${workspaceFolder}/client"
+                "cwd": "${workspaceFolder}/web-client"
             }
         },
         {
@@ -48,7 +48,7 @@
         },
         {
             "label": "Test All",
-            "dependsOn": ["Test Client", "Test Server"],
+            "dependsOn": ["Test Web Client", "Test Server"],
             "dependsOrder": "parallel"
         }
     ]
