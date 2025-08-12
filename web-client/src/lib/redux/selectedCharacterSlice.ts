@@ -14,6 +14,23 @@ export const selectedCharacterSlice = createSlice({
     name: "selectedCharacter",
     initialState,
     reducers: {
+        setNewCharacter: (state, action: PayloadAction<{defaultClass: CharacterClassBase, defaultBackground: BackgroundBase, defaultSpecies: SpeciesBase }>) => {
+            state = {
+                id: "",
+                name: "",
+                alignment: "",
+                characterClass: classBaseReset(action.payload.defaultClass, ""),
+                background: backgroundBaseReset(action.payload.defaultBackground, ""),
+                species: speciesBaseReset(action.payload.defaultSpecies, "", ""),
+                scores: getStandardScores(),
+                physicalDescription: "",
+                personality: "",
+                ideals: "",
+                bonds: "",
+                flaws: "",
+                proficiencyBonus: 0
+            }
+        },
         setName: (state, action: PayloadAction<string>) => {
             state.name = action.payload
         },
@@ -143,5 +160,5 @@ export const selectAllInitiativeBonuseFeatEffects = createSelector(
     }
 );
 
-export const { setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
+export const { setNewCharacter, setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;
