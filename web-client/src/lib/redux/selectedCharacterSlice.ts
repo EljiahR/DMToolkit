@@ -1,5 +1,5 @@
 import { createSelector, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { AbilityScores, BackgroundBase, CharacterClassBase, FeatEffect, LineageBase, SpeciesBase } from "../types/dmToolTypes";
+import type { AbilityScores, BackgroundBase, CharacterClassBase, FeatEffect, Feature, LineageBase, SpeciesBase } from "../types/dmToolTypes";
 import { getModifier, rollStat } from "../dm-tools/stats";
 import { backgroundBaseReset, classBaseReset, lineageBaseReset, speciesBaseReset } from "../dm-tools/baseResetConverters";
 import type { GeneratedTraits } from "../dm-tools/traitGenerator";
@@ -139,17 +139,28 @@ export const selectedCharacterSlice = createSlice({
     }
 });
 
+export const selectAllFeatures = (state: RootState) => {
+    const allFeatures: Feature[] = [];
+    allFeatures.concat(state.selectedCharacter.background.features);
+    allFeatures.concat(state.selectedCharacter.characterClass.features);
+    if (state.selectedCharacter.characterClass.subclass) {
+        allFeatures.concat(state.selectedCharacter.characterClass.subclass.features);
+    }
+    return allFeatures;
+}
+
 export const selectAllAbilityScores = (state: RootState) => {
     return state.selectedCharacter.scores;
 }
 
-export const selectAllFeatEffects = (state: RootState) => {
-    const featEffects: FeatEffect[] = [];
-    state.selectedCharacter.background.features.forEach(feat => {
-        featEffects.push(...feat.effects);
-    });
-    return featEffects;
-};
+export const selectAllFeatEffects = createSelector(
+    [selectAllFeatures],
+    (allFeatures) => {
+        const allFeatEffects: FeatEffect[] = [];
+        allFeatures.forEach((feat) => allFeatEffects.concat(feat.effects));
+        return allFeatEffects;
+    }
+)
 
 export const selectAllAbilityScoreFeatEffects = createSelector(
     [selectAllFeatEffects],
