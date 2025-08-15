@@ -1,12 +1,13 @@
 import { createSelector, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { AbilityScores, BackgroundBase, CharacterClassBase, FeatEffect, LineageBase, SpeciesBase } from "../types/dmToolTypes";
-import { rollStat } from "../dm-tools/stats";
+import { getModifier, rollStat } from "../dm-tools/stats";
 import { backgroundBaseReset, classBaseReset, lineageBaseReset, speciesBaseReset } from "../dm-tools/baseResetConverters";
 import type { GeneratedTraits } from "../dm-tools/traitGenerator";
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
 import type { RootState } from "./store";
-import type { ZeroOrOne } from "../types/miscTypes";
+import type { StringAndNumber, ZeroOrOne } from "../types/miscTypes";
 import { generateEmptyCharacter } from "./initialCharacterSliceState";
+import type { AbilityScoreBonusFeatEffectData, InitiativeBonusFeatEffectData } from "../types/featEffectDataTypes";
 
 const initialState = generateEmptyCharacter();
 
@@ -138,6 +139,10 @@ export const selectedCharacterSlice = createSlice({
     }
 });
 
+export const selectAllAbilityScores = (state: RootState) => {
+    return state.selectedCharacter.scores;
+}
+
 export const selectAllFeatEffects = (state: RootState) => {
     const featEffects: FeatEffect[] = [];
     state.selectedCharacter.background.features.forEach(feat => {
@@ -159,6 +164,55 @@ export const selectAllInitiativeBonuseFeatEffects = createSelector(
         return allFeatEffects.filter((featEffect) => featEffect.type == "initiativeBonus");
     }
 );
+
+export const selectAllAbilityScoreFeatEffectBonuses = createSelector(
+    [selectAllAbilityScoreFeatEffects],
+    (allAbilityScoreEffects) => {
+        const bonuses: StringAndNumber = {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+        };
+
+        allAbilityScoreEffects.forEach((abilityEffect) => {
+            const data = abilityEffect.data as AbilityScoreBonusFeatEffectData;
+            bonuses[data.statId] += data.amount;
+        });
+
+        return bonuses;
+    }
+);
+
+export const selectAllAbilityScoreModifiers = createSelector(
+    [selectAllAbilityScores, selectAllAbilityScoreFeatEffectBonuses],
+    (abilityScores, abilityScoreBonuses) => {
+        const modifiers: StringAndNumber = {
+            "str": getModifier(abilityScores["str"].amount + abilityScoreBonuses["str"]),
+            "dex": getModifier(abilityScores["dex"].amount + abilityScoreBonuses["dex"]),
+            "con": getModifier(abilityScores["con"].amount + abilityScoreBonuses["con"]),
+            "int": getModifier(abilityScores["int"].amount + abilityScoreBonuses["int"]),
+            "wis": getModifier(abilityScores["wis"].amount + abilityScoreBonuses["wis"]),
+            "cha": getModifier(abilityScores["cha"].amount + abilityScoreBonuses["cha"])
+        };
+
+        return modifiers
+    }
+);
+
+export const selectInitiative = createSelector(
+    [selectAllInitiativeBonuseFeatEffects, selectAllAbilityScoreModifiers],
+    (initiativeFeatEffects, modifiers) => {
+        var initiative = 10 + modifiers["dex"];
+        initiativeFeatEffects.forEach((initiativeFeatEffect) => {
+            const data = initiativeFeatEffect.data as InitiativeBonusFeatEffectData;
+            initiative += data.amount;
+        });
+        return initiative;
+    }
+)
 
 export const { setNewCharacter, setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

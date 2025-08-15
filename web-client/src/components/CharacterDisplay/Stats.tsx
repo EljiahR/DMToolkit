@@ -1,6 +1,5 @@
-import { getModifier } from "../../lib/dm-tools/stats";
 import { useAppSelector } from "../../lib/redux/hooks"
-import { selectAllAbilityScoreFeatEffects, selectAllInitiativeBonuseFeatEffects } from "../../lib/redux/selectedCharacterSlice";
+import { selectAllAbilityScoreFeatEffectBonuses, selectAllAbilityScoreModifiers, selectInitiative } from "../../lib/redux/selectedCharacterSlice";
 import type { AbilityScore } from "../../lib/types/dmToolTypes"
 
 export default function() {
@@ -8,32 +7,16 @@ export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
     const speed = useAppSelector((state) => state.selectedCharacter.species.base.speed);
     const size = useAppSelector((state) => state.selectedCharacter.species.base.size);
-    const allAbilityScoreFeatEffects = useAppSelector(selectAllAbilityScoreFeatEffects);
-    const allInitiativeFeatEffects = useAppSelector(selectAllInitiativeBonuseFeatEffects);
-    
-
-    const getAllBonuses = (key: string) => {
-        var bonusTotal = 0;
-        allAbilityScoreFeatEffects.filter((effect) => effect.data["statId"] == key).forEach((effect) => {
-            bonusTotal += effect.data["amount"];
-        });
-
-        return bonusTotal;
-    };
-
-    const getInitiative = () => {
-        var initiativeTotal = 10 + getModifier(scores["dex"].amount + getAllBonuses("dex"));
-        allInitiativeFeatEffects.forEach((effect) => initiativeTotal += effect.data["amount"]);
-        return initiativeTotal;
-    }
-    const initiative = getInitiative();
+    const abilityScoreBonuses = useAppSelector(selectAllAbilityScoreFeatEffectBonuses);
+    const abilityScoreModifiers = useAppSelector(selectAllAbilityScoreModifiers);
+    const initiative = useAppSelector(selectInitiative);
     
     return (
         <div>
             <div id="ability-section">
                 {Object.keys(scores).map((key) => {
                     return (
-                        <AbilityScoreDisplay key={key} score={scores[key]} bonus={getAllBonuses(key)} proficiencyBonus={proficiencyBonus} />
+                        <AbilityScoreDisplay key={key} score={scores[key]} bonus={abilityScoreBonuses[key]} modifier={abilityScoreModifiers[key] ?? 0} proficiencyBonus={proficiencyBonus} />
                     )
                 })}
             </div>
@@ -54,6 +37,10 @@ export default function() {
                     <p>Size</p>
                     <p>{size}</p>
                 </div>
+                <div id="passive-perception">
+                    <p>Passive Perception</p>
+                    <p></p>
+                </div>
             </div>
         </div>
     )
@@ -62,17 +49,17 @@ export default function() {
 interface AbilityScoreDisplayProps {
     score: AbilityScore;
     bonus: number;
+    modifier: number;
     proficiencyBonus: number;
 }
 
-const AbilityScoreDisplay = ({score, bonus, proficiencyBonus}: AbilityScoreDisplayProps) => {    
-    const scoreMod = getModifier(score.amount + bonus);
+const AbilityScoreDisplay = ({score, bonus, modifier, proficiencyBonus}: AbilityScoreDisplayProps) => {    
     
     return (
         <div className="ability-score">
             <h3>{score.name}</h3>
             <div className="modifier">
-                <p>{scoreMod}</p>
+                <p>{modifier}</p>
                 <p>Modifier</p>
             </div>
             <div className="score-total">
@@ -81,7 +68,7 @@ const AbilityScoreDisplay = ({score, bonus, proficiencyBonus}: AbilityScoreDispl
             <div className="throws">
                 <div className="saving-throw">
                     <div className={`proficiency-check ${score.proficient ? "checked" : ""}`}></div>
-                    <p>{score.proficient ? scoreMod + proficiencyBonus : scoreMod}</p>
+                    <p>{score.proficient ? modifier + proficiencyBonus : modifier}</p>
                     <p>Saving Throw</p>
                 </div>
                 <div className="skill-checks">
@@ -91,7 +78,7 @@ const AbilityScoreDisplay = ({score, bonus, proficiencyBonus}: AbilityScoreDispl
                     return (
                         <div className="saving-throw" key={skill.name}>
                             <div className={`proficiency-check ${skill.proficient ? "checked" : ""}`}></div>
-                            <p>{skill.proficient ? scoreMod + proficiencyBonus : scoreMod}</p>
+                            <p>{skill.proficient ? modifier + proficiencyBonus : modifier}</p>
                             <p>{skill.name}</p>
                         </div>
                     )
