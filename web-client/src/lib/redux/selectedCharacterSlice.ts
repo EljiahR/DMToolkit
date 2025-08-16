@@ -7,7 +7,7 @@ import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
 import type { RootState } from "./store";
 import type { StringAndNumber, ZeroOrOne } from "../types/miscTypes";
 import { generateEmptyCharacter } from "./initialCharacterSliceState";
-import type { AbilityScoreBonusFeatEffectData, InitiativeBonusFeatEffectData } from "../types/featEffectDataTypes";
+import type { AbilityScoreBonusFeatEffectData, SimpleBonusFeatEffectData } from "../types/featEffectDataTypes";
 
 const initialState = generateEmptyCharacter();
 
@@ -176,6 +176,13 @@ export const selectAllInitiativeBonuseFeatEffects = createSelector(
     }
 );
 
+export const selectAllPassPerceptionBonusFeatEffects = createSelector(
+    [selectAllFeatEffects],
+    (allFeatEffects) => {
+        return allFeatEffects.filter((featEffect) => featEffect.type == "passivePerceptionBonus");
+    }
+)
+
 export const selectAllAbilityScoreFeatEffectBonuses = createSelector(
     [selectAllAbilityScoreFeatEffects],
     (allAbilityScoreEffects) => {
@@ -218,12 +225,38 @@ export const selectInitiative = createSelector(
     (initiativeFeatEffects, modifiers) => {
         var initiative = modifiers["dex"];
         initiativeFeatEffects.forEach((initiativeFeatEffect) => {
-            const data = initiativeFeatEffect.data as InitiativeBonusFeatEffectData;
+            const data = initiativeFeatEffect.data as SimpleBonusFeatEffectData;
             initiative += data.amount;
         });
         return initiative;
     }
 );
+
+export const selectProficiencyBonus = (state: RootState) => {
+    return state.selectedCharacter.proficiencyBonus;
+}
+
+export const selectSpeed = (state: RootState) => {
+    return state.selectedCharacter.species.base.speed;
+}
+
+export const selectSize = (state: RootState) => {
+    return state.selectedCharacter.species.base.size;
+}
+
+export const selectPassivePerception = createSelector(
+    [selectAllPassPerceptionBonusFeatEffects, selectAllAbilityScoreModifiers, selectAllAbilityScores, selectProficiencyBonus],
+    (passivePerceptionEffects, modifiers, scores, proficiencyBonus) => {
+        const perceptionSkill = scores["wis"].skills.find((skill) => skill.name == "Perception");
+        var passivePerception = 10 + (perceptionSkill && perceptionSkill.proficient ? proficiencyBonus : 0);
+        passivePerceptionEffects.forEach((effect) => {
+            const data = effect.data as SimpleBonusFeatEffectData;
+            passivePerception += data.amount;
+        });
+
+        return passivePerception;
+    }
+)
 
 export const { setNewCharacter, setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

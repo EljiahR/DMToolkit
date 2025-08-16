@@ -1,15 +1,16 @@
 import { useAppSelector } from "../../lib/redux/hooks"
-import { selectAllAbilityScoreFeatEffectBonuses, selectAllAbilityScoreModifiers, selectInitiative } from "../../lib/redux/selectedCharacterSlice";
+import { selectAllAbilityScoreFeatEffectBonuses, selectAllAbilityScoreModifiers, selectAllAbilityScores, selectInitiative, selectPassivePerception, selectProficiencyBonus, selectSize, selectSpeed } from "../../lib/redux/selectedCharacterSlice";
 import type { AbilityScore } from "../../lib/types/dmToolTypes"
 
 export default function() {
-    const proficiencyBonus = useAppSelector((state) => state.selectedCharacter.proficiencyBonus);
-    const scores = useAppSelector((state) => state.selectedCharacter.scores);
-    const speed = useAppSelector((state) => state.selectedCharacter.species.base.speed);
-    const size = useAppSelector((state) => state.selectedCharacter.species.base.size);
+    const proficiencyBonus = useAppSelector(selectProficiencyBonus);
+    const scores = useAppSelector(selectAllAbilityScores);
+    const speed = useAppSelector(selectSpeed);
+    const size = useAppSelector(selectSize);
     const abilityScoreBonuses = useAppSelector(selectAllAbilityScoreFeatEffectBonuses);
     const abilityScoreModifiers = useAppSelector(selectAllAbilityScoreModifiers);
     const initiative = useAppSelector(selectInitiative);
+    const passivePerception = useAppSelector(selectPassivePerception);
     
     return (
         <div>
@@ -39,7 +40,7 @@ export default function() {
                 </div>
                 <div id="passive-perception">
                     <p>Passive Perception</p>
-                    <p></p>
+                    <p>{passivePerception}</p>
                 </div>
             </div>
         </div>
