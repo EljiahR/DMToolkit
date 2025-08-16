@@ -216,14 +216,14 @@ export const selectAllAbilityScoreModifiers = createSelector(
 export const selectInitiative = createSelector(
     [selectAllInitiativeBonuseFeatEffects, selectAllAbilityScoreModifiers],
     (initiativeFeatEffects, modifiers) => {
-        var initiative = 10 + modifiers["dex"];
+        var initiative = modifiers["dex"];
         initiativeFeatEffects.forEach((initiativeFeatEffect) => {
             const data = initiativeFeatEffect.data as InitiativeBonusFeatEffectData;
             initiative += data.amount;
         });
         return initiative;
     }
-)
+);
 
 export const { setNewCharacter, setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;
