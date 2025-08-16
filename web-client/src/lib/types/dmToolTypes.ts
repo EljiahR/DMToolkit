@@ -2,6 +2,7 @@ export interface CharacterClassBase {
     id: string;
     name: string;
     description: string;
+    hp: number;
     subclasses: SubclassBase[];
     features: FeatureBase[];
     defaultScoreArray: number[];

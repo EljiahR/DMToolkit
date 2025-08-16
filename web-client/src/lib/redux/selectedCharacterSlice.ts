@@ -15,6 +15,8 @@ export const selectedCharacterSlice = createSlice({
     name: "selectedCharacter",
     initialState,
     reducers: {
+        // Keep getting a false-positive for state not being used here
+        // @ts-ignore
         setNewCharacter: (state, action: PayloadAction<{defaultClass: CharacterClassBase, defaultBackground: BackgroundBase, defaultSpecies: SpeciesBase }>) => {
             state = {
                 id: "",
@@ -248,7 +250,7 @@ export const selectPassivePerception = createSelector(
     [selectAllPassPerceptionBonusFeatEffects, selectAllAbilityScoreModifiers, selectAllAbilityScores, selectProficiencyBonus],
     (passivePerceptionEffects, modifiers, scores, proficiencyBonus) => {
         const perceptionSkill = scores["wis"].skills.find((skill) => skill.name == "Perception");
-        var passivePerception = 10 + (perceptionSkill && perceptionSkill.proficient ? proficiencyBonus : 0);
+        var passivePerception = 10 + modifiers["wis"] + (perceptionSkill && perceptionSkill.proficient ? proficiencyBonus : 0);
         passivePerceptionEffects.forEach((effect) => {
             const data = effect.data as SimpleBonusFeatEffectData;
             passivePerception += data.amount;
@@ -256,7 +258,7 @@ export const selectPassivePerception = createSelector(
 
         return passivePerception;
     }
-)
+);
 
 export const { setNewCharacter, setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

@@ -41,6 +41,7 @@ export interface CharacterClassBaseDto {
     id: string;
     name: string;
     description: string;
+    hp: number;
     subclassIds: string[];
     featureIds: string[];
     defaultScoreArray: number[];
