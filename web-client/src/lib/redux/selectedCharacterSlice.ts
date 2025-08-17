@@ -274,8 +274,8 @@ export const selectHpRolls = (state: RootState) => {
 export const selectHpMax = createSelector(
     [selectHpRolls, selectAllAbilityScoreModifiers],
     (hpRolls, modifiers) => {
-        if (hpRolls.length < 1) return 1;
-        return hpRolls.reduce((total, roll) => total + roll + modifiers["con"]);
+        const hpMax = hpRolls.reduce((total, roll) => total + roll + modifiers["con"], 0);
+        return hpMax > 0 ? hpMax : 1;
     }
 )
 
