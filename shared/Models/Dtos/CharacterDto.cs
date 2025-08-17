@@ -5,6 +5,7 @@ public class CharacterDto
     public string Id { get; set; } = Guid.NewGuid();
     public string Name { get; set; } = string.Empty();
     public string Alignment { get; set; } = string.Empty();
+    public int HpMax { get; set; } = 1;
     public CharacterClassDto CharacterClass { get; set; } = new();
     public string ClassInstanceId { get; set; } = string.Empty();
     public BackgroundDto Background { get; set; } = new();

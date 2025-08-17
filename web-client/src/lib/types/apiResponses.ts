@@ -41,7 +41,8 @@ export interface CharacterClassBaseDto {
     id: string;
     name: string;
     description: string;
-    hp: number;
+    hitDie: number;
+    fixedHp: number;
     subclassIds: string[];
     featureIds: string[];
     defaultScoreArray: number[];
@@ -171,6 +172,7 @@ export interface CharacterDto {
     id: string;
     name: string;
     alignment: string;
+    hpMax: number;
     characterClass: CharacterClassDto;
     classInstanceId: string;
     background: BackgroundDto;

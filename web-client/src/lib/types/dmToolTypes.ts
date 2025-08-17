@@ -2,7 +2,8 @@ export interface CharacterClassBase {
     id: string;
     name: string;
     description: string;
-    hp: number;
+    hitDie: number;
+    fixedHp: number;
     subclasses: SubclassBase[];
     features: FeatureBase[];
     defaultScoreArray: number[];
@@ -126,6 +127,7 @@ export interface Character {
     id: string;
     name: string;
     alignment: string;
+    hpMax: number;
     characterClass: CharacterClass;
     background: Background;
     species: Species;
