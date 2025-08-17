@@ -22,6 +22,9 @@ export const selectedCharacterSlice = createSlice({
                 id: "",
                 name: "",
                 alignment: "",
+                hp: 1,
+                hpRolls: [action.payload.defaultClass.hitDie],
+                tempHp: 0,
                 characterClass: classBaseReset(action.payload.defaultClass, ""),
                 background: backgroundBaseReset(action.payload.defaultBackground, ""),
                 species: speciesBaseReset(action.payload.defaultSpecies, "", ""),
@@ -259,6 +262,22 @@ export const selectPassivePerception = createSelector(
         return passivePerception;
     }
 );
+
+export const selectHp = (state: RootState) => {
+    return state.selectedCharacter.hp;
+}
+
+export const selectHpRolls = (state: RootState) => {
+    return state.selectedCharacter.hpRolls;
+}
+
+export const selectHpMax = createSelector(
+    [selectHpRolls, selectAllAbilityScoreModifiers],
+    (hpRolls, modifiers) => {
+        if (hpRolls.length < 1) return 1;
+        return hpRolls.reduce((total, roll) => total + roll + modifiers["con"]);
+    }
+)
 
 export const { setNewCharacter, setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

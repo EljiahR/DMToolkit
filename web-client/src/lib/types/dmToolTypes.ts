@@ -127,7 +127,9 @@ export interface Character {
     id: string;
     name: string;
     alignment: string;
-    hpMax: number;
+    hp: number;
+    hpRolls: number[];
+    tempHp: number;
     characterClass: CharacterClass;
     background: Background;
     species: Species;

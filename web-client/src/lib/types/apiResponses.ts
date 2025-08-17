@@ -172,7 +172,9 @@ export interface CharacterDto {
     id: string;
     name: string;
     alignment: string;
-    hpMax: number;
+    hp: number;
+    hpRolls: number[];
+    tempHp: number;
     characterClass: CharacterClassDto;
     classInstanceId: string;
     background: BackgroundDto;
