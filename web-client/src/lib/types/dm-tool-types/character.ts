@@ -1,6 +1,6 @@
 import type { Background } from "./background";
 import type { CharacterClass } from "./characterClass";
-import type { Item, Worth } from "./items";
+import type { AllItemTypes, Item, Worth } from "./items";
 import type { Species } from "./species";
 import type { AbilityScores } from "./stats";
 
@@ -22,7 +22,7 @@ export interface Character {
     flaws: string;
     proficiencyBonus: number;
     coins: Worth;
-    inventory: Item[];
-    equippedItems: Item[];
+    inventory: AllItemTypes[];
+    equippedItems: AllItemTypes[];
 }
 

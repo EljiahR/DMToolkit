@@ -1,9 +1,15 @@
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
-import type { Background, BackgroundBase, Character, CharacterClass, CharacterClassBase, Lineage, LineageBase, Species, SpeciesBase } from "../types/dm-tool-types/character";
+import type { Background, BackgroundBase } from "../types/dm-tool-types/background";
+import type { Character } from "../types/dm-tool-types/character";
+import type { CharacterClass, CharacterClassBase } from "../types/dm-tool-types/characterClass";
+import type { Worth } from "../types/dm-tool-types/items";
+import type { Lineage, LineageBase, Species, SpeciesBase } from "../types/dm-tool-types/species";
 
 const characterClassBase: CharacterClassBase = {
     id: "default",
     name: "Default",
+    hitDie: 1,
+    fixedHp: 1,
     description: "Default class used for initializng the initial state of the selectedCharacter slice",
     subclasses: [],
     features: [],
@@ -67,11 +73,24 @@ const species: Species = {
     base: speciesBase
 }
 
+export const generateEmptyWallet = (): Worth => {
+    return {
+        cp: 0,
+        sp: 0,
+        ep: 0,
+        gp: 0,
+        pp: 0
+    }
+}
+
 export const generateEmptyCharacter = (): Character => {
     return {
         id: "0",
         name: "",
         alignment: "unaligned",
+        hp: 1,
+        hpRolls: [1],
+        tempHp: 0, 
         characterClass,
         background,
         species,
@@ -81,6 +100,9 @@ export const generateEmptyCharacter = (): Character => {
         ideals: "",
         bonds: "",
         flaws: "",
-        proficiencyBonus: 0
+        proficiencyBonus: 0,
+        coins: generateEmptyWallet(),
+        inventory: [],
+        equippedItems: []
     };
 } 

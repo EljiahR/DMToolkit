@@ -53,4 +53,6 @@ export interface Armor extends Item {
     hasStealthDisadvantage: boolean;
     don: string;
     doff: string;
-}
+};
+
+export type AllItemTypes = Item | Weapon | Armor

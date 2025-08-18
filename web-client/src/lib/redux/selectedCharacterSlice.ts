@@ -1,13 +1,18 @@
 import { createSelector, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { AbilityScores, BackgroundBase, CharacterClassBase, FeatEffect, Feature, LineageBase, SpeciesBase } from "../types/dm-tool-types/character";
 import { getModifier, rollStat } from "../dm-tools/stats";
 import { backgroundBaseReset, classBaseReset, lineageBaseReset, speciesBaseReset } from "../dm-tools/baseResetConverters";
 import type { GeneratedTraits } from "../dm-tools/traitGenerator";
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
 import type { RootState } from "./store";
 import type { StringAndNumber, ZeroOrOne } from "../types/miscTypes";
-import { generateEmptyCharacter } from "./initialCharacterSliceState";
+import { generateEmptyCharacter, generateEmptyWallet } from "./initialCharacterSliceState";
 import type { AbilityScoreBonusFeatEffectData, SimpleBonusFeatEffectData } from "../types/featEffectDataTypes";
+import type { CharacterClassBase } from "../types/dm-tool-types/characterClass";
+import type { BackgroundBase } from "../types/dm-tool-types/background";
+import type { LineageBase, SpeciesBase } from "../types/dm-tool-types/species";
+import type { AbilityScores } from "../types/dm-tool-types/stats";
+import type { FeatEffect, Feature } from "../types/dm-tool-types/feature";
+import type { Armor } from "../types/dm-tool-types/items";
 
 const initialState = generateEmptyCharacter();
 
@@ -34,7 +39,10 @@ export const selectedCharacterSlice = createSlice({
                 ideals: "",
                 bonds: "",
                 flaws: "",
-                proficiencyBonus: 0
+                proficiencyBonus: 0,
+                coins: generateEmptyWallet(), 
+                inventory: [],
+                equippedItems: []
             }
         },
         setName: (state, action: PayloadAction<string>) => {
@@ -265,17 +273,60 @@ export const selectPassivePerception = createSelector(
 
 export const selectHp = (state: RootState) => {
     return state.selectedCharacter.hp;
-}
+};
 
 export const selectHpRolls = (state: RootState) => {
     return state.selectedCharacter.hpRolls;
-}
+};
 
 export const selectHpMax = createSelector(
     [selectHpRolls, selectAllAbilityScoreModifiers],
     (hpRolls, modifiers) => {
         const hpMax = hpRolls.reduce((total, roll) => total + roll + modifiers["con"], 0);
         return hpMax > 0 ? hpMax : 1;
+    }
+);
+
+export const selectInventory = (state: RootState) => {
+    return state.selectedCharacter.inventory;
+};
+
+export const selectAllEquippedItems = (state: RootState) => {
+    return state.selectedCharacter.equippedItems;
+};
+
+export const selectAllEquippedWeapons = createSelector(
+    [selectAllEquippedItems],
+    (equipment) => {
+        return equipment.filter((item) => item.category == "Weapon");
+    }
+);
+
+export const selectAllEquippedArmor = createSelector(
+    [selectAllEquippedItems],
+    (equipment) => {
+        return equipment.filter((item) => "armorCategory" in item) as Armor[];
+    }
+);
+
+export const selectAC = createSelector(
+    [selectAllEquippedArmor, selectAllAbilityScoreModifiers],
+    (armor, modifiers) => {
+        var ac = 10;
+        const equippedArmor = armor.find((item) => item.armorCategory != "Shield");
+        if (equippedArmor) {
+            ac = equippedArmor.acBase;
+            ac += equippedArmor.hasDexterityCap ? Math.min(equippedArmor.dexterityCap, modifiers["dex"]) : modifiers["dex"];
+        } else {
+            ac += modifiers["dex"];
+        };
+
+        const shield = armor.find((item) => item.armorCategory == "Shield");
+        if (shield) {
+            ac += 2;
+        }
+
+        return ac;
     }
 )
 
