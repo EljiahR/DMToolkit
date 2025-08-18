@@ -12,7 +12,7 @@ import type { BackgroundBase } from "../types/dm-tool-types/background";
 import type { LineageBase, SpeciesBase } from "../types/dm-tool-types/species";
 import type { AbilityScores } from "../types/dm-tool-types/stats";
 import type { FeatEffect, Feature } from "../types/dm-tool-types/feature";
-import type { Armor } from "../types/dm-tool-types/items";
+import type { Armor, Weapon } from "../types/dm-tool-types/items";
 
 const initialState = generateEmptyCharacter();
 
@@ -298,14 +298,14 @@ export const selectAllEquippedItems = (state: RootState) => {
 export const selectAllEquippedWeapons = createSelector(
     [selectAllEquippedItems],
     (equipment) => {
-        return equipment.filter((item) => item.category == "Weapon");
+        return equipment.filter((item) => item.category == "Weapon") as Weapon[];
     }
 );
 
 export const selectAllEquippedArmor = createSelector(
     [selectAllEquippedItems],
     (equipment) => {
-        return equipment.filter((item) => "armorCategory" in item) as Armor[];
+        return equipment.filter((item) => item.category == "Armor") as Armor[];
     }
 );
 

@@ -190,7 +190,7 @@ export interface WeaponMasteryDto {
     description: string;
 }
 
-export interface Weapon extends ItemDto {
+export interface WeaponDto extends ItemDto {
     dice: [string, string];
     damageType: string;
     propertyIds: string[];
@@ -198,7 +198,7 @@ export interface Weapon extends ItemDto {
     customName: string;
 }
 
-export interface Armor extends ItemDto {
+export interface ArmorDto extends ItemDto {
     armorCategory: ArmorCategories;
     acBase: number;
     dexterityCap: number;
