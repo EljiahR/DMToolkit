@@ -1,6 +1,6 @@
 import type { Background } from "./background";
 import type { CharacterClass } from "./characterClass";
-import type { AllItemTypes, Item, Worth } from "./items";
+import type { AllItemTypes, Worth } from "./items";
 import type { Species } from "./species";
 import type { AbilityScores } from "./stats";
 
