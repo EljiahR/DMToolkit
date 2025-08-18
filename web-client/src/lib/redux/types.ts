@@ -1,4 +1,4 @@
-import type { BackgroundBase, CharacterClassBase, LineageBase, SpeciesBase } from "../types/dmToolTypes";
+import type { BackgroundBase, CharacterClassBase, LineageBase, SpeciesBase } from "../types/dm-tool-types/character";
 
 export interface AuthSlice {
     accessToken: string | null;

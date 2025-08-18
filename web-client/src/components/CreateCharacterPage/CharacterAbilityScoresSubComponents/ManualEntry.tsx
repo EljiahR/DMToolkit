@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
 import { setScore, setScoresToMinimum } from "../../../lib/redux/selectedCharacterSlice";
-import type { AbilityScore } from "../../../lib/types/dmToolTypes";
+import type { AbilityScore } from "../../../lib/types/dm-tool-types/character";
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);

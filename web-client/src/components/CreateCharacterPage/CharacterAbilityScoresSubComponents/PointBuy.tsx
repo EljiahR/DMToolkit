@@ -2,7 +2,7 @@ import { useLayoutEffect, useMemo } from "react";
 import { scoreCalculator, scoreCosts } from "../../../lib/dm-tools/pointBuyCalculator";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
 import { addOneToScore, setScoresToBase, subtractOneFromScore } from "../../../lib/redux/selectedCharacterSlice";
-import type { AbilityScore } from "../../../lib/types/dmToolTypes";
+import type { AbilityScore } from "../../../lib/types/dm-tool-types/character";
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);

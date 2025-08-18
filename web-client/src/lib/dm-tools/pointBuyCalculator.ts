@@ -1,4 +1,4 @@
-import type { AbilityScores } from "../types/dmToolTypes";
+import type { AbilityScores } from "../types/dm-tool-types/character";
 
 interface ScoreCosts {
     [key: number]: number

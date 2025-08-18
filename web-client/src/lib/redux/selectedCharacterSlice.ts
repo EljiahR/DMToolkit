@@ -1,5 +1,5 @@
 import { createSelector, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { AbilityScores, BackgroundBase, CharacterClassBase, FeatEffect, Feature, LineageBase, SpeciesBase } from "../types/dmToolTypes";
+import type { AbilityScores, BackgroundBase, CharacterClassBase, FeatEffect, Feature, LineageBase, SpeciesBase } from "../types/dm-tool-types/character";
 import { getModifier, rollStat } from "../dm-tools/stats";
 import { backgroundBaseReset, classBaseReset, lineageBaseReset, speciesBaseReset } from "../dm-tools/baseResetConverters";
 import type { GeneratedTraits } from "../dm-tools/traitGenerator";

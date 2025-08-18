@@ -1,4 +1,4 @@
-import type { FeatureBase } from "../../src/lib/types/dmToolTypes";
+import type { FeatureBase } from "../../src/lib/types/dm-tool-types/character";
 
 export const versatileFeature: FeatureBase = {
     id: "candoanything",

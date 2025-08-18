@@ -1,5 +1,5 @@
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
-import type { Background, BackgroundBase, Character, CharacterClass, CharacterClassBase, Lineage, LineageBase, Species, SpeciesBase } from "../types/dmToolTypes";
+import type { Background, BackgroundBase, Character, CharacterClass, CharacterClassBase, Lineage, LineageBase, Species, SpeciesBase } from "../types/dm-tool-types/character";
 
 const characterClassBase: CharacterClassBase = {
     id: "default",

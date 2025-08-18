@@ -1,4 +1,4 @@
-import type { CharacterClassBase } from "../../src/lib/types/dmToolTypes";
+import type { CharacterClassBase } from "../../src/lib/types/dm-tool-types/character";
 import { barbarianDescription, wizardDescription } from "./descriptions";
 
 export const characterClasses: CharacterClassBase[] = [

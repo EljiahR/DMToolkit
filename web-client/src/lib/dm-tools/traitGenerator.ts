@@ -1,4 +1,4 @@
-import type { AbilityScores } from "../types/dmToolTypes";
+import type { AbilityScores } from "../types/dm-tool-types/character";
 import diceFactory from "./diceFactory";
 import { customConcat } from "./stringFunctions";
 

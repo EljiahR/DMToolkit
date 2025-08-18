@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { useAppSelector } from "../../lib/redux/hooks"
 import { selectAllFeatures } from "../../lib/redux/selectedCharacterSlice"
-import type { Feature } from "../../lib/types/dmToolTypes";
+import type { Feature } from "../../lib/types/dm-tool-types/character";
 
 export default function() {
     const allFeatures = useAppSelector(selectAllFeatures);

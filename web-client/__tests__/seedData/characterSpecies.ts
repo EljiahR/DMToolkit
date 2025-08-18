@@ -1,4 +1,4 @@
-import type { LineageBase, SpeciesBase } from "../../src/lib/types/dmToolTypes";
+import type { LineageBase, SpeciesBase } from "../../src/lib/types/dm-tool-types/character";
 import { elfDescription, humanDescription } from "./descriptions";
 
 export const lineages: LineageBase[] = [

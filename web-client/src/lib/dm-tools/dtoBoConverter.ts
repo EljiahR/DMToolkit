@@ -1,5 +1,5 @@
 import type { AbilityScoreDto, BackgroundBaseDto, BackgroundDto, CharacterClassBaseDto, CharacterClassDto, CharacterDto, FeatEffectDto, FeatureBaseDto, FeatureDto, LineageBaseDto, LineageDto, SpeciesBaseDto, SpeciesDto, SubclassBaseDto, SubclassDto } from "../types/apiResponses";
-import type { AbilityScores, Background, BackgroundBase, Character, CharacterClass, CharacterClassBase, FeatEffect, Feature, FeatureBase, Lineage, LineageBase, Species, SpeciesBase, Subclass, SubclassBase } from "../types/dmToolTypes";
+import type { AbilityScores, Background, BackgroundBase, Character, CharacterClass, CharacterClassBase, FeatEffect, Feature, FeatureBase, Lineage, LineageBase, Species, SpeciesBase, Subclass, SubclassBase } from "../types/dm-tool-types/character";
 
 // Bases
 
