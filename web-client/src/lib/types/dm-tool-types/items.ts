@@ -12,11 +12,14 @@ export interface Worth {
     pp: number;
 }
 
+export type ItemCategories = "Weapon" | "Armor";
+
 export interface Item {
     id: string;
     name: string;
     weight: number;
     worth: Worth;
+    category: ItemCategories;
 }
 
 export interface WeaponProperty {
@@ -39,8 +42,10 @@ export interface Weapon extends Item {
     customName: string;
 }
 
+export type ArmorCategories = "Light" | "Medium" | "Heavy" | "Shield";
+
 export interface Armor extends Item {
-    category: "Light" | "Medium" | "Heavy" | "Shield";
+    armorCategory: ArmorCategories;
     acBase: number;
     dexterityCap: number;
     hasDexterityCap: number;

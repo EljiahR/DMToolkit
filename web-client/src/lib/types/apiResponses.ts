@@ -1,3 +1,5 @@
+import type { ArmorCategories, ItemCategories } from "./dm-tool-types/items";
+
 // Auth
 export type Token = {
     tokenType: string;
@@ -168,6 +170,45 @@ export interface AbilityScoreDto {
     skillIds: string[];
 }
 
+export interface ItemDto {
+    id: string;
+    name: string;
+    weight: number;
+    worth: [number, number, number, number, number];
+    category: ItemCategories;
+}
+
+export interface WeaponPropertyDto {
+    id: string;
+    name: string;
+    description: string;
+}
+
+export interface WeaponMasteryDto {
+    id: string;
+    name: string;
+    description: string;
+}
+
+export interface Weapon extends ItemDto {
+    dice: [string, string];
+    damageType: string;
+    propertyIds: string[];
+    masteryId: string;
+    customName: string;
+}
+
+export interface Armor extends ItemDto {
+    armorCategory: ArmorCategories;
+    acBase: number;
+    dexterityCap: number;
+    hasDexterityCap: number;
+    strengthRequirement: number;
+    hasStealthDisadvantage: boolean;
+    don: string;
+    doff: string;
+}
+
 export interface CharacterDto {
     id: string;
     name: string;
@@ -188,5 +229,8 @@ export interface CharacterDto {
     ideals: string;
     bonds: string;
     flaws: string;
-    proficiencyBonus: number
+    proficiencyBonus: number;
+    coins: [number, number, number, number, number];
+    inventoryIds: string[];
+    equippedItemIds: string[];
 }
