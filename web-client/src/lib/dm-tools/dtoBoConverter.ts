@@ -1,10 +1,11 @@
-import type { AbilityScoreDto, BackgroundBaseDto, BackgroundDto, CharacterClassBaseDto, CharacterClassDto, CharacterDto, CoinsDto, FeatEffectDto, FeatureBaseDto, FeatureDto, ItemDto, LineageBaseDto, LineageDto, SpeciesBaseDto, SpeciesDto, SubclassBaseDto, SubclassDto, WeaponDto } from "../types/apiResponses";
+import type { AbilityScoreDto, ArmorDto, BackgroundBaseDto, BackgroundDto, CharacterClassBaseDto, CharacterClassDto, CharacterDto, CoinsDto, FeatEffectDto, FeatureBaseDto, FeatureDto, ItemDto, LineageBaseDto, LineageDto, SpeciesBaseDto, SpeciesDto, SubclassBaseDto, SubclassDto, WeaponDto, WeaponMasteryDto, WeaponPropertyDto } from "../types/apiResponses";
 import type { Background, BackgroundBase } from "../types/dm-tool-types/background";
 import type { Character } from "../types/dm-tool-types/character";
 import type { CharacterClass, CharacterClassBase, Subclass, SubclassBase } from "../types/dm-tool-types/characterClass";
 import type { FeatEffect, Feature, FeatureBase } from "../types/dm-tool-types/feature";
-import type { AllItemTypes, Item, Weapon, Worth } from "../types/dm-tool-types/items";
+import type { AllItemTypes, Armor, Item, Weapon, WeaponMastery, WeaponProperty, Worth } from "../types/dm-tool-types/items";
 import type { Lineage, LineageBase, Species, SpeciesBase } from "../types/dm-tool-types/species";
+import type { Spell } from "../types/dm-tool-types/spell";
 import type { AbilityScores } from "../types/dm-tool-types/stats";
 
 // Bases
@@ -158,9 +159,31 @@ export const itemToBo = (itemDto: ItemDto): Item => {
     }
 };
 
-export const weaponToBo = (weaponDto: WeaponDto): Weapon => {
+export const weaponPropertyToBo = (propertyDto: WeaponPropertyDto): WeaponProperty => {
     return {
-        ...weaponDto
+        ...propertyDto
+    }
+}
+
+export const WeaponMasteryToBo = (masteryDto: WeaponMasteryDto): WeaponMastery => {
+    return {
+        ...masteryDto
+    }
+}
+
+export const weaponToBo = (weaponDto: WeaponDto, weaponProperties: WeaponProperty[], masteries: WeaponMastery[]): Weapon => {
+    return {
+        ...weaponDto,
+        properties: weaponProperties.filter((property) => weaponDto.propertyIds.includes(property.id)),
+        mastery: masteries.find((mastery) => mastery.id == weaponDto.masteryId)!,
+        worth: coinsToBo(weaponDto.worth)
+    }
+}
+
+export const armorToBo = (armorDto: ArmorDto): Armor => {
+    return {
+        ...armorDto,
+        worth: coinsToBo(armorDto.worth)
     }
 }
 
@@ -169,6 +192,9 @@ export const inventoryToBo = (ids: string[], allItems: AllItemTypes[]): AllItemT
 }
 
 export const characterToBo = (characterDto: CharacterDto, classBases: CharacterClassBase[], backgroundBases: BackgroundBase[], subclasses: SubclassBase[], speciesBases: SpeciesBase[], lineageBases: LineageBase[], effects: FeatEffect[], featureBases: FeatureBase[], allItems: AllItemTypes[]): Character => {
+    const inventory = inventoryToBo(characterDto.inventoryIds, allItems);
+    const knownSpells: Spell[] = [];
+
     return {
         id: characterDto.id,
         name: characterDto.name,
@@ -187,6 +213,9 @@ export const characterToBo = (characterDto: CharacterDto, classBases: CharacterC
         hpRolls: characterDto.hpRolls,
         tempHp: characterDto.tempHp,
         coins: coinsToBo(characterDto.coins),
-        inventory: inventoryToBo(characterDto.inventoryIds, allItems)
+        inventory,
+        equippedItems: inventoryToBo(characterDto.equippedItemIds, inventory),
+        knownSpells,
+        readiedSpells: knownSpells
     }
 }
