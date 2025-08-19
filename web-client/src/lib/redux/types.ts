@@ -16,3 +16,9 @@ export interface DMToolsSlice {
     species: SpeciesBase[];
     lineages: LineageBase[];
 }
+
+export type CharacterDisplayNavigationOptions = "Overview" | "Stats" | "Combat" | "Feats" | "Spells" | "Inventory";
+
+export interface UISlice {
+    characterDisplayNavigation: CharacterDisplayNavigationOptions
+}

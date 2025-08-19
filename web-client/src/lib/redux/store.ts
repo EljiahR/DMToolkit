@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import userReducer from "./userSlice";
 import selectedCharacterReducer from "./selectedCharacterSlice";
+import uiReducer from "./uiSlice";
 import dmToolsReducuer from "./dmToolsSlice";
 
 export const store = configureStore({
@@ -9,7 +10,8 @@ export const store = configureStore({
         auth: authReducer,
         user: userReducer,
         selectedCharacter: selectedCharacterReducer,
-        dmTools: dmToolsReducuer
+        dmTools: dmToolsReducuer,
+        ui: uiReducer
     }
 });
 
