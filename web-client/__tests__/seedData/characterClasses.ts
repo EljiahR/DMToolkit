@@ -1,4 +1,4 @@
-import type { CharacterClassBase } from "../../src/lib/types/dm-tool-types/character";
+import type { CharacterClassBase } from "../../src/lib/types/dm-tool-types/characterClass";
 import { barbarianDescription, wizardDescription } from "./descriptions";
 
 export const characterClasses: CharacterClassBase[] = [
@@ -8,7 +8,9 @@ export const characterClasses: CharacterClassBase[] = [
         description: barbarianDescription,
         features: [],
         subclasses: [],
-        defaultScoreArray: [15, 13, 14, 12, 10, 8]
+        defaultScoreArray: [15, 13, 14, 12, 10, 8],
+        hitDie: 12,
+        fixedHp: 7
     },
     {
         id: "cheating",
@@ -16,6 +18,8 @@ export const characterClasses: CharacterClassBase[] = [
         description: wizardDescription,
         features: [],
         subclasses: [],
-        defaultScoreArray: []
+        defaultScoreArray: [],
+        hitDie: 6,
+        fixedHp: 4
     }
 ];

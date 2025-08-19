@@ -209,6 +209,8 @@ export interface ArmorDto extends ItemDto {
     doff: string;
 }
 
+export type CoinsDto = [number, number, number, number, number];
+
 export interface CharacterDto {
     id: string;
     name: string;
@@ -230,7 +232,7 @@ export interface CharacterDto {
     bonds: string;
     flaws: string;
     proficiencyBonus: number;
-    coins: [number, number, number, number, number];
+    coins: CoinsDto,
     inventoryIds: string[];
     equippedItemIds: string[];
 }

@@ -1,6 +1,6 @@
 import { getScoreModifier } from "../../../lib/dm-tools/abilityScoreConstructors";
 import { useAppSelector } from "../../../lib/redux/hooks"
-import type { AbilityScore } from "../../../lib/types/dm-tool-types/character"
+import type { AbilityScore } from "../../../lib/types/dm-tool-types/stats";
 
 export default function() {
     const character = useAppSelector((state) => state.selectedCharacter);

@@ -4,7 +4,7 @@ import { arraySwap, SortableContext, sortableKeyboardCoordinates, useSortable } 
 import { CSS } from "@dnd-kit/utilities";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
 import { setScoresToStandard, swapScores } from "../../../lib/redux/selectedCharacterSlice";
-import type { AbilityScore } from "../../../lib/types/dm-tool-types/character";
+import type { AbilityScore } from "../../../lib/types/dm-tool-types/stats";
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);

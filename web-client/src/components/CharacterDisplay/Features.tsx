@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { useAppSelector } from "../../lib/redux/hooks"
 import { selectAllFeatures } from "../../lib/redux/selectedCharacterSlice"
-import type { Feature } from "../../lib/types/dm-tool-types/character";
+import type { Feature } from "../../lib/types/dm-tool-types/feature";
 
 export default function() {
     const allFeatures = useAppSelector(selectAllFeatures);
@@ -9,7 +9,8 @@ export default function() {
 
     const filteredFeatures = useMemo(() => {
         return allFeatures;
-    }, [allFeatures])
+    }, [allFeatures]);
+
     return (
         <div id="features">
             <div id="feat-filters"></div>

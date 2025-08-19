@@ -1,6 +1,6 @@
 import { getStandardScores } from "../../../../src/lib/dm-tools/abilityScoreConstructors";
 import { rollStat } from "../../../../src/lib/dm-tools/stats";
-import type { AbilityScores } from "../../../../src/lib/types/dm-tool-types/character";
+import type { AbilityScores } from "../../../../src/lib/types/dm-tool-types/stats";
 
 export const standardScores: AbilityScores = getStandardScores();
 

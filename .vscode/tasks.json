@@ -50,6 +50,14 @@
             "label": "Test All",
             "dependsOn": ["Test Web Client", "Test Server"],
             "dependsOrder": "parallel"
+        },
+        {
+            "label": "Build Web Client",
+            "type": "shell",
+            "command": "npm run build",
+            "options": {
+                "cwd": "${workspaceFolder}/web-client"
+            }
         }
     ]
 }

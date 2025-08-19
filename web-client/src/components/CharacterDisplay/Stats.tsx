@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../lib/redux/hooks"
 import { selectAllAbilityScoreFeatEffectBonuses, selectAllAbilityScoreModifiers, selectAllAbilityScores, selectInitiative, selectPassivePerception, selectProficiencyBonus, selectSize, selectSpeed } from "../../lib/redux/selectedCharacterSlice";
-import type { AbilityScore } from "../../lib/types/dm-tool-types/character"
+import type { AbilityScore } from "../../lib/types/dm-tool-types/stats";
 
 export default function() {
     const proficiencyBonus = useAppSelector(selectProficiencyBonus);

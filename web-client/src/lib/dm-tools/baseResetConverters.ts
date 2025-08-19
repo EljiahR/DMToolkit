@@ -1,4 +1,6 @@
-import type { Background, BackgroundBase, CharacterClass, CharacterClassBase, Lineage, LineageBase, Species, SpeciesBase } from "../types/dm-tool-types/character";
+import type { Background, BackgroundBase } from "../types/dm-tool-types/background";
+import type { CharacterClass, CharacterClassBase } from "../types/dm-tool-types/characterClass";
+import type { Lineage, LineageBase, Species, SpeciesBase } from "../types/dm-tool-types/species";
 
 
 export const classBaseReset = (characterClass: CharacterClassBase, id: string): CharacterClass => {

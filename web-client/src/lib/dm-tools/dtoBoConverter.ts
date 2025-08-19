@@ -1,5 +1,11 @@
-import type { AbilityScoreDto, BackgroundBaseDto, BackgroundDto, CharacterClassBaseDto, CharacterClassDto, CharacterDto, FeatEffectDto, FeatureBaseDto, FeatureDto, LineageBaseDto, LineageDto, SpeciesBaseDto, SpeciesDto, SubclassBaseDto, SubclassDto } from "../types/apiResponses";
-import type { AbilityScores, Background, BackgroundBase, Character, CharacterClass, CharacterClassBase, FeatEffect, Feature, FeatureBase, Lineage, LineageBase, Species, SpeciesBase, Subclass, SubclassBase } from "../types/dm-tool-types/character";
+import type { AbilityScoreDto, BackgroundBaseDto, BackgroundDto, CharacterClassBaseDto, CharacterClassDto, CharacterDto, CoinsDto, FeatEffectDto, FeatureBaseDto, FeatureDto, ItemDto, LineageBaseDto, LineageDto, SpeciesBaseDto, SpeciesDto, SubclassBaseDto, SubclassDto, WeaponDto } from "../types/apiResponses";
+import type { Background, BackgroundBase } from "../types/dm-tool-types/background";
+import type { Character } from "../types/dm-tool-types/character";
+import type { CharacterClass, CharacterClassBase, Subclass, SubclassBase } from "../types/dm-tool-types/characterClass";
+import type { FeatEffect, Feature, FeatureBase } from "../types/dm-tool-types/feature";
+import type { AllItemTypes, Item, Weapon, Worth } from "../types/dm-tool-types/items";
+import type { Lineage, LineageBase, Species, SpeciesBase } from "../types/dm-tool-types/species";
+import type { AbilityScores } from "../types/dm-tool-types/stats";
 
 // Bases
 
@@ -39,7 +45,9 @@ export const characterClassBaseToBo = (classDto: CharacterClassBaseDto, subclass
         description: classDto.description,
         subclasses: subclassBases.filter((subclassBase) => classDto.subclassIds.includes(subclassBase.id)),
         features: featureBases.filter((featureBase) => classDto.featureIds.includes(featureBase.id)),
-        defaultScoreArray: classDto.defaultScoreArray
+        defaultScoreArray: classDto.defaultScoreArray,
+        hitDie: classDto.hitDie,
+        fixedHp: classDto.fixedHp
     }
 }
 
@@ -133,7 +141,34 @@ export const scoresToBo = (scoreDtos: AbilityScoreDto[]): AbilityScores => {
     }
 }
 
-export const characterToBo = (characterDto: CharacterDto, classBases: CharacterClassBase[], backgroundBases: BackgroundBase[], subclasses: SubclassBase[], speciesBases: SpeciesBase[], lineageBases: LineageBase[], effects: FeatEffect[], featureBases: FeatureBase[]): Character => {
+export const coinsToBo = (coinsDto: CoinsDto): Worth => {
+    return {
+        cp: coinsDto[0],
+        sp: coinsDto[1],
+        ep: coinsDto[2],
+        gp: coinsDto[3],
+        pp: coinsDto[4],
+    }
+};
+
+export const itemToBo = (itemDto: ItemDto): Item => {
+    return {
+        ...itemDto,
+        worth: coinsToBo(itemDto.worth)
+    }
+};
+
+export const weaponToBo = (weaponDto: WeaponDto): Weapon => {
+    return {
+        ...weaponDto
+    }
+}
+
+export const inventoryToBo = (ids: string[], allItems: AllItemTypes[]): AllItemTypes[] => {
+    return allItems.filter((item) => ids.includes(item.id)); // Can be optimised for sure
+}
+
+export const characterToBo = (characterDto: CharacterDto, classBases: CharacterClassBase[], backgroundBases: BackgroundBase[], subclasses: SubclassBase[], speciesBases: SpeciesBase[], lineageBases: LineageBase[], effects: FeatEffect[], featureBases: FeatureBase[], allItems: AllItemTypes[]): Character => {
     return {
         id: characterDto.id,
         name: characterDto.name,
@@ -147,6 +182,11 @@ export const characterToBo = (characterDto: CharacterDto, classBases: CharacterC
         ideals: characterDto.ideals,
         bonds: characterDto.bonds,
         flaws: characterDto.flaws,
-        proficiencyBonus: characterDto.proficiencyBonus
+        proficiencyBonus: characterDto.proficiencyBonus,
+        hp: characterDto.hp,
+        hpRolls: characterDto.hpRolls,
+        tempHp: characterDto.tempHp,
+        coins: coinsToBo(characterDto.coins),
+        inventory: inventoryToBo(characterDto.inventoryIds, allItems)
     }
 }

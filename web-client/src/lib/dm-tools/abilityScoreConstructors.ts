@@ -1,4 +1,4 @@
-import type { AbilityScore, AbilityScores, Skill } from "../types/dm-tool-types/character";
+import type { AbilityScore, AbilityScores, Skill } from "../types/dm-tool-types/stats"
 
 
 
