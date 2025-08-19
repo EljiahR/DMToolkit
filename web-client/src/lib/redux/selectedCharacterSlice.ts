@@ -297,6 +297,17 @@ export const selectAllEquippedItems = (state: RootState) => {
     return state.selectedCharacter.equippedItems;
 };
 
+export const selectAllEquippedItemIds = (state: RootState) => {
+    return state.selectedCharacter.equippedItems.map((item) => item.id);
+}
+
+export const selectNonEquippedItems = createSelector(
+    [selectInventory, selectAllEquippedItemIds],
+    (allItems, equippedItemIds) => {
+        return allItems.filter((item) => !equippedItemIds.includes(item.id))
+    }
+)
+
 export const selectAllEquippedWeapons = createSelector(
     [selectAllEquippedItems],
     (equipment) => {
