@@ -2,6 +2,7 @@ import type { Background } from "./background";
 import type { CharacterClass } from "./characterClass";
 import type { AllItemTypes, Worth } from "./items";
 import type { Species } from "./species";
+import type { Spell } from "./spell";
 import type { AbilityScores } from "./stats";
 
 export interface Character {
@@ -24,5 +25,7 @@ export interface Character {
     coins: Worth;
     inventory: AllItemTypes[];
     equippedItems: AllItemTypes[];
+    knownSpells: Spell[];
+    readiedSpells: Spell[];
 }
 

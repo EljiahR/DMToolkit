@@ -42,7 +42,9 @@ export const selectedCharacterSlice = createSlice({
                 proficiencyBonus: 0,
                 coins: generateEmptyWallet(), 
                 inventory: [],
-                equippedItems: []
+                equippedItems: [],
+                knownSpells: [],
+                readiedSpells: []
             }
         },
         setName: (state, action: PayloadAction<string>) => {
@@ -328,7 +330,15 @@ export const selectAC = createSelector(
 
         return ac;
     }
-)
+);
+
+export const selectKnownSpells = (state: RootState) => {
+    return state.selectedCharacter.knownSpells;
+}
+
+export const selectReadiedSpells = (state: RootState) => {
+    return state.selectedCharacter.readiedSpells;
+}
 
 export const { setNewCharacter, setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

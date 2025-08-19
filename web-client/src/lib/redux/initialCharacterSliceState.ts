@@ -103,6 +103,8 @@ export const generateEmptyCharacter = (): Character => {
         proficiencyBonus: 0,
         coins: generateEmptyWallet(),
         inventory: [],
-        equippedItems: []
+        equippedItems: [],
+        knownSpells: [],
+        readiedSpells: []
     };
 } 
