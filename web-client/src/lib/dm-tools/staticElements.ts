@@ -1,4 +1,4 @@
-import type { Piece } from "../types/dm-tool-types/character";
+import type { Piece } from "../types/dm-tool-types/items";
 
 export const Copper: Piece = {
     name: "Copper",
