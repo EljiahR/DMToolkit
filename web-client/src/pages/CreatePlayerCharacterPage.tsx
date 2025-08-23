@@ -1,13 +1,12 @@
-import React, { useState } from "react";
 import CharacterClass from "../components/CreateCharacterPage/CharacterClass";
 import CharacterBackground from "../components/CreateCharacterPage/CharacterBackground";
 import CharacterSpecies from "../components/CreateCharacterPage/CharacterSpecies";
 import CharacterAlignment from "../components/CreateCharacterPage/CharacterAlignment";
 import CharacterDescription from "../components/CreateCharacterPage/CharacterDescription";
 import CharacterAbilityScores from "../components/CreateCharacterPage/CharacterAbilityScores";
-import { CharacterCreationNavigationOptions } from "../lib/redux/types";
+import CreateCharacterNavigation from "../components/CreateCharacterPage/CreateCharacterNavigation";
 import { useAppDispatch, useAppSelector } from "../lib/redux/hooks";
-import { selectCharacterCreationIndex } from "../lib/redux/uiSlice";
+import { selectCharacterCreationIndex, setCharacterCreationIndex } from "../lib/redux/uiSlice";
 
 const StartSection = () => {
     return (
@@ -16,6 +15,8 @@ const StartSection = () => {
         </div>
     )
 }
+
+const EmptySection = () => <></>;
 
 const components = [
     StartSection,
@@ -30,19 +31,12 @@ const components = [
 export default function() {
     // Available sections: class, background, species, scores, alignment, description
     const sectionIndex = useAppSelector(selectCharacterCreationIndex)
-    const dispatch = useAppDispatch();
-    const ActiveSection = components[sectionIndex];
-
-    const handleSectionChange = () => {
-
-    }
+    const ActiveSection = sectionIndex < 7 ? components[sectionIndex] : EmptySection;
 
     return (
         <div>
             {<ActiveSection />}
-            <div id="section-nav">
-
-            </div>
+            <CreateCharacterNavigation />
         </div>
     )
 };

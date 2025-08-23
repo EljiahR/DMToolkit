@@ -20,6 +20,16 @@ export const uiSlice = createSlice({
             if (state.characterCreationNavigationIndex != action.payload) {
                 state.characterCreationNavigationIndex = action.payload;
             }
+        },
+        increaseCharacterCreationIndex: (state) => {
+           if (state.characterCreationNavigationIndex < 6) {
+                state.characterCreationNavigationIndex += 1;
+           }
+        },
+        decreaseCharacterCreationIndex: (state) => {
+           if (state.characterCreationNavigationIndex > 0) {
+                state.characterCreationNavigationIndex -= 1;
+           }
         }
     }
 });
@@ -32,5 +42,5 @@ export const selectCharacterCreationIndex = (state: RootState) => {
     return state.ui.characterCreationNavigationIndex;
 }
 
-export const { setCharacterDisplay, setCharacterCreationIndex } = uiSlice.actions;
+export const { setCharacterDisplay, setCharacterCreationIndex, increaseCharacterCreationIndex, decreaseCharacterCreationIndex } = uiSlice.actions;
 export default uiSlice.reducer;
