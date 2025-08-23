@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
 import { CharacterCreationNavigationOptions } from "../../lib/redux/types";
-import { decreaseCharacterCreationIndex, increaseCharacterCreationIndex, selectCharacterCreationIndex, setCharacterCreationIndex } from "../../lib/redux/uiSlice"
+import { decreaseCharacterCreationIndex, increaseCharacterCreationIndex, selectCharacterCreationIndex } from "../../lib/redux/uiSlice"
 
 export default function() {
     const sectionIndex = useAppSelector(selectCharacterCreationIndex);

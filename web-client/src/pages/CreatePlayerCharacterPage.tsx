@@ -5,8 +5,8 @@ import CharacterAlignment from "../components/CreateCharacterPage/CharacterAlign
 import CharacterDescription from "../components/CreateCharacterPage/CharacterDescription";
 import CharacterAbilityScores from "../components/CreateCharacterPage/CharacterAbilityScores";
 import CreateCharacterNavigation from "../components/CreateCharacterPage/CreateCharacterNavigation";
-import { useAppDispatch, useAppSelector } from "../lib/redux/hooks";
-import { selectCharacterCreationIndex, setCharacterCreationIndex } from "../lib/redux/uiSlice";
+import { useAppSelector } from "../lib/redux/hooks";
+import { selectCharacterCreationIndex } from "../lib/redux/uiSlice";
 
 const StartSection = () => {
     return (
