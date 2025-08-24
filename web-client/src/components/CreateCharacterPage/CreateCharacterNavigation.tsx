@@ -23,7 +23,7 @@ export default function() {
                 <button onClick={handleIndexDecrease}>&larr; {CharacterCreationNavigationOptions[sectionIndex - 1]}</button>
             }
             {sectionIndex < 7 &&
-                <button onClick={handleIndexIncrease}>{CharacterCreationNavigationOptions[sectionIndex + 1]} &rarr;</button>
+                <button onClick={handleIndexIncrease}>{sectionIndex > 0 ? CharacterCreationNavigationOptions[sectionIndex + 1] : "Start"} &rarr;</button>
             }
         </div>
     )

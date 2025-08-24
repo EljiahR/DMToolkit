@@ -1,14 +1,17 @@
 import { describe, it } from "vitest";
-import renderWithStore from "../renderOptions/renderWithStore";
 import CharacterDisplay from "../../src/pages/CharacterDisplay";
 import { screen } from "@testing-library/react";
+import renderWithAll from "../renderOptions/renderWithAll";
+import { generateEmptyCharacter } from "../../src/lib/redux/initialCharacterSliceState";
+
+const emptyCharacter = generateEmptyCharacter();
 
 describe("CharacterDisplay page", () => {
     beforeEach(() => {
-        renderWithStore(<CharacterDisplay />);
+        renderWithAll(<CharacterDisplay />, { preloadedState: { selectedCharacter: {...emptyCharacter, name: "John Dnd"}}});
     });
 
     it("renders", () => {
-        expect(screen.getByRole("heading", { name: /name/i })).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: /john dnd/i })).toBeInTheDocument();
     });
 });

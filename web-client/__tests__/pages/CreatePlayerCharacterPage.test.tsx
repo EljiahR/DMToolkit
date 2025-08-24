@@ -1,15 +1,15 @@
 import { describe, it } from "vitest";
 import { screen } from '@testing-library/react';
 import CreatePlayerCharacterPage from "../../src/pages/CreatePlayerCharacterPage";
-import renderWithStore from "../renderOptions/renderWithStore";
 import userEvent from "@testing-library/user-event";
 import { characterClasses } from "../seedData/characterClasses";
 import { characterBackgrounds } from "../seedData/characterBackgrounds";
 import { characterSpecies, lineages } from "../seedData/characterSpecies";
+import renderWithAll from "../renderOptions/renderWithAll";
 
 describe("CreatePlayerCharacter page", () => {
     beforeEach(() => {
-        renderWithStore(<CreatePlayerCharacterPage />, { preloadedState: {dmTools: { characterClasses, backgrounds: characterBackgrounds, species: characterSpecies, lineages: lineages } } });
+        renderWithAll(<CreatePlayerCharacterPage />, { initialEntries: ["/"], preloadedState: {dmTools: { characterClasses, backgrounds: characterBackgrounds, species: characterSpecies, lineages: lineages } } });
     })
 
     it("renders", () => {
