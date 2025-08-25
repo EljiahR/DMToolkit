@@ -18,15 +18,15 @@ export default function() {
             </div>
             <div id="descriptions">
                 <label htmlFor="physical-description">Physical</label>
-                <textarea id="physical-description" readOnly>{selectedCharacter.physicalDescription}</textarea>
+                <textarea id="physical-description" value={selectedCharacter.physicalDescription} readOnly />
                 <label htmlFor="personality-description">Personality</label>
-                <textarea id="personality-description" readOnly>{selectedCharacter.personality}</textarea>
+                <textarea id="personality-description" value={selectedCharacter.personality} readOnly />
                 <label htmlFor="ideals">Ideals</label>
-                <textarea id="ideals" readOnly>{selectedCharacter.ideals}</textarea>
+                <textarea id="ideals" value={selectedCharacter.ideals} readOnly />
                 <label htmlFor="bonds">Bonds</label>
-                <textarea id="bonds" readOnly>{selectedCharacter.bonds}</textarea>
+                <textarea id="bonds" value={selectedCharacter.bonds} readOnly />
                 <label htmlFor="flaws">Flaws</label>
-                <textarea id="flaws" readOnly>{selectedCharacter.flaws}</textarea>
+                <textarea id="flaws" value={selectedCharacter.flaws} readOnly />
             </div>
         </div>
         

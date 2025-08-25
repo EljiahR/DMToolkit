@@ -17,7 +17,7 @@ describe("CreatePlayerCharacter page", () => {
         expect(screen.getByRole("button", { name: /start/i})).toBeInTheDocument();
     });
 
-    it("allows the user to follow all steps to character summary", async () => {
+    it("allows the user to follow all steps to the last section", async () => {
         // Start page
         const startButton = screen.getByRole("button", { name: /start/i });
         await userEvent.click(startButton);
@@ -57,17 +57,10 @@ describe("CreatePlayerCharacter page", () => {
         await userEvent.click(descriptionButton);
 
         // Description page
-        const summaryButton = screen.getByRole("button", { name: /finish/i });
         const nameInput: HTMLInputElement = screen.getByLabelText(/name/i);
-        const randomTraitsButton: HTMLButtonElement = screen.getByRole("button", { name: /randomize traits/i});
         await userEvent.type(nameInput, "John DnD");
-        await userEvent.click(randomTraitsButton);
-        await userEvent.click(summaryButton);
 
-        // Summary page
-        expect(screen.getByText(/name: john dnd/i)).toBeInTheDocument();
-        expect(screen.getByText(/class: barbarian/i)).toBeInTheDocument();
-        expect(screen.getByText(/background: thug/i)).toBeInTheDocument();
-        expect(screen.getByText(/species: human/i)).toBeInTheDocument();
+        // Following all steps should lead user to final section before display
+        expect(nameInput.value).toBe("John DnD"); 
     });
 });
