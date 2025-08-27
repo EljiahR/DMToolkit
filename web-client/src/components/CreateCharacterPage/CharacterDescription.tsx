@@ -2,7 +2,7 @@ import traitGenerator from "../../lib/dm-tools/traitGenerator";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
 import { setBonds, setFlaws, setIdeals, setName, setPersonality, setPhysicalDescription, setTraits } from "../../lib/redux/selectedCharacterSlice";
 
-export default function() {
+export default function({className = ""}: {className?: string}) {
     const name = useAppSelector((state) => state.selectedCharacter.name);
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
     const bonuses = useAppSelector((state) => state.selectedCharacter.background.abilityScores);
@@ -18,7 +18,7 @@ export default function() {
     };
 
     return (
-        <div>
+        <div className={className}>
             <h2>Describe your character</h2>
             <div id="character-descriptions">
                 <label htmlFor="character-name">Name</label>

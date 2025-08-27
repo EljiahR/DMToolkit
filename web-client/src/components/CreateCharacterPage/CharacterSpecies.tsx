@@ -2,7 +2,7 @@ import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
 import { setLineageBase, setSpeciesBase } from "../../lib/redux/selectedCharacterSlice";
 
-export default function() {
+export default function({className = ""}: {className?: string}) {
     const allSpecies = useAppSelector((state) => state.dmTools.species);
     const allLineages = useAppSelector((state) => state.dmTools.lineages);
     const selectedSpeciesBase = useAppSelector((state) => state.selectedCharacter.species.base);
@@ -39,7 +39,7 @@ export default function() {
     }  
 
     return (
-        <div>
+        <div className={className}>
             <h2>Species</h2>    
             <label htmlFor="species-selector">Select a species</label>
             <select id="species-selector" value={selectedSpeciesBase ? selectedSpeciesBase.id : ""} onChange={(e) => handleSpeciesChange(e.target.value)}>

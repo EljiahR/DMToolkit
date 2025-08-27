@@ -2,7 +2,7 @@ import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks";
 import { setBackgroundBase } from "../../lib/redux/selectedCharacterSlice";
 
-export default function() {
+export default function({className = ""}: {className?: string}) {
     const backgrounds = useAppSelector((state) => state.dmTools.backgrounds);
     const selectedBackgroundBase = useAppSelector((state) => state.selectedCharacter.background.base);
     const dispatch = useAppDispatch();
@@ -28,7 +28,7 @@ export default function() {
     }
 
     return (
-        <div>
+        <div className={className}>
             <h2>Background</h2>
             <label htmlFor="background-selection">Choose a background</label>
             <select id="background-selection" value={selectedBackgroundBase ? selectedBackgroundBase.id : ""} onChange={(e) => handleBackgroundChange(e.target.value)}>

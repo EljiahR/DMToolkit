@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
 import { setCharacterClassBase } from "../../lib/redux/selectedCharacterSlice";
 
 
-export default function() {
+export default function({className = ""}: {className?: string}) {
     const availableClasses = useAppSelector((state) => state.dmTools.characterClasses);
     const selectedClassBase = useAppSelector((state) => state.selectedCharacter.characterClass.base);
     const dispatch = useAppDispatch();
@@ -29,7 +29,7 @@ export default function() {
     }
 
     return (
-        <div>
+        <div className={className}>
             <h2>Class</h2>
             <label htmlFor="class-selector">Select a class</label>
             <select id="class-selector" value={selectedClassBase ? selectedClassBase.id : ""} onChange={(e) => handleClassSelection(e.target.value)}>

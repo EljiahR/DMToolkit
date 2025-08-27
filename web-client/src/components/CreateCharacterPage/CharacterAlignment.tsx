@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
 import { setAlignment } from "../../lib/redux/selectedCharacterSlice";
 
-export default function() {
+export default function({className = ""}: {className?: string}) {
     const characterAlignment = useAppSelector((state) => state.selectedCharacter.alignment);
     const dispatch = useAppDispatch();
     
@@ -10,7 +10,7 @@ export default function() {
     }
 
     return (
-        <div>
+        <div className={className}>
             <h2>Alignment</h2>
             <div id="alignment-options">
                 <label htmlFor="lawful-good">Lawful Good</label>

@@ -8,9 +8,9 @@ import CreateCharacterNavigation from "../components/CreateCharacterPage/CreateC
 import { useAppSelector } from "../lib/redux/hooks";
 import { selectCharacterCreationIndex } from "../lib/redux/uiSlice";
 
-const StartSection = () => {
+const StartSection = ({className = ""}: {className?: string}) => {
     return (
-        <div>
+        <div className={className}>
             <h2>Create a new Player Character</h2>
         </div>
     )
@@ -35,7 +35,7 @@ export default function() {
 
     return (
         <div>
-            {<ActiveSection />}
+            {<ActiveSection className="flex flex-col text-center" />}
             <CreateCharacterNavigation className="w-screen" />
         </div>
     )

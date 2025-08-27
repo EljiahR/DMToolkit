@@ -6,11 +6,11 @@ import ClassDefault from "./CharacterAbilityScoresSubComponents/ClassDefault";
 import ManualEntry from "./CharacterAbilityScoresSubComponents/ManualEntry";
 import BonusAbilityScores from "./CharacterAbilityScoresSubComponents/BonusAbilityScores";
 
-export default function() {  
+export default function({className = ""}: {className?: string}) {  
     const [selectedMethod, setSelectedMethod] = useState("standard");
     
     return (
-        <div>
+        <div className={className}>
             <h2>Ability Scores</h2>
             <label htmlFor="score-method">Select the method</label>
             <select id="score-method" value={selectedMethod} onChange={(e) => setSelectedMethod(e.target.value)}>
