@@ -5,7 +5,7 @@ const Navbar = () => {
     const username = useAppSelector((state) => state.user.username);
     
     return (
-        <div>
+        <div className="fixed w-screen top-0 flex items-center justify-between px-2 py-1">
             <nav>
                 <Link to="/">
                     <button type="button">Home</button>

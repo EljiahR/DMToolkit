@@ -20,8 +20,8 @@ const AuthForm = () => {
     }
     
     return (
-        <div id="auth-section">
-            <form id="sign-in-form" onSubmit={(e) => handleFormSubmit(e)}>
+        <div id="auth-section" className="flex flex-col">
+            <form id="sign-in-form" onSubmit={(e) => handleFormSubmit(e)} className="flex flex-col">
                 <label htmlFor="sign-in-email">Username</label>
                 <input id="sign-in-email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
 
