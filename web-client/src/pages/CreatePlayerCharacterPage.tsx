@@ -36,7 +36,7 @@ export default function() {
     return (
         <div>
             {<ActiveSection />}
-            <CreateCharacterNavigation />
+            <CreateCharacterNavigation className="w-screen" />
         </div>
     )
 };

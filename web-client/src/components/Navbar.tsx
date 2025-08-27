@@ -14,7 +14,9 @@ const Navbar = () => {
                     <button type="button">Create Character</button>
                 </Link>
             </nav>
+            {username != null && username?.trim() != "" && 
             <div>Hello {username}</div>
+            }
         </div>
         
     )
