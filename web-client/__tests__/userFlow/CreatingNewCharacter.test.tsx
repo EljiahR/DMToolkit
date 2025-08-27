@@ -7,7 +7,6 @@ import { characterClasses } from "../seedData/characterClasses";
 import { characterBackgrounds } from "../seedData/characterBackgrounds";
 import { characterSpecies, lineages } from "../seedData/characterSpecies";
 
-
 vi.mock("./AuthProvider", () => ({}));
 
 describe("Creating a new character starting from the home page", () => {
@@ -70,5 +69,5 @@ describe("Creating a new character starting from the home page", () => {
 
         // Arriving at display page, overview section
         expect(screen.getByRole("heading", { name: /john dnd/i })).toBeInTheDocument();
-    })
-})
+    });
+});
