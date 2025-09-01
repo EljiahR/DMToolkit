@@ -2,6 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .text-input {
+    @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight;
+  }
+
+  .text-input:focus {
+    @apply outline-none ring;
+  }
+
+  .btn {
+    @apply shadow text-white font-bold py-2 px-4 rounded
+  }
+  .btn-purple {
+    @apply bg-purple-500;
+  }
+  .btn-blue {
+    @apply bg-blue-500;
+  }
+  .btn-white {
+    @apply bg-white text-black duration-0;
+  }
+  .btn:hover {
+    @apply border-inherit
+  }
+  .btn:focus {
+    @apply ring outline-none
+  }
+  .btn-purple:hover {
+    @apply bg-purple-400;
+  }
+  .btn-blue:hover {
+    @apply bg-blue-400;
+  }
+  .btn-white:hover {
+    @apply bg-gray-100;
+  }
+
+  .link-fix {
+    @apply w-full
+  }
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

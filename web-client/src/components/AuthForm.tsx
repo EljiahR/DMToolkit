@@ -22,21 +22,21 @@ const AuthForm = () => {
     return (
         <div id="auth-section" className="flex flex-col w-screen p-2 gap-1">
             <form id="sign-in-form" onSubmit={(e) => handleFormSubmit(e)} className="flex flex-col gap-2">
-                <div className="flex justify-center items-center gap-1">
+                <div className="flex flex-col gap-1">
                     <label htmlFor="sign-in-email">Username</label>
-                    <input id="sign-in-email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input className="text-input" id="sign-in-email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Username" />
                 </div>
                 
-                <div className="flex justify-center items-center gap-1">
+                <div className="flex flex-col gap-1">
                     <label htmlFor="sign-in-password">Password</label>
-                    <input id="sign-in-password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input className="text-input" id="sign-in-password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="**********" />
                 </div>
-                <button type="submit">Sign In</button>
+                <button className="btn btn-blue" type="submit">Sign In</button>
             </form>
-            <Link to="/auth/register" className="mx-auto">
-                <button>Register</button>
+            <Link to="/auth/register">
+                <button className="link-fix btn btn-purple">Register</button>
             </Link>
-            <button onClick={handleAnonymous}>Continue without account</button>
+            <button className="btn btn-white" onClick={handleAnonymous}>Continue without account</button>
         </div>
         
     )

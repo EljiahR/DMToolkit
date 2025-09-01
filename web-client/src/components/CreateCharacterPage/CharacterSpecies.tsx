@@ -18,11 +18,11 @@ export default function({className = ""}: {className?: string}) {
             // TODO: Error handling
         }
         
-        if (selectedSpeciesBase == null || selectedSpeciesBase.id == "default") {
+        if (allSpecies.length > 0 && (selectedSpeciesBase == null || selectedSpeciesBase.id == "default")) {
             dispatch(setSpeciesBase(allSpecies[0]));
         }
 
-        if (selectedLineageBase == null || selectedLineageBase.id == "default") {
+        if (allLineages.length > 0 && (selectedLineageBase == null || selectedLineageBase.id == "default")) {
             dispatch(setLineageBase(selectedSpeciesBase ? selectedSpeciesBase.lineages[0] : allSpecies[0].lineages[0]));
         }
     });
