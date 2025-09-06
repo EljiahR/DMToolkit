@@ -49,27 +49,28 @@ const allScoreTraits: AllScoreTraits = {
     }
 }
 
+const getRandomIndex = (length: number) => Math.floor(Math.random() * length);
+
 export type GeneratedTraits = {
     physical: string;
     personality: string;
 }
 
 export default function(scores: AbilityScores, bonuses: [string, string]): GeneratedTraits {
-    const d4 = diceFactory(4, 1);
     var physicalTraits: string[] = [];
     var personalityTraits: string[] = [];
     Object.keys(scores).forEach((key) => {
         const scoreTotal = scores[key].amount + (bonuses.includes(key) ?  2 - bonuses.indexOf(key) : 0);
 
         if (scoreTotal >= 12) {
-            const newTrait = allScoreTraits[key].high[d4.roll() - 1];
+            const newTrait = allScoreTraits[key].high[getRandomIndex(allScoreTraits[key].high.length)];
             if (newTrait.type == "physical") {
                 physicalTraits.push(newTrait.description);
             } else {
                 personalityTraits.push(newTrait.description);
             }
         } else if (scoreTotal <= 9) {
-            const newTrait = allScoreTraits[key].low[d4.roll() - 1];
+            const newTrait = allScoreTraits[key].low[getRandomIndex(allScoreTraits[key].low.length)];
             if (newTrait.type == "physical") {
                 physicalTraits.push(newTrait.description);
             } else {

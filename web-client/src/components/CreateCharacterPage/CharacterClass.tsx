@@ -13,7 +13,7 @@ export default function({className = ""}: {className?: string}) {
             // throw error or return to homepage not sure yet :)
         }
         
-        if (selectedClassBase == null || selectedClassBase.id == "default") {
+        if ((selectedClassBase == null || selectedClassBase.id == "default") && availableClasses.length > 0) {
             dispatch(setCharacterClassBase(availableClasses[0]));
         }
     });

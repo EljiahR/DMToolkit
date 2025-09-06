@@ -12,7 +12,7 @@ export default function({className = ""}: {className?: string}) {
             // TODO: Error handling
         }
         
-        if (selectedBackgroundBase == null || selectedBackgroundBase.id == "default") {
+        if ((selectedBackgroundBase == null || selectedBackgroundBase.id == "default") && backgrounds.length > 0) {
             dispatch(setBackgroundBase(backgrounds[0]));
         }
     });
