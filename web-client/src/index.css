@@ -20,6 +20,9 @@
   .btn-blue {
     @apply bg-blue-500;
   }
+  .btn-blue-reverse {
+    @apply bg-white text-blue-500;
+  }
   .btn-white {
     @apply bg-white text-black duration-0;
   }
@@ -34,6 +37,9 @@
   }
   .btn-blue:hover {
     @apply bg-blue-400;
+  }
+  .btn-blue-reverse:hover {
+    @apply bg-gray-100;
   }
   .btn-white:hover {
     @apply bg-gray-100;

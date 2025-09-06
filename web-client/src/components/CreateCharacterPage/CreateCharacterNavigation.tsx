@@ -18,12 +18,12 @@ export default function({ className}: {className?: string}) {
     const handleIndexDecrease = () => dispatch(decreaseCharacterCreationIndex());
 
     return (
-        <div id="section-nav" className={className + " grid " + (sectionIndex > 0 ? "grid-cols-2" : "grid-cols-1")}>
+        <div id="section-nav" className={className + " grid gap-1 " + (sectionIndex > 0 ? "grid-cols-2" : "grid-cols-1")}>
             {sectionIndex > 0 && 
-                <button onClick={handleIndexDecrease}>&larr; {CharacterCreationNavigationOptions[sectionIndex - 1]}</button>
+                <button onClick={handleIndexDecrease} className="btn btn-white">&larr; {CharacterCreationNavigationOptions[sectionIndex - 1]}</button>
             }
             {sectionIndex < 7 &&
-                <button onClick={handleIndexIncrease} className={sectionIndex > 0 ? "col-start-2" : ""}>{sectionIndex > 0 ? CharacterCreationNavigationOptions[sectionIndex + 1] : "Start"} &rarr;</button>
+                <button onClick={handleIndexIncrease} className={"btn btn-white " + (sectionIndex > 0 ? "col-start-2" : "")}>{sectionIndex > 0 ? CharacterCreationNavigationOptions[sectionIndex + 1] : "Start"} &rarr;</button>
             }
         </div>
     )

@@ -12,9 +12,10 @@ const App = () => {
             <Route path="/" element={<Layout />} >
                 <Route index element={<HomePage />} />
                 <Route path="create-a-character" element={<CreatePlayerCharacterPage />} />
+                <Route path="/character-display" element={<CharacterDisplay />} />
+                <Route path="/sign-in" element={<SignInPage />} />
             </Route>
-            <Route path="/character-display" element={<CharacterDisplay />} />
-            <Route path="/sign-in" element={<SignInPage />} />
+            
             <Route path="/protected-test" element={<TestProtectedPage />} />
         </Routes>
     );

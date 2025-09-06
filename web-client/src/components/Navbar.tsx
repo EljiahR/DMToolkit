@@ -8,10 +8,10 @@ const Navbar = () => {
         <div className="fixed w-screen top-0 flex items-center justify-between px-2 py-1">
             <nav>
                 <Link to="/">
-                    <button type="button">Home</button>
+                    <button type="button" className="btn btn-blue-reverse">Home</button>
                 </Link>
                 <Link to="/sign-in?redirectUrl=/create-a-character">
-                    <button type="button">Create Character</button>
+                    <button type="button" className="btn btn-blue-reverse">Create Character</button>
                 </Link>
             </nav>
             {username != null && username?.trim() != "" && 
