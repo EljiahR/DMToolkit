@@ -36,7 +36,7 @@ export default function() {
     return (
         <div>
             {<ActiveSection className="flex flex-col text-center" />}
-            <CreateCharacterNavigation className="w-screen" />
+            <CreateCharacterNavigation className="fixed bottom-0 w-screen" />
         </div>
     )
 };

@@ -32,7 +32,7 @@ export default function({className = ""}: {className?: string}) {
         <div className={className}>
             <h2>Class</h2>
             <label htmlFor="class-selector">Select a class</label>
-            <select id="class-selector" value={selectedClassBase ? selectedClassBase.id : ""} onChange={(e) => handleClassSelection(e.target.value)}>
+            <select id="class-selector" value={selectedClassBase ? selectedClassBase.id : ""} onChange={(e) => handleClassSelection(e.target.value)} className="selector">
                 {availableClasses.map((characterClass) => {
                     return (
                         <option key={`class-${characterClass.id}`} value={characterClass.id}>{characterClass.name}</option>

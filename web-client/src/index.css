@@ -48,6 +48,29 @@
   .link-fix {
     @apply w-full
   }
+
+  select {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5
+  }
+  select:focus {
+    @apply ring-blue-500 border-blue-500
+  }
+
+  .alignment-radio > label {
+    @apply block font-bold h-full w-full border rounded border-gray-300 px-2 py-5
+  }
+
+  .alignment-radio:has(input[type="radio"]:checked) > label {
+    @apply bg-blue-500
+  }
+
+  .alignment-radio > label:hover {
+    @apply bg-gray-100
+  }
+
+  .alignment-radio > input[type="radio"] {
+    @apply hidden
+  }
 }
 
 :root {
