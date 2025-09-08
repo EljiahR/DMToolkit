@@ -21,7 +21,7 @@ export const Protected: React.FC<{children: React.ReactNode}> = ({children}) => 
             } catch (error) {
                 setAuthenticationState(authenticationStates.unauthorized);
                 console.error("Not authorized", error);
-                navigate("/sign-in");              
+                navigate("/auth/sign-in");              
             }
         };
 

@@ -10,8 +10,11 @@ const Navbar = () => {
                 <Link to="/">
                     <button type="button" className="btn btn-blue-reverse">Home</button>
                 </Link>
-                <Link to="/sign-in?redirectUrl=/create-a-character">
+                <Link to="/create-a-character">
                     <button type="button" className="btn btn-blue-reverse">Create Character</button>
+                </Link>
+                <Link to="/character-display">
+                    <button type="button" className="btn btn-blue-reverse">View Active Character</button>
                 </Link>
             </nav>
             {username != null && username?.trim() != "" && 
