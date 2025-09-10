@@ -8,6 +8,13 @@ export interface Spell {
     school: string;
     castingTime: string;
     range: string;
+    duration: string;
     components: StringArraySizeOneToThree;
     materialComponents: string[];
+    target: string;
+    hasSavingThrow: boolean;
+    usesAttackRoll: boolean;
+    shape: string;
+    size: number;
+    isAttack: boolean;
 };
