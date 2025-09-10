@@ -36,6 +36,5 @@ export interface AbilityScoreDto {
     name: string;
     amount: number;
     proficient: boolean;
-    skills: SkillDto[];
     skillIds: string[];
 }
