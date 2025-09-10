@@ -1,12 +1,11 @@
-import type { AbilityScoreDto, ArmorDto, BackgroundBaseDto, BackgroundDto, CharacterClassBaseDto, CharacterClassDto, CharacterDto, CoinsDto, FeatEffectDto, FeatureBaseDto, FeatureDto, ItemDto, LineageBaseDto, LineageDto, SpeciesBaseDto, SpeciesDto, SubclassBaseDto, SubclassDto, WeaponDto, WeaponMasteryDto, WeaponPropertyDto } from "../types/apiResponses";
-import type { Background, BackgroundBase } from "../types/dm-tool-types/background";
-import type { Character } from "../types/dm-tool-types/character";
-import type { CharacterClass, CharacterClassBase, Subclass, SubclassBase } from "../types/dm-tool-types/characterClass";
-import type { FeatEffect, Feature, FeatureBase } from "../types/dm-tool-types/feature";
-import type { AllItemTypes, Armor, Item, Weapon, WeaponMastery, WeaponProperty, Worth } from "../types/dm-tool-types/items";
-import type { Lineage, LineageBase, Species, SpeciesBase } from "../types/dm-tool-types/species";
+import type { Background, BackgroundBase, BackgroundBaseDto, BackgroundDto } from "../types/dm-tool-types/background";
+import type { Character, CharacterDto } from "../types/dm-tool-types/character";
+import type { CharacterClass, CharacterClassBase, CharacterClassBaseDto, CharacterClassDto, Subclass, SubclassBase, SubclassBaseDto, SubclassDto } from "../types/dm-tool-types/characterClass";
+import type { FeatEffect, FeatEffectDto, Feature, FeatureBase, FeatureBaseDto, FeatureDto } from "../types/dm-tool-types/feature";
+import type { AllItemTypes, Armor, ArmorDto, CoinsDto, Item, ItemDto, Weapon, WeaponDto, WeaponMastery, WeaponMasteryDto, WeaponProperty, WeaponPropertyDto, Worth } from "../types/dm-tool-types/items";
+import type { Lineage, LineageBase, LineageBaseDto, LineageDto, Species, SpeciesBase, SpeciesBaseDto, SpeciesDto } from "../types/dm-tool-types/species";
 import type { Spell } from "../types/dm-tool-types/spell";
-import type { AbilityScores } from "../types/dm-tool-types/stats";
+import type { AbilityScoreDto, AbilityScores } from "../types/dm-tool-types/stats";
 
 // Bases
 

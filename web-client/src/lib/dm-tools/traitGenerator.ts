@@ -1,5 +1,4 @@
 import type { AbilityScores } from "../types/dm-tool-types/stats";
-import diceFactory from "./diceFactory";
 import { customConcat } from "./stringFunctions";
 
 export type TraitDescription = {
