@@ -1,20 +1,22 @@
 type StringArraySizeOneToThree = [string] | [string, string] | [string, string, string];
 
+export interface SpellEffect {
+    id: string;
+    subtitle?: string;
+    data: Record<string, any>;
+}
+
 export interface Spell {
     id: string;
     name: string;
-    description: string;
     level: number;
     school: string;
+    classes: string[];
     castingTime: string;
     range: string;
-    duration: string;
     components: StringArraySizeOneToThree;
     materialComponents: string[];
-    target: string;
-    hasSavingThrow: boolean;
-    usesAttackRoll: boolean;
-    shape: string;
-    size: number;
-    isAttack: boolean;
+    duration: string;
+    description: string;
+    effects: SpellEffect[];
 };
