@@ -55,4 +55,45 @@ export interface Armor extends Item {
     doff: string;
 };
 
-export type AllItemTypes = Item | Weapon | Armor
+export type AllItemTypes = Item | Weapon | Armor;
+
+export interface ItemDto {
+    id: string;
+    name: string;
+    weight: number;
+    worth: [number, number, number, number, number];
+    category: ItemCategories;
+}
+
+export interface WeaponPropertyDto {
+    id: string;
+    name: string;
+    description: string;
+}
+
+export interface WeaponMasteryDto {
+    id: string;
+    name: string;
+    description: string;
+}
+
+export interface WeaponDto extends ItemDto {
+    dice: [string, string];
+    damageType: string;
+    propertyIds: string[];
+    masteryId: string;
+    customName: string;
+}
+
+export interface ArmorDto extends ItemDto {
+    armorCategory: ArmorCategories;
+    acBase: number;
+    dexterityCap: number;
+    hasDexterityCap: number;
+    strengthRequirement: number;
+    hasStealthDisadvantage: boolean;
+    don: string;
+    doff: string;
+}
+
+export type CoinsDto = [number, number, number, number, number];

@@ -22,3 +22,20 @@ export interface AbilityScores {
     "wis": AbilityScore;
     "cha": AbilityScore;
 }
+
+export interface SkillDto {
+    id: string;
+    name: string;
+    proficient: boolean;
+    scoreId: string;
+}
+
+export interface AbilityScoreDto {
+    id: string;
+    key: string;
+    name: string;
+    amount: number;
+    proficient: boolean;
+    skills: SkillDto[];
+    skillIds: string[];
+}

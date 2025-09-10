@@ -2,7 +2,7 @@ type StringArraySizeOneToThree = [string] | [string, string] | [string, string, 
 
 export interface SpellEffect {
     id: string;
-    subtitle?: string;
+    subtitle: string | null;
     data: Record<string, any>;
 }
 

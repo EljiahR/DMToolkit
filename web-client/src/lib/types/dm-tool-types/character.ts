@@ -1,9 +1,9 @@
-import type { Background } from "./background";
-import type { CharacterClass } from "./characterClass";
-import type { AllItemTypes, Worth } from "./items";
-import type { Species } from "./species";
+import type { Background, BackgroundDto } from "./background";
+import type { CharacterClass, CharacterClassDto } from "./characterClass";
+import type { AllItemTypes, CoinsDto, Worth } from "./items";
+import type { Species, SpeciesDto } from "./species";
 import type { Spell } from "./spell";
-import type { AbilityScores } from "./stats";
+import type { AbilityScoreDto, AbilityScores } from "./stats";
 
 export interface Character {
     id: string;
@@ -28,4 +28,31 @@ export interface Character {
     knownSpells: Spell[];
     readiedSpells: Spell[];
 }
+
+export interface CharacterDto {
+    id: string;
+    name: string;
+    alignment: string;
+    hp: number;
+    hpRolls: number[];
+    tempHp: number;
+    characterClass: CharacterClassDto;
+    classInstanceId: string;
+    background: BackgroundDto;
+    backgroundInstanceId: string;
+    species: SpeciesDto;
+    speciesInstanceId: string;
+    scores: AbilityScoreDto[];
+    scoreInstanceIds: string[];
+    physicalDescription: string;
+    personality: string;
+    ideals: string;
+    bonds: string;
+    flaws: string;
+    proficiencyBonus: number;
+    coins: CoinsDto,
+    inventoryIds: string[];
+    equippedItemIds: string[];
+}
+
 
