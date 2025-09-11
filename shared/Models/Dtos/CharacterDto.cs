@@ -15,11 +15,14 @@ public class CharacterDto
     public SpeciesDto Species { get; set; } = new();
     public string SpeciesInstanceId { get; set; } = string.Empty();
     public List<AbilityScoreDto> Scores { get; set; } = new();
-    public List<string> ScoreIds { get; set; } = new();
+    public List<string> ScoreInstanceIds { get; set; } = new();
     public string PhysicalDescription { get; set; } = string.Empty();
     public string Personality { get; set; } = string.Empty();
     public string Ideals { get; set; } = string.Empty();
     public string Bonds { get; set; } = string.Empty();
     public string Flaws { get; set; } = string.Empty();
     public int ProficiencyBonus { get; set; } = 0;
+    public List<int> Coins { get; set; } = new();
+    public List<string> InventoryIds { get; set; } = new();
+    public List<string> EquippedItemIds { get; set; } = new();
 }

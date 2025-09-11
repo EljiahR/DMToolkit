@@ -1,5 +1,19 @@
 import type { Feature, FeatureBase, FeatureDto } from "./feature";
 
+export interface SubclassBase {
+    id: string;
+    name: string;
+    description: string;
+    features: FeatureBase[];
+}
+
+export interface SubclassBaseDto {
+    id: string;
+    name: string;
+    description: string;
+    featureIds: string[];
+}
+
 export interface CharacterClassBase {
     id: string;
     name: string;
@@ -19,12 +33,7 @@ export interface CharacterClass {
     base: CharacterClassBase;
 }
 
-export interface SubclassBase {
-    id: string;
-    name: string;
-    description: string;
-    features: FeatureBase[];
-}
+
 
 export interface Subclass {
     id: string;
@@ -51,12 +60,7 @@ export interface CharacterClassDto {
     baseId: string;
 }
 
-export interface SubclassBaseDto {
-    id: string;
-    name: string;
-    description: string;
-    featureIds: string[];
-}
+
 
 export interface CharacterClassBaseDto {
     id: string;
