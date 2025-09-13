@@ -14,6 +14,19 @@ export interface SubclassBaseDto {
     featureIds: string[];
 }
 
+export interface Subclass {
+    id: string;
+    base: SubclassBase;
+    features: Feature[];
+}
+
+export interface SubclassDto {
+    id: string;
+    baseId: string;
+    featureInstanceIds: string[];
+    features: FeatureDto[];
+}
+
 export interface CharacterClassBase {
     id: string;
     name: string;
@@ -25,43 +38,6 @@ export interface CharacterClassBase {
     defaultScoreArray: number[];
 };
 
-export interface CharacterClass {
-    id: string;
-    level: number;
-    subclass: Subclass | null;
-    features: Feature[];
-    base: CharacterClassBase;
-}
-
-
-
-export interface Subclass {
-    id: string;
-    base: SubclassBase;
-    features: Feature[];
-}
-
-export interface SubclassDto {
-    id: string;
-    baseId: string;
-    features: FeatureDto[];
-    featureInstanceIds: string[]
-}
-
-export interface CharacterClassDto {
-    id: string;
-    name: string;
-    description: string;
-    level: number;
-    subclass: SubclassDto | null;
-    subclassInstanceId: string;
-    features: FeatureDto[];
-    featureInstanceIds: string[];
-    baseId: string;
-}
-
-
-
 export interface CharacterClassBaseDto {
     id: string;
     name: string;
@@ -72,3 +48,21 @@ export interface CharacterClassBaseDto {
     featureIds: string[];
     defaultScoreArray: number[];
 };
+
+export interface CharacterClass {
+    id: string;
+    level: number;
+    subclass: Subclass | null;
+    features: Feature[];
+    base: CharacterClassBase;
+}
+
+export interface CharacterClassDto {
+    id: string;
+    level: number;
+    subclass: SubclassDto | null;
+    subclassInstanceId: string;
+    features: FeatureDto[];
+    featureInstanceIds: string[];
+    baseId: string;
+}

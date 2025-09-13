@@ -3,8 +3,6 @@ namespace DMToolkit.Shared.Models.Dtos;
 public class CharacterClassDto
 {
     public string Id { get; set; } = Guid.NewGuid();
-    public string Name { get; set; } = string.Empty();
-    public string Description { get; set; } = string.Empty();
     public int Level { get; set; } = 0;
     public SubclassDto? Subclass { get; set; } = null;
     public string SubclassInstanceId { get; set; } = string.Empty();
