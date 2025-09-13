@@ -1,6 +1,6 @@
 import type { Background, BackgroundDto } from "./background";
 import type { CharacterClass, CharacterClassDto } from "./characterClass";
-import type { AllItemTypes, CoinsDto, Worth } from "./items";
+import type { AllItemTypes, Worth } from "./items";
 import type { Species, SpeciesDto } from "./species";
 import type { Spell } from "./spell";
 import type { AbilityScoreDto, AbilityScores } from "./stats";
@@ -50,7 +50,7 @@ export interface CharacterDto {
     bonds: string;
     flaws: string;
     proficiencyBonus: number;
-    coins: CoinsDto,
+    coins: Worth,
     inventoryIds: string[];
     equippedItemIds: string[];
 }

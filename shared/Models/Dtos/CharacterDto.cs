@@ -22,7 +22,7 @@ public class CharacterDto
     public string Bonds { get; set; } = string.Empty();
     public string Flaws { get; set; } = string.Empty();
     public int ProficiencyBonus { get; set; } = 0;
-    public List<int> Coins { get; set; } = new();
+    public Worth Coins { get; set; } = new();
     public List<string> InventoryIds { get; set; } = new();
     public List<string> EquippedItemIds { get; set; } = new();
 }

@@ -5,6 +5,14 @@ export interface Piece {
 }
 
 export interface Worth {
+    cp: Piece;
+    sp: Piece;
+    ep: Piece;
+    gp: Piece;
+    pp: Piece;
+}
+
+export interface WorthDto {
     cp: number;
     sp: number;
     ep: number;
@@ -19,6 +27,14 @@ export interface Item {
     name: string;
     weight: number;
     worth: Worth;
+    category: ItemCategories;
+}
+
+export interface ItemDto {
+    id: string;
+    name: string;
+    weight: number;
+    worth: WorthDto;
     category: ItemCategories;
 }
 
@@ -57,14 +73,6 @@ export interface Armor extends Item {
 
 export type AllItemTypes = Item | Weapon | Armor;
 
-export interface ItemDto {
-    id: string;
-    name: string;
-    weight: number;
-    worth: [number, number, number, number, number];
-    category: ItemCategories;
-}
-
 export interface WeaponPropertyDto {
     id: string;
     name: string;
@@ -95,5 +103,3 @@ export interface ArmorDto extends ItemDto {
     don: string;
     doff: string;
 }
-
-export type CoinsDto = [number, number, number, number, number];
