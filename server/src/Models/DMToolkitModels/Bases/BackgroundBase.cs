@@ -8,8 +8,7 @@ public class BackgroundBase
     public string AbilityScoreOptionOne { get; set; } = string.Empty;
     public string AbilityScoreOptionTwo { get; set; } = string.Empty;
     public string AbilityScoreOptionThree { get; set; } = string.Empty;
-    public string FeatId { get; set; } = string.Empty;
-    public FeatBase? Feat { get; set; } = null;
+    public string FeatBaseId { get; set; } = string.Empty;
     public string SkillOne { get; set; } = string.Empty;
     public string SkillTwo { get; set; } = string.Empty; 
 }
