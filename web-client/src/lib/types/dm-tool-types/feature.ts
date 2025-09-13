@@ -11,16 +11,17 @@ export interface FeatureBase {
     availableEffects: FeatEffect[][];
 }
 
+export interface FeatureBaseDto {
+    id: string;
+    name: string;
+    description: string;
+    availableEffectIds: string[][];
+}
+
 export interface Feature {
     id: string;
     effects: FeatEffect[];
     base: FeatureBase;
-}
-
-export interface FeatEffectDto {
-    id: string;
-    type: string;
-    data: Record<string, any>;
 }
 
 export interface FeatureDto {
@@ -29,9 +30,4 @@ export interface FeatureDto {
     baseId: string;
 }
 
-export interface FeatureBaseDto {
-    id: string;
-    name: string;
-    description: string;
-    availableEffectIds: string[][];
-}
+
