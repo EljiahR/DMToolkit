@@ -1,3 +1,5 @@
+using DMToolkit.Models.JoinTables;
+
 namespace DMToolkit.Models.Bases;
 
 public class CharacterClassBase
@@ -8,7 +10,7 @@ public class CharacterClassBase
     public int HitDie { get; set; } = 0;
     public int FixedHp { get; set; } = 0;
     public List<SubclassBase> Subclasses { get; set; } = new();
-    public List<string> FeatBaseIds{ get; set; } = new();
+    public List<FeatBaseCharacterClassBase> FeatBaseCharacterClassBases { get; set; } = new();
     public int DefaultStr { get; set; } = 0;
     public int DefaultDex { get; set; } = 0;
     public int DefaultCon { get; set; } = 0;
