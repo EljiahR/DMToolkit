@@ -8,6 +8,14 @@ export interface LineageBase {
     speciesId: string;
 }
 
+export interface LineageBaseDto {
+    id: string;
+    name: string;
+    description: string;
+    featureIds: string[];
+    speciesId: string;
+}
+
 export interface Lineage {
     id: string;
     features: Feature[];
@@ -25,21 +33,6 @@ export interface SpeciesBase {
     lineages: LineageBase[];
 }
 
-export interface Species {
-    id: string;
-    features: Feature[];
-    lineage: Lineage;
-    base: SpeciesBase;
-}
-
-export interface LineageBaseDto {
-    id: string;
-    name: string;
-    description: string;
-    featureIds: string[];
-    speciesId: string;
-}
-
 export interface SpeciesBaseDto {
     id: string;
     name: string;
@@ -50,6 +43,17 @@ export interface SpeciesBaseDto {
     featureIds: string[];
     lineageIds: string[];
 }
+
+export interface Species {
+    id: string;
+    features: Feature[];
+    lineage: Lineage;
+    base: SpeciesBase;
+}
+
+
+
+
 
 export interface LineageDto {
     id: string;
