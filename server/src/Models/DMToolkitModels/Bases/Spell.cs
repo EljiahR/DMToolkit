@@ -1,6 +1,6 @@
 using DMToolkit.Models.JoinTables;
 
-namespace DMToolkit.Models.Bases;
+namespace DMToolkit.Models.Definitions;
 
 public class Spell
 {
@@ -8,7 +8,7 @@ public class Spell
     public string Name { get; set; } = string.Empty;
     public int Level { get; set; } = 0;
     public List<SpellSchool> SpellSchools { get; set; } = new();
-    public List<SpellCharacterClass> SpellCharacterClasses { get; set; } = new();
+    public List<SpellCharacterClassDefinition> SpellCharacterClassDefinitions { get; set; } = new();
     public string CastingTime { get; set; } = string.Empty;
     public string Range { get; set; } = string.Empty;
     public string ComponentOne { get; set; } = string.Empty;

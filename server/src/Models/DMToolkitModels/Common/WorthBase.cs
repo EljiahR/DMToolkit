@@ -1,6 +1,6 @@
 namespace DMToolkit.Models.Common;
 
-public abstract class Worth
+public abstract class WorthBase
 {
     public int Cp { get; set; } = 0;
     public int Sp { get; set; } = 0;

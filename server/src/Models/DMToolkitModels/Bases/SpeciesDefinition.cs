@@ -1,8 +1,8 @@
 using DMToolkit.Models.JoinTables;
 
-namespace DMToolkit.Models.Bases;
+namespace DMToolkit.Models.Definitions;
 
-public class SpeciesBase
+public class SpeciesDefinition
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;
@@ -10,6 +10,6 @@ public class SpeciesBase
     public string Type { get; set; } = string.Empty;
     public int Speed { get; set; } = 0;
     public string Size { get; set; } = string.Empty;
-    public List<FeatBaseSpeciesBase> FeatBaseSpeciesBases { get; set; } = new();
-    public List<LineageBase> LineageBases = new();
+    public List<FeatDefinitionSpeciesDefinition> FeatDefinitionSpeciesDefinitions { get; set; } = new();
+    public List<LineageDefinition> LineageDefinitions = new();
 }

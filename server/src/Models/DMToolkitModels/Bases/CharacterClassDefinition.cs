@@ -1,16 +1,16 @@
 using DMToolkit.Models.JoinTables;
 
-namespace DMToolkit.Models.Bases;
+namespace DMToolkit.Models.Definitions;
 
-public class CharacterClassBase
+public class CharacterClassDefinition
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public int HitDie { get; set; } = 0;
     public int FixedHp { get; set; } = 0;
-    public List<SubclassBase> Subclasses { get; set; } = new();
-    public List<FeatBaseCharacterClassBase> FeatBaseCharacterClassBases { get; set; } = new();
+    public List<SubclassDefinition> SubclassDefinitions { get; set; } = new();
+    public List<FeatDefinitionCharacterClassDefinition> FeatDefinitionCharacterClassDefinitions { get; set; } = new();
     public int DefaultStr { get; set; } = 0;
     public int DefaultDex { get; set; } = 0;
     public int DefaultCon { get; set; } = 0;

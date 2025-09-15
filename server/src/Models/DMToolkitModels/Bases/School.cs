@@ -1,6 +1,6 @@
 using DMToolkit.Models.JoinTables;
 
-namespace DMToolkit.Models.Bases;
+namespace DMToolkit.Models.Definitions;
 
 public class School
 {

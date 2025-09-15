@@ -1,4 +1,4 @@
-namespace DMToolkit.Models.Bases;
+namespace DMToolkit.Models.Definitions;
 
 public class FeatEffect
 {
