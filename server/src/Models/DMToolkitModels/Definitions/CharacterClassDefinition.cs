@@ -9,8 +9,8 @@ public class CharacterClassDefinition
     public string Description { get; set; } = string.Empty;
     public int HitDie { get; set; } = 0;
     public int FixedHp { get; set; } = 0;
-    public List<SubclassDefinition> SubclassDefinitions { get; set; } = new();
-    public List<FeatDefinitionCharacterClassDefinition> FeatDefinitionCharacterClassDefinitions { get; set; } = new();
+    public ICollection<SubclassDefinition> SubclassDefinitions { get; set; } = new List<SubclassDefinition>();
+    public ICollection<FeatDefinitionCharacterClassDefinition> FeatDefinitionCharacterClassDefinitions { get; set; } = new List<FeatDefinitionCharacterClassDefinition>();
     public int DefaultStr { get; set; } = 0;
     public int DefaultDex { get; set; } = 0;
     public int DefaultCon { get; set; } = 0;

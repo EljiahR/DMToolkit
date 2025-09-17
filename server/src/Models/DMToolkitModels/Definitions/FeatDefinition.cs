@@ -7,9 +7,9 @@ public class FeatDefinition
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public List<FeatDefinitionFeatEffect> FeatDefinitionFeatEffects { get; set; } = new();
-    public List<FeatDefinitionCharacterClassDefinition> FeatDefinitionCharacterClassDefinitions { get; set; } = new();
-    public List<FeatDefinitionLineageDefinition> FeatDefinitionLineageDefinitions { get; set; } = new();
-    public List<FeatDefinitionSpeciesDefinition> FeatDefinitionSpeciesDefinitions { get; set; } = new();
-    public List<FeatDefinitionSubclassDefinition> FeatDefinitionSubclassDefinitions { get; set; } = new();
+    public ICollection<FeatDefinitionFeatEffect> FeatDefinitionFeatEffects { get; set; } = new List<FeatDefinitionFeatEffect>();
+    public ICollection<FeatDefinitionCharacterClassDefinition> FeatDefinitionCharacterClassDefinitions { get; set; } = new List<FeatDefinitionCharacterClassDefinition>();
+    public ICollection<FeatDefinitionLineageDefinition> FeatDefinitionLineageDefinitions { get; set; } = new List<FeatDefinitionLineageDefinition>();
+    public ICollection<FeatDefinitionSpeciesDefinition> FeatDefinitionSpeciesDefinitions { get; set; } = new List<FeatDefinitionSpeciesDefinition>();
+    public ICollection<FeatDefinitionSubclassDefinition> FeatDefinitionSubclassDefinitions { get; set; } = new List<FeatDefinitionSubclassDefinition>();
 }

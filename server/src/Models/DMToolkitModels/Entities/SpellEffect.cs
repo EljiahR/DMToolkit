@@ -8,5 +8,5 @@ public class SpellEffect
     public string? Subtitle { get; set; }
     public string Type { get; set; } = string.Empty;
     public Dictionary<string, object> Data { get; set; } = new();
-    public List<SpellEffectSpell> SpellEffectSpells { get; set; } = new();
+    public ICollection<SpellEffectSpell> SpellEffectSpells { get; set; } = new List<SpellEffectSpell>();
 }

@@ -10,6 +10,6 @@ public class SpeciesDefinition
     public string Type { get; set; } = string.Empty;
     public int Speed { get; set; } = 0;
     public string Size { get; set; } = string.Empty;
-    public List<FeatDefinitionSpeciesDefinition> FeatDefinitionSpeciesDefinitions { get; set; } = new();
-    public List<LineageDefinition> LineageDefinitions = new();
+    public ICollection<FeatDefinitionSpeciesDefinition> FeatDefinitionSpeciesDefinitions { get; set; } = new List<FeatDefinitionSpeciesDefinition>();
+    public ICollection<LineageDefinition> LineageDefinitions = new List<LineageDefinition>();
 }
