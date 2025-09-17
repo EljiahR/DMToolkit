@@ -13,8 +13,8 @@
 /server/tests/obj
 
 # Shared
-/shared/SharedModels/bin
-/shared/SharedModels/obj
+/shared/bin
+/shared/obj
 
 # OS
 .DS_Store
