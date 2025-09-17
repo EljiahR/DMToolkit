@@ -11,10 +11,10 @@ public class Spell
     public List<SpellCharacterClassDefinition> SpellCharacterClassDefinitions { get; set; } = new();
     public string CastingTime { get; set; } = string.Empty;
     public string Range { get; set; } = string.Empty;
-    public string ComponentOne { get; set; } = string.Empty;
-    public string ComponentTwo { get; set; } = string.Empty;
-    public string ComponentThree { get; set; } = string.Empty;
-    // materialComponents
+    public bool VerbalRequired { get; set; } = false;
+    public bool SomaticRequired { get; set; } = false;
+    public bool MaterialsRequired { get; set; } = false;
+    public List<SpellItem> SpellItems { get; set; } = new();
     public string Duration { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public List<SpellEffectSpell> SpellEffectSpells { get; set; } = new();
