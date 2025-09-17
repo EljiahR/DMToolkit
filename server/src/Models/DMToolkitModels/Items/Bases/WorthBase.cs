@@ -1,4 +1,4 @@
-namespace DMToolkit.Models.Common;
+namespace DMToolkit.Models.Items.Bases;
 
 public abstract class WorthBase
 {
