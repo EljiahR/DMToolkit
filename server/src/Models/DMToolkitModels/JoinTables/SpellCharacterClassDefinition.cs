@@ -1,4 +1,5 @@
 using DMToolkit.Models.Definitions;
+using DMToolkit.Models.Entities;
 
 namespace DMToolkit.Models.JoinTables;
 
