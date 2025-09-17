@@ -12,6 +12,10 @@
 /server/tests/bin
 /server/tests/obj
 
+# Shared
+/shared/SharedModels/bin
+/shared/SharedModels/obj
+
 # OS
 .DS_Store
 Thumbs.db
