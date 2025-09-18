@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMToolkit.API", "src\DMTool
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMToolkit.Tests", "tests\DMToolkit.Tests.csproj", "{40DC60B6-DFE2-4A03-B59E-87B78EE8FACD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedModels", "..\shared\SharedModels\SharedModels.csproj", "{01783528-476A-40F4-AA2A-F13E1597FB6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedModels", "..\shared\SharedModels.csproj", "{01783528-476A-40F4-AA2A-F13E1597FB6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
