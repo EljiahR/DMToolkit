@@ -148,6 +148,48 @@ public class DMDbContext : IdentityDbContext<DMUser>
             .WithOne(ses => ses.SpellEffect)
             .HasForeignKey(ses => ses.SpellEffectId);
 
+        // INSTANCES
+
+        // ITEM BASES
+
+        // ITEM DEFINITIONS
+
+        // ITEM ENTITIES
+
+        // JOINTABLES KEYS
+        builder.Entity<FeatDefinitionCharacterClassDefinition>()
+            .HasKey(e => new { e.FeatDefinitionId, e.CharacterClassDefinitionId });
+
+        builder.Entity<FeatDefinitionFeatEffect>()
+            .HasKey(e => new { e.FeatDefinitionId, e.FeatEffectId });
+
+        builder.Entity<FeatDefinitionLineageDefinition>()
+            .HasKey(e => new { e.FeatDefinitionId, e.LineageDefinitionId });
+
+        builder.Entity<FeatDefinitionSpeciesDefinition>()
+            .HasKey(e => new { e.FeatDefinitionId, e.SpeciesDefinitionId });
+
+        builder.Entity<FeatDefinitionSubclassDefinition>()
+            .HasKey(e => new { e.FeatDefinitionId, e.SubclassDefinitionId });
+
+        builder.Entity<ItemCategoryItemBase>()
+            .HasKey(e => new { e.ItemCategoryId, e.ItemBaseId });
+
+        builder.Entity<SpellCharacterClassDefinition>()
+            .HasKey(e => new { e.SpellId, e.CharacterClassBaseId });
+
+        builder.Entity<SpellEffectSpell>()
+            .HasKey(e => new { e.SpellEffectId, e.SpellId });
+
+        builder.Entity<SpellItem>()
+            .HasKey(e => new { e.SpellId, e.ItemId });
+
+        builder.Entity<SpellSchool>()
+            .HasKey(e => new { e.SpellId, e.SchoolId });
+
+        builder.Entity<WeaponDefinitionWeaponProperty>()
+            .HasKey(e => new { e.WeaponDefinitionId, e.WeaponPropertyId });
+
         base.OnModelCreating(builder);
     }
 }
