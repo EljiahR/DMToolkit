@@ -12,4 +12,5 @@ public class FeatDefinition
     public ICollection<FeatDefinitionLineageDefinition> FeatDefinitionLineageDefinitions { get; set; } = new List<FeatDefinitionLineageDefinition>();
     public ICollection<FeatDefinitionSpeciesDefinition> FeatDefinitionSpeciesDefinitions { get; set; } = new List<FeatDefinitionSpeciesDefinition>();
     public ICollection<FeatDefinitionSubclassDefinition> FeatDefinitionSubclassDefinitions { get; set; } = new List<FeatDefinitionSubclassDefinition>();
+    public ICollection<BackgroundDefinition> BackgroundDefinitions { get; set; } = new List<BackgroundDefinition>();
 }

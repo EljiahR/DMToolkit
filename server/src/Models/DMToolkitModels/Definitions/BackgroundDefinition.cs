@@ -9,7 +9,7 @@ public class BackgroundDefinition
     public string AbilityScoreOptionTwo { get; set; } = string.Empty;
     public string AbilityScoreOptionThree { get; set; } = string.Empty;
     public string FeatDefinitionId { get; set; } = string.Empty;
-    public FeatDefinition? Feat { get; set; } = null;
+    public FeatDefinition? FeatDefinition { get; set; } = null;
     public string SkillOne { get; set; } = string.Empty;
     public string SkillTwo { get; set; } = string.Empty; 
 }
