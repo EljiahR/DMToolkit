@@ -9,4 +9,5 @@ public class SpellItem
     public required Spell Spell { get; set; }
     public required string ItemId { get; set; }
     public required Item Item { get; set; }
+    public int AmountRequired { get; set; } = 0;
 }

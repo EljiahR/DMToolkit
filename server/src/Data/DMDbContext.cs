@@ -1,5 +1,6 @@
 using DMToolkit.Models;
 using DMToolkit.Models.Definitions;
+using DMToolkit.Models.Entities;
 using DMToolkit.Models.JoinTables;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -84,7 +85,7 @@ public class DMDbContext : IdentityDbContext<DMUser>
         //// Made in AbililtyScoreDefinition
 
         // SpeciesDefinition
-        // Many-to-one SpeciesDefinition <- FeatDefinitionSpeciesDefinition
+        // Many-to-one SpeciesDefinition <- FeatDefinitionSpeciesDefinitions
         builder.Entity<SpeciesDefinition>()
             .HasMany(sd => sd.FeatDefinitionSpeciesDefinitions)
             .WithOne(fdsd => fdsd.SpeciesDefinition)
@@ -96,13 +97,56 @@ public class DMDbContext : IdentityDbContext<DMUser>
             .HasForeignKey(ld => ld.SpeciesDefinitionId);
 
         // SubclassDefinition
-        // Many-to-one SubclassDefinition <- FeatDefinitionSubclassDefinition
+        // Many-to-one SubclassDefinition <- FeatDefinitionSubclassDefinitions
         builder.Entity<SubclassDefinition>()
             .HasMany(sd => sd.FeatDefinitionSubclassDefinitions)
             .WithOne(fdsc => fdsc.SubclassDefinition)
             .HasForeignKey(fdsc => fdsc.SubclassDefinitionId);
 
         // ENTITIES
+
+        // FeatEffect
+        // Many-to-one FeatEffect <- FeatDefinitionFeatEffects
+        builder.Entity<FeatEffect>()
+            .HasMany(fe => fe.FeatDefinitionFeatEffects)
+            .WithOne(fdfe => fdfe.FeatEffect)
+            .HasForeignKey(fdfe => fdfe.FeatEffectId);
+
+        // School
+        // Many-to-one School <- SpellSchools
+        builder.Entity<School>()
+            .HasMany(s => s.SpellSchools)
+            .WithOne(ss => ss.School)
+            .HasForeignKey(ss => ss.SchoolId);
+
+        // Spell
+        // Many-to-one Spell <- SpellSchools
+        builder.Entity<Spell>()
+            .HasMany(s => s.SpellSchools)
+            .WithOne(ss => ss.Spell)
+            .HasForeignKey(ss => ss.SpellId);
+        // Many-to-one Spell <- SpellCharacterClassDefinitions
+        builder.Entity<Spell>()
+            .HasMany(s => s.SpellCharacterClassDefinitions)
+            .WithOne(sccd => sccd.Spell)
+            .HasForeignKey(sccd => sccd.SpellId);
+        // Many-to-one Spell <- SpellItems
+        builder.Entity<Spell>()
+            .HasMany(s => s.SpellItems)
+            .WithOne(si => si.Spell)
+            .HasForeignKey(si => si.SpellId);
+        // Many-to-one Spell <- SpellEffectSpells
+        builder.Entity<Spell>()
+            .HasMany(s => s.SpellEffectSpells)
+            .WithOne(ses => ses.Spell)
+            .HasForeignKey(ses => ses.SpellId);
+
+        // SpellEffect
+        // Many-to-one SpellEffect <- SpellEffectSpells
+        builder.Entity<SpellEffect>()
+            .HasMany(se => se.SpellEffectSpells)
+            .WithOne(ses => ses.SpellEffect)
+            .HasForeignKey(ses => ses.SpellEffectId);
 
         base.OnModelCreating(builder);
     }
