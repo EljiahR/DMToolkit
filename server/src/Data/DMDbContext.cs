@@ -1,6 +1,8 @@
 using DMToolkit.Models;
 using DMToolkit.Models.Definitions;
 using DMToolkit.Models.Entities;
+using DMToolkit.Models.Items.Bases;
+using DMToolkit.Models.Items.Definitions;
 using DMToolkit.Models.JoinTables;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -152,9 +154,27 @@ public class DMDbContext : IdentityDbContext<DMUser>
 
         // ITEM BASES
 
+        // ItemBase
+        // Many-to-one ItemBase <- ItemCategoryItemBases
+        builder.Entity<ItemBase>()
+            .HasMany(ib => ib.ItemCategoryItemBases)
+            .WithOne(icib => icib.ItemBase)
+            .HasForeignKey(icib => icib.ItemBaseId);
+
         // ITEM DEFINITIONS
 
+        // WeaponDefinition
+        // Many-to-one WeaponDefinition <- WeaponDefinitionWeaponProperty
+        builder.Entity<WeaponDefinition>()
+            .HasMany(wd => wd.WeaponDefinitionWeaponProperties)
+            .WithOne(wdwp => wdwp.WeaponDefinition)
+            .HasForeignKey(wdwp => wdwp.WeaponDefinitionId);
+        // One-to-many WeaponDefinition -> WeaponProperty (WeaponMastery)
+        // Made in WeaponProperty
+
         // ITEM ENTITIES
+
+        // ItemCat
 
         // JOINTABLES KEYS
         builder.Entity<FeatDefinitionCharacterClassDefinition>()
