@@ -168,6 +168,8 @@ public class DMDbContext : IdentityDbContext<DMUser>
             .WithOne(s => s.AbilityScoreInstance)
             .HasForeignKey(s => s.AbilityScoreInstanceId);
 
+
+
         // SkillInstance
         // One-to-many SkillInstance -> AbilityScoreInstance
         // Made in AbilityScoreInstance
