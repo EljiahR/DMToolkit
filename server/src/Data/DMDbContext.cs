@@ -1,6 +1,7 @@
 using DMToolkit.Models;
 using DMToolkit.Models.Definitions;
 using DMToolkit.Models.Entities;
+using DMToolkit.Models.Instances;
 using DMToolkit.Models.Items.Bases;
 using DMToolkit.Models.Items.Definitions;
 using DMToolkit.Models.Items.Entities;
@@ -152,6 +153,27 @@ public class DMDbContext : IdentityDbContext<DMUser>
             .HasForeignKey(ses => ses.SpellEffectId);
 
         // INSTANCES
+
+        // AbilityScoreInstance
+        // One-to-many AbilityScoreInstance -> AbilityScoreDefinition
+        builder.Entity<AbilityScoreInstance>()
+            .HasOne(i => i.Definition)
+            .WithMany()
+            .HasForeignKey(i => i.DefinitionId);
+        // Many-to-one AbilityScoreInstance <- SkillInstances
+        builder.Entity<AbilityScoreInstance>()
+            .HasMany(a => a.SkillInstances)
+            .WithOne(s => s.AbilityScoreInstance)
+            .HasForeignKey(s => s.AbilityScoreInstanceId);
+
+        // SkillInstance
+        // One-to-many SkillInstance -> AbilityScoreInstance
+        // Made in AbilityScoreInstance
+        // One-to-many SkillInstance -> SkillDefinition
+        builder.Entity<SkillInstance>()
+            .HasOne(i => i.Definition)
+            .WithMany()
+            .HasForeignKey(i=> i.DefinitionId);
 
         // ITEM BASES
 
