@@ -18,7 +18,7 @@ public class DMDbContext : IdentityDbContext<DMUser>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        // DEFINITIONS
+        #region Definitions
 
         // AbilityScoreDefinition
         // Many-to-one AbilityScoreDefinition <- SkillDefinitions
@@ -107,7 +107,8 @@ public class DMDbContext : IdentityDbContext<DMUser>
             .WithOne(fdsc => fdsc.SubclassDefinition)
             .HasForeignKey(fdsc => fdsc.SubclassDefinitionId);
 
-        // ENTITIES
+        #endregion
+        #region Entites
 
         // FeatEffect
         // Many-to-one FeatEffect <- FeatDefinitionFeatEffects
@@ -152,7 +153,8 @@ public class DMDbContext : IdentityDbContext<DMUser>
             .WithOne(ses => ses.SpellEffect)
             .HasForeignKey(ses => ses.SpellEffectId);
 
-        // INSTANCES
+        #endregion
+        #region Instances
 
         // AbilityScoreInstance
         // One-to-many AbilityScoreInstance -> AbilityScoreDefinition
@@ -175,7 +177,8 @@ public class DMDbContext : IdentityDbContext<DMUser>
             .WithMany()
             .HasForeignKey(i=> i.DefinitionId);
 
-        // ITEM BASES
+        #endregion
+        #region Item-Bases
 
         // ItemBase
         // Many-to-one ItemBase <- ItemCategoryItemBases
@@ -184,7 +187,8 @@ public class DMDbContext : IdentityDbContext<DMUser>
             .WithOne(icib => icib.ItemBase)
             .HasForeignKey(icib => icib.ItemBaseId);
 
-        // ITEM DEFINITIONS
+        #endregion
+        #region Item-Definitions
 
         // WeaponDefinition
         // Many-to-one WeaponDefinition <- WeaponDefinitionWeaponProperty
@@ -195,7 +199,8 @@ public class DMDbContext : IdentityDbContext<DMUser>
         // One-to-many WeaponDefinition -> WeaponProperty (WeaponMastery)
         // Made in WeaponProperty
 
-        // ITEM ENTITIES
+        #endregion
+        #region Item-Entities
 
         // ItemCategory
         // Many-to-one ItemCategory <- ItemCategoryItemBases
@@ -216,7 +221,8 @@ public class DMDbContext : IdentityDbContext<DMUser>
             .WithOne(wm => wm.WeaponMastery)
             .HasForeignKey(wm => wm.WeaponMasteryId);
 
-        // JOINTABLES KEYS
+        #endregion
+        #region Join Table Keys
         builder.Entity<FeatDefinitionCharacterClassDefinition>()
             .HasKey(e => new { e.FeatDefinitionId, e.CharacterClassDefinitionId });
 
@@ -250,6 +256,7 @@ public class DMDbContext : IdentityDbContext<DMUser>
         builder.Entity<WeaponDefinitionWeaponProperty>()
             .HasKey(e => new { e.WeaponDefinitionId, e.WeaponPropertyId });
 
+        #endregion
         base.OnModelCreating(builder);
     }
 }
