@@ -27,46 +27,12 @@ public class DMDbContext : IdentityDbContext<DMUser>
         builder.ApplyConfiguration(new SpeciesDefinitionConfiguration());
         builder.ApplyConfiguration(new SubclassDefinitionConfiguration());
 
-        #region Entites
+        // Entity configurations
         builder.ApplyConfiguration(new FeatDefinitionConfiguration());
-
-        // School
-        // Many-to-one School <- SpellSchools
-        builder.Entity<School>()
-            .HasMany(s => s.SpellSchools)
-            .WithOne(ss => ss.School)
-            .HasForeignKey(ss => ss.SchoolId);
-
-        // Spell
-        // Many-to-one Spell <- SpellSchools
-        builder.Entity<Spell>()
-            .HasMany(s => s.SpellSchools)
-            .WithOne(ss => ss.Spell)
-            .HasForeignKey(ss => ss.SpellId);
-        // Many-to-one Spell <- SpellCharacterClassDefinitions
-        builder.Entity<Spell>()
-            .HasMany(s => s.SpellCharacterClassDefinitions)
-            .WithOne(sccd => sccd.Spell)
-            .HasForeignKey(sccd => sccd.SpellId);
-        // Many-to-one Spell <- SpellItems
-        builder.Entity<Spell>()
-            .HasMany(s => s.SpellItems)
-            .WithOne(si => si.Spell)
-            .HasForeignKey(si => si.SpellId);
-        // Many-to-one Spell <- SpellEffectSpells
-        builder.Entity<Spell>()
-            .HasMany(s => s.SpellEffectSpells)
-            .WithOne(ses => ses.Spell)
-            .HasForeignKey(ses => ses.SpellId);
-
-        // SpellEffect
-        // Many-to-one SpellEffect <- SpellEffectSpells
-        builder.Entity<SpellEffect>()
-            .HasMany(se => se.SpellEffectSpells)
-            .WithOne(ses => ses.SpellEffect)
-            .HasForeignKey(ses => ses.SpellEffectId);
-
-        #endregion
+        builder.ApplyConfiguration(new SchoolConfiguration());
+        builder.ApplyConfiguration(new SpellConfiguration());
+        builder.ApplyConfiguration(new SpellEffectConfiguration());
+        
         #region Instances
 
         // AbilityScoreInstance
