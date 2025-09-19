@@ -1,7 +1,5 @@
 using DMToolkit.Data.Configurations;
 using DMToolkit.Models;
-using DMToolkit.Models.Definitions;
-using DMToolkit.Models.Entities;
 using DMToolkit.Models.Instances;
 using DMToolkit.Models.Items.Bases;
 using DMToolkit.Models.Items.Definitions;
@@ -9,6 +7,8 @@ using DMToolkit.Models.Items.Entities;
 using DMToolkit.Models.JoinTables;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+
+namespace DMToolkit.Data;
 
 public class DMDbContext : IdentityDbContext<DMUser>
 {
@@ -32,7 +32,7 @@ public class DMDbContext : IdentityDbContext<DMUser>
         builder.ApplyConfiguration(new SchoolConfiguration());
         builder.ApplyConfiguration(new SpellConfiguration());
         builder.ApplyConfiguration(new SpellEffectConfiguration());
-        
+
         #region Instances
 
         // AbilityScoreInstance
@@ -56,7 +56,7 @@ public class DMDbContext : IdentityDbContext<DMUser>
         builder.Entity<SkillInstance>()
             .HasOne(i => i.Definition)
             .WithMany()
-            .HasForeignKey(i=> i.DefinitionId);
+            .HasForeignKey(i => i.DefinitionId);
 
         #endregion
         #region Item-Bases
