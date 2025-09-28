@@ -3,7 +3,7 @@ using DMToolkit.Models.Entities;
 
 namespace DMToolkit.Models.JoinTables;
 
-public class FeatDefinitionFeatEffect
+public class FeatDefinitionFeatEffect : IJoinTable
 {
     public required string FeatDefinitionId { get; set; }
     public required FeatDefinition FeatDefinition { get; set; }

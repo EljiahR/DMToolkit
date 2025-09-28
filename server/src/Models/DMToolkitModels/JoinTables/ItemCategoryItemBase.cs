@@ -3,7 +3,7 @@ using DMToolkit.Models.Items.Entities;
 
 namespace DMToolkit.Models.JoinTables;
 
-public class ItemCategoryItemBase
+public class ItemCategoryItemBase : IJoinTable
 {
     public required string ItemCategoryId { get; set; }
     public required ItemCategory ItemCategory { get; set; }

@@ -2,7 +2,7 @@ using DMToolkit.Models.Definitions;
 
 namespace DMToolkit.Models.JoinTables;
 
-public class FeatDefinitionSubclassDefinition
+public class FeatDefinitionSubclassDefinition : IJoinTable
 {
     public required string FeatDefinitionId { get; set; }
     public required FeatDefinition FeatDefinition { get; set; }

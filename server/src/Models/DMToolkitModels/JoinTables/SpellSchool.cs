@@ -2,7 +2,7 @@ using DMToolkit.Models.Entities;
 
 namespace DMToolkit.Models.JoinTables;
 
-public class SpellSchool
+public class SpellSchool : IJoinTable
 {
     public required string SpellId { get; set; }
     public required Spell Spell { get; set; }

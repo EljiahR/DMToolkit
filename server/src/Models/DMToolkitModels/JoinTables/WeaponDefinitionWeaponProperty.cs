@@ -3,7 +3,7 @@ using DMToolkit.Models.Items.Entities;
 
 namespace DMToolkit.Models.JoinTables;
 
-public class WeaponDefinitionWeaponProperty
+public class WeaponDefinitionWeaponProperty : IJoinTable
 {
     public required string WeaponDefinitionId { get; set; }
     public required WeaponDefinition WeaponDefinition { get; set; }
