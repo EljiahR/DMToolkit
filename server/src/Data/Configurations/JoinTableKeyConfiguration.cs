@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DMToolkit.Data.Configurations;
 
-public class JoinTableKeyConfiguration<TJoin> : IEntityTypeConfiguration<TJoin>
-    where TJoin : class, IJoinTable
+public class JoinTableKeyConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
+    where TEntity : class, IJoinTable
 {
-    public void Configure(EntityTypeBuilder<TJoin> builder)
+    public void Configure(EntityTypeBuilder<TEntity> builder)
     {
-        var keyProps = typeof(TJoin)
+        var keyProps = typeof(TEntity)
             .GetProperties()
             .Where(p => p.Name.EndsWith("Id"))
             .ToArray();

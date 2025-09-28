@@ -15,6 +15,9 @@ public class DMDbContext : IdentityDbContext<DMUser>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        // Generic configurations (Join Table keys, Instance to Definition hookups)
+        builder.ApplyConfigurationsFromAssembly(typeof(DMDbContext).Assembly);
+
         // Definition configurations
         builder.ApplyConfiguration(new AbilityScoreDefinitionConfiguration());
         builder.ApplyConfiguration(new CharacterClassDefinitionConfiguration());
@@ -31,7 +34,6 @@ public class DMDbContext : IdentityDbContext<DMUser>
 
         // Instance Configurations
         builder.ApplyConfiguration(new AbilityScoreInstanceConfiguration());
-        builder.ApplyConfiguration(new SkillInstanceConfiguration());
         builder.ApplyConfiguration(new FeatInstanceConfiguration());
 
         // Item Base Configurations
@@ -43,20 +45,6 @@ public class DMDbContext : IdentityDbContext<DMUser>
         // Item Entity Configurations
         builder.ApplyConfiguration(new ItemCategoryConfiguration());
         builder.ApplyConfiguration(new WeaponPropertyConfiguration());
-
-        // Join Table Keys
-        builder.ApplyConfiguration(new JoinTableKeyConfiguration<FeatDefinitionCharacterClassDefinition>());
-        builder.ApplyConfiguration(new JoinTableKeyConfiguration<FeatDefinitionFeatEffect>());
-        builder.ApplyConfiguration(new JoinTableKeyConfiguration<FeatDefinitionLineageDefinition>());
-        builder.ApplyConfiguration(new JoinTableKeyConfiguration<FeatDefinitionSpeciesDefinition>());
-        builder.ApplyConfiguration(new JoinTableKeyConfiguration<FeatDefinitionSubclassDefinition>());
-        builder.ApplyConfiguration(new JoinTableKeyConfiguration<FeatInstanceFeatEffect>());
-        builder.ApplyConfiguration(new JoinTableKeyConfiguration<ItemCategoryItemBase>());
-        builder.ApplyConfiguration(new JoinTableKeyConfiguration<SpellCharacterClassDefinition>());
-        builder.ApplyConfiguration(new JoinTableKeyConfiguration<SpellEffectSpell>());
-        builder.ApplyConfiguration(new JoinTableKeyConfiguration<SpellItem>());
-        builder.ApplyConfiguration(new JoinTableKeyConfiguration<SpellSchool>());
-        builder.ApplyConfiguration(new JoinTableKeyConfiguration<WeaponDefinitionWeaponProperty>());
 
         base.OnModelCreating(builder);
     }

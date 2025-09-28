@@ -8,10 +8,6 @@ public class AbilityScoreInstanceConfiguration : IEntityTypeConfiguration<Abilit
 {
     public void Configure(EntityTypeBuilder<AbilityScoreInstance> builder)
     {
-        // One-to-many AbilityScoreInstance -> AbilityScoreDefinition
-        builder.HasOne(i => i.Definition)
-            .WithMany()
-            .HasForeignKey(i => i.DefinitionId);
         // Many-to-one AbilityScoreInstance <- SkillInstances
         builder.HasMany(a => a.SkillInstances)
             .WithOne(s => s.AbilityScoreInstance)
