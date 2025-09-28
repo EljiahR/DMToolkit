@@ -2,7 +2,7 @@ using DMToolkit.Models.Definitions;
 
 namespace DMToolkit.Models.Instances;
 
-public class AbilityScoreInstance
+public class AbilityScoreInstance : IDefinitionInstance<AbilityScoreDefinition>
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public int Score { get; set; } = 0;

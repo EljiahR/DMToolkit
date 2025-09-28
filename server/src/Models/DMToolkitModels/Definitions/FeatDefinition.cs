@@ -2,7 +2,7 @@ using DMToolkit.Models.JoinTables;
 
 namespace DMToolkit.Models.Definitions;
 
-public class FeatDefinition
+public class FeatDefinition : IDefinition
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;

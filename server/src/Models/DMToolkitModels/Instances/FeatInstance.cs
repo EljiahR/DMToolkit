@@ -3,7 +3,7 @@ using DMToolkit.Models.JoinTables;
 
 namespace DMToolkit.Models.Instances;
 
-public class FeatInstance
+public class FeatInstance : IDefinitionInstance<FeatDefinition>
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public ICollection<FeatInstanceFeatEffect> FeatInstanceFeatEffects { get; set; } = new List<FeatInstanceFeatEffect>();

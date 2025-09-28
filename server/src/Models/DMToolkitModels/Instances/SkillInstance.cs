@@ -2,7 +2,7 @@ using DMToolkit.Models.Definitions;
 
 namespace DMToolkit.Models.Instances;
 
-public class SkillInstance
+public class SkillInstance : IDefinitionInstance<SkillDefinition>
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public bool IsProficient { get; set; } = false;

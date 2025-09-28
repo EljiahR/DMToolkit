@@ -1,6 +1,6 @@
 namespace DMToolkit.Models.Definitions;
 
-public class BackgroundDefinition
+public class BackgroundDefinition : IDefinition
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;
