@@ -1,9 +1,5 @@
 using DMToolkit.Data.Configurations;
 using DMToolkit.Models;
-using DMToolkit.Models.Instances;
-using DMToolkit.Models.Items.Bases;
-using DMToolkit.Models.Items.Definitions;
-using DMToolkit.Models.Items.Entities;
 using DMToolkit.Models.JoinTables;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
