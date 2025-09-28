@@ -32,6 +32,7 @@ public class DMDbContext : IdentityDbContext<DMUser>
         // Instance Configurations
         builder.ApplyConfiguration(new AbilityScoreInstanceConfiguration());
         builder.ApplyConfiguration(new SkillInstanceConfiguration());
+        builder.ApplyConfiguration(new FeatInstanceConfiguration());
 
         // Item Base Configurations
         builder.ApplyConfiguration(new ItemBaseConfiguration());
@@ -49,6 +50,7 @@ public class DMDbContext : IdentityDbContext<DMUser>
         builder.ApplyConfiguration(new JoinTableKeyConfiguration<FeatDefinitionLineageDefinition>());
         builder.ApplyConfiguration(new JoinTableKeyConfiguration<FeatDefinitionSpeciesDefinition>());
         builder.ApplyConfiguration(new JoinTableKeyConfiguration<FeatDefinitionSubclassDefinition>());
+        builder.ApplyConfiguration(new JoinTableKeyConfiguration<FeatInstanceFeatEffect>());
         builder.ApplyConfiguration(new JoinTableKeyConfiguration<ItemCategoryItemBase>());
         builder.ApplyConfiguration(new JoinTableKeyConfiguration<SpellCharacterClassDefinition>());
         builder.ApplyConfiguration(new JoinTableKeyConfiguration<SpellEffectSpell>());
