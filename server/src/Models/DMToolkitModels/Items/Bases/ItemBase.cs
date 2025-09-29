@@ -8,5 +8,5 @@ public abstract class ItemBase : WorthBase
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public int Weight { get; set; } = 0;
-    public ICollection<ItemCategoryItemBase> ItemCategoryItemBases { get; set; } = new List<ItemCategoryItemBase>();
+    public string ItemType { get; set; } = "Item";
 }
