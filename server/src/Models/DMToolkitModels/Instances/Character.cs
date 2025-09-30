@@ -11,8 +11,10 @@ public class Character : WorthBase
     public int Hp { get; set; } = 0;
     public int TempHp { get; set; } = 0;
     public List<CharacterCharacterClassInstance> CharacterCharacterClassInstances { get; set; } = new();
-    public BackgroundInstance? Background { get; set; } = null;
-    public SpeciesInstance? Species { get; set; } = null;
+    public string BackgroundInstanceId { get; set; } = string.Empty;
+    public BackgroundInstance? BackgroundInstance { get; set; } = null;
+    public string SpeciesInstanceId { get; set; } = string.Empty;
+    public SpeciesInstance? SpeciesInstance { get; set; } = null;
     public ICollection<CharacterAbilityScoreInstance> CharacterAbilityScoreInstances { get; set; } = new List<CharacterAbilityScoreInstance>();
     public string PhysicalDescription { get; set; } = string.Empty;
     public string Personality { get; set; } = string.Empty;
