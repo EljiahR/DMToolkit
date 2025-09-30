@@ -8,10 +8,6 @@ public class WeaponPropertyConfiguration : IEntityTypeConfiguration<WeaponProper
 {
     public void Configure(EntityTypeBuilder<WeaponProperty> builder)
     {
-        // Many-to-one WeaponProperty <- WeaponDefinitionWeaponProperties
-        builder.HasMany(wp => wp.WeaponDefinitionWeaponProperties)
-            .WithOne(wdwp => wdwp.WeaponProperty)
-            .HasForeignKey(wdwp => wdwp.WeaponPropertyId);
         // Many-to-one WeaponPropery <- WeaponDefinition
         builder.HasMany(wp => wp.WeaponMasteries)
             .WithOne(wm => wm.WeaponMastery)

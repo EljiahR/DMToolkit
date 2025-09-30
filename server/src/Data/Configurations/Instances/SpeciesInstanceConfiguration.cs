@@ -12,10 +12,5 @@ public class SpeciesInstanceConfiguration : IEntityTypeConfiguration<SpeciesInst
         builder.HasOne(s => s.LineageInstance)
             .WithOne(l => l.SpeciesInstance)
             .HasForeignKey<SpeciesInstance>(s => s.LineageInstanceId);
-
-        // Many-to-one SpeciesInstance <- FeatInstanceSpeciesInstances
-        builder.HasMany(s => s.FeatInstanceSpeciesInstances)
-            .WithOne(f => f.SpeciesInstance)
-            .HasForeignKey(f => f.SpeciesInstanceId);
     }
 }

@@ -7,4 +7,5 @@ public class AbilityScoreDefinition : IDefinition
     public string Abbreviation { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public ICollection<SkillDefinition> SkillDefinitions { get; set; } = new List<SkillDefinition>();
+    public ICollection<BackgroundDefinition> BackgroundDefinitions { get; set; } = new List<BackgroundDefinition>();
 }

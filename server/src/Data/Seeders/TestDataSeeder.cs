@@ -164,10 +164,7 @@ public static class TestDataSeeder
         var philosopherDefinition = new BackgroundDefinition
         {
             Name = "Philosopher",
-            Description = "Thinks and stuff",
-            AbilityScoreOptionOne = "int",
-            AbilityScoreOptionTwo = "wis",
-            AbilityScoreOptionThree = "cha",
+            Description = "Thinks and stuff"
         };
     }
 }

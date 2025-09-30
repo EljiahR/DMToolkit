@@ -8,9 +8,9 @@ public class FeatDefinition : IDefinition
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public ICollection<FeatDefinitionFeatEffect> FeatDefinitionFeatEffects { get; set; } = new List<FeatDefinitionFeatEffect>();
-    public ICollection<FeatDefinitionCharacterClassDefinition> FeatDefinitionCharacterClassDefinitions { get; set; } = new List<FeatDefinitionCharacterClassDefinition>();
-    public ICollection<FeatDefinitionLineageDefinition> FeatDefinitionLineageDefinitions { get; set; } = new List<FeatDefinitionLineageDefinition>();
-    public ICollection<FeatDefinitionSpeciesDefinition> FeatDefinitionSpeciesDefinitions { get; set; } = new List<FeatDefinitionSpeciesDefinition>();
-    public ICollection<FeatDefinitionSubclassDefinition> FeatDefinitionSubclassDefinitions { get; set; } = new List<FeatDefinitionSubclassDefinition>();
+    public ICollection<CharacterClassDefinition> CharacterClassDefinitions { get; set; } = new List<CharacterClassDefinition>();
+    public ICollection<LineageDefinition> LineageDefinitions { get; set; } = new List<LineageDefinition>();
+    public ICollection<SpeciesDefinition> SpeciesDefinitions { get; set; } = new List<SpeciesDefinition>();
+    public ICollection<SubclassDefinition> SubclassDefinitions { get; set; } = new List<SubclassDefinition>();
     public ICollection<BackgroundDefinition> BackgroundDefinitions { get; set; } = new List<BackgroundDefinition>();
 }

@@ -15,7 +15,7 @@ public class Character : WorthBase
     public BackgroundInstance? BackgroundInstance { get; set; } = null;
     public string SpeciesInstanceId { get; set; } = string.Empty;
     public SpeciesInstance? SpeciesInstance { get; set; } = null;
-    public ICollection<CharacterAbilityScoreInstance> CharacterAbilityScoreInstances { get; set; } = new List<CharacterAbilityScoreInstance>();
+    public ICollection<AbilityScoreInstance> AbilityScoreInstances { get; set; } = new List<AbilityScoreInstance>();
     public string PhysicalDescription { get; set; } = string.Empty;
     public string Personality { get; set; } = string.Empty;
     public string Ideals { get; set; } = string.Empty;

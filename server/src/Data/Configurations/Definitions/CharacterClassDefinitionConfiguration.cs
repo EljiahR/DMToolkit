@@ -12,10 +12,5 @@ public class CharacterClassDefinitionConfiguration : IEntityTypeConfiguration<Ch
         builder.HasMany(ccd => ccd.SubclassDefinitions)
             .WithOne(sd => sd.CharacterClassDefinition)
             .HasForeignKey(sd => sd.CharacterClassDefinitionId);
-            
-        // Many-to-one CharacterClassDefinition <- FeatDefinitionCharacterClassDefinition
-        builder.HasMany(ccd => ccd.FeatDefinitionCharacterClassDefinitions)
-            .WithOne(fdccd => fdccd.CharacterClassDefinition)
-            .HasForeignKey(fdccd => fdccd.CharacterClassDefinitionId);
     }
 }

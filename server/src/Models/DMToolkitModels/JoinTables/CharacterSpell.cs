@@ -6,8 +6,8 @@ namespace DMToolkit.Models.JoinTables;
 public class CharacterSpell : IJoinTable
 {
     public required string CharacterId { get; set; }
-    public required Character Character { get; set; }
+    public Character Character { get; set; } = null!;
     public required string SpellId { get; set; }
-    public required Spell Spell { get; set; }
+    public Spell Spell { get; set; } = null!;
     public bool IsReadied { get; set; } = false;
 }

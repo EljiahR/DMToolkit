@@ -23,11 +23,6 @@ public class CharacterConfiguration : IEntityTypeConfiguration<Character>
             .WithOne()
             .HasForeignKey<Character>(c => c.SpeciesInstanceId);
 
-        // Many-to-one Character <- CharacterAbilityScoreInstances
-        builder.HasMany(c => c.CharacterAbilityScoreInstances)
-            .WithOne(j => j.Character)
-            .HasForeignKey(j => j.CharacterId);
-
         // Many-to-one Character <- CharacterItemBases
         builder.HasMany(c => c.CharacterItemBases)
             .WithOne(j => j.Character)

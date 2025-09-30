@@ -5,9 +5,9 @@ namespace DMToolkit.Models.JoinTables;
 public class CharacterCharacterClassInstance : IJoinTable
 {
     public required string CharacterId { get; set; }
-    public required Character Character { get; set; }
+    public Character Character { get; set; } = null!;
     public required string CharacterClassInstanceId { get; set; }
-    public required CharacterClassInstance CharacterClassInstance { get; set; }
+    public CharacterClassInstance CharacterClassInstance { get; set; } = null!;
     public int Level { get; set; } = 0;
     public int HpRoll { get; set; } = 0;
 }

@@ -1,5 +1,3 @@
-using DMToolkit.Models.JoinTables;
-
 namespace DMToolkit.Models.Definitions;
 
 public class SpeciesDefinition : IDefinition
@@ -10,6 +8,6 @@ public class SpeciesDefinition : IDefinition
     public string Type { get; set; } = string.Empty;
     public int Speed { get; set; } = 0;
     public string Size { get; set; } = string.Empty;
-    public ICollection<FeatDefinitionSpeciesDefinition> FeatDefinitionSpeciesDefinitions { get; set; } = new List<FeatDefinitionSpeciesDefinition>();
+    public ICollection<FeatDefinition> FeatDefinitions { get; set; } = new List<FeatDefinition>();
     public ICollection<LineageDefinition> LineageDefinitions = new List<LineageDefinition>();
 }
