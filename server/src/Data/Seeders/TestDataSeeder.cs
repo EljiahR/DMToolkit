@@ -164,7 +164,8 @@ public static class TestDataSeeder
         var philosopherDefinition = new BackgroundDefinition
         {
             Name = "Philosopher",
-            Description = "Thinks and stuff"
+            Description = "Thinks and stuff",
+            AbilityScoreDefinitions = new List<AbilityScoreDefinition> { intDefinition, wisDefinition, chaDefinition }
         };
     }
 }

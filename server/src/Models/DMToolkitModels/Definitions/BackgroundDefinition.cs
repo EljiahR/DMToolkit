@@ -8,6 +8,5 @@ public class BackgroundDefinition : IDefinition
     public ICollection<AbilityScoreDefinition> AbilityScoreDefinitions { get; set; } = new List<AbilityScoreDefinition>();
     public string FeatDefinitionId { get; set; } = string.Empty;
     public FeatDefinition? FeatDefinition { get; set; } = null;
-    public string SkillOne { get; set; } = string.Empty;
-    public string SkillTwo { get; set; } = string.Empty; 
+    public ICollection<SkillDefinition> SkillDefinitions { get; set; } = new List<SkillDefinition>(); 
 }
