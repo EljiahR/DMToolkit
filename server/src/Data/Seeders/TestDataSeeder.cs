@@ -39,6 +39,18 @@ public static class TestDataSeeder
             Description = "Ability to more than meets the eye"
         };
 
+        var survivalDefinition = new SkillDefinition
+        {
+            Name = "Survival",
+            Description = "Ability to LIVE"
+        };
+
+        var perceptionDefinition = new SkillDefinition
+        {
+            Name = "Perception",
+            Description = "Ability to see"
+        };
+
         // AbilityScoreDefinitions
         var strDefinition = new AbilityScoreDefinition
         {
@@ -76,7 +88,7 @@ public static class TestDataSeeder
             Name = "Wisdom",
             Description = "Think BIG",
             Abbreviation = "wis",
-            SkillDefinitions = new List<SkillDefinition> { insightDefinition }
+            SkillDefinitions = new List<SkillDefinition> { insightDefinition, perceptionDefinition, survivalDefinition }
         };
 
         var chaDefinition = new AbilityScoreDefinition
@@ -176,7 +188,33 @@ public static class TestDataSeeder
                     { "Duration", "1 hour" }
                 }
             }
-        }
+        };
+
+        var travelersResilienceEffects = new List<FeatEffect>
+        {
+            new FeatEffect
+            {
+                Type = "ConditionResistance",
+                Title = "Resist Exhaustion",
+                Description = "You gain advantage on saving throws made to resist exhaustion from travel, hunger, or harsh environments.",
+                Data = new Dictionary<string, object>
+                {
+                    { "Condition", "Exhaustion" },
+                    { "Advantage", true }
+                }
+            },
+            new FeatEffect
+            {
+                Type = "SkillModifier",
+                Title = "Survival Expertise",
+                Description = "Gain a bonus to Survival checks when foraging for food or navigating difficult terrain.",
+                Data = new Dictionary<string, object>
+                {
+                    { "Skill", "Survival" },
+                    { "Bonus", 2 }
+                }
+            }
+        };
 
         // Feat definitions
         var sharpshooterDefinition = new FeatDefinition
@@ -197,11 +235,17 @@ public static class TestDataSeeder
             Description = "Your contemplative nature and sharp reasoning grant you clarity in thought and speech.",
         };
 
+        var travelersResilienceDefinition = new FeatDefinition
+        {
+            Name = "Traveler's Resilience",
+            Description = "Years of wandering have hardened you against fatigue and sharpened your survival instincts.",
+        };
+
         // FeatDefinitionFeatEffects
-        
-        var sharpshooterTable = sharpshooterEffects.Select(e => new FeatDefinitionFeatEffect { FeatDefinitionId = sharpshooterDefinition.Id, FeatEffectId = e.Id }); 
-        var toughTable = toughEffects.Select(e => new FeatDefinitionFeatEffect { FeatDefinitionId = toughDefinition.Id, FeatEffectId = e.Id }); 
-        var philosopherInsightTable = philosopherInsightEffects.Select(e => new FeatDefinitionFeatEffect { FeatDefinitionId = philosopherInsightDefinition.Id, FeatEffectId = e.Id }); 
+
+        var sharpshooterTable = sharpshooterEffects.Select(e => new FeatDefinitionFeatEffect { FeatDefinitionId = sharpshooterDefinition.Id, FeatEffectId = e.Id });
+        var toughTable = toughEffects.Select(e => new FeatDefinitionFeatEffect { FeatDefinitionId = toughDefinition.Id, FeatEffectId = e.Id });
+        var philosopherInsightTable = philosopherInsightEffects.Select(e => new FeatDefinitionFeatEffect { FeatDefinitionId = philosopherInsightDefinition.Id, FeatEffectId = e.Id });
 
         // Background definitions
 
@@ -210,8 +254,17 @@ public static class TestDataSeeder
             Name = "Philosopher",
             Description = "Thinks and stuff",
             AbilityScoreDefinitions = new List<AbilityScoreDefinition> { intDefinition, wisDefinition, chaDefinition },
-            FeatDefinition = philosopherInsightFeat,
+            FeatDefinition = philosopherInsightDefinition,
             SkillDefinitions = new List<SkillDefinition> { arcanaDefinition, insightDefinition }
+        };
+        
+        var wayfarerBackground = new BackgroundDefinition
+        {
+            Name = "Wayfarer",
+            Description = "You are a seasoned traveler who has crossed strange lands, survived in the wilderness, and adapted to the hardships of life on the road.",
+            AbilityScoreDefinitions = new List<AbilityScoreDefinition> { strDefinition, conDefinition, wisDefinition },
+            FeatDefinition = travelersResilienceDefinition,
+            SkillDefinitions = new List<SkillDefinition> { survivalDefinition, perceptionDefinition }
         };
     }
 }
