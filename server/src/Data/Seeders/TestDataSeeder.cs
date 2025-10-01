@@ -140,6 +140,43 @@ public static class TestDataSeeder
             }
         };
 
+        var philosopherInsightEffects = new List<FeatEffect>
+        {
+            new FeatEffect
+            {
+                Type = "SkillModifier",
+                Title = "Insightful Reasoning",
+                Description = "Gain a bonus to Insight checks as your study of people and ideas sharpens your perception.",
+                Data = new Dictionary<string, object>
+                {
+                    { "Skill", "Insight" },
+                    { "Bonus", 2 }
+                }
+            },
+            new FeatEffect
+            {
+                Type = "SkillModifier",
+                Title = "Persuasive Speaker",
+                Description = "Gain a bonus to Persuasion checks from your ability to frame arguments logically.",
+                Data = new Dictionary<string, object>
+                {
+                    { "Skill", "Persuasion" },
+                    { "Bonus", 2 }
+                }
+            },
+            new FeatEffect
+            {
+                Type = "UtilityFeature",
+                Title = "Contemplative Rest",
+                Description = "When taking a short or long rest, you can spend 10 minutes in meditation to grant one ally advantage on their next saving throw within the next hour.",
+                Data = new Dictionary<string, object>
+                {
+                    { "RestTimeRequired", "10 minutes" },
+                    { "Effect", "GrantAllyAdvantageSavingThrow" },
+                    { "Duration", "1 hour" }
+                }
+            }
+        }
 
         // Feat definitions
         var sharpshooterDefinition = new FeatDefinition
@@ -154,10 +191,17 @@ public static class TestDataSeeder
             Description = "You are unusually hardy, gaining additional health to endure hardships.",
         };
 
-        // FeatDefinitionFeatEffects
+        var philosopherInsightDefinition = new FeatDefinition
         {
-            var sharpshooterTable = sharpshooterEffects.Select(e => new FeatDefinitionFeatEffect { FeatDefinitionId = sharpshooterDefinition.Id, FeatEffectId = e.Id }); 
-        }
+            Name = "Philosopher's Insight",
+            Description = "Your contemplative nature and sharp reasoning grant you clarity in thought and speech.",
+        };
+
+        // FeatDefinitionFeatEffects
+        
+        var sharpshooterTable = sharpshooterEffects.Select(e => new FeatDefinitionFeatEffect { FeatDefinitionId = sharpshooterDefinition.Id, FeatEffectId = e.Id }); 
+        var toughTable = toughEffects.Select(e => new FeatDefinitionFeatEffect { FeatDefinitionId = toughDefinition.Id, FeatEffectId = e.Id }); 
+        var philosopherInsightTable = philosopherInsightEffects.Select(e => new FeatDefinitionFeatEffect { FeatDefinitionId = philosopherInsightDefinition.Id, FeatEffectId = e.Id }); 
 
         // Background definitions
 
@@ -165,7 +209,9 @@ public static class TestDataSeeder
         {
             Name = "Philosopher",
             Description = "Thinks and stuff",
-            AbilityScoreDefinitions = new List<AbilityScoreDefinition> { intDefinition, wisDefinition, chaDefinition }
+            AbilityScoreDefinitions = new List<AbilityScoreDefinition> { intDefinition, wisDefinition, chaDefinition },
+            FeatDefinition = philosopherInsightFeat,
+            SkillDefinitions = new List<SkillDefinition> { arcanaDefinition, insightDefinition }
         };
     }
 }
