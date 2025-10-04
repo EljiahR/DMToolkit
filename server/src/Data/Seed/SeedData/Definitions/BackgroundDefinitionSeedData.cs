@@ -3,15 +3,15 @@ using DMToolkit.Models.Definitions;
 
 public static class BackgroundDefinitionSeedData
 {
-    public static readonly BackgroundDefinition PhilosopherDefinition = new()   
+    public static readonly BackgroundDefinition PhilosopherDefinition = new()
     {
         Name = "Philosopher",
-        Description =    "Thinks and stuff",
+        Description = "Thinks and stuff",
         AbilityScoreDefinitions = new List<AbilityScoreDefinition> { AbilityScoreDefinitionSeedData.IntDefinition, AbilityScoreDefinitionSeedData.WisDefinition, AbilityScoreDefinitionSeedData.ChaDefinition },
         FeatDefinition = FeatDefinitionSeedData.PhilosopherInsightDefinition,
         SkillDefinitions = new List<SkillDefinition> { SkillDefinitionSeedData.ArcanaDefinition, SkillDefinitionSeedData.InsightDefinition }
     };
-        
+
     public static readonly BackgroundDefinition WayfarerBackground = new()
     {
         Name = "Wayfarer",
@@ -19,5 +19,11 @@ public static class BackgroundDefinitionSeedData
         AbilityScoreDefinitions = new List<AbilityScoreDefinition> { AbilityScoreDefinitionSeedData.StrDefinition, AbilityScoreDefinitionSeedData.ConDefinition, AbilityScoreDefinitionSeedData.WisDefinition },
         FeatDefinition = FeatDefinitionSeedData.TravelersResilienceDefinition,
         SkillDefinitions = new List<SkillDefinition> { SkillDefinitionSeedData.SurvivalDefinition, SkillDefinitionSeedData.PerceptionDefinition }
+    };
+
+    public static readonly List<BackgroundDefinition> AllBackgroundDefinitions = new()
+    {
+        PhilosopherDefinition,
+        WayfarerBackground
     };
 }

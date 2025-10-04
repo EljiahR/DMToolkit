@@ -116,4 +116,16 @@ public static class FeatEffectSeedData
     public static readonly List<FeatEffect> ToughEffects = new() { HpFlatBonusEffect };
     public static readonly List<FeatEffect> PhilosopherInsightEffects = new() { InsightfulReasoningEffect, PersuasiveSpeakerEffect, ContemplativeRestEffect };
     public static readonly List<FeatEffect> TravelersResilienceEffects = new() { ResistExhaustionEffect, SurvivalExpertiseEffect };
+    public static readonly List<FeatEffect> AllEffects = new()
+    {
+        IgnoreCoverEffect,
+        LongRangeAccuracyEffect,
+        PowerShotEffect,
+        HpFlatBonusEffect,
+        InsightfulReasoningEffect,
+        PersuasiveSpeakerEffect,
+        ContemplativeRestEffect,
+        ResistExhaustionEffect,
+        SurvivalExpertiseEffect
+    };
 }

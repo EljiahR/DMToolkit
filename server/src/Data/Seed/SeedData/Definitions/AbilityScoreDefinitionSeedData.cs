@@ -50,4 +50,6 @@ public static class AbilityScoreDefinitionSeedData
         Abbreviation = "cha",
         SkillDefinitions = new List<SkillDefinition> { SkillDefinitionSeedData.DeceptionDefinition }
     };
+
+    public static readonly AbilityScoreDefinition[] AllScoreDefinitions = { StrDefinition, DexDefinition, ConDefinition, IntDefinition, WisDefinition, ChaDefinition };
 }

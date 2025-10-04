@@ -8,4 +8,5 @@ public static class FeatDefinitionFeatEffectSeedData
     public static readonly List<FeatDefinitionFeatEffect> ToughTable = FeatEffectSeedData.ToughEffects.Select(e => new FeatDefinitionFeatEffect { FeatDefinitionId = FeatDefinitionSeedData.ToughDefinition.Id, FeatEffectId = e.Id }).ToList();
     public static readonly List<FeatDefinitionFeatEffect> PhilosopherInsightTable = FeatEffectSeedData.PhilosopherInsightEffects.Select(e => new FeatDefinitionFeatEffect { FeatDefinitionId = FeatDefinitionSeedData.PhilosopherInsightDefinition.Id, FeatEffectId = e.Id }).ToList();
     public static readonly List<FeatDefinitionFeatEffect> TravelersResilienceEffectsTable = FeatEffectSeedData.TravelersResilienceEffects.Select(e => new FeatDefinitionFeatEffect { FeatDefinitionId = FeatDefinitionSeedData.TravelersResilienceDefinition.Id, FeatEffectId = e.Id }).ToList();
+    public static readonly List<FeatDefinitionFeatEffect> AllTables = SharpshooterTable.Concat(ToughTable).Concat(PhilosopherInsightTable).Concat(TravelersResilienceEffectsTable).ToList();
 }

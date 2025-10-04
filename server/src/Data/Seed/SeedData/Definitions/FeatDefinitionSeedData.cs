@@ -27,4 +27,12 @@ public static class FeatDefinitionSeedData
         Name = "Traveler's Resilience",
         Description = "Years of wandering have hardened you against fatigue and sharpened your survival instincts.",
     };
+
+    public static readonly List<FeatDefinition> AllFeatDefinitions = new()
+    {
+        SharpshooterDefinition,
+        ToughDefinition,
+        PhilosopherInsightDefinition,
+        TravelersResilienceDefinition
+    };
 }

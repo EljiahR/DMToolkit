@@ -45,4 +45,13 @@ public static class SkillDefinitionSeedData
         Name = "Survival",
         Description = "Ability to LIVE"
     };
+
+    public static readonly SkillDefinition[] AllSkillDefinitions = {
+        ArcanaDefinition,
+        AthleticsDefinition,
+        DeceptionDefinition,
+        InsightDefinition,
+        PerceptionDefinition,
+        SurvivalDefinition
+    };
 }
