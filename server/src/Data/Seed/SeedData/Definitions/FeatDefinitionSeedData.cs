@@ -52,6 +52,42 @@ public static class FeatDefinitionSeedData
         Description = "Your intuition allows you to sense fluctuations in magical energy before others can perceive them.",
     };
 
+    public static readonly FeatDefinition EnduringResilienceDefinition = new()
+    {
+        Name = "Enduring Resilience",
+        Description = "The Stoneborn’s connection to the earth grants them incredible fortitude in the face of harm.",
+    };
+
+    public static readonly FeatDefinition MoltenSurgeDefinition = new()
+    {
+        Name = "Molten Surge",
+        Description = "Your veins thrum with latent volcanic energy that erupts in moments of desperation, amplifying your physical might temporarily.",
+    };
+
+    public static readonly FeatDefinition UnyieldingFormDefinition = new()
+    {
+        Name = "Unyielding Form",
+        Description = "When focused, your body becomes nearly impervious, resisting damage with supernatural toughness.",
+    };
+
+    public static readonly FeatDefinition EssenceOverflowDefinition = new()
+    {
+        Name = "Essence Overflow",
+        Description = "Your unstable form leaks raw magic, allowing you to enhance your spells or abilities in unpredictable but powerful ways.",
+    };
+
+    public static readonly FeatDefinition RadiantPulseDefinition = new()
+    {
+        Name = "Radiant Pulse",
+        Description = "You can channel your inner light into a burst of healing or searing brilliance.",
+    };
+
+    public static readonly FeatDefinition VeilOfDuskDefinition = new()
+    {
+        Name = "Veil of Dusk",
+        Description = "You shroud yourself in shadow, becoming harder to detect and briefly resistant to harm.",
+    };
+
     public static readonly List<FeatDefinition> AllFeatDefinitions = new()
     {
         SharpshooterDefinition,
@@ -61,6 +97,12 @@ public static class FeatDefinitionSeedData
         HoldTheLineDefinition,
         IronStaminaDefinition,
         FocusChannelDefinition,
-        ArcaneInstinctDefinition
+        ArcaneInstinctDefinition,
+        EnduringResilienceDefinition,
+        MoltenSurgeDefinition,
+        UnyieldingFormDefinition,
+        EssenceOverflowDefinition,
+        RadiantPulseDefinition,
+        VeilOfDuskDefinition,
     };
 }

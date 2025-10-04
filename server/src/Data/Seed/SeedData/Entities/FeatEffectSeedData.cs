@@ -207,6 +207,96 @@ public static class FeatEffectSeedData
         }
     };
 
+    public static readonly FeatEffect StoneSkinEffect = new()
+    {
+        Type = "DamageResistance",
+        Title = "Stone Skin",
+        Description = "Gain resistance to bludgeoning damage from nonmagical sources.",
+        Data = new Dictionary<string, object>
+        {
+            { "DamageType", "Bludgeoning" },
+            { "ResistanceValue", 0.5 }
+        }
+    };
+
+    public static readonly FeatEffect EarthenFocusEffect = new()
+    {
+        Type = "SavingThrowBonus",
+        Title = "Earthen Focus",
+        Description = "You have advantage on Constitution saving throws made to resist exhaustion.",
+        Data = new Dictionary<string, object>
+        {
+            { "Ability", "Constitution" },
+            { "Condition", "Exhaustion" },
+            { "Bonus", "Advantage" }
+        }
+    };
+
+    public static readonly FeatEffect MoltenEmpowermentEffect = new()
+    {
+        Type = "TemporaryBuff",
+        Title = "Molten Empowerment",
+        Description = "When reduced below half health, gain +2 Strength until the end of your next turn.",
+        Data = new Dictionary<string, object>
+        {
+            { "Trigger", "BelowHalfHP" },
+            { "Stat", "Strength" },
+            { "Bonus", 2 },
+            { "Duration", "1Turn" }
+        }
+    };
+
+    public static FeatEffect HardenedFleshEffect = new()
+    {
+        Type = "PassiveDefense",
+        Title = "Hardened Flesh",
+        Description = "Reduce incoming physical damage by 1 while not wearing heavy armor.",
+        Data = new Dictionary<string, object>
+        {
+            { "DamageReduction", 1 },
+            { "Condition", "LightOrNoArmor" }
+        }
+    };
+
+    public static FeatEffect AethericSurgeEffect = new()
+    {
+        Type = "MagicAmplify",
+        Title = "Aetheric Surge",
+        Description = "Once per rest, reroll a spell attack or damage roll and take the higher result.",
+        Data = new Dictionary<string, object>
+        {
+            { "Uses", 1 },
+            { "Recharge", "ShortRest" }
+        }
+    };
+
+    public static FeatEffect RadiantPulseEffect = new()
+    {
+        Type = "AreaEffect",
+        Title = "Radiant Pulse",
+        Description = "Emit a burst of radiant light that heals allies or burns enemies within 10 feet.",
+        Data = new Dictionary<string, object>
+        {
+            { "Radius", 10 },
+            { "HealAmount", 4 },
+            { "DamageAmount", 4 },
+            { "DamageType", "Radiant" }
+        }
+    };
+
+    public static FeatEffect ShadowVeilEffect = new()
+    {
+        Type = "StealthBuff",
+        Title = "Shadow Veil",
+        Description = "Gain advantage on Stealth checks for 1 minute and resistance to radiant damage.",
+        Data = new Dictionary<string, object>
+        {
+            { "Duration", "1Minute" },
+            { "Bonus", "Advantage" },
+            { "DamageResistance", "Radiant" }
+        }
+    };
+
     // Collections
     public static readonly List<FeatEffect> SharpshooterEffects = new() { IgnoreCoverEffect, LongRangeAccuracyEffect, PowerShotEffect };
     public static readonly List<FeatEffect> ToughEffects = new() { HpFlatBonusEffect };
@@ -216,6 +306,13 @@ public static class FeatEffectSeedData
     public static readonly List<FeatEffect> IronStaminaEffects = new() { ResistFatigueEffect, EnduringFortitudeEffect };
     public static readonly List<FeatEffect> FocusChannelEffects = new() { DisciplinedFocusEffect, EfficientCastingEffect };
     public static readonly List<FeatEffect> ArcaneInstinctEffects = new() { SenseMagicEffect, PreparedMindEffect };
+    public static readonly List<FeatEffect> EnduringResilienceEffects = new() { StoneSkinEffect, EarthenFocusEffect };
+    public static readonly List<FeatEffect> MoltenSurgeEffects = new() { MoltenEmpowermentEffect };
+    public static readonly List<FeatEffect> UnyieldingFormEffects = new() { HardenedFleshEffect };
+    public static readonly List<FeatEffect> EssenceOverflowEffects = new() { AethericSurgeEffect };
+    public static readonly List<FeatEffect> RadiantPulseEffects = new() { RadiantPulseEffect };
+    public static readonly List<FeatEffect> VeilOfDuskEffects = new() { ShadowVeilEffect };
+
     public static readonly List<FeatEffect> AllEffects = new()
     {
         IgnoreCoverEffect,
@@ -234,6 +331,13 @@ public static class FeatEffectSeedData
         DisciplinedFocusEffect,
         EfficientCastingEffect,
         SenseMagicEffect,
-        PreparedMindEffect
+        PreparedMindEffect,
+        StoneSkinEffect,
+        EarthenFocusEffect,
+        MoltenEmpowermentEffect,
+        HardenedFleshEffect,
+        AethericSurgeEffect,
+        RadiantPulseEffect,
+        ShadowVeilEffect
     };
 }

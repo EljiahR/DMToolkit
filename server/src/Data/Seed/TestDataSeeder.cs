@@ -17,9 +17,11 @@ public static class TestDataSeeder
         context.AddRange(FeatDefinitionFeatEffectSeedData.AllTables);
         context.AddRange(AbilityScoreDefinitionSeedData.AllScoreDefinitions);
         context.AddRange(CharacterClassDefinitionSeedData.AllCharacterClasses);
+        context.AddRange(SpeciesDefinitionSeedData.AllSpecies);
         await context.SaveChangesAsync();
 
         context.AddRange(BackgroundDefinitionSeedData.AllBackgroundDefinitions);
+        context.AddRange(LineageDefinitionSeedData.AllLineages);
         await context.SaveChangesAsync();
     }
 }
