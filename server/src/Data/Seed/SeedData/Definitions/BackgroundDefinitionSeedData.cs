@@ -1,5 +1,6 @@
-using DMToolkit.Data.Seeders.SeedData;
 using DMToolkit.Models.Definitions;
+
+namespace DMToolkit.Data.Seeders.SeedData;
 
 public static class BackgroundDefinitionSeedData
 {

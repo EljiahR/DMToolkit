@@ -111,11 +111,111 @@ public static class FeatEffectSeedData
         }
     };
 
+    public static readonly FeatEffect StopTheAdvanceEffect = new()
+    {
+        Type = "ReactionTrigger",
+        Title = "Stop the Advance",
+        Description = "When an enemy moves within 5 feet of you, you may use your reaction to reduce their movement speed by half until the end of their turn.",
+        Data = new()
+        {
+            { "Trigger", "EnemyMovementWithinRange" },
+            { "Range", 5 },
+            { "Effect", "ReduceSpeed" },
+            { "Value", 0.5 }
+        }
+    };
+    public static readonly FeatEffect GuardiansResolveEffect = new()
+    {
+        Type = "DefenseModifier",
+        Title = "Guardian’s Resolve",
+        Description = "Gain a +1 bonus to AC while you are within 5 feet of at least one ally.",
+        Data = new()
+            {
+                { "Condition", "AllyNearby" },
+                { "ACBonus", 1 }
+            }
+    };
+
+    public static readonly FeatEffect ResistFatigueEffect = new()
+    {
+        Type = "ConditionResistance",
+        Title = "Resist Fatigue",
+        Description = "Gain advantage on saving throws against exhaustion or effects that cause fatigue.",
+        Data = new()
+        {
+            { "Condition", "Exhaustion" },
+            { "Advantage", true }
+        }
+    };
+    public static readonly FeatEffect EnduringFortitudeEffect = new()
+    {
+        Type = "HealthBonus",
+        Title = "Enduring Fortitude",
+        Description = "Increase your maximum hit points by 1 per character level.",
+        Data = new()
+        {
+            { "PerLevel", 1 },
+            { "AppliesTo", "MaxHP" }
+        }
+    };
+
+    public static readonly FeatEffect DisciplinedFocusEffect = new()
+    {
+        Type = "ConcentrationBonus",
+        Title = "Disciplined Focus",
+        Description = "Gain advantage on concentration checks to maintain magical effects.",
+        Data = new()
+        {
+            { "CheckType", "Concentration" },
+            { "Advantage", true }
+        }
+    };
+
+    public static readonly FeatEffect EfficientCastingEffect = new()
+    {
+        Type = "ResourceModifier",
+        Title = "Efficient Casting",
+        Description = "Once per long rest, you may reduce the cost of one spell or ability by 1 point (mana, focus, or equivalent).",
+        Data = new()
+        {
+            { "ResourceType", "Mana" },
+            { "Reduction", 1 },
+            { "Uses", 1 },
+            { "RestType", "Long" }
+        }
+    };
+
+    public static readonly FeatEffect SenseMagicEffect = new()
+    {
+        Type = "DetectionBonus",
+        Title = "Sense Magic",
+        Description = "You automatically detect the presence of active magical effects within 15 feet.",
+        Data = new()
+        {
+            { "DetectionType", "Magic" },
+            { "Range", 15 }
+        }
+};
+    public static readonly FeatEffect PreparedMindEffect = new()
+    {
+        Type = "InitiativeModifier",
+        Title = "Prepared Mind",
+        Description = "Gain a +1 bonus to initiative rolls.",
+        Data = new()
+        {
+            { "Bonus", 1 }
+        }
+    };
+
     // Collections
     public static readonly List<FeatEffect> SharpshooterEffects = new() { IgnoreCoverEffect, LongRangeAccuracyEffect, PowerShotEffect };
     public static readonly List<FeatEffect> ToughEffects = new() { HpFlatBonusEffect };
     public static readonly List<FeatEffect> PhilosopherInsightEffects = new() { InsightfulReasoningEffect, PersuasiveSpeakerEffect, ContemplativeRestEffect };
     public static readonly List<FeatEffect> TravelersResilienceEffects = new() { ResistExhaustionEffect, SurvivalExpertiseEffect };
+    public static readonly List<FeatEffect> HoldTheLineEffects = new() { StopTheAdvanceEffect, GuardiansResolveEffect };
+    public static readonly List<FeatEffect> IronStaminaEffects = new() { ResistFatigueEffect, EnduringFortitudeEffect };
+    public static readonly List<FeatEffect> FocusChannelEffects = new() { DisciplinedFocusEffect, EfficientCastingEffect };
+    public static readonly List<FeatEffect> ArcaneInstinctEffects = new() { SenseMagicEffect, PreparedMindEffect };
     public static readonly List<FeatEffect> AllEffects = new()
     {
         IgnoreCoverEffect,
@@ -126,6 +226,14 @@ public static class FeatEffectSeedData
         PersuasiveSpeakerEffect,
         ContemplativeRestEffect,
         ResistExhaustionEffect,
-        SurvivalExpertiseEffect
+        SurvivalExpertiseEffect,
+        StopTheAdvanceEffect,
+        GuardiansResolveEffect,
+        ResistFatigueEffect,
+        EnduringFortitudeEffect,
+        DisciplinedFocusEffect,
+        EfficientCastingEffect,
+        SenseMagicEffect,
+        PreparedMindEffect
     };
 }

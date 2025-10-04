@@ -14,9 +14,9 @@ public static class TestDataSeeder
         context.AddRange(FeatDefinitionSeedData.AllFeatDefinitions);
         await context.SaveChangesAsync();
 
-
         context.AddRange(FeatDefinitionFeatEffectSeedData.AllTables);
         context.AddRange(AbilityScoreDefinitionSeedData.AllScoreDefinitions);
+        context.AddRange(CharacterClassDefinitionSeedData.AllCharacterClasses);
         await context.SaveChangesAsync();
 
         context.AddRange(BackgroundDefinitionSeedData.AllBackgroundDefinitions);

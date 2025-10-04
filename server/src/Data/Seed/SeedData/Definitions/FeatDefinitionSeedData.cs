@@ -28,11 +28,39 @@ public static class FeatDefinitionSeedData
         Description = "Years of wandering have hardened you against fatigue and sharpened your survival instincts.",
     };
 
+    public static readonly FeatDefinition HoldTheLineDefinition = new()
+    {
+        Name = "Hold the Line",
+        Description = "You excel at halting enemy advances and protecting allies who fight beside you.",
+    };
+
+    public static readonly FeatDefinition IronStaminaDefinition = new()
+    {
+        Name = "Iron Stamina",
+        Description = "Your training has made you tireless and steadfast, shrugging off fatigue and pain.",
+    };
+
+    public static readonly FeatDefinition FocusChannelDefinition = new()
+    {
+        Name = "Focus Channel",
+        Description = "You maintain precision over your power through intense concentration.",
+    };
+
+    public static readonly FeatDefinition ArcaneInstinctDefinition = new()
+    {
+        Name = "Arcane Instinct",
+        Description = "Your intuition allows you to sense fluctuations in magical energy before others can perceive them.",
+    };
+
     public static readonly List<FeatDefinition> AllFeatDefinitions = new()
     {
         SharpshooterDefinition,
         ToughDefinition,
         PhilosopherInsightDefinition,
-        TravelersResilienceDefinition
+        TravelersResilienceDefinition,
+        HoldTheLineDefinition,
+        IronStaminaDefinition,
+        FocusChannelDefinition,
+        ArcaneInstinctDefinition
     };
 }
