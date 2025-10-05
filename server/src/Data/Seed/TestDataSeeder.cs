@@ -1,6 +1,5 @@
 using DMToolkit.Data.Seeders.SeedData;
 
-
 namespace DMToolkit.Data.Seeders;
 
 public class TestDataSeeder

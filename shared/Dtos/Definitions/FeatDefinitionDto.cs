@@ -1,6 +1,6 @@
 namespace DMToolkit.Shared.Models.Dtos;
 
-public class FeatureDefinitionDto
+public class FeatDefinitionDto
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;

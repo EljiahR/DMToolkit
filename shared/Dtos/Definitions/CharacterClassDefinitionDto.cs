@@ -1,18 +1,17 @@
-using DMToolkit.Models.Entities;
-using DMToolkit.Models.JoinTables;
+using DMToolkit.Shared.Models.Dtos.Joins;
 
-namespace DMToolkit.Models.Definitions;
+namespace DMToolkit.Shared.Models.Dtos;
 
-public class CharacterClassDefinition : IDefinition
+public class CharacterClassDefinitionDto
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public int HitDie { get; set; } = 0;
     public int FixedHp { get; set; } = 0;
-    public ICollection<SubclassDefinition> SubclassDefinitions { get; set; } = new List<SubclassDefinition>();
-    public ICollection<CharacterClassDefinitionFeatDefinition> CharacterClassDefinitionFeatDefinitions { get; set; } = new List<CharacterClassDefinitionFeatDefinition>();
-    public ICollection<Spell> Spells { get; set; } = new List<Spell>();
+    public ICollection<SubclassDefinitionDto> SubclassDefinitions { get; set; } = new List<SubclassDefinitionDto>();
+    public ICollection<CharacterClassFeatsDto> Feats{ get; set; } = new List<CharacterClassFeatsDto>();
+    public ICollection<SpellDto> Spells { get; set; } = new List<SpellDto>();
     public int DefaultStr { get; set; } = 0;
     public int DefaultDex { get; set; } = 0;
     public int DefaultCon { get; set; } = 0;
