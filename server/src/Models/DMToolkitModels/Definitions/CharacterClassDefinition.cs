@@ -1,4 +1,5 @@
 using DMToolkit.Models.Entities;
+using DMToolkit.Models.Items.Bases;
 using DMToolkit.Models.JoinTables;
 
 namespace DMToolkit.Models.Definitions;
@@ -12,7 +13,8 @@ public class CharacterClassDefinition : IDefinition
     public int FixedHp { get; set; } = 0;
     public ICollection<SubclassDefinition> SubclassDefinitions { get; set; } = new List<SubclassDefinition>();
     public ICollection<CharacterClassDefinitionFeatDefinition> CharacterClassDefinitionFeatDefinitions { get; set; } = new List<CharacterClassDefinitionFeatDefinition>();
-    public ICollection<Spell> Spells { get; set; } = new List<Spell>();
+    public ICollection<ItemBase> ItemBasesSetA { get; set; } = new List<ItemBase>();
+    public ICollection<ItemBase> ItemBasesSetB { get; set; } = new List<ItemBase>();
     public int DefaultStr { get; set; } = 0;
     public int DefaultDex { get; set; } = 0;
     public int DefaultCon { get; set; } = 0;
