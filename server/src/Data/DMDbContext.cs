@@ -4,6 +4,7 @@ using DMToolkit.Models;
 using DMToolkit.Models.Definitions;
 using DMToolkit.Models.Entities;
 using DMToolkit.Models.Instances;
+using DMToolkit.Models.JoinTables;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -22,6 +23,8 @@ public class DMDbContext : IdentityDbContext<DMUser>
     public DbSet<BackgroundDefinition> BackgroundDefinitions { get; set; }
     public DbSet<CharacterClassDefinition> CharacterClassDefinitions { get; set; }
     public DbSet<FeatDefinition> FeatDefinitions { get; set; }
+    public DbSet<LineageDefinition> LineageDefinitions { get; set; }
+    public DbSet<SkillDefinition> SkillDefinitions { get; set; }
     public DbSet<SpeciesDefinition> SpeciesDefinitions { get; set; }
 
     // Entities
@@ -32,6 +35,9 @@ public class DMDbContext : IdentityDbContext<DMUser>
 
     // Instances
     public DbSet<Character> Characters { get; set; }
+
+    // Join Tables
+    public DbSet<FeatDefinitionFeatEffect> FeatDefinitionFeatEffects { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
