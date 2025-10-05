@@ -1,8 +1,7 @@
-namespace DMToolkit.Shared.Models.Dtos;
+namespace DMToolkit.Shared.Models.Dtos.Entities;
 
-public class SkillDto
+public class SchoolDto
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;
-    public bool Proficient { get; set; } = false;
 }
