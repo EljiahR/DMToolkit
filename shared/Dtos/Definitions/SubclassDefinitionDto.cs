@@ -1,3 +1,5 @@
+using DMToolkit.Shared.Models.Dtos.Joins;
+
 namespace DMToolkit.Shared.Models.Dtos;
 
 public class SubclassDefinitionDto
@@ -5,5 +7,5 @@ public class SubclassDefinitionDto
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public List<string> FeatureIds { get; set; } = new();
+    public ICollection<CharacterClassFeatsDto> FeatTables { get; set; } = new List<CharacterClassFeatsDto>();
 }
