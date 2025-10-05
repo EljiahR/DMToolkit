@@ -10,8 +10,9 @@ public class CharacterClassDefinitionDto
     public int HitDie { get; set; } = 0;
     public int FixedHp { get; set; } = 0;
     public ICollection<SubclassDefinitionDto> SubclassDefinitions { get; set; } = new List<SubclassDefinitionDto>();
-    public ICollection<CharacterClassFeatsDto> Feats{ get; set; } = new List<CharacterClassFeatsDto>();
-    public ICollection<SpellDto> Spells { get; set; } = new List<SpellDto>();
+    public ICollection<CharacterClassFeatsDto> FeatTables { get; set; } = new List<CharacterClassFeatsDto>();
+    public ICollection<string> ItemSetAIds { get; set; } = new List<string>();
+    public ICollection<string> ItemSetBIds { get; set; } = new List<string>();
     public int DefaultStr { get; set; } = 0;
     public int DefaultDex { get; set; } = 0;
     public int DefaultCon { get; set; } = 0;
