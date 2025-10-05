@@ -1,8 +1,11 @@
 using DMToolkit.Data;
+using DMToolkit.Data.Seeders;
 using DMToolkit.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+string? dbConnection = builder.Configuration["DatabaseConnectionString"];
 
 var allowedOrigins = new List<string?>
 {
@@ -10,7 +13,18 @@ var allowedOrigins = new List<string?>
     builder.Configuration["DevelopmentOrigin"]
 };
 
-Console.WriteLine(allowedOrigins[0]);
+if (!string.IsNullOrWhiteSpace(dbConnection))
+{
+    builder.Services.AddDbContext<DMDbContext>(options =>
+        options.UseNpgsql(dbConnection));
+
+    builder.Services.AddScoped<TestDataSeeder>();
+}
+else
+{
+    builder.Services.AddDbContext<DMDbContext>(options =>
+        options.UseSqlite("Data Source=chat.db"));
+}
 
 // Add services to the container.
 builder.Services.AddDbContext<DMDbContext>(options =>
@@ -44,6 +58,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+if (!string.IsNullOrWhiteSpace(dbConnection))
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var seeder = scope.ServiceProvider.GetRequiredService<TestDataSeeder>();
+        seeder.Seed();
+    }
+}
 
 app.MapIdentityApi<DMUser>();
 

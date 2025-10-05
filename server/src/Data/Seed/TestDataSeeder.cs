@@ -1,27 +1,31 @@
 using DMToolkit.Data.Seeders.SeedData;
-using DMToolkit.Models.Definitions;
-using DMToolkit.Models.Entities;
-using DMToolkit.Models.JoinTables;
+
 
 namespace DMToolkit.Data.Seeders;
 
-public static class TestDataSeeder
+public class TestDataSeeder
 {
-    public static async Task SeedAsync(DMDbContext context)
+    private readonly DMDbContext _context;
+    public TestDataSeeder(DMDbContext context)
     {
-        context.AddRange(SkillDefinitionSeedData.AllSkillDefinitions);
-        context.AddRange(FeatEffectSeedData.AllEffects);
-        context.AddRange(FeatDefinitionSeedData.AllFeatDefinitions);
-        await context.SaveChangesAsync();
+        _context = context;
+    }
 
-        context.AddRange(FeatDefinitionFeatEffectSeedData.AllTables);
-        context.AddRange(AbilityScoreDefinitionSeedData.AllScoreDefinitions);
-        context.AddRange(CharacterClassDefinitionSeedData.AllCharacterClasses);
-        context.AddRange(SpeciesDefinitionSeedData.AllSpecies);
-        await context.SaveChangesAsync();
+    public void Seed()
+    {
+        _context.AddRange(SkillDefinitionSeedData.AllSkillDefinitions);
+        _context.AddRange(FeatEffectSeedData.AllEffects);
+        _context.AddRange(FeatDefinitionSeedData.AllFeatDefinitions);
+        _context.SaveChanges();
 
-        context.AddRange(BackgroundDefinitionSeedData.AllBackgroundDefinitions);
-        context.AddRange(LineageDefinitionSeedData.AllLineages);
-        await context.SaveChangesAsync();
+        _context.AddRange(FeatDefinitionFeatEffectSeedData.AllTables);
+        _context.AddRange(AbilityScoreDefinitionSeedData.AllScoreDefinitions);
+        _context.AddRange(CharacterClassDefinitionSeedData.AllCharacterClasses);
+        _context.AddRange(SpeciesDefinitionSeedData.AllSpecies);
+        _context.SaveChanges();
+
+        _context.AddRange(BackgroundDefinitionSeedData.AllBackgroundDefinitions);
+        _context.AddRange(LineageDefinitionSeedData.AllLineages);
+        _context.SaveChanges();
     }
 }
