@@ -1,4 +1,4 @@
-namespace DMToolkit.Shared.Models.Dtos;
+namespace DMToolkit.Shared.Models.Dtos.Definitions;
 
 public class FeatDefinitionDto
 {
