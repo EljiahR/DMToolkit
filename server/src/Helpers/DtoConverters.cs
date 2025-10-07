@@ -25,13 +25,37 @@ public static class DtoConverters
         };
     }
 
+    public static SkillDefinitionDto ConvertSkillDefinition(SkillDefinition skill)
+    {
+        return new()
+        {
+            Id = skill.Id,
+            Name = skill.Name,
+            Description = skill.Description
+        };
+    }
     public static AbilityScoreDefinitionDto ConvertAbilityScoreDefinition(AbilityScoreDefinition abilityScore)
     {
-        return new() { };
+        return new()
+        {
+            Id = abilityScore.Id,
+            Name = abilityScore.Name,
+            Abbreviation = abilityScore.Abbreviation,
+            Description = abilityScore.Description,
+            SkillDefinitions = abilityScore.SkillDefinitions.Select(ConvertSkillDefinition).ToList()
+        };
     }
     public static BackgroundDefinitionDto ConvertBackgroundDefinition(BackgroundDefinition background)
     {
-        return new() { };
+        return new()
+        {
+            Id = background.Id,
+            Name = background.Name,
+            Description = background.Description,
+            AbilityScoreIds = background.AbilityScoreDefinitions.Select(a => a.Id).ToList(),
+            FeatDefinitionId = background.FeatDefinitionId,
+            SkillDefinitionIds = background.SkillDefinitions.Select(s => s.Id).ToList()
+        };
     }
     public static CharacterClassDefinitionDto ConvertCharacterClassDefinition(CharacterClassDefinition characterClass)
     {
