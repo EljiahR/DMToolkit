@@ -3,7 +3,7 @@ using DMToolkit.Shared.Models.Dtos.Entities;
 
 namespace DMToolkit.Shared.Models.Dtos.Collections;
 
-public class StarterSetDto
+public class StartupDataDto
 {
     public List<AbilityScoreDefinitionDto> AbilityScoreDefinitions { get; set; } = new();
     public List<BackgroundDefinitionDto> BackgroundDefinitions { get; set; } = new();

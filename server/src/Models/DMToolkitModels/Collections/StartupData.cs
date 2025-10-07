@@ -3,7 +3,7 @@ using DMToolkit.Models.Entities;
 
 namespace DMToolkit.Models.Collections;
 
-public class StarterSet
+public class StartupData
 {
     public List<AbilityScoreDefinition> AbilityScoreDefinitions { get; set; } = new();
     public List<BackgroundDefinition> BackgroundDefinitions { get; set; } = new();

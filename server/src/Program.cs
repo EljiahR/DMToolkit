@@ -17,18 +17,16 @@ if (!string.IsNullOrWhiteSpace(dbConnection))
 {
     builder.Services.AddDbContext<DMDbContext>(options =>
         options.UseNpgsql(dbConnection));
-
-    builder.Services.AddScoped<TestDataSeeder>();
 }
 else
 {
     builder.Services.AddDbContext<DMDbContext>(options =>
         options.UseSqlite("Data Source=chat.db"));
+
+    builder.Services.AddScoped<TestDataSeeder>();
 }
 
-// Add services to the container.
-builder.Services.AddDbContext<DMDbContext>(options =>
-    options.UseSqlite("Data Source=dm.db"));
+builder.Services.AddMemoryCache();
 
 builder.Services.AddCors(options =>
 {
