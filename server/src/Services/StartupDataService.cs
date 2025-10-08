@@ -37,8 +37,14 @@ public class StartupDataService : IStartupDataService
                                         .Include(b => b.AbilityScoreDefinitions)
                                         .Include(b => b.SkillDefinitions)
                                         .AsNoTracking().ToListAsync();
-        var characterClassesTask = _context.CharacterClassDefinitions.AsNoTracking().ToListAsync();
-        var featsTask = _context.FeatDefinitions.AsNoTracking().ToListAsync();
+        var characterClassesTask = _context.CharacterClassDefinitions
+                                        .Include(c => c.SubclassDefinitions)
+                                            .ThenInclude(s => s.SubclassDefinitionFeatDefinitions)
+                                        .Include(c => c.CharacterClassDefinitionFeatDefinitions)
+                                        .AsNoTracking().ToListAsync();
+        var featsTask = _context.FeatDefinitions
+                                .Include(f => f.FeatDefinitionFeatEffects)
+                                .AsNoTracking().ToListAsync();
         var speciesTask = _context.SpeciesDefinitions.AsNoTracking().ToListAsync();
         var featEffectsTask = _context.FeatEffects.AsNoTracking().ToListAsync();
         var schoolsTask = _context.Schools.AsNoTracking().ToListAsync();

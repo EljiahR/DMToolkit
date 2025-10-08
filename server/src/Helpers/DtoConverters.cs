@@ -101,6 +101,16 @@ public static class DtoConverters
             DefaultCha = characterClass.DefaultCha
         };
     }
+    public static List<FeatDefinitionEffectGroupingDto> ConvertFeatDefinitionFeatEffectJoinTable(IEnumerable<FeatDefinitionFeatEffect> joinTables)
+    {
+        return joinTables.GroupBy(j => j.Group)
+                            .Select(g => new FeatDefinitionEffectGroupingDto
+                            {
+                                Group = g.First().Group,
+                                FeatEffectIds = g.Select(t => t.FeatEffectId).ToList()
+                            })
+                            .ToList();
+    }
     public static FeatDefinitionDto ConvertFeat(FeatDefinition feat)
     {
         return new()
@@ -108,7 +118,7 @@ public static class DtoConverters
             Id = feat.Id,
             Name = feat.Name,
             Description = feat.Description,
-            
+            AvaibleEffectTables = ConvertFeatDefinitionFeatEffectJoinTable(feat.FeatDefinitionFeatEffects)
         };
     }
     public static SpeciesDefinitionDto ConvertSpecies(SpeciesDefinition species)
