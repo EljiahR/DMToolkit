@@ -13,8 +13,8 @@ public class CharacterClassDefinition : IDefinition
     public int FixedHp { get; set; } = 0;
     public ICollection<SubclassDefinition> SubclassDefinitions { get; set; } = new List<SubclassDefinition>();
     public ICollection<CharacterClassDefinitionFeatDefinition> CharacterClassDefinitionFeatDefinitions { get; set; } = new List<CharacterClassDefinitionFeatDefinition>();
-    public ICollection<ItemBase> ItemBasesSetA { get; set; } = new List<ItemBase>();
-    public ICollection<ItemBase> ItemBasesSetB { get; set; } = new List<ItemBase>();
+    public ICollection<ItemBase> ItemBaseSetA { get; set; } = new List<ItemBase>();
+    public ICollection<ItemBase> ItemBaseSetB { get; set; } = new List<ItemBase>();
     public int DefaultStr { get; set; } = 0;
     public int DefaultDex { get; set; } = 0;
     public int DefaultCon { get; set; } = 0;
