@@ -52,7 +52,12 @@ public class StartupDataService : IStartupDataService
                                     .AsNoTracking().ToListAsync();
         var featEffectsTask = _context.FeatEffects.AsNoTracking().ToListAsync();
         var schoolsTask = _context.Schools.AsNoTracking().ToListAsync();
-        var spellsTask = _context.Spells.AsNoTracking().ToListAsync();
+        var spellsTask = _context.Spells
+                                    .Include(s => s.Schools)
+                                    .Include(s => s.CharacterClassDefinitions)
+                                    .Include(s => s.SpellItems)
+                                    .Include(s => s.SpellEffects)
+                                    .AsNoTracking().ToListAsync();
         var spellEffectsTask = _context.SpellEffects.AsNoTracking().ToListAsync();
 
         await Task.WhenAll(abilityScoresTask, backgroundsTask, characterClassesTask, featsTask, speciesTask, featEffectsTask, schoolsTask, spellsTask, spellEffectsTask);

@@ -147,18 +147,59 @@ public static class DtoConverters
     }
     public static FeatEffectDto ConvertFeatEffect(FeatEffect featEffect)
     {
-        return new() { };
+        return new()
+        {
+            Id = featEffect.Id,
+            Type = featEffect.Type,
+            Title = featEffect.Title,
+            Description = featEffect.Description,
+            Data = featEffect.Data
+        };
     }
     public static SchoolDto ConvertSchool(School school)
     {
-        return new() { };
+        return new()
+        {
+            Id = school.Id,
+            Name = school.Name
+        };
+    }
+    public static List<SpellItemDto> ConvertSpellItemBaseJoinTable(IEnumerable<SpellItem> spellItems)
+    {
+        return spellItems.Select(s => new SpellItemDto
+        {
+            ItemId = s.ItemId,
+            AmountRequired = s.AmountRequired
+        }).ToList();
     }
     public static SpellDto ConvertSpell(Spell spell)
     {
-        return new() { };
+        return new()
+        {
+            Id = spell.Id,
+            Name = spell.Name,
+            Level = spell.Level,
+            SchoolIds = spell.Schools.Select(s => s.Id).ToList(),
+            CharacterClassIds = spell.CharacterClassDefinitions.Select(c => c.Id).ToList(),
+            CastingTime = spell.CastingTime,
+            Range = spell.Range,
+            VerbalRequired = spell.VerbalRequired,
+            SomaticRequired = spell.SomaticRequired,
+            MaterialsRequired = spell.MaterialsRequired,
+            MaterialRequirements = ConvertSpellItemBaseJoinTable(spell.SpellItems),
+            Duration = spell.Duration,
+            Description = spell.Description,
+            SpellEffectIds = spell.SpellEffects.Select(e => e.Id).ToList()
+        };
     }
     public static SpellEffectDto ConvertSpellEffect(SpellEffect spellEffect)
     {
-        return new() { };
+        return new()
+        {
+            Id = spellEffect.Id,
+            Subtitle = spellEffect.Subtitle,
+            Type = spellEffect.Type,
+            Data = spellEffect.Data
+        };
     }
 }
