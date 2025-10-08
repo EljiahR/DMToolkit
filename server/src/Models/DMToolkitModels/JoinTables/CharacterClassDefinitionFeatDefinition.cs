@@ -2,7 +2,7 @@ using DMToolkit.Models.Definitions;
 
 namespace DMToolkit.Models.JoinTables;
 
-public class CharacterClassDefinitionFeatDefinition : IJoinTable
+public class CharacterClassDefinitionFeatDefinition : IJoinTable, IClassFeat
 {
     public required string CharacterClassDefinitionId { get; set; }
     public CharacterClassDefinition CharacterClassDefinition { get; set; } = null!;

@@ -10,7 +10,7 @@ public class CharacterClassDefinitionDto
     public int HitDie { get; set; } = 0;
     public int FixedHp { get; set; } = 0;
     public ICollection<SubclassDefinitionDto> SubclassDefinitions { get; set; } = new List<SubclassDefinitionDto>();
-    public ICollection<CharacterClassFeatsDto> FeatTables { get; set; } = new List<CharacterClassFeatsDto>();
+    public ICollection<FeatIdLevelGroupingDto> FeatTables { get; set; } = new List<FeatIdLevelGroupingDto>();
     public ICollection<string> ItemSetAIds { get; set; } = new List<string>();
     public ICollection<string> ItemSetBIds { get; set; } = new List<string>();
     public int DefaultStr { get; set; } = 0;

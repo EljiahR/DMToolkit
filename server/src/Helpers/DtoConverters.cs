@@ -59,14 +59,16 @@ public static class DtoConverters
             SkillDefinitionIds = background.SkillDefinitions.Select(s => s.Id).ToList()
         };
     }
-    public static CharacterClassFeatsDto ConvertSubclassDefinitionFeatDefinition(SubclassDefinitionFeatDefinition joinTable)
+    public static List<FeatIdLevelGroupingDto> ConvertFeatTables(IEnumerable<IClassFeat> featTables)
     {
-        return new()
-        {
-            FeatId = joinTable.FeatDefinitionId,
-            Level = joinTable.Level,
-            Group = joinTable.Group
-        };
+        return featTables.GroupBy(t => t.Group)
+                        .Select(t => new FeatIdLevelGroupingDto
+                        {
+                            FeatIds = t.Select(f => f.FeatDefinitionId).ToList(),
+                            Group = t.First().Group,
+                            Level = t.First().Level
+                        })
+                        .ToList();
     }
     public static SubclassDefinitionDto ConvertSubclassDefintion(SubclassDefinition subclass)
     {
@@ -75,16 +77,7 @@ public static class DtoConverters
             Id = subclass.Id,
             Name = subclass.Name,
             Description = subclass.Description,
-            FeatTables = subclass.SubclassDefinitionFeatDefinitions.Select(ConvertSubclassDefinitionFeatDefinition).ToList()
-        };
-    }
-    public static CharacterClassFeatsDto ConvertCharacterClassDefinitionFeatDefinition(CharacterClassDefinitionFeatDefinition joinTable)
-    {
-        return new()
-        {
-            FeatId = joinTable.FeatDefinitionId,
-            Level = joinTable.Level,
-            Group = joinTable.Group
+            FeatTables = ConvertFeatTables(subclass.SubclassDefinitionFeatDefinitions)
         };
     }
     public static CharacterClassDefinitionDto ConvertCharacterClassDefinition(CharacterClassDefinition characterClass)
@@ -97,7 +90,7 @@ public static class DtoConverters
             HitDie = characterClass.HitDie,
             FixedHp = characterClass.FixedHp,
             SubclassDefinitions = characterClass.SubclassDefinitions.Select(ConvertSubclassDefintion).ToList(),
-            FeatTables = characterClass.CharacterClassDefinitionFeatDefinitions.Select(ConvertCharacterClassDefinitionFeatDefinition).ToList(),
+            FeatTables = ConvertFeatTables(characterClass.CharacterClassDefinitionFeatDefinitions),
             ItemSetAIds = characterClass.ItemBaseSetA.Select(a => a.Id).ToList(),
             ItemSetBIds = characterClass.ItemBaseSetB.Select(b => b.Id).ToList(),
             DefaultStr = characterClass.DefaultStr,
