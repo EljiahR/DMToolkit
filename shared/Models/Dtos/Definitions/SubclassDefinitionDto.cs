@@ -1,6 +1,6 @@
 using DMToolkit.Shared.Models.Dtos.Joins;
 
-namespace DMToolkit.Shared.Models.Dtos;
+namespace DMToolkit.Shared.Models.Dtos.Definitions;
 
 public class SubclassDefinitionDto
 {

@@ -30,8 +30,13 @@ public class StartupDataService : IStartupDataService
 
         _logger.LogInformation("Cache miss. Fetching startup data from database...");
 
-        var abilityScoresTask = _context.AbilityScoreDefinitions.AsNoTracking().ToListAsync();
-        var backgroundsTask = _context.BackgroundDefinitions.AsNoTracking().ToListAsync();
+        var abilityScoresTask = _context.AbilityScoreDefinitions
+                                        .Include(a => a.SkillDefinitions)
+                                        .AsNoTracking().ToListAsync();
+        var backgroundsTask = _context.BackgroundDefinitions
+                                        .Include(b => b.AbilityScoreDefinitions)
+                                        .Include(b => b.SkillDefinitions)
+                                        .AsNoTracking().ToListAsync();
         var characterClassesTask = _context.CharacterClassDefinitions.AsNoTracking().ToListAsync();
         var featsTask = _context.FeatDefinitions.AsNoTracking().ToListAsync();
         var speciesTask = _context.SpeciesDefinitions.AsNoTracking().ToListAsync();

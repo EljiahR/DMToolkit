@@ -1,9 +1,11 @@
 using DMToolkit.Models.Collections;
 using DMToolkit.Models.Definitions;
 using DMToolkit.Models.Entities;
+using DMToolkit.Models.JoinTables;
 using DMToolkit.Shared.Models.Dtos.Collections;
 using DMToolkit.Shared.Models.Dtos.Definitions;
 using DMToolkit.Shared.Models.Dtos.Entities;
+using DMToolkit.Shared.Models.Dtos.Joins;
 
 namespace DMToolkit.Helpers;
 
@@ -57,9 +59,54 @@ public static class DtoConverters
             SkillDefinitionIds = background.SkillDefinitions.Select(s => s.Id).ToList()
         };
     }
+    public static CharacterClassFeatsDto ConvertSubclassDefinitionFeatDefinition(SubclassDefinitionFeatDefinition joinTable)
+    {
+        return new()
+        {
+            FeatId = joinTable.FeatDefinitionId,
+            Level = joinTable.Level,
+            Group = joinTable.Group
+        };
+    }
+    public static SubclassDefinitionDto ConvertSubclassDefintion(SubclassDefinition subclass)
+    {
+        return new()
+        {
+            Id = subclass.Id,
+            Name = subclass.Name,
+            Description = subclass.Description,
+            FeatTables = subclass.SubclassDefinitionFeatDefinitions.Select(ConvertSubclassDefinitionFeatDefinition).ToList()
+        };
+    }
+    public static CharacterClassFeatsDto ConvertCharacterClassDefinitionFeatDefinition(CharacterClassDefinitionFeatDefinition joinTable)
+    {
+        return new()
+        {
+            FeatId = joinTable.FeatDefinitionId,
+            Level = joinTable.Level,
+            Group = joinTable.Group
+        };
+    }
     public static CharacterClassDefinitionDto ConvertCharacterClassDefinition(CharacterClassDefinition characterClass)
     {
-        return new() { };
+        return new()
+        {
+            Id = characterClass.Id,
+            Name = characterClass.Name,
+            Description = characterClass.Description,
+            HitDie = characterClass.HitDie,
+            FixedHp = characterClass.FixedHp,
+            SubclassDefinitions = characterClass.SubclassDefinitions.Select(ConvertSubclassDefintion).ToList(),
+            FeatTables = characterClass.CharacterClassDefinitionFeatDefinitions.Select(ConvertCharacterClassDefinitionFeatDefinition).ToList(),
+            ItemSetAIds = characterClass.ItemBasesSetA.Select(a => a.Id).ToList(),
+            ItemSetBIds = characterClass.ItemBasesSetB.Select(b => b.Id).ToList(),
+            DefaultStr = characterClass.DefaultStr,
+            DefaultDex = characterClass.DefaultDex,
+            DefaultCon = characterClass.DefaultCon,
+            DefaultInt = characterClass.DefaultInt,
+            DefaultWis = characterClass.DefaultWis,
+            DefaultCha = characterClass.DefaultCha
+        };
     }
     public static FeatDefinitionDto ConvertFeat(FeatDefinition feat)
     {
