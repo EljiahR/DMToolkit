@@ -1,6 +1,6 @@
 namespace DMToolkit.Shared.Models.Dtos.Joins;
 
-public class FeatIdLevelGroupingDto
+public class FeatGroupLevelDto
 {
     public int Level { get; set; } = 0;
     public int Group { get; set; } = 0;

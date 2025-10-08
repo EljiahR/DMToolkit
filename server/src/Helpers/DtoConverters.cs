@@ -59,10 +59,10 @@ public static class DtoConverters
             SkillDefinitionIds = background.SkillDefinitions.Select(s => s.Id).ToList()
         };
     }
-    public static List<FeatIdLevelGroupingDto> ConvertFeatTables(IEnumerable<IClassFeat> featTables)
+    public static List<FeatGroupLevelDto> ConvertFeatTables(IEnumerable<IClassFeat> featTables)
     {
-        return featTables.GroupBy(t => t.Group)
-                        .Select(t => new FeatIdLevelGroupingDto
+        return featTables.GroupBy(t => new {t.Group, t.Level})
+                        .Select(t => new FeatGroupLevelDto
                         {
                             FeatIds = t.Select(f => f.FeatDefinitionId).ToList(),
                             Group = t.First().Group,
