@@ -45,7 +45,11 @@ public class StartupDataService : IStartupDataService
         var featsTask = _context.FeatDefinitions
                                 .Include(f => f.FeatDefinitionFeatEffects)
                                 .AsNoTracking().ToListAsync();
-        var speciesTask = _context.SpeciesDefinitions.AsNoTracking().ToListAsync();
+        var speciesTask = _context.SpeciesDefinitions
+                                    .Include(s => s.FeatDefinitions)
+                                    .Include(s => s.LineageDefinitions)
+                                        .ThenInclude(l => l.FeatDefinitions)
+                                    .AsNoTracking().ToListAsync();
         var featEffectsTask = _context.FeatEffects.AsNoTracking().ToListAsync();
         var schoolsTask = _context.Schools.AsNoTracking().ToListAsync();
         var spellsTask = _context.Spells.AsNoTracking().ToListAsync();

@@ -121,9 +121,29 @@ public static class DtoConverters
             AvaibleEffectTables = ConvertFeatDefinitionFeatEffectJoinTable(feat.FeatDefinitionFeatEffects)
         };
     }
+    public static LineageDefinitionDto ConvertLineage(LineageDefinition lineage)
+    {
+        return new()
+        {
+            Id = lineage.Id,
+            Name = lineage.Name,
+            Description = lineage.Description,
+            FeatIds = lineage.FeatDefinitions.Select(f => f.Id).ToList()
+        };
+    }
     public static SpeciesDefinitionDto ConvertSpecies(SpeciesDefinition species)
     {
-        return new() { };
+        return new()
+        {
+            Id = species.Id,
+            Name = species.Name,
+            Description = species.Description,
+            Type = species.Type,
+            Speed = species.Speed,
+            Size = species.Size,
+            FeatIds = species.FeatDefinitions.Select(f => f.Id).ToList(),
+            Lineages = species.LineageDefinitions.Select(ConvertLineage).ToList()
+        };
     }
     public static FeatEffectDto ConvertFeatEffect(FeatEffect featEffect)
     {
