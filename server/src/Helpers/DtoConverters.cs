@@ -110,7 +110,13 @@ public static class DtoConverters
     }
     public static FeatDefinitionDto ConvertFeat(FeatDefinition feat)
     {
-        return new() { };
+        return new()
+        {
+            Id = feat.Id,
+            Name = feat.Name,
+            Description = feat.Description,
+            
+        };
     }
     public static SpeciesDefinitionDto ConvertSpecies(SpeciesDefinition species)
     {
