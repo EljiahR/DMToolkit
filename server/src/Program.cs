@@ -1,6 +1,7 @@
 using DMToolkit.Data;
 using DMToolkit.Data.Seeders;
 using DMToolkit.Models;
+using DMToolkit.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,6 +51,9 @@ builder.Services.AddCors(options =>
 builder.Services.AddIdentityApiEndpoints<DMUser>().AddEntityFrameworkStores<DMDbContext>();
 
 builder.Services.AddAuthorization();
+
+// Services
+builder.Services.AddScoped<IStartupDataService, StartupDataService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
