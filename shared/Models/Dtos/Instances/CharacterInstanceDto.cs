@@ -14,7 +14,7 @@ public class CharacterDto
     public string BackgroundInstanceId { get; set; } = string.Empty;
     public SpeciesDto Species { get; set; } = new();
     public string SpeciesInstanceId { get; set; } = string.Empty;
-    public List<AbilityScoreDto> Scores { get; set; } = new();
+    public List<AbilityScoreInstanceDto> Scores { get; set; } = new();
     public List<string> ScoreInstanceIds { get; set; } = new();
     public string PhysicalDescription { get; set; } = string.Empty;
     public string Personality { get; set; } = string.Empty;

@@ -16,7 +16,7 @@ public static class CharacterClassDefinitionSeedData
         DefaultInt = 10,
         DefaultWis = 12,
         DefaultCha = 8,
-        FeatDefinitions = new List<FeatDefinition> { FeatDefinitionSeedData.HoldTheLineDefinition, FeatDefinitionSeedData.IronStaminaDefinition }
+        CharacterClassDefinitionFeatDefinitions = CharacterClassDefinitionFeatDefinitionSeedData.VanguardFeatTables
     };
 
     public static readonly CharacterClassDefinition ArcanistDefinition = new()
@@ -31,7 +31,7 @@ public static class CharacterClassDefinitionSeedData
         DefaultInt = 15,
         DefaultWis = 13,
         DefaultCha = 10,
-        FeatDefinitions = new List<FeatDefinition> { FeatDefinitionSeedData.FocusChannelDefinition, FeatDefinitionSeedData.ArcaneInstinctDefinition }
+        CharacterClassDefinitionFeatDefinitions = CharacterClassDefinitionFeatDefinitionSeedData.ArcanistFeatTables
     };
 
     public static readonly List<CharacterClassDefinition> AllCharacterClasses = new() { VanguardDefinition, ArcanistDefinition };
