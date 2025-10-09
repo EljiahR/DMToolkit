@@ -52,8 +52,10 @@ builder.Services.AddIdentityApiEndpoints<DMUser>().AddEntityFrameworkStores<DMDb
 
 builder.Services.AddAuthorization();
 
-// Services
+// Added services to container
 builder.Services.AddScoped<IStartupDataService, StartupDataService>();
+
+builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -119,6 +121,8 @@ app.MapGet("/weatherforecastsecure", () =>
 .WithName("GetWeatherForecastWithAuth")
 .WithOpenApi()
 .RequireAuthorization();
+
+app.MapControllers();
 
 app.Run();
 

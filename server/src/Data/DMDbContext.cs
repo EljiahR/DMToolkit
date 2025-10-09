@@ -43,9 +43,9 @@ public class DMDbContext : IdentityDbContext<DMUser>
     {
         var isSqlite = Database.ProviderName == "MicrosoftEntityFrameworkCore.Sqlite";
 
-        var converter = new ValueConverter<List<string>, string>(
+        var converter = new ValueConverter<Dictionary<string, object>, string>(
             v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
-            v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions?)null) ?? new()
+            v => JsonSerializer.Deserialize<Dictionary<string, object>>(v, (JsonSerializerOptions?)null) ?? new()
         );
 
         // Generic configurations (Join Table keys, Instance to Definition hookups)
