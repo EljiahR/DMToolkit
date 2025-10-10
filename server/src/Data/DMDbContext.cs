@@ -61,8 +61,8 @@ public class DMDbContext : IdentityDbContext<DMUser>
         );
 
         var dictionaryComparer = new ValueComparer<Dictionary<string, object>>(
-            (list1, list2) => list1.SequenceEqual(list2), // Equality check
-            list => list.Aggregate(0, (currentHash, next) => HashCode.Combine(currentHash, next)), // Hash code generation
+            (list1, list2) => list1!.SequenceEqual(list2!),
+            list => list.Aggregate(0, (currentHash, next) => HashCode.Combine(currentHash, next)),
             list => list.ToDictionary());
 
         // Definition configurations
