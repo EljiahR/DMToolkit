@@ -16,7 +16,6 @@ public static class CharacterClassDefinitionSeedData
         DefaultInt = 10,
         DefaultWis = 12,
         DefaultCha = 8,
-        CharacterClassDefinitionFeatDefinitions = CharacterClassDefinitionFeatDefinitionSeedData.VanguardFeatTables
     };
 
     public static readonly CharacterClassDefinition ArcanistDefinition = new()
@@ -31,7 +30,6 @@ public static class CharacterClassDefinitionSeedData
         DefaultInt = 15,
         DefaultWis = 13,
         DefaultCha = 10,
-        CharacterClassDefinitionFeatDefinitions = CharacterClassDefinitionFeatDefinitionSeedData.ArcanistFeatTables
     };
 
     public static readonly List<CharacterClassDefinition> AllCharacterClasses = new() { VanguardDefinition, ArcanistDefinition };

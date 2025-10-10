@@ -1,12 +1,12 @@
+using DMToolkit.Models.Definitions;
 using DMToolkit.Models.Instances;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DMToolkit.Data.Configurations;
 
-public class SpeciesInstanceConfiguration : IEntityTypeConfiguration<SpeciesInstance>
+public class SpeciesInstanceConfiguration : GenericInstanceConfiguration<SpeciesInstance, SpeciesDefinition>
 {
-    public void Configure(EntityTypeBuilder<SpeciesInstance> builder)
+    protected override void ExtraConfigure(EntityTypeBuilder<SpeciesInstance> builder)
     {
         // One-to-one SpeciesInstance < - > LineageInstance
         builder.HasOne(s => s.LineageInstance)

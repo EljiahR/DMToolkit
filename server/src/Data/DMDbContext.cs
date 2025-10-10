@@ -7,14 +7,17 @@ using DMToolkit.Models.Instances;
 using DMToolkit.Models.JoinTables;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DMToolkit.Data;
 
 public class DMDbContext : IdentityDbContext<DMUser>
 {
-    public DMDbContext(DbContextOptions<DMDbContext> options) : base(options)
+    private readonly ILogger<DMDbContext> _logger;
+    public DMDbContext(DbContextOptions<DMDbContext> options, ILogger<DMDbContext> logger) : base(options)
     {
+        _logger = logger;
         Database.EnsureCreated();
     }
 
@@ -38,52 +41,83 @@ public class DMDbContext : IdentityDbContext<DMUser>
 
     // Join Tables
     public DbSet<FeatDefinitionFeatEffect> FeatDefinitionFeatEffects { get; set; }
+    public DbSet<CharacterClassDefinitionFeatDefinition> CharacterClassDefinitionFeatDefinitions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        var isSqlite = Database.ProviderName == "MicrosoftEntityFrameworkCore.Sqlite";
+        var isSqlite = Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite";
+
+        if (isSqlite)
+        {
+            _logger.LogInformation("Configuring for Sqlite...");
+        } else
+        {
+            _logger.LogInformation("Configuring for {DBProvider}...", Database.ProviderName);
+        }
 
         var converter = new ValueConverter<Dictionary<string, object>, string>(
             v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
             v => JsonSerializer.Deserialize<Dictionary<string, object>>(v, (JsonSerializerOptions?)null) ?? new()
         );
 
-        // Generic configurations (Join Table keys, Instance to Definition hookups)
-        builder.ApplyConfigurationsFromAssembly(typeof(DMDbContext).Assembly);
+        var dictionaryComparer = new ValueComparer<Dictionary<string, object>>(
+            (list1, list2) => list1.SequenceEqual(list2), // Equality check
+            list => list.Aggregate(0, (currentHash, next) => HashCode.Combine(currentHash, next)), // Hash code generation
+            list => list.ToDictionary());
 
         // Definition configurations
+        _logger.LogInformation("Applying definition configurations...");
         builder.ApplyConfiguration(new AbilityScoreDefinitionConfiguration());
         builder.ApplyConfiguration(new CharacterClassDefinitionConfiguration());
         builder.ApplyConfiguration(new FeatDefinitionConfiguration());
         builder.ApplyConfiguration(new SpeciesDefinitionConfiguration());
 
         // Entity configurations
+        _logger.LogInformation("Applying entity configurations...");
         builder.ApplyConfiguration(new FeatEffectConfiguration());
         builder.ApplyConfiguration(new SpellConfiguration());
 
         // Instance Configurations
+        _logger.LogInformation("Applying instance configurations...");
         builder.ApplyConfiguration(new AbilityScoreInstanceConfiguration());
         builder.ApplyConfiguration(new CharacterClassInstanceConfiguration());
         builder.ApplyConfiguration(new CharacterConfiguration());
         builder.ApplyConfiguration(new SpeciesInstanceConfiguration());
 
         // Item Base Configurations
+        _logger.LogInformation("Applying item configurations...");
         builder.ApplyConfiguration(new ItemBaseConfiguration());
 
         // Item Entity Configurations
         builder.ApplyConfiguration(new WeaponPropertyConfiguration());
 
+        // Join Table Configurations
+        _logger.LogInformation("Applying join table configurations...");
+        builder.ApplyConfiguration(new CharacterCharacterClassInstanceConfiguration());
+        builder.ApplyConfiguration(new CharacterClassDefinitionFeatDefinitionConfiguration());
+        builder.ApplyConfiguration(new CharacterClassDefinitionItemBaseConfiguration());
+        builder.ApplyConfiguration(new CharacterItemBaseConfiguration());
+        builder.ApplyConfiguration(new CharacterSpellConfiguration());
+        builder.ApplyConfiguration(new FeatDefinitionFeatEffectConfiguration());
+        builder.ApplyConfiguration(new SpellItemConfiguration());
+        builder.ApplyConfiguration(new SubclassDefinitionFeatDefinitionConfiguration());
+
         // Data Json Converter
+        _logger.LogInformation("Applying conversions...");
         builder.Entity<FeatEffect>()
             .Property(e => e.Data)
             .HasConversion(converter)
-            .HasColumnType(isSqlite ? "TEXT" : "jsonb");
+            .HasColumnType(isSqlite ? "TEXT" : "jsonb")
+            .Metadata.SetValueComparer(dictionaryComparer);
 
         builder.Entity<SpellEffect>()
             .Property(e => e.Data)
             .HasConversion(converter)
-            .HasColumnType(isSqlite ? "TEXT" : "jsonb");
+            .HasColumnType(isSqlite ? "TEXT" : "jsonb")
+            .Metadata.SetValueComparer(dictionaryComparer);
+            
 
+        _logger.LogInformation("Finished adding configurations.");
         base.OnModelCreating(builder);
     }
 }

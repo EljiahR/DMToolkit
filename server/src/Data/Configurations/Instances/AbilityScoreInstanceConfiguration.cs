@@ -1,12 +1,12 @@
+using DMToolkit.Models.Definitions;
 using DMToolkit.Models.Instances;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DMToolkit.Data.Configurations;
 
-public class AbilityScoreInstanceConfiguration : IEntityTypeConfiguration<AbilityScoreInstance>
+public class AbilityScoreInstanceConfiguration : GenericInstanceConfiguration<AbilityScoreInstance, AbilityScoreDefinition>
 {
-    public void Configure(EntityTypeBuilder<AbilityScoreInstance> builder)
+    protected override void ExtraConfigure(EntityTypeBuilder<AbilityScoreInstance> builder)
     {
         // Many-to-one AbilityScoreInstance <- SkillInstances
         builder.HasMany(a => a.SkillInstances)

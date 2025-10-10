@@ -63,10 +63,11 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-if (!string.IsNullOrWhiteSpace(dbConnection))
+if (string.IsNullOrWhiteSpace(dbConnection))
 {
     using (var scope = app.Services.CreateScope())
     {
+        app.Logger.LogInformation("Attempting to seed database...");
         var seeder = scope.ServiceProvider.GetRequiredService<TestDataSeeder>();
         seeder.Seed();
     }

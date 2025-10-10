@@ -1,12 +1,12 @@
+using DMToolkit.Models.Definitions;
 using DMToolkit.Models.Instances;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DMToolkit.Data.Configurations;
 
-public class CharacterClassInstanceConfiguration : IEntityTypeConfiguration<CharacterClassInstance>
+public class CharacterClassInstanceConfiguration : GenericInstanceConfiguration<CharacterClassInstance, CharacterClassDefinition>
 {
-    public void Configure(EntityTypeBuilder<CharacterClassInstance> builder)
+    protected override void ExtraConfigure(EntityTypeBuilder<CharacterClassInstance> builder)
     {
         // One-to-one CharacterClassInstance < - > SubclassInstance
         builder.HasOne(e => e.SubclassInstance)

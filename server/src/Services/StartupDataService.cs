@@ -41,6 +41,7 @@ public class StartupDataService : IStartupDataService
                                         .Include(c => c.SubclassDefinitions)
                                             .ThenInclude(s => s.SubclassDefinitionFeatDefinitions)
                                         .Include(c => c.CharacterClassDefinitionFeatDefinitions)
+                                        .Include(c => c.CharacterClassDefinitionItemBases)
                                         .AsNoTracking().ToListAsync();
         var featsTask = _context.FeatDefinitions
                                 .Include(f => f.FeatDefinitionFeatEffects)

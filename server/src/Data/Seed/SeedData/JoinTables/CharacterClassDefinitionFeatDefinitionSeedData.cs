@@ -35,4 +35,6 @@ public static class CharacterClassDefinitionFeatDefinitionSeedData
             Level = 1
         }
     };
+
+    public static readonly List<CharacterClassDefinitionFeatDefinition> AllClassFeatDefinitionTables = VanguardFeatTables.Concat(ArcanistFeatTables).ToList();
 }
