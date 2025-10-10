@@ -4,14 +4,14 @@ export interface FeatEffect {
     data: Record<string, any>;
 }
 
-export interface FeatureBase {
+export interface FeatureDefinition {
     id: string;
     name: string;
     description: string;
     availableEffects: FeatEffect[][];
 }
 
-export interface FeatureBaseDto {
+export interface FeatureDefinitionDto {
     id: string;
     name: string;
     description: string;
@@ -21,7 +21,7 @@ export interface FeatureBaseDto {
 export interface Feature {
     id: string;
     effects: FeatEffect[];
-    base: FeatureBase;
+    base: FeatureDefinition;
 }
 
 export interface FeatureDto {

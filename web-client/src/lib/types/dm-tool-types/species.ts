@@ -1,14 +1,14 @@
-import type { Feature, FeatureBase, FeatureDto } from "./feature";
+import type { Feature, FeatureDefinition, FeatureDto } from "./feature";
 
-export interface LineageBase {
+export interface LineageDefinition {
     id: string;
     name: string;
     description: string;
-    features: FeatureBase[];
+    features: FeatureDefinition[];
     speciesId: string;
 }
 
-export interface LineageBaseDto {
+export interface LineageDefinitionDto {
     id: string;
     name: string;
     description: string;
@@ -19,21 +19,21 @@ export interface LineageBaseDto {
 export interface Lineage {
     id: string;
     features: Feature[];
-    base: LineageBase;
+    base: LineageDefinition;
 }
 
-export interface SpeciesBase {
+export interface SpeciesDefinition {
     id: string;
     name: string;
     description: string;
     type: string;
     speed: number;
     size: string;
-    features: FeatureBase[];
-    lineages: LineageBase[];
+    features: FeatureDefinition[];
+    lineages: LineageDefinition[];
 }
 
-export interface SpeciesBaseDto {
+export interface SpeciesDefinitionDto {
     id: string;
     name: string;
     description: string;
@@ -48,7 +48,7 @@ export interface Species {
     id: string;
     features: Feature[];
     lineage: Lineage;
-    base: SpeciesBase;
+    base: SpeciesDefinition;
 }
 
 
