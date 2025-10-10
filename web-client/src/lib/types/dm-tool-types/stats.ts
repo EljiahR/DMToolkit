@@ -5,12 +5,6 @@ export interface Skill {
     scoreId: string;
 }
 
-export interface SkillDefinitionDto {
-    id: string;
-    name: string;
-    description: string;
-}
-
 export interface AbilityScore {
     id: string;
     name: string;

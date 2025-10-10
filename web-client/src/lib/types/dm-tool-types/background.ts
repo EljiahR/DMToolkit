@@ -1,13 +1,6 @@
 import type { Feature, FeatureDefinition, FeatureDto } from "./feature";
 
-export interface BackgroundDefinition {
-    id: string;
-    name: string;
-    description: string;
-    abilityScores: string[];
-    features: FeatureDefinition[];
-    skillProficiencies: string[];
-}
+
 
 export interface BackgroundDefinitionDto {
     id: string;

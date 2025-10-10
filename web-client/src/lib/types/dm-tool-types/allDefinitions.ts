@@ -12,6 +12,6 @@ export interface allDefinitions {
     lineages: LineageDefinition[];
 }
 
-export interface startupDataDto {
+export interface startDataDto {
     abililityScore: AbilityScoreDto
 }
