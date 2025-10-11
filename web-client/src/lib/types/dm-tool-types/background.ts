@@ -1,15 +1,5 @@
-import type { Feature, FeatureDefinition, FeatureDto } from "./feature";
-
-
-
-export interface BackgroundDefinitionDto {
-    id: string;
-    name: string;
-    description: string;
-    abilityScores: string[];
-    featureIds: string[];
-    skillProficiencies: string[];
-}
+import type { BackgroundDefinition } from "./definitions/backgroundDefinition";
+import type { Feature, FeatureDto } from "./feature";
 
 export interface Background {
     id: string;

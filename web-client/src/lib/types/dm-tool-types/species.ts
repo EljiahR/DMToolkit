@@ -1,47 +1,11 @@
-import type { Feature, FeatureDefinition, FeatureDto } from "./feature";
-
-export interface LineageDefinition {
-    id: string;
-    name: string;
-    description: string;
-    features: FeatureDefinition[];
-    speciesId: string;
-}
-
-export interface LineageDefinitionDto {
-    id: string;
-    name: string;
-    description: string;
-    featureIds: string[];
-    speciesId: string;
-}
+import type { LineageDefinition } from "./definitions/lineageDefinition";
+import type { SpeciesDefinition } from "./definitions/speciesDefinition";
+import type { Feature, FeatureDto } from "./feature";
 
 export interface Lineage {
     id: string;
     features: Feature[];
     base: LineageDefinition;
-}
-
-export interface SpeciesDefinition {
-    id: string;
-    name: string;
-    description: string;
-    type: string;
-    speed: number;
-    size: string;
-    features: FeatureDefinition[];
-    lineages: LineageDefinition[];
-}
-
-export interface SpeciesDefinitionDto {
-    id: string;
-    name: string;
-    description: string;
-    type: string;
-    speed: number;
-    size: string;
-    featureIds: string[];
-    lineageIds: string[];
 }
 
 export interface Species {
@@ -50,10 +14,6 @@ export interface Species {
     lineage: Lineage;
     base: SpeciesDefinition;
 }
-
-
-
-
 
 export interface LineageDto {
     id: string;

@@ -1,8 +1,8 @@
 import type { Background, BackgroundDto } from "./background";
 import type { CharacterClass, CharacterClassDto } from "./characterClass";
+import type { Spell } from "./entities/spell";
 import type { AllItemTypes, Worth } from "./items";
 import type { Species, SpeciesDto } from "./species";
-import type { Spell } from "./spell";
 import type { AbilityScoreDto, AbilityScores } from "./stats";
 
 export interface Character {

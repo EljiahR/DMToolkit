@@ -1,27 +1,10 @@
-export interface FeatEffect {
-    id: string;
-    type: string;
-    data: Record<string, any>;
-}
-
-export interface FeatureDefinition {
-    id: string;
-    name: string;
-    description: string;
-    availableEffects: FeatEffect[][];
-}
-
-export interface FeatureDefinitionDto {
-    id: string;
-    name: string;
-    description: string;
-    availableEffectIds: string[][];
-}
+import type { FeatDefinition } from "./definitions/featDefinition";
+import type { FeatEffect } from "./entities/featEffect";
 
 export interface Feature {
     id: string;
     effects: FeatEffect[];
-    base: FeatureDefinition;
+    base: FeatDefinition;
 }
 
 export interface FeatureDto {

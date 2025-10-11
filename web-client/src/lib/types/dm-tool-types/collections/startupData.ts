@@ -1,12 +1,33 @@
-import type { BackgroundDefinition } from "../background";
-import type { CharacterClassDefinition } from "../characterClass";
-import type { FeatureDefinition } from "../feature";
-import type { LineageDefinition, SpeciesDefinition } from "../species";
+import type { AbilityScoreDefinition, AbilityScoreDefinitionDto } from "../definitions/abilityScoreDefinition";
+import type { BackgroundDefinition, BackgroundDefinitionDto } from "../definitions/backgroundDefinition";
+import type { CharacterClassDefinition, CharacterClassDefinitionDto } from "../definitions/characterClassDefinition";
+import type { FeatDefinition, FeatDefinitionDto } from "../definitions/featDefinition";
+import type { SpeciesDefinition, SpeciesDefinitionDto } from "../definitions/speciesDefinition";
+import type { FeatEffect, FeatEffectDto } from "../entities/featEffect";
+import type { School, SchoolDto } from "../entities/school";
+import type { Spell, SpellDto } from "../entities/spell";
+import type { SpellEffect, SpellEffectDto } from "../entities/spellEffect";
 
 export interface StartupData {
-    features: FeatureDefinition[];
-    classes: CharacterClassDefinition[];
-    backgrounds: BackgroundDefinition[];
-    species: SpeciesDefinition[];
-    lineages: LineageDefinition[];
+    abilityScoreDefinitions: AbilityScoreDefinition[];
+    backgroundDefinitions: BackgroundDefinition[];
+    characterClassDefinitions: CharacterClassDefinition[];
+    featDefinitions: FeatDefinition[];
+    speciesDefinitions: SpeciesDefinition[];
+    featEffects: FeatEffect[];
+    schools: School[];
+    spells: Spell[];
+    spellEffects: SpellEffect[];
+}
+
+export interface StartupDataDto {
+    abilityScoreDefinitions: AbilityScoreDefinitionDto[];
+    backgroundDefinitions: BackgroundDefinitionDto[];
+    characterClassDefinitions: CharacterClassDefinitionDto[];
+    featDefinitions: FeatDefinitionDto[];
+    speciesDefinitions: SpeciesDefinitionDto[];
+    featEffects: FeatEffectDto[];
+    schools: SchoolDto[];
+    spells: SpellDto[];
+    spellEffects: SpellEffectDto[];
 }

@@ -1,18 +1,6 @@
-import type { Feature, FeatureDefinition, FeatureDto } from "./feature";
-
-export interface SubclassDefinition {
-    id: string;
-    name: string;
-    description: string;
-    features: FeatureDefinition[];
-}
-
-export interface SubclassDefinitionDto {
-    id: string;
-    name: string;
-    description: string;
-    featureIds: string[];
-}
+import type { CharacterClassDefinition } from "./definitions/characterClassDefinition";
+import type { SubclassDefinition } from "./definitions/subclassDefinition";
+import type { Feature, FeatureDto } from "./feature";
 
 export interface Subclass {
     id: string;
@@ -26,28 +14,6 @@ export interface SubclassDto {
     featureInstanceIds: string[];
     features: FeatureDto[];
 }
-
-export interface CharacterClassDefinition {
-    id: string;
-    name: string;
-    description: string;
-    hitDie: number;
-    fixedHp: number;
-    subclasses: SubclassDefinition[];
-    features: FeatureDefinition[];
-    defaultScoreArray: number[];
-};
-
-export interface CharacterClassDefinitionDto {
-    id: string;
-    name: string;
-    description: string;
-    hitDie: number;
-    fixedHp: number;
-    subclassIds: string[];
-    featureIds: string[];
-    defaultScoreArray: number[];
-};
 
 export interface CharacterClass {
     id: string;
