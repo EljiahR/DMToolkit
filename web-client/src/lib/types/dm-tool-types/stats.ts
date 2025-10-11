@@ -1,40 +1,40 @@
-export interface Skill {
+import type { AbilityScoreDefinition } from "./definitions/abilityScoreDefinition";
+import type { SkillDefinition } from "./definitions/skillDefinition";
+
+export interface SkillInstance {
     id: string;
-    name: string;
     proficient: boolean;
-    scoreId: string;
+    definition: SkillDefinition;
 }
 
-export interface AbilityScore {
+export interface AbilityScoreInstance {
     id: string;
-    name: string;
     amount: number;
     proficient: boolean;
-    skills: Skill[];
+    skillInstances: SkillInstance[];
+    definition: AbilityScoreDefinition
 }
 
 export interface AbilityScores {
-    [key: string]: AbilityScore;
-    "str": AbilityScore;
-    "dex": AbilityScore;
-    "con": AbilityScore;
-    "int": AbilityScore;
-    "wis": AbilityScore;
-    "cha": AbilityScore;
+    [key: string]: AbilityScoreInstance;
+    "str": AbilityScoreInstance;
+    "dex": AbilityScoreInstance;
+    "con": AbilityScoreInstance;
+    "int": AbilityScoreInstance;
+    "wis": AbilityScoreInstance;
+    "cha": AbilityScoreInstance;
 }
 
-export interface SkillDto {
+export interface SkillInstanceDto {
     id: string;
-    name: string;
     proficient: boolean;
-    scoreId: string;
+    definitionId: string;
 }
 
-export interface AbilityScoreDto {
+export interface AbilityScoreInstanceDto {
     id: string;
-    key: string;
-    name: string;
     amount: number;
     proficient: boolean;
-    skillIds: string[];
+    skillInstances: SkillInstanceDto[];
+    definitionId: string;
 }

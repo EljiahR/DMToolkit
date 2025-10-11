@@ -1,9 +1,9 @@
 import type { Background, BackgroundDto } from "./background";
 import type { CharacterClass, CharacterClassDto } from "./characterClass";
 import type { Spell } from "./entities/spell";
-import type { AllItemTypes, Worth } from "./items";
+import type { AllItemTypes, Worth, WorthDto } from "./items";
 import type { Species, SpeciesDto } from "./species";
-import type { AbilityScoreDto, AbilityScores } from "./stats";
+import type { AbilityScoreInstanceDto, AbilityScores } from "./stats";
 
 export interface Character {
     id: string;
@@ -42,7 +42,7 @@ export interface CharacterDto {
     backgroundInstanceId: string;
     species: SpeciesDto;
     speciesInstanceId: string;
-    scores: AbilityScoreDto[];
+    scores: AbilityScoreInstanceDto[];
     scoreInstanceIds: string[];
     physicalDescription: string;
     personality: string;
@@ -50,7 +50,7 @@ export interface CharacterDto {
     bonds: string;
     flaws: string;
     proficiencyBonus: number;
-    coins: Worth,
+    coins: WorthDto,
     inventoryIds: string[];
     equippedItemIds: string[];
 }

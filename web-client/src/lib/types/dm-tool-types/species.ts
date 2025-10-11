@@ -5,22 +5,21 @@ import type { Feature, FeatureDto } from "./feature";
 export interface Lineage {
     id: string;
     features: Feature[];
-    base: LineageDefinition;
+    definition: LineageDefinition;
 }
 
 export interface Species {
     id: string;
     features: Feature[];
     lineage: Lineage;
-    base: SpeciesDefinition;
+    definition: SpeciesDefinition;
 }
 
 export interface LineageDto {
     id: string;
     features: FeatureDto[];
     featureInstanceIds: string[];
-    speciesInstanceId: string;
-    baseId: string;
+    definitionId: string;
 }
 
 export interface SpeciesDto {
@@ -29,5 +28,5 @@ export interface SpeciesDto {
     featureInstanceIds: string[];
     lineage: LineageDto;
     lineageInstanceId: string;
-    baseId: string;
+    definitionId: string;
 }

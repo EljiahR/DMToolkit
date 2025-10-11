@@ -7,14 +7,16 @@ import type { CharacterClassDefinition, CharacterClassDefinitionDto } from "../t
 import type { FeatDefinition, FeatDefinitionDto } from "../types/dm-tool-types/definitions/featDefinition";
 import type { LineageDefinition, LineageDefinitionDto } from "../types/dm-tool-types/definitions/lineageDefinition";
 import type { SkillDefinition, SkillDefinitionDto } from "../types/dm-tool-types/definitions/skillDefinition";
+import type { SpeciesDefinition, SpeciesDefinitionDto } from "../types/dm-tool-types/definitions/speciesDefinition";
 import type { SubclassDefinition, SubclassDefinitionDto } from "../types/dm-tool-types/definitions/subclassDefinition";
 import type { FeatEffect, FeatEffectDto } from "../types/dm-tool-types/entities/featEffect";
+import type { Spell } from "../types/dm-tool-types/entities/spell";
 import type { Feature, FeatureDto } from "../types/dm-tool-types/feature";
-import type { AllItemTypes, Armor, ArmorDto, Item, ItemDto, Weapon, WeaponDto, WeaponMastery, WeaponMasteryDto, WeaponProperty, WeaponPropertyDto, Worth } from "../types/dm-tool-types/items";
+import type { AllItemTypes, Armor, ArmorDto, Item, ItemDto, Weapon, WeaponDto, WeaponMastery, WeaponMasteryDto, WeaponProperty, WeaponPropertyDto, Worth, WorthDto } from "../types/dm-tool-types/items";
 import type { FeatDefinitionEffectGrouping, FeatDefinitionEffectGroupingDto } from "../types/dm-tool-types/relationships/featDefinitionEffectGroupingDto";
 import type { FeatGroupLevel, FeatGroupLevelDto } from "../types/dm-tool-types/relationships/featGroupLevel";
 import type { Lineage, LineageDto, Species, SpeciesDto } from "../types/dm-tool-types/species";
-import type { AbilityScoreDto, AbilityScores } from "../types/dm-tool-types/stats";
+import type { AbilityScoreInstance, AbilityScoreInstanceDto, AbilityScores, SkillInstance, SkillInstanceDto } from "../types/dm-tool-types/stats";
 
 // Definitions
 
@@ -113,7 +115,7 @@ export const lineageDefinitionToBo = (lineageDto: LineageDefinitionDto, featDefi
     }
 } 
 
-export const speciesBaseToBo = (speciesDto: SpeciesBaseDto, featureBases: FeatureBase[], lineageBases: LineageBase[]): SpeciesBase => {
+export const speciesDefinitionToBo = (speciesDto: SpeciesDefinitionDto, featDefinitions: FeatDefinition[]): SpeciesDefinition => {
     return {
         id: speciesDto.id,
         name: speciesDto.name,
@@ -121,23 +123,23 @@ export const speciesBaseToBo = (speciesDto: SpeciesBaseDto, featureBases: Featur
         type: speciesDto.type,
         speed: speciesDto.speed,
         size: speciesDto.size,
-        features: featureBases.filter((featureBase) => speciesDto.featureIds.includes(featureBase.id)),
-        lineages: lineageBases.filter((lineageBase) => speciesDto.lineageIds.includes(lineageBase.id))
+        featDefinitions: featDefinitions.filter((feat) => speciesDto.featDefinitionIds.includes(feat.id)),
+        lineageDefinitions: speciesDto.lineageDefinitions.map(l => lineageDefinitionToBo(l, featDefinitions))
     }
 }
 
 // Instances
-export const featureInstancesToBo = (featureDtos: FeatureDto[], effects: FeatEffect[], featureBases: FeatureBase[]): Feature[] => {
+export const featureInstancesToBo = (featureDtos: FeatureDto[], effects: FeatEffect[], featDefinitions: FeatDefinition[]): Feature[] => {
     return featureDtos.map((featureDto) => {
         return {
             id: featureDto.id,
             effects: effects.filter((effect) => featureDto.effectIds.includes(effect.id)),
-            base: featureBases.find((base) => base.id == featureDto.baseId)!
+            base: featDefinitions.find((feat) => feat.id == featureDto.baseId)!
         }
     });
 }
 
-export const subclassInstanceToBo = (subclassDto: SubclassDto, subclasses: SubclassBase[], effects: FeatEffect[], featureBases: FeatureBase[]): Subclass => {
+export const subclassInstanceToBo = (subclassDto: SubclassDto, subclasses: SubclassDefinition[], effects: FeatEffect[], featureBases: FeatDefinition[]): Subclass => {
     return {
         id: subclassDto.id,
         base: subclasses.find((subclass) => subclassDto.baseId == subclass.id)!,
@@ -145,61 +147,111 @@ export const subclassInstanceToBo = (subclassDto: SubclassDto, subclasses: Subcl
     }
 }
 
-export const classInstanceToBo = (classDto : CharacterClassDto, classBases: CharacterClassBase[], subclasses: SubclassBase[], effects: FeatEffect[], featureBases: FeatureBase[]): CharacterClass => {
+export const classInstanceToBo = (classDto : CharacterClassDto, characterClasses: CharacterClassDefinition[], subclasses: SubclassDefinition[], effects: FeatEffect[], featDefinitions: FeatDefinition[]): CharacterClass => {
     return {
         id: classDto.id,
         level: classDto.level,
-        subclass: classDto.subclass == null ? null : subclassInstanceToBo(classDto.subclass, subclasses, effects, featureBases),
-        features: featureInstancesToBo(classDto.features, effects, featureBases),
-        base: classBases.find((classBase) => classBase.id == classDto.baseId)!
+        subclass: classDto.subclass == null ? null : subclassInstanceToBo(classDto.subclass, subclasses, effects, featDefinitions),
+        features: featureInstancesToBo(classDto.features, effects, featDefinitions),
+        base: characterClasses.find((classDefinition) => classDefinition.id == classDto.baseId)!
     }
 }
 
-export const backgroundInstanceToBo = (backgroundDto: BackgroundDto, backgroundBases: BackgroundBase[], effects: FeatEffect[], featureBases: FeatureBase[]): Background => {
+export const backgroundInstanceToBo = (backgroundDto: BackgroundDto, backgroundDefinitions: BackgroundDefinition[], effects: FeatEffect[], featDefinitions: FeatDefinition[]): Background => {
     return {
         id: backgroundDto.id,
         abilityScores: backgroundDto.abilityScores,
-        features: featureInstancesToBo(backgroundDto.features, effects, featureBases),
+        features: featureInstancesToBo(backgroundDto.features, effects, featDefinitions),
         skillProficiencies: backgroundDto.skillProficiencies,
-        base: backgroundBases.find((backgroundBase) => backgroundBase.id == backgroundDto.baseId)!
+        base: backgroundDefinitions.find((background) => background.id == backgroundDto.baseId)!
     }
 }
 
-export const lineageInstanceToBo = (lineageDto: LineageDto, lineageBases: LineageBase[], effects: FeatEffect[], featureBases: FeatureBase[]): Lineage => {
+export const lineageInstanceToBo = (lineageDto: LineageDto, lineageDefinitions: LineageDefinition[], effects: FeatEffect[], featDefinitions: FeatDefinition[]): Lineage => {
     return {
         id: lineageDto.id,
-        features: featureInstancesToBo(lineageDto.features, effects, featureBases),
-        base: lineageBases.find((lineageBase) => lineageBase.id == lineageDto.baseId)!
+        features: featureInstancesToBo(lineageDto.features, effects, featDefinitions),
+        definition: lineageDefinitions.find((lineage) => lineage.id == lineageDto.definitionId)!
     }
 }
 
-export const speciesInstanceToBo = (speciesDto: SpeciesDto, speciesBases: SpeciesBase[], lineageBases: LineageBase[], effects: FeatEffect[], featureBases: FeatureBase[]): Species => {
+export const speciesInstanceToBo = (speciesDto: SpeciesDto, speciesDefinitions: SpeciesDefinition[], effects: FeatEffect[], featDefinitions: FeatDefinition[]): Species => {
+    const definition = speciesDefinitions.find(s => s.id == speciesDto.definitionId)!;
+
     return {
         id: speciesDto.id,
-        features: featureInstancesToBo(speciesDto.features, effects, featureBases),
-        lineage: lineageInstanceToBo(speciesDto.lineage, lineageBases, effects, featureBases),
-        base: speciesBases.find((speciesBase) => speciesBase.id == speciesDto.baseId)!
+        features: featureInstancesToBo(speciesDto.features, effects, featDefinitions),
+        lineage: lineageInstanceToBo(speciesDto.lineage, definition.lineageDefinitions, effects, featDefinitions),
+        definition: definition
     }
 }
 
-export const scoresToBo = (scoreDtos: AbilityScoreDto[]): AbilityScores => {
+export const skillInstancesToBo = (skillDtos: SkillInstanceDto[], skillDefinitions: SkillDefinition[]): SkillInstance[] => {
+    return skillDtos.map(s => {
+        return {
+            id: s.id,
+            proficient: s.proficient,
+            definition: skillDefinitions.find(d => d.id == s.id)!
+        }
+    })
+}
+
+export const abilityScoreInstanceToBo = (score: AbilityScoreInstanceDto, scoreDefinitions: AbilityScoreDefinition[]): AbilityScoreInstance => {
+    const definition = scoreDefinitions.find(s => s.id == score.id)!;
     return {
-        "str": scoreDtos.find((score) => score.key == "str")!,
-        "dex": scoreDtos.find((score) => score.key == "dex")!,
-        "con": scoreDtos.find((score) => score.key == "con")!,
-        "int": scoreDtos.find((score) => score.key == "int")!,
-        "wis": scoreDtos.find((score) => score.key == "wis")!,
-        "cha": scoreDtos.find((score) => score.key == "cha")!
+        id: score.id,
+        amount: score.amount,
+        proficient: score.proficient,
+        skillInstances: skillInstancesToBo(score.skillInstances, definition.skillDefinitions),
+        definition
     }
 }
 
-export const coinsToBo = (coinsDto: CoinsDto): Worth => {
+export const scoresToBo = (scoreDtos: AbilityScoreInstanceDto[], scoreDefinitions: AbilityScoreDefinition[]): AbilityScores => {
+    const scores = scoreDtos.map(scoreDto => abilityScoreInstanceToBo(scoreDto, scoreDefinitions));
+    
     return {
-        cp: coinsDto[0],
-        sp: coinsDto[1],
-        ep: coinsDto[2],
-        gp: coinsDto[3],
-        pp: coinsDto[4],
+        "str": scores.find((score) => score.definition.abbreviation == "str")!,
+        "dex": scores.find((score) => score.definition.abbreviation == "dex")!,
+        "con": scores.find((score) => score.definition.abbreviation == "con")!,
+        "int": scores.find((score) => score.definition.abbreviation == "int")!,
+        "wis": scores.find((score) => score.definition.abbreviation == "wis")!,
+        "cha": scores.find((score) => score.definition.abbreviation == "cha")!
+    }
+}
+
+export const coinsToBo = (coinsDto: WorthDto): Worth => {
+    return {
+        cp: {
+            name: "Copper",
+            shortName: "cp",
+            nextStep: 10,
+            amount: coinsDto.cp
+        },
+        sp: {
+            name: "Silver",
+            shortName: "sp",
+            nextStep: 5,
+            amount: coinsDto.sp
+        },
+        ep: {
+            name: "Electum",
+            shortName: "cp",
+            nextStep: 2,
+            amount: coinsDto.ep
+        },
+        gp: {
+            name: "Gold",
+            shortName: "cp",
+            nextStep: 10,
+            amount: coinsDto.gp
+        },
+        pp: {
+            name: "Platinum",
+            shortName: "cp",
+            nextStep: 0,
+            amount: coinsDto.pp
+        },
     }
 };
 
@@ -242,7 +294,7 @@ export const inventoryToBo = (ids: string[], allItems: AllItemTypes[]): AllItemT
     return allItems.filter((item) => ids.includes(item.id)); // Can be optimised for sure
 }
 
-export const characterToBo = (characterDto: CharacterDto, classBases: CharacterClassBase[], backgroundBases: BackgroundBase[], subclasses: SubclassBase[], speciesBases: SpeciesBase[], lineageBases: LineageBase[], effects: FeatEffect[], featureBases: FeatureBase[], allItems: AllItemTypes[]): Character => {
+export const characterToBo = (abilityScoreDefinitions: AbilityScoreDefinition[], characterDto: CharacterDto, classDefinitions: CharacterClassDefinition[], backgroundDefinitions: BackgroundDefinition[], subclasses: SubclassDefinition[], speciesDefinitions: SpeciesDefinition[], lineageDefinitions: LineageDefinition[], effects: FeatEffect[], featDefinitions: FeatDefinition[], allItems: AllItemTypes[]): Character => {
     const inventory = inventoryToBo(characterDto.inventoryIds, allItems);
     const knownSpells: Spell[] = [];
 
@@ -250,10 +302,10 @@ export const characterToBo = (characterDto: CharacterDto, classBases: CharacterC
         id: characterDto.id,
         name: characterDto.name,
         alignment: characterDto.alignment,
-        characterClass: classInstanceToBo(characterDto.characterClass, classBases, subclasses, effects, featureBases),
-        background: backgroundInstanceToBo(characterDto.background, backgroundBases, effects, featureBases),
-        species: speciesInstanceToBo(characterDto.species, speciesBases, lineageBases, effects, featureBases),
-        scores: scoresToBo(characterDto.scores),
+        characterClass: classInstanceToBo(characterDto.characterClass, classDefinitions, subclasses, effects, featDefinitions),
+        background: backgroundInstanceToBo(characterDto.background, backgroundDefinitions, effects, featDefinitions),
+        species: speciesInstanceToBo(characterDto.species, speciesDefinitions, effects, featDefinitions),
+        scores: scoresToBo(characterDto.scores, abilityScoreDefinitions),
         physicalDescription: characterDto.physicalDescription,
         personality: characterDto.personality,
         ideals: characterDto.ideals,

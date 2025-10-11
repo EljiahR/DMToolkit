@@ -8,8 +8,8 @@ export interface SpeciesDefinition {
     type: string;
     speed: number;
     size: string;
-    feats: FeatDefinition[];
-    lineages: LineageDefinition[];
+    featDefinitions: FeatDefinition[];
+    lineageDefinitions: LineageDefinition[];
 }
 
 export interface SpeciesDefinitionDto {
@@ -19,6 +19,6 @@ export interface SpeciesDefinitionDto {
     type: string;
     speed: number;
     size: string;
-    featIds: string[];
-    lineages: LineageDefinitionDto[];
+    featDefinitionIds: string[];
+    lineageDefinitions: LineageDefinitionDto[];
 }

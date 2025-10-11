@@ -2,6 +2,7 @@ export interface Piece {
     name: string;
     shortName: string;
     nextStep: number;
+    amount: number;
 }
 
 export interface Worth {
