@@ -1,5 +1,5 @@
-import type { FeatureDefinition } from "../feature";
 import type { AbilityScoreDefinition } from "./abilityScoreDefinition";
+import type { FeatDefinition } from "./featDefinition";
 import type { SkillDefinition } from "./skillDefinition";
 
 export interface BackgroundDefinition {
@@ -7,7 +7,7 @@ export interface BackgroundDefinition {
     name: string;
     description: string;
     abilityScoreDefinitions: AbilityScoreDefinition[];
-    featureDefinition: FeatureDefinition;
+    featDefinition: FeatDefinition;
     skillProficiencies: SkillDefinition[];
 }
 

@@ -1,6 +1,5 @@
-import type { SubclassDefinitionDto } from "../characterClass";
 import type { FeatGroupLevel, FeatGroupLevelDto } from "../relationships/featGroupLevel";
-import type { SubclassDefinition } from "./subclassDefinition";
+import type { SubclassDefinition, SubclassDefinitionDto } from "./subclassDefinition";
 
 export interface CharacterClassDefinition {
     id: string;
@@ -8,7 +7,7 @@ export interface CharacterClassDefinition {
     description: string;
     hitDie: number;
     fixedHp: number;
-    subclasses: SubclassDefinition[]
+    subclassDefinitions: SubclassDefinition[]
     featTables: FeatGroupLevel[];
     itemSetA: null;
     itemSetB: null;
@@ -26,7 +25,7 @@ export interface CharacterClassDefinitionDto {
     description: string;
     hitDie: number;
     fixedHp: number;
-    subclasses: SubclassDefinitionDto[]
+    subclassDefinitions: SubclassDefinitionDto[]
     featTables: FeatGroupLevelDto[];
     itemSetAIds: string[];
     itemSetBIds: string[];

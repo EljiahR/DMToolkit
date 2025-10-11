@@ -1,9 +1,13 @@
-import type { Background, BackgroundBase } from "../types/dm-tool-types/background";
-import type { CharacterClass, CharacterClassBase } from "../types/dm-tool-types/characterClass";
-import type { Lineage, LineageBase, Species, SpeciesBase } from "../types/dm-tool-types/species";
+import type { Background } from "../types/dm-tool-types/background";
+import type { CharacterClass } from "../types/dm-tool-types/characterClass";
+import type { BackgroundDefinition } from "../types/dm-tool-types/definitions/backgroundDefinition";
+import type { CharacterClassDefinition } from "../types/dm-tool-types/definitions/characterClassDefinition";
+import type { LineageDefinition } from "../types/dm-tool-types/definitions/lineageDefinition";
+import type { SpeciesDefinition } from "../types/dm-tool-types/definitions/speciesDefinition";
+import type { Lineage, Species } from "../types/dm-tool-types/species";
 
 
-export const classBaseReset = (characterClass: CharacterClassBase, id: string): CharacterClass => {
+export const classBaseReset = (characterClass: CharacterClassDefinition, id: string): CharacterClass => {
     return {
         id,
         level: 0,
@@ -13,7 +17,7 @@ export const classBaseReset = (characterClass: CharacterClassBase, id: string): 
     }
 }
 
-export const backgroundBaseReset = (base: BackgroundBase, id: string): Background => {
+export const backgroundBaseReset = (base: BackgroundDefinition, id: string): Background => {
     return {
         id,
         abilityScores: ["", ""],
@@ -23,7 +27,7 @@ export const backgroundBaseReset = (base: BackgroundBase, id: string): Backgroun
     };
 }
 
-export const lineageBaseReset = (lineage: LineageBase, id: string): Lineage => {
+export const lineageBaseReset = (lineage: LineageDefinition, id: string): Lineage => {
     return {
         id,
         features: [],
@@ -31,7 +35,7 @@ export const lineageBaseReset = (lineage: LineageBase, id: string): Lineage => {
     }
 } 
 
-export const speciesBaseReset = (species: SpeciesBase, id: string, lineageId: string): Species => {
+export const speciesBaseReset = (species: SpeciesDefinition, id: string, lineageId: string): Species => {
     return {
         id,
         features: [],
