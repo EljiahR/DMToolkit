@@ -5,7 +5,7 @@ import { useAuth } from "./AuthProvider";
 const authenticationStates = {
     loading: 0,
     authorized: 1,
-    unauthorized: 2
+    unauthorized: 2,
 } as const;
 
 export const Protected: React.FC<{children: React.ReactNode}> = ({children}) => {
@@ -18,6 +18,7 @@ export const Protected: React.FC<{children: React.ReactNode}> = ({children}) => 
             try {
                 await status();
                 setAuthenticationState(authenticationStates.authorized);
+                
             } catch (error) {
                 setAuthenticationState(authenticationStates.unauthorized);
                 console.error("Not authorized", error);

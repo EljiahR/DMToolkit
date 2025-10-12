@@ -9,7 +9,7 @@ import { characterBackgrounds } from "../../../seedData/characterBackgrounds";
 
 describe("ClassDefault", () => {
     beforeEach(() => {
-        renderWithStore(<ClassDefault />, { preloadedState: { selectedCharacter: { characterClass: classBaseReset(characterClasses[0], "0"), scores: standardScores, background: backgroundBaseReset(characterBackgrounds[0], "0") }, dmTools: { characterClasses } } });
+        renderWithStore(<ClassDefault />, { preloadedState: { selectedCharacter: { characterClass: classBaseReset(characterClasses[0], "0"), scores: standardScores, background: backgroundBaseReset(characterBackgrounds[0], "0") }, dmTools: { characterClassDefinitions: characterClasses } } });
     });
 
     it("renders with the selected classes correct default", () => {

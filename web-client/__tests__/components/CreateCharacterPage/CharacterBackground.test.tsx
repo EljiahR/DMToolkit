@@ -7,7 +7,7 @@ import renderWithStore from "../../renderOptions/renderWithStore";
 
 describe("CharacterBackground component", () => {
     beforeEach(() => {
-        renderWithStore(<CharacterBackground />, { preloadedState: { dmTools: { backgrounds: characterBackgrounds } } });
+        renderWithStore(<CharacterBackground />, { preloadedState: { dmTools: { backgroundDefinitions: characterBackgrounds } } });
     })
     
     it("renders with the default background selected", () => {

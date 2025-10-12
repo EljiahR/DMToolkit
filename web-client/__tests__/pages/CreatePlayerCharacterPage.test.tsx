@@ -9,7 +9,7 @@ import renderWithAll from "../renderOptions/renderWithAll";
 
 describe("CreatePlayerCharacter page", () => {
     beforeEach(() => {
-        renderWithAll(<CreatePlayerCharacterPage />, { initialEntries: ["/"], preloadedState: {dmTools: { characterClasses, backgrounds: characterBackgrounds, species: characterSpecies, lineages: lineages } } });
+        renderWithAll(<CreatePlayerCharacterPage />, { initialEntries: ["/"], preloadedState: { dmTools: { characterClassDefinitions: characterClasses, backgroundDefinitions: characterBackgrounds, speciesDefinitions: characterSpecies } } });
     })
 
     it("renders", () => {

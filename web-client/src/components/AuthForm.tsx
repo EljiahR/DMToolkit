@@ -15,6 +15,7 @@ const AuthForm = () => {
     }
 
     const handleAnonymous = () => {
+        
         const redirectUrl = searchParams.get("redirectUrl");
         navigate(redirectUrl ?? "/");
     }

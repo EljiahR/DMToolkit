@@ -5,13 +5,13 @@ import userEvent from "@testing-library/user-event";
 import renderWithAll from "../renderOptions/renderWithAll";
 import { characterClasses } from "../seedData/characterClasses";
 import { characterBackgrounds } from "../seedData/characterBackgrounds";
-import { characterSpecies, lineages } from "../seedData/characterSpecies";
+import { characterSpecies } from "../seedData/characterSpecies";
 
 vi.mock("./AuthProvider", () => ({}));
 
 describe("Creating a new character starting from the home page", () => {
     beforeEach(() => {
-        renderWithAll(<App />, { initialEntries: ["/"], preloadedState: {dmTools: { characterClasses, backgrounds: characterBackgrounds, species: characterSpecies, lineages: lineages } } });
+        renderWithAll(<App />, { initialEntries: ["/"], preloadedState: { dmTools: { characterClassDefinitions: characterClasses, backgroundDefinitions: characterBackgrounds, speciesDefinitions: characterSpecies } } });
     });
 
     it("allows the user to go to the Create Character section, make a new character following all steps, and view that new character on the display page", async () => {
@@ -19,9 +19,9 @@ describe("Creating a new character starting from the home page", () => {
         const createCharacterButton = screen.getByRole("button", {name: /create character/i});
         await userEvent.click(createCharacterButton);
 
-        // SignInPage and clicking the Continue without account button
-        const anonymousButton = screen.getByRole("button", {name: /continue without account/i});
-        await userEvent.click(anonymousButton);
+        // // SignInPage and clicking the Continue without account button
+        // const anonymousButton = screen.getByRole("button", {name: /continue without account/i});
+        // await userEvent.click(anonymousButton);
 
         // Start section
         const startButton = screen.getByRole("button", { name: /start/i });

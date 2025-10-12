@@ -2,12 +2,12 @@ import { describe, it } from "vitest";
 import CharacterSpecies from "../../../src/components/CreateCharacterPage/CharacterSpecies";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { characterSpecies, lineages } from "../../seedData/characterSpecies";
+import { characterSpecies } from "../../seedData/characterSpecies";
 import renderWithStore from "../../renderOptions/renderWithStore";
 
 describe("CharacterSpecies component", () => {
     beforeEach(() => {
-        renderWithStore(<CharacterSpecies />, { preloadedState: { dmTools: { species: characterSpecies, lineages } }})
+        renderWithStore(<CharacterSpecies />, { preloadedState: { dmTools: { speciesDefinitions: characterSpecies } }})
     })
     
     it("renders with the default selected species showing", () => {

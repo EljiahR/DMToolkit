@@ -9,7 +9,7 @@ import { characterBackgrounds } from "../../seedData/characterBackgrounds";
 describe("CharacterAbilityScores component", () => {
 
     beforeEach(() => {
-        renderWithStore(<CharacterAbilityScores />, { preloadedState: { dmTools: { characterClasses, backgrounds: characterBackgrounds } }});
+        renderWithStore(<CharacterAbilityScores />, { preloadedState: { dmTools: { characterClassDefinitions: characterClasses, backgroundDefinitions: characterBackgrounds } }});
     })
     
     it("renders with the standard array as default", () => {

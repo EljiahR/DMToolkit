@@ -8,7 +8,7 @@ import renderWithStore from "../../renderOptions/renderWithStore";
 
 describe("CharacterAbilityScores component", () => {
     beforeEach(() => {
-        renderWithStore(<CharacterClass />, { preloadedState: { dmTools: { characterClasses } }})
+        renderWithStore(<CharacterClass />, { preloadedState: { dmTools: { characterClassDefinitions: characterClasses } }})
     });
     
     it("renders with the default class displayed", () => {

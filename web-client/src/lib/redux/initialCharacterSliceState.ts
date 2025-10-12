@@ -18,12 +18,12 @@ const defaultCharacterClassDefinition: CharacterClassDefinition = {
     description: "Default class used for initializng the initial state of the selectedCharacter slice",
     subclassDefinitions: [],
     featTables: [],
-    defaultStr: 1,
-    defaultDex: 1,
-    defaultCon: 1,
-    defaultInt: 1,
-    defaultWis: 1,
-    defaultCha: 1,
+    defaultStr: 8,
+    defaultDex: 8,
+    defaultCon: 8,
+    defaultInt: 8,
+    defaultWis: 8,
+    defaultCha: 8,
     itemSetA: null,
     itemSetB: null
 }
