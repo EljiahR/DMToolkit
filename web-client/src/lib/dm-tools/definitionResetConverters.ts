@@ -31,7 +31,7 @@ export const lineageBaseReset = (lineage: LineageDefinition, id: string): Lineag
     return {
         id,
         features: [],
-        base: lineage
+        definition: lineage
     }
 } 
 
@@ -39,7 +39,7 @@ export const speciesBaseReset = (species: SpeciesDefinition, id: string, lineage
     return {
         id,
         features: [],
-        lineage: lineageBaseReset(species.lineages[0], lineageId),
-        base: species
+        lineage: lineageBaseReset(species.lineageDefinitions[0], lineageId),
+        definition: species
     }
 }

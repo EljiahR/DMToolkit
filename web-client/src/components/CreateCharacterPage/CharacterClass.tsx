@@ -4,7 +4,7 @@ import { setCharacterClassBase } from "../../lib/redux/selectedCharacterSlice";
 
 
 export default function({className = ""}: {className?: string}) {
-    const availableClasses = useAppSelector((state) => state.dmTools.characterClasses);
+    const availableClasses = useAppSelector((state) => state.dmTools.characterClassDefinitions);
     const selectedClassBase = useAppSelector((state) => state.selectedCharacter.characterClass.base);
     const dispatch = useAppDispatch();
     

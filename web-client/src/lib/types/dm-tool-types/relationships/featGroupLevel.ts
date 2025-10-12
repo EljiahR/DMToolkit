@@ -1,13 +1,13 @@
-import type { FeatureDefinition } from "../feature";
+import type { FeatDefinition } from "../definitions/featDefinition";
 
 export interface FeatGroupLevel {
     level: number;
     group: number;
-    feats: FeatureDefinition[];
+    featDefinitions: FeatDefinition[];
 }
 
 export interface FeatGroupLevelDto {
     level: number;
     group: number;
-    featIds: string[];
+    featDefinitionIds: string[];
 }

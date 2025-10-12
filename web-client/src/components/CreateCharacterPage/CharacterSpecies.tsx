@@ -1,29 +1,19 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
-import { setLineageBase, setSpeciesBase } from "../../lib/redux/selectedCharacterSlice";
+import { setSpeciesBase } from "../../lib/redux/selectedCharacterSlice";
 
 export default function({className = ""}: {className?: string}) {
-    const allSpecies = useAppSelector((state) => state.dmTools.species);
-    const allLineages = useAppSelector((state) => state.dmTools.lineages);
-    const selectedSpeciesBase = useAppSelector((state) => state.selectedCharacter.species.base);
-    const selectedLineageBase = useAppSelector((state) => state.selectedCharacter.species.lineage.base);
+    const allSpecies = useAppSelector((state) => state.dmTools.speciesDefinitions);
+    const selectedSpeciesBase = useAppSelector((state) => state.selectedCharacter.species.definition);
+    const selectedLineageBase = useAppSelector((state) => state.selectedCharacter.species.lineage.definition);
     const dispatch = useAppDispatch();
 
     useLayoutEffect(() => {
         if (allSpecies.length < 1) {
             // TODO: Error handling
         }
-
-        if (allLineages.length < 1) {
-            // TODO: Error handling
-        }
-        
         if (allSpecies.length > 0 && (selectedSpeciesBase == null || selectedSpeciesBase.id == "default")) {
             dispatch(setSpeciesBase(allSpecies[0]));
-        }
-
-        if (allLineages.length > 0 && (selectedLineageBase == null || selectedLineageBase.id == "default")) {
-            dispatch(setLineageBase(selectedSpeciesBase ? selectedSpeciesBase.lineages[0] : allSpecies[0].lineages[0]));
         }
     });
 
@@ -51,7 +41,7 @@ export default function({className = ""}: {className?: string}) {
             </select>
             <label htmlFor="lineage-selector">Select a lineage</label>
             <select id="lineage-selector">
-                {allLineages.filter(lineage => lineage.speciesId == selectedSpeciesBase.id).map((lineage) => {
+                {selectedSpeciesBase.lineageDefinitions.map((lineage) => {
                     return (
                         <option key={`lineage-${lineage.id}`} value={lineage.id}>{lineage.name}</option>
                     )

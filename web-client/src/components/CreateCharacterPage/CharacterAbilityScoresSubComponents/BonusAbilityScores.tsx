@@ -5,7 +5,7 @@ import type { ZeroOrOne } from "../../../lib/types/miscTypes";
 
 export default function() {
     const dispatch = useAppDispatch();
-    const allBackgrounds = useAppSelector((state) => state.dmTools.backgrounds);
+    const allBackgrounds = useAppSelector((state) => state.dmTools.backgroundDefinitions);
     const backgroundBase = useAppSelector((state) => state.selectedCharacter.background.base);
     const playerScores = useAppSelector((state) => state.selectedCharacter.scores);
     const instanceBonuses = useAppSelector((state) => state.selectedCharacter.background.abilityScores);
@@ -29,7 +29,7 @@ export default function() {
                 <option value=""></option>
                 {Object.keys(playerScores).map((scoreId) => {
                     return (
-                        <option key={`bonus-${scoreId}-2`} value={scoreId}>{playerScores[scoreId].name}</option>
+                        <option key={`bonus-${scoreId}-2`} value={scoreId}>{playerScores[scoreId].definition.name}</option>
                     )
                 })}
             </select>
@@ -38,7 +38,7 @@ export default function() {
                 <option value=""></option>
                 {Object.keys(playerScores).map((scoreId) => {
                     return (
-                        <option key={`bonus-${scoreId}-1`} value={scoreId}>{playerScores[scoreId].name}</option>
+                        <option key={`bonus-${scoreId}-1`} value={scoreId}>{playerScores[scoreId].definition.name}</option>
                     )
                 })}
             </select>

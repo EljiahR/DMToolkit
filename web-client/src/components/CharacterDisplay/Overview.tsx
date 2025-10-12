@@ -10,7 +10,7 @@ export default function() {
                 <p>{selectedCharacter.characterClass.base.name}</p>
             </div>
             <div id="origin">
-                <p>{selectedCharacter.species.base.name}</p>
+                <p>{selectedCharacter.species.definition.name}</p>
                 <p>{selectedCharacter.background.base.name}</p>
             </div>
             <div id="alignment">

@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
 import { setScoresToRandom, setScoreToRandom } from "../../../lib/redux/selectedCharacterSlice";
-import type { AbilityScore } from "../../../lib/types/dm-tool-types/stats";
+import type { AbilityScoreInstance } from "../../../lib/types/dm-tool-types/stats";
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
@@ -34,7 +34,7 @@ export default function() {
 };
 
 interface ScoreDisplayProps {
-    score: AbilityScore;
+    score: AbilityScoreInstance;
     handleScoreReroll: (scoreId: string) => void;
     bonus: number;
 }
@@ -42,7 +42,7 @@ interface ScoreDisplayProps {
 const ScoreDisplay = ({ score, handleScoreReroll, bonus }: ScoreDisplayProps) => {
     return (
         <div id={`${score.id}-score`}>
-            <p>{`${score.name}: ${bonus > 0 ? `${score.amount} +${bonus}` : score.amount}`}</p>
+            <p>{`${score.definition.name}: ${bonus > 0 ? `${score.amount} +${bonus}` : score.amount}`}</p>
             <button onClick={() => handleScoreReroll(score.id)}>Roll</button>
         </div>
     )

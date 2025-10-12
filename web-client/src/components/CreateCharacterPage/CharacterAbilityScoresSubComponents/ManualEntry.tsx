@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
 import { setScore, setScoresToMinimum } from "../../../lib/redux/selectedCharacterSlice";
-import type { AbilityScore } from "../../../lib/types/dm-tool-types/stats";
+import type { AbilityScoreInstance } from "../../../lib/types/dm-tool-types/stats";
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
@@ -31,7 +31,7 @@ export default function() {
 }
 
 interface ScoreComponentProps {
-    score: AbilityScore;
+    score: AbilityScoreInstance;
     updateScore: (scoreId: string, updatedValue: string) => void;
     bonus: number;
 }
@@ -39,7 +39,7 @@ interface ScoreComponentProps {
 const ScoreComponent = ({ score, updateScore, bonus}: ScoreComponentProps) => {
     return (
         <div>
-            <label htmlFor={`${score.id}-input`}>{score.name}: </label>
+            <label htmlFor={`${score.id}-input`}>{score.definition.name}: </label>
             <input type="number" id={`${score.id}-input`} value={score.amount} onChange={(e) => updateScore(score.id, e.target.value)} />
             <div>
                 {bonus > 0 &&

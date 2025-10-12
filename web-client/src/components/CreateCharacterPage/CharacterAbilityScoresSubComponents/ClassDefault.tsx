@@ -4,14 +4,14 @@ import { setCharacterClassBase, setScoresToClassDefault } from "../../../lib/red
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
-    const defaultClass = useAppSelector((state) => state.dmTools.characterClasses[0]);
+    const defaultClass = useAppSelector((state) => state.dmTools.characterClassDefinitions[0]);
     const characterClassBase = useAppSelector((state) => state.selectedCharacter.characterClass.base);
     const bonuses = useAppSelector((state) => state.selectedCharacter.background.abilityScores);
     const dispatch = useAppDispatch();
 
     if (!characterClassBase || !scores) {
         dispatch(setCharacterClassBase(defaultClass));
-        dispatch(setScoresToClassDefault(defaultClass.defaultScoreArray));
+        dispatch(setScoresToClassDefault([defaultClass.defaultStr, defaultClass.defaultDex, defaultClass.defaultCon, defaultClass.defaultInt, defaultClass.defaultWis, defaultClass.defaultCha]));
     }
     
     useLayoutEffect(() => {
@@ -25,7 +25,7 @@ export default function() {
                 {Object.keys(scores).map((key) => {
                     return (
                         <div key={`$default-${key}`}>
-                            <p>{`${scores[key].name}: ${bonuses.includes(key) ? `${scores[key].amount} +${2 - bonuses.indexOf(key)}` : scores[key].amount}`}</p>
+                            <p>{`${scores[key].definition.name}: ${bonuses.includes(key) ? `${scores[key].amount} +${2 - bonuses.indexOf(key)}` : scores[key].amount}`}</p>
                         </div>
                     )
                 })}

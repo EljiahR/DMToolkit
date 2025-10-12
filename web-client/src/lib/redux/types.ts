@@ -1,6 +1,6 @@
-import type { BackgroundBase } from "../types/dm-tool-types/background";
-import type { CharacterClassBase } from "../types/dm-tool-types/characterClass";
-import type { LineageBase, SpeciesBase } from "../types/dm-tool-types/species";
+import type { BackgroundDefinition } from "../types/dm-tool-types/definitions/backgroundDefinition";
+import type { CharacterClassDefinition } from "../types/dm-tool-types/definitions/characterClassDefinition";
+import type { SpeciesDefinition } from "../types/dm-tool-types/definitions/speciesDefinition";
 
 export interface AuthSlice {
     accessToken: string | null;
@@ -11,10 +11,9 @@ export interface UserSlice {
 }
 
 export interface DMToolsSlice {
-    characterClasses: CharacterClassBase[];
-    backgrounds: BackgroundBase[];
-    species: SpeciesBase[];
-    lineages: LineageBase[];
+    characterClassDefinitions: CharacterClassDefinition[];
+    backgroundDefinitions: BackgroundDefinition[];
+    speciesDefinitions: SpeciesDefinition[];
 }
 
 export type CharacterDisplayNavigationOptions = "Overview" | "Stats" | "Combat" | "Feats" | "Spells" | "Inventory";

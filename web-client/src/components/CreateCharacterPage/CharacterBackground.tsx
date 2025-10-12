@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks";
 import { setBackgroundBase } from "../../lib/redux/selectedCharacterSlice";
 
 export default function({className = ""}: {className?: string}) {
-    const backgrounds = useAppSelector((state) => state.dmTools.backgrounds);
+    const backgrounds = useAppSelector((state) => state.dmTools.backgroundDefinitions);
     const selectedBackgroundBase = useAppSelector((state) => state.selectedCharacter.background.base);
     const dispatch = useAppDispatch();
 

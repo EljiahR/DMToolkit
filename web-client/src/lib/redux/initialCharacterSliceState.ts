@@ -1,19 +1,31 @@
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
-import type { Background, BackgroundBase } from "../types/dm-tool-types/background";
+import { Copper, Electum, Gold, Platinum, Silver } from "../dm-tools/staticElements";
+import type { Background } from "../types/dm-tool-types/background";
 import type { Character } from "../types/dm-tool-types/character";
-import type { CharacterClass, CharacterClassBase } from "../types/dm-tool-types/characterClass";
+import type { CharacterClass, } from "../types/dm-tool-types/characterClass";
+import type { BackgroundDefinition } from "../types/dm-tool-types/definitions/backgroundDefinition";
+import type { CharacterClassDefinition } from "../types/dm-tool-types/definitions/characterClassDefinition";
+import type { LineageDefinition } from "../types/dm-tool-types/definitions/lineageDefinition";
+import type { SpeciesDefinition } from "../types/dm-tool-types/definitions/speciesDefinition";
 import type { Worth } from "../types/dm-tool-types/items";
-import type { Lineage, LineageBase, Species, SpeciesBase } from "../types/dm-tool-types/species";
+import type { Lineage, Species } from "../types/dm-tool-types/species";
 
-const characterClassBase: CharacterClassBase = {
+const defaultCharacterClassDefinition: CharacterClassDefinition = {
     id: "default",
     name: "Default",
     hitDie: 1,
     fixedHp: 1,
     description: "Default class used for initializng the initial state of the selectedCharacter slice",
-    subclasses: [],
-    features: [],
-    defaultScoreArray: []
+    subclassDefinitions: [],
+    featTables: [],
+    defaultStr: 1,
+    defaultDex: 1,
+    defaultCon: 1,
+    defaultInt: 1,
+    defaultWis: 1,
+    defaultCha: 1,
+    itemSetA: null,
+    itemSetB: null
 }
 
 const characterClass: CharacterClass = {
@@ -21,15 +33,15 @@ const characterClass: CharacterClass = {
     level: 0,
     subclass: null,
     features: [],
-    base: characterClassBase
+    base: defaultCharacterClassDefinition
 }
 
-const backgroundBase: BackgroundBase = {
+const defaultBackgroundDefinition: BackgroundDefinition = {
     id: "default",
     name: "Default",
     description: "Default background used for initializng the initial state of the selectedCharacter slice",
-    abilityScores: [],
-    features: [],
+    abilityScoreDefinitions: [],
+    featDefinition: null,
     skillProficiencies: []
 }
 
@@ -38,48 +50,47 @@ const background: Background = {
     abilityScores: ["", ""],
     features: [],
     skillProficiencies: [],
-    base: backgroundBase
+    base: defaultBackgroundDefinition
 }
 
-const lineageBase: LineageBase = {
+const defaultLineageDefinition: LineageDefinition = {
     id: "default",
     name: "Default",
     description: "Default lineage used for initializng the initial state of the selectedCharacter slice",
-    features: [],
-    speciesId: "default"
+    featDefinitions: [],
 }
 
 const lineage: Lineage = {
     id: "0",
     features: [],
-    base: lineageBase
+    definition: defaultLineageDefinition
 }
 
-const speciesBase: SpeciesBase = {
+const defaultSpeciesDefinition: SpeciesDefinition = {
     id: "default",
     name: "Default",
     description: "Default species used for initializng the initial state of the selectedCharacter slice",
     type: "none",
     speed: 0,
     size: "none",
-    features: [],
-    lineages: [lineageBase]
+    featDefinitions: [],
+    lineageDefinitions: [defaultLineageDefinition]
 }
 
 const species: Species = {
     id: "0",
     features: [],
     lineage,
-    base: speciesBase
+    definition: defaultSpeciesDefinition
 }
 
 export const generateEmptyWallet = (): Worth => {
     return {
-        cp: 0,
-        sp: 0,
-        ep: 0,
-        gp: 0,
-        pp: 0
+        cp: JSON.parse(JSON.stringify(Copper)),
+        sp: JSON.parse(JSON.stringify(Silver)),
+        ep: JSON.parse(JSON.stringify(Electum)),
+        gp: JSON.parse(JSON.stringify(Gold)),
+        pp: JSON.parse(JSON.stringify(Platinum))
     }
 }
 

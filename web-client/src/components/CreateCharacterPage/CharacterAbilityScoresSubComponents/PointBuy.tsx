@@ -2,7 +2,7 @@ import { useLayoutEffect, useMemo } from "react";
 import { scoreCalculator, scoreCosts } from "../../../lib/dm-tools/pointBuyCalculator";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
 import { addOneToScore, setScoresToBase, subtractOneFromScore } from "../../../lib/redux/selectedCharacterSlice";
-import type { AbilityScore } from "../../../lib/types/dm-tool-types/stats";
+import type { AbilityScoreInstance } from "../../../lib/types/dm-tool-types/stats";
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
@@ -17,7 +17,7 @@ export default function() {
         return 27 - scoreCalculator(scores);
     }, [scores]);
 
-    const handleScoreChange = (score: AbilityScore, isAdditive: boolean) => {
+    const handleScoreChange = (score: AbilityScoreInstance, isAdditive: boolean) => {
         if (isAdditive && score.amount < 15 && scoreRemainder >= (scoreCosts[score.amount + 1] - scoreCosts[score.amount])) {
             dispatch(addOneToScore(score.id));
         } else if (!isAdditive && score.amount > 8) {
@@ -41,15 +41,15 @@ export default function() {
 }
 
 interface ScoreDisplayProps {
-    score: AbilityScore;
-    handleScoreChange: (score: AbilityScore, isAdditive: boolean) => void;
+    score: AbilityScoreInstance;
+    handleScoreChange: (score: AbilityScoreInstance, isAdditive: boolean) => void;
     bonus: number
 }
 
 const ScoreDisplay = ({ score, handleScoreChange, bonus }: ScoreDisplayProps) => {
     return (
         <div id={`${score.id}-display`}>
-            <p>{`${score.name}: ${bonus > 0 ? `${score.amount} +${bonus}` : score.amount}`}</p>
+            <p>{`${score.definition.name}: ${bonus > 0 ? `${score.amount} +${bonus}` : score.amount}`}</p>
             <div>
                 <button onClick={() => handleScoreChange(score, true)}>+</button>
                 <button onClick={() => handleScoreChange(score, false)}>-</button>

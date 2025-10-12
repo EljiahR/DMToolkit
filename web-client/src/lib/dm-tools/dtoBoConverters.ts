@@ -1,12 +1,12 @@
 import type { Background, BackgroundDto } from "../types/dm-tool-types/background";
 import type { Character, CharacterDto } from "../types/dm-tool-types/character";
 import type { CharacterClass, CharacterClassDto, Subclass, SubclassDto } from "../types/dm-tool-types/characterClass";
-import type { AbilityScoreDefinition, AbilityScoreDefinitionDto } from "../types/dm-tool-types/definitions/abilityScoreDefinition";
+import type { AbilityScoreDefinition } from "../types/dm-tool-types/definitions/abilityScoreDefinition";
 import type { BackgroundDefinition, BackgroundDefinitionDto } from "../types/dm-tool-types/definitions/backgroundDefinition";
 import type { CharacterClassDefinition, CharacterClassDefinitionDto } from "../types/dm-tool-types/definitions/characterClassDefinition";
 import type { FeatDefinition, FeatDefinitionDto } from "../types/dm-tool-types/definitions/featDefinition";
 import type { LineageDefinition, LineageDefinitionDto } from "../types/dm-tool-types/definitions/lineageDefinition";
-import type { SkillDefinition, SkillDefinitionDto } from "../types/dm-tool-types/definitions/skillDefinition";
+import type { SkillDefinition } from "../types/dm-tool-types/definitions/skillDefinition";
 import type { SpeciesDefinition, SpeciesDefinitionDto } from "../types/dm-tool-types/definitions/speciesDefinition";
 import type { SubclassDefinition, SubclassDefinitionDto } from "../types/dm-tool-types/definitions/subclassDefinition";
 import type { FeatEffect, FeatEffectDto } from "../types/dm-tool-types/entities/featEffect";
@@ -20,23 +20,23 @@ import type { AbilityScoreInstance, AbilityScoreInstanceDto, AbilityScores, Skil
 
 // Definitions
 
-const skillDefinitionToBo = (skill: SkillDefinitionDto): SkillDefinition => {
-    return {
-        id: skill.id,
-        name: skill.name,
-        description: skill.description
-    }
-}
+// const skillDefinitionToBo = (skill: SkillDefinitionDto): SkillDefinition => {
+//     return {
+//         id: skill.id,
+//         name: skill.name,
+//         description: skill.description
+//     }
+// }
 
-const abilityScoreDefinitionToBo = (score: AbilityScoreDefinitionDto): AbilityScoreDefinition => {
-    return {
-        id: score.id,
-        name: score.name,
-        abbreviation: score.abbreviation,
-        description: score.description,
-        skillDefinitions: score.skillDefinitions.map(s => skillDefinitionToBo(s))
-    }
-}
+// const abilityScoreDefinitionToBo = (score: AbilityScoreDefinitionDto): AbilityScoreDefinition => {
+//     return {
+//         id: score.id,
+//         name: score.name,
+//         abbreviation: score.abbreviation,
+//         description: score.description,
+//         skillDefinitions: score.skillDefinitions.map(s => skillDefinitionToBo(s))
+//     }
+// }
 
 const featDefinitionEffectGroupingToBo = (tables: FeatDefinitionEffectGroupingDto[], effects: FeatEffect[]): FeatDefinitionEffectGrouping[] => {
     return tables.map(t => {
@@ -72,7 +72,7 @@ export const featGroupLevelToBo = (groups: FeatGroupLevelDto[], feats: FeatDefin
         return {
             level: g.level,
             group: g.group,
-            feats: feats.filter(f => g.featIds.includes(f.id))
+            featDefinitions: feats.filter(f => g.featDefinitionIds.includes(f.id))
         }
     })
 }
@@ -111,7 +111,7 @@ export const lineageDefinitionToBo = (lineageDto: LineageDefinitionDto, featDefi
         id: lineageDto.id,
         name: lineageDto.name,
         description: lineageDto.description,
-        feats: featDefinitions.filter((feat) => lineageDto.featIds.includes(feat.id)),
+        featDefinitions: featDefinitions.filter((feat) => lineageDto.featDefinitionIds.includes(feat.id)),
     }
 } 
 
@@ -294,7 +294,7 @@ export const inventoryToBo = (ids: string[], allItems: AllItemTypes[]): AllItemT
     return allItems.filter((item) => ids.includes(item.id)); // Can be optimised for sure
 }
 
-export const characterToBo = (abilityScoreDefinitions: AbilityScoreDefinition[], characterDto: CharacterDto, classDefinitions: CharacterClassDefinition[], backgroundDefinitions: BackgroundDefinition[], subclasses: SubclassDefinition[], speciesDefinitions: SpeciesDefinition[], lineageDefinitions: LineageDefinition[], effects: FeatEffect[], featDefinitions: FeatDefinition[], allItems: AllItemTypes[]): Character => {
+export const characterToBo = (abilityScoreDefinitions: AbilityScoreDefinition[], characterDto: CharacterDto, classDefinitions: CharacterClassDefinition[], backgroundDefinitions: BackgroundDefinition[], subclasses: SubclassDefinition[], speciesDefinitions: SpeciesDefinition[], effects: FeatEffect[], featDefinitions: FeatDefinition[], allItems: AllItemTypes[]): Character => {
     const inventory = inventoryToBo(characterDto.inventoryIds, allItems);
     const knownSpells: Spell[] = [];
 

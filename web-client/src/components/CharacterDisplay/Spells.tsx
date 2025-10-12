@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../lib/redux/hooks"
 import { selectKnownSpells } from "../../lib/redux/selectedCharacterSlice"
-import type { Spell } from "../../lib/types/dm-tool-types/spell"
+import type { Spell } from "../../lib/types/dm-tool-types/entities/spell";
 
 export default function() {
     const knownSpells = useAppSelector(selectKnownSpells);

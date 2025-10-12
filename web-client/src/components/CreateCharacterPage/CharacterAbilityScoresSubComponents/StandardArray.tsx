@@ -4,7 +4,7 @@ import { arraySwap, SortableContext, sortableKeyboardCoordinates, useSortable } 
 import { CSS } from "@dnd-kit/utilities";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
 import { setScoresToStandard, swapScores } from "../../../lib/redux/selectedCharacterSlice";
-import type { AbilityScore } from "../../../lib/types/dm-tool-types/stats";
+import type { AbilityScoreInstance } from "../../../lib/types/dm-tool-types/stats";
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
@@ -56,7 +56,7 @@ export default function() {
 }
 
 interface SortableScoreProps {
-    score: AbilityScore;
+    score: AbilityScoreInstance;
     bonus: number;
 }
 
@@ -68,6 +68,6 @@ const SortableScore = ({ score, bonus }: SortableScoreProps) => {
     };
 
     return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>{`${score.name}: ${bonus > 0 ? `${score.amount} +${bonus}` : score.amount}`}</div>
+        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>{`${score.definition.name}: ${bonus > 0 ? `${score.amount} +${bonus}` : score.amount}`}</div>
     )
 }

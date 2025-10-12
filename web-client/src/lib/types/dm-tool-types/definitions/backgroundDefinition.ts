@@ -7,7 +7,7 @@ export interface BackgroundDefinition {
     name: string;
     description: string;
     abilityScoreDefinitions: AbilityScoreDefinition[];
-    featDefinition: FeatDefinition;
+    featDefinition: FeatDefinition | null;
     skillProficiencies: SkillDefinition[];
 }
 

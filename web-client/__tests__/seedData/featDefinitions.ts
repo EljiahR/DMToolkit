@@ -1,8 +1,8 @@
 import type { FeatDefinition } from "../../src/lib/types/dm-tool-types/definitions/featDefinition";
 
-export const versatileFeature: FeatDefinition = {
-    id: "candoanything",
-    name: "Versatile",
+export const emptyFeat: FeatDefinition = {
+    id: "nullFeat",
+    name: "",
     description: "",
     availableEffectTables: []
-}   
+};

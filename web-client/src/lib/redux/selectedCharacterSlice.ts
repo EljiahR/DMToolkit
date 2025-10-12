@@ -1,18 +1,20 @@
 import { createSelector, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { getModifier, rollStat } from "../dm-tools/stats";
-import { backgroundBaseReset, classBaseReset, lineageBaseReset, speciesBaseReset } from "../dm-tools/baseResetConverters";
+import { backgroundBaseReset, classBaseReset, lineageBaseReset, speciesBaseReset } from "../dm-tools/definitionResetConverters";
 import type { GeneratedTraits } from "../dm-tools/traitGenerator";
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
 import type { RootState } from "./store";
 import type { StringAndNumber, ZeroOrOne } from "../types/miscTypes";
 import { generateEmptyCharacter, generateEmptyWallet } from "./initialCharacterSliceState";
 import type { AbilityScoreBonusFeatEffectData, SimpleBonusFeatEffectData } from "../types/featEffectDataTypes";
-import type { CharacterClassBase } from "../types/dm-tool-types/characterClass";
-import type { BackgroundBase } from "../types/dm-tool-types/background";
-import type { LineageBase, SpeciesBase } from "../types/dm-tool-types/species";
 import type { AbilityScores } from "../types/dm-tool-types/stats";
-import type { FeatEffect, Feature } from "../types/dm-tool-types/feature";
 import type { Armor, Weapon } from "../types/dm-tool-types/items";
+import type { CharacterClassDefinition } from "../types/dm-tool-types/definitions/characterClassDefinition";
+import type { BackgroundDefinition } from "../types/dm-tool-types/definitions/backgroundDefinition";
+import type { SpeciesDefinition } from "../types/dm-tool-types/definitions/speciesDefinition";
+import type { LineageDefinition } from "../types/dm-tool-types/definitions/lineageDefinition";
+import type { Feature } from "../types/dm-tool-types/feature";
+import type { FeatEffect } from "../types/dm-tool-types/entities/featEffect";
 
 const initialState = generateEmptyCharacter();
 
@@ -53,19 +55,19 @@ export const selectedCharacterSlice = createSlice({
         setAlignment: (state, action: PayloadAction<string>) => {
             state.alignment = action.payload;
         },
-        setCharacterClassBase: (state, action: PayloadAction<CharacterClassBase>) => {
+        setCharacterClassBase: (state, action: PayloadAction<CharacterClassDefinition>) => {
             state.characterClass = classBaseReset(action.payload, state.characterClass.id);
         },
-        setBackgroundBase: (state, action: PayloadAction<BackgroundBase>) => {
+        setBackgroundBase: (state, action: PayloadAction<BackgroundDefinition>) => {
             state.background = backgroundBaseReset(action.payload, state.background.id);
         },
         setBackgroundScores: (state, action: PayloadAction<{scoreId: string, index: ZeroOrOne}>) => {
             state.background.abilityScores[action.payload.index] = action.payload.scoreId;
         },
-        setSpeciesBase: (state, action: PayloadAction<SpeciesBase>) => {
+        setSpeciesBase: (state, action: PayloadAction<SpeciesDefinition>) => {
             state.species = speciesBaseReset(action.payload, state.species.id, state.species.lineage.id);
         },
-        setLineageBase: (state, action: PayloadAction<LineageBase>) => {
+        setLineageBase: (state, action: PayloadAction<LineageDefinition>) => {
             state.species.lineage= lineageBaseReset(action.payload, state.species.lineage.id)
         },
         setScore: (state, action: PayloadAction<{scoreId: string, amount: string}>) => {
@@ -125,12 +127,12 @@ export const selectedCharacterSlice = createSlice({
             if (state.scores == null) {
                 state.scores = getStandardScores();
             }
-            state.scores.str.amount = action.payload ? action.payload[0] : state.characterClass.base.defaultScoreArray[0] ?? 8;
-            state.scores.dex.amount = action.payload ? action.payload[1] : state.characterClass.base.defaultScoreArray[1] ?? 8;
-            state.scores.con.amount = action.payload ? action.payload[2] : state.characterClass.base.defaultScoreArray[2] ?? 8;
-            state.scores.int.amount = action.payload ? action.payload[3] : state.characterClass.base.defaultScoreArray[3] ?? 8;
-            state.scores.wis.amount = action.payload ? action.payload[4] : state.characterClass.base.defaultScoreArray[4] ?? 8;
-            state.scores.cha.amount = action.payload ? action.payload[5] : state.characterClass.base.defaultScoreArray[5] ?? 8;
+            state.scores.str.amount = action.payload ? action.payload[0] : state.characterClass.base.defaultStr ?? 8;
+            state.scores.dex.amount = action.payload ? action.payload[1] : state.characterClass.base.defaultDex ?? 8;
+            state.scores.con.amount = action.payload ? action.payload[2] : state.characterClass.base.defaultCon ?? 8;
+            state.scores.int.amount = action.payload ? action.payload[3] : state.characterClass.base.defaultInt ?? 8;
+            state.scores.wis.amount = action.payload ? action.payload[4] : state.characterClass.base.defaultWis ?? 8;
+            state.scores.cha.amount = action.payload ? action.payload[5] : state.characterClass.base.defaultCha ?? 8;
         },
         setPhysicalDescription: (state, action: PayloadAction<string>) => {
             state.physicalDescription = action.payload;
@@ -252,17 +254,17 @@ export const selectProficiencyBonus = (state: RootState) => {
 }
 
 export const selectSpeed = (state: RootState) => {
-    return state.selectedCharacter.species.base.speed;
+    return state.selectedCharacter.species.definition.speed;
 }
 
 export const selectSize = (state: RootState) => {
-    return state.selectedCharacter.species.base.size;
+    return state.selectedCharacter.species.definition.size;
 }
 
 export const selectPassivePerception = createSelector(
     [selectAllPassPerceptionBonusFeatEffects, selectAllAbilityScoreModifiers, selectAllAbilityScores, selectProficiencyBonus],
     (passivePerceptionEffects, modifiers, scores, proficiencyBonus) => {
-        const perceptionSkill = scores["wis"].skills.find((skill) => skill.name == "Perception");
+        const perceptionSkill = scores["wis"].skillInstances.find((skill) => skill.definition.name == "Perception");
         var passivePerception = 10 + modifiers["wis"] + (perceptionSkill && perceptionSkill.proficient ? proficiencyBonus : 0);
         passivePerceptionEffects.forEach((effect) => {
             const data = effect.data as SimpleBonusFeatEffectData;

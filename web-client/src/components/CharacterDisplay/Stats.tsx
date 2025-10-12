@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../lib/redux/hooks"
 import { selectAllAbilityScoreFeatEffectBonuses, selectAllAbilityScoreModifiers, selectAllAbilityScores, selectInitiative, selectPassivePerception, selectProficiencyBonus, selectSize, selectSpeed } from "../../lib/redux/selectedCharacterSlice";
-import type { AbilityScore } from "../../lib/types/dm-tool-types/stats";
+import type { AbilityScoreInstance } from "../../lib/types/dm-tool-types/stats";
 
 export default function() {
     const proficiencyBonus = useAppSelector(selectProficiencyBonus);
@@ -48,7 +48,7 @@ export default function() {
 }
 
 interface AbilityScoreDisplayProps {
-    score: AbilityScore;
+    score: AbilityScoreInstance;
     bonus: number;
     modifier: number;
     proficiencyBonus: number;
@@ -58,7 +58,7 @@ const AbilityScoreDisplay = ({score, bonus, modifier, proficiencyBonus}: Ability
     
     return (
         <div className="ability-score">
-            <h3>{score.name}</h3>
+            <h3>{score.definition.name}</h3>
             <div className="modifier">
                 <p>{modifier}</p>
                 <p>Modifier</p>
@@ -75,12 +75,12 @@ const AbilityScoreDisplay = ({score, bonus, modifier, proficiencyBonus}: Ability
                 <div className="skill-checks">
 
                 </div>
-                {score.skills.map((skill) => {
+                {score.skillInstances.map((skill) => {
                     return (
-                        <div className="saving-throw" key={skill.name}>
+                        <div className="saving-throw" key={skill.definition.name}>
                             <div className={`proficiency-check ${skill.proficient ? "checked" : ""}`}></div>
                             <p>{skill.proficient ? modifier + proficiencyBonus : modifier}</p>
-                            <p>{skill.name}</p>
+                            <p>{skill.definition.name}</p>
                         </div>
                     )
                 })}

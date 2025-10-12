@@ -4,7 +4,7 @@ import ClassDefault from "../../../../src/components/CreateCharacterPage/Charact
 import renderWithStore from "../../../renderOptions/renderWithStore";
 import { characterClasses } from "../../../seedData/characterClasses";
 import { standardScores } from "./defaultScores";
-import { backgroundBaseReset, classBaseReset } from "../../../../src/lib/dm-tools/baseResetConverters";
+import { backgroundBaseReset, classBaseReset } from "../../../../src/lib/dm-tools/definitionResetConverters";
 import { characterBackgrounds } from "../../../seedData/characterBackgrounds";
 
 describe("ClassDefault", () => {
