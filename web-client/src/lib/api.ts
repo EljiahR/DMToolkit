@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { RegisterErrors, Token } from "./types/apiResponses";
+import type { StartupDataDto } from "./types/dm-tool-types/collections/startupData";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -24,5 +25,10 @@ export const apiRefreshToken = async (refreshToken: string) => {
 
 export const apiInfo = async (accessToken: string) => {
     const response = await api.get<{email: string, isEmailConfirmed: boolean}>("/manage/info", {headers: {Authorization: `Bearer ${accessToken}`}})
+    return response.data;
+}
+
+export const apiGetStartupData = async () => {
+    const response = await api.get<StartupDataDto>("dmtoolkit");
     return response.data;
 }

@@ -1,22 +1,29 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { DMToolsSlice } from "./types";
+import type { StartupData, StartupDataDto } from "../types/dm-tool-types/collections/startupData";
+import { startupDataToBo } from "../dm-tools/dtoBoConverters";
 
-const initialState: DMToolsSlice = {
-    characterClassDefinitions: [],
+const initialState: StartupData = {
+    abilityScoreDefinitions: [],
     backgroundDefinitions: [],
+    characterClassDefinitions: [],
+    featDefinitions: [],
     speciesDefinitions: [],
+    featEffects: [],
+    schools: [],
+    spells: [],
+    spellEffects: []
 };
 
 export const dmToolsSlice = createSlice({
     name: "dmTools",
     initialState,
     reducers: {
-        // @ts-ignore
-        setAll: (state, action: PayloadAction<DMToolsSlice>) => {
-            state = action.payload;
+        setAllFromDto: (state, action: PayloadAction<StartupDataDto>) => {
+            const convertedData = startupDataToBo(action.payload);
+            state = convertedData;
         }
     }
 });
 
-export const { setAll } = dmToolsSlice.actions;
+export const { setAllFromDto } = dmToolsSlice.actions;
 export default dmToolsSlice.reducer;

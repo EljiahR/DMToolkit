@@ -1,19 +1,9 @@
-import type { BackgroundDefinition } from "../types/dm-tool-types/definitions/backgroundDefinition";
-import type { CharacterClassDefinition } from "../types/dm-tool-types/definitions/characterClassDefinition";
-import type { SpeciesDefinition } from "../types/dm-tool-types/definitions/speciesDefinition";
-
 export interface AuthSlice {
     accessToken: string | null;
 }
 
 export interface UserSlice {
     username: string | null;
-}
-
-export interface DMToolsSlice {
-    characterClassDefinitions: CharacterClassDefinition[];
-    backgroundDefinitions: BackgroundDefinition[];
-    speciesDefinitions: SpeciesDefinition[];
 }
 
 export type CharacterDisplayNavigationOptions = "Overview" | "Stats" | "Combat" | "Feats" | "Spells" | "Inventory";

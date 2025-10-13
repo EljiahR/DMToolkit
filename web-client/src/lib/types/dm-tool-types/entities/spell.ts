@@ -7,7 +7,7 @@ export interface Spell {
     id: string;
     name: string;
     level: number;
-    schools: School[];
+    school: School | null;
     characterClasses: CharacterClassDefinition[];
     castingTime: string;
     range: string;
@@ -15,16 +15,16 @@ export interface Spell {
     somaticRequired: boolean;
     materialsRequired: boolean;
     materialRequirements: SpellItem[];
-    duraton: string;
+    duration: string;
     description: string;
-    spellEffects: SpellEffect;
+    spellEffects: SpellEffect[];
 }
 
 export interface SpellDto {
     id: string;
     name: string;
     level: number;
-    schoolIds: string[];
+    schoolId: string;
     characterClassIds: string[];
     castingTime: string;
     range: string;
@@ -32,7 +32,7 @@ export interface SpellDto {
     somaticRequired: boolean;
     materialsRequired: boolean;
     materialRequirements: SpellItemDto[];
-    duraton: string;
+    duration: string;
     description: string;
     spellEffectIds: string[];
 }

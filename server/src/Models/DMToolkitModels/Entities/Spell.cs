@@ -8,7 +8,7 @@ public class Spell
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;
     public int Level { get; set; } = 0;
-    public ICollection<School> Schools { get; set; } = new List<School>();
+    public School? School { get; set; } = null;
     public ICollection<CharacterClassDefinition> CharacterClassDefinitions { get; set; } = new List<CharacterClassDefinition>();
     public string CastingTime { get; set; } = string.Empty;
     public string Range { get; set; } = string.Empty;

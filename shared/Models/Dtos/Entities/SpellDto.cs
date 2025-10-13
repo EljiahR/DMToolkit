@@ -7,7 +7,7 @@ public class SpellDto
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;
     public int Level { get; set; } = 0;
-    public ICollection<string> SchoolIds { get; set; } = new List<string>();
+    public string SchoolId { get; set; } = string.Empty;
     public ICollection<string> CharacterClassIds { get; set; } = new List<string>();
     public string CastingTime { get; set; } = string.Empty;
     public string Range { get; set; } = string.Empty;

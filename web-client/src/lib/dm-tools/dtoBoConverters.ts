@@ -1,16 +1,19 @@
 import type { Background, BackgroundDto } from "../types/dm-tool-types/background";
 import type { Character, CharacterDto } from "../types/dm-tool-types/character";
 import type { CharacterClass, CharacterClassDto, Subclass, SubclassDto } from "../types/dm-tool-types/characterClass";
-import type { AbilityScoreDefinition } from "../types/dm-tool-types/definitions/abilityScoreDefinition";
+import type { StartupData, StartupDataDto } from "../types/dm-tool-types/collections/startupData";
+import type { AbilityScoreDefinition, AbilityScoreDefinitionDto } from "../types/dm-tool-types/definitions/abilityScoreDefinition";
 import type { BackgroundDefinition, BackgroundDefinitionDto } from "../types/dm-tool-types/definitions/backgroundDefinition";
 import type { CharacterClassDefinition, CharacterClassDefinitionDto } from "../types/dm-tool-types/definitions/characterClassDefinition";
 import type { FeatDefinition, FeatDefinitionDto } from "../types/dm-tool-types/definitions/featDefinition";
 import type { LineageDefinition, LineageDefinitionDto } from "../types/dm-tool-types/definitions/lineageDefinition";
-import type { SkillDefinition } from "../types/dm-tool-types/definitions/skillDefinition";
+import type { SkillDefinition, SkillDefinitionDto } from "../types/dm-tool-types/definitions/skillDefinition";
 import type { SpeciesDefinition, SpeciesDefinitionDto } from "../types/dm-tool-types/definitions/speciesDefinition";
 import type { SubclassDefinition, SubclassDefinitionDto } from "../types/dm-tool-types/definitions/subclassDefinition";
 import type { FeatEffect, FeatEffectDto } from "../types/dm-tool-types/entities/featEffect";
-import type { Spell } from "../types/dm-tool-types/entities/spell";
+import type { School } from "../types/dm-tool-types/entities/school";
+import type { Spell, SpellDto } from "../types/dm-tool-types/entities/spell";
+import type { SpellEffect } from "../types/dm-tool-types/entities/spellEffect";
 import type { Feature, FeatureDto } from "../types/dm-tool-types/feature";
 import type { AllItemTypes, Armor, ArmorDto, Item, ItemDto, Weapon, WeaponDto, WeaponMastery, WeaponMasteryDto, WeaponProperty, WeaponPropertyDto, Worth, WorthDto } from "../types/dm-tool-types/items";
 import type { FeatDefinitionEffectGrouping, FeatDefinitionEffectGroupingDto } from "../types/dm-tool-types/relationships/featDefinitionEffectGroupingDto";
@@ -20,23 +23,23 @@ import type { AbilityScoreInstance, AbilityScoreInstanceDto, AbilityScores, Skil
 
 // Definitions
 
-// const skillDefinitionToBo = (skill: SkillDefinitionDto): SkillDefinition => {
-//     return {
-//         id: skill.id,
-//         name: skill.name,
-//         description: skill.description
-//     }
-// }
+const skillDefinitionToBo = (skill: SkillDefinitionDto): SkillDefinition => {
+    return {
+        id: skill.id,
+        name: skill.name,
+        description: skill.description
+    }
+}
 
-// const abilityScoreDefinitionToBo = (score: AbilityScoreDefinitionDto): AbilityScoreDefinition => {
-//     return {
-//         id: score.id,
-//         name: score.name,
-//         abbreviation: score.abbreviation,
-//         description: score.description,
-//         skillDefinitions: score.skillDefinitions.map(s => skillDefinitionToBo(s))
-//     }
-// }
+const abilityScoreDefinitionToBo = (score: AbilityScoreDefinitionDto): AbilityScoreDefinition => {
+    return {
+        id: score.id,
+        name: score.name,
+        abbreviation: score.abbreviation,
+        description: score.description,
+        skillDefinitions: score.skillDefinitions.map(s => skillDefinitionToBo(s))
+    }
+}
 
 const featDefinitionEffectGroupingToBo = (tables: FeatDefinitionEffectGroupingDto[], effects: FeatEffect[]): FeatDefinitionEffectGrouping[] => {
     return tables.map(t => {
@@ -220,6 +223,25 @@ export const scoresToBo = (scoreDtos: AbilityScoreInstanceDto[], scoreDefinition
     }
 }
 
+export const spellToBo = (spellDto: SpellDto, schools: School[], characterClassDefinitions: CharacterClassDefinition[], spellEffects: SpellEffect[]): Spell => {
+    return {
+        id: spellDto.id,
+        name: spellDto.name,
+        level: spellDto.level,
+        school: schools.find(s => s.id == spellDto.id) ?? null,
+        characterClasses: characterClassDefinitions.filter(c => spellDto.characterClassIds.includes(c.id)),
+        castingTime: spellDto.castingTime,
+        range: spellDto.range,
+        verbalRequired: spellDto.verbalRequired,
+        somaticRequired: spellDto.somaticRequired,
+        materialsRequired: spellDto.materialsRequired,
+        materialRequirements: [],
+        duration: spellDto.duration,
+        description: spellDto.description,
+        spellEffects: spellEffects.filter(e => spellDto.spellEffectIds.includes(e.id))
+    }
+}
+
 export const coinsToBo = (coinsDto: WorthDto): Worth => {
     return {
         cp: {
@@ -320,5 +342,29 @@ export const characterToBo = (abilityScoreDefinitions: AbilityScoreDefinition[],
         equippedItems: inventoryToBo(characterDto.equippedItemIds, inventory),
         knownSpells,
         readiedSpells: knownSpells
+    }
+}
+
+export const startupDataToBo = (data: StartupDataDto): StartupData => {
+    const abilityScoreDefinitions = data.abilityScoreDefinitions.map(a => abilityScoreDefinitionToBo(a));
+    const featDefinitions = data.featDefinitions.map(f => featDefinitionToBo(f, data.featEffects));
+    const allSkillDefinitions = abilityScoreDefinitions.reduce((skillList, score) => {
+        return [
+            ...skillList,
+            ...score.skillDefinitions
+        ]
+    }, [] as SkillDefinition[]);
+    const characterClassDefinitions = data.characterClassDefinitions.map(c => characterClassDefinitionToBo(c, featDefinitions));
+
+    return {
+        abilityScoreDefinitions,
+        backgroundDefinitions: data.backgroundDefinitions.map(b => backgroundDefinitionToBo(b, featDefinitions, abilityScoreDefinitions, allSkillDefinitions)),
+        characterClassDefinitions,
+        featDefinitions,
+        speciesDefinitions: data.speciesDefinitions.map(s => speciesDefinitionToBo(s, featDefinitions)),
+        featEffects: data.featEffects,
+        schools: data.schools,
+        spells: data.spells.map(s => spellToBo(s, data.schools, characterClassDefinitions, data.spellEffects)),
+        spellEffects: data.spellEffects
     }
 }

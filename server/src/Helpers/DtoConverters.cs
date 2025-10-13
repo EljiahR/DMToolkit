@@ -64,7 +64,7 @@ public static class DtoConverters
         return featTables.GroupBy(t => new {t.Group, t.Level})
                         .Select(t => new FeatGroupLevelDto
                         {
-                            FeatIds = t.Select(f => f.FeatDefinitionId).ToList(),
+                            FeatDefinitionIds = t.Select(f => f.FeatDefinitionId).ToList(),
                             Group = t.First().Group,
                             Level = t.First().Level
                         })
@@ -141,8 +141,8 @@ public static class DtoConverters
             Type = species.Type,
             Speed = species.Speed,
             Size = species.Size,
-            FeatIds = species.FeatDefinitions.Select(f => f.Id).ToList(),
-            Lineages = species.LineageDefinitions.Select(ConvertLineage).ToList()
+            FeatDefinitionIds = species.FeatDefinitions.Select(f => f.Id).ToList(),
+            LineageDefinitions = species.LineageDefinitions.Select(ConvertLineage).ToList()
         };
     }
     public static FeatEffectDto ConvertFeatEffect(FeatEffect featEffect)
@@ -179,7 +179,7 @@ public static class DtoConverters
             Id = spell.Id,
             Name = spell.Name,
             Level = spell.Level,
-            SchoolIds = spell.Schools.Select(s => s.Id).ToList(),
+            SchoolId = spell.School?.Id ?? "",
             CharacterClassIds = spell.CharacterClassDefinitions.Select(c => c.Id).ToList(),
             CastingTime = spell.CastingTime,
             Range = spell.Range,
