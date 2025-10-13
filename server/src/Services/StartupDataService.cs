@@ -54,7 +54,7 @@ public class StartupDataService : IStartupDataService
         var featEffectsTask = _context.FeatEffects.AsNoTracking().ToListAsync();
         var schoolsTask = _context.Schools.AsNoTracking().ToListAsync();
         var spellsTask = _context.Spells
-                                    .Include(s => s.Schools)
+                                    .Include(s => s.School)
                                     .Include(s => s.CharacterClassDefinitions)
                                     .Include(s => s.SpellItems)
                                     .Include(s => s.SpellEffects)
@@ -68,8 +68,8 @@ public class StartupDataService : IStartupDataService
             AbilityScoreDefinitions = abilityScoresTask.Result,
             BackgroundDefinitions = backgroundsTask.Result,
             CharacterClassDefinitions = characterClassesTask.Result,
-            Feats = featsTask.Result,
-            Species = speciesTask.Result,
+            FeatDefinitions = featsTask.Result,
+            SpeciesDefinitions = speciesTask.Result,
             FeatEffects = featEffectsTask.Result,
             Schools = schoolsTask.Result,
             Spells = spellsTask.Result,

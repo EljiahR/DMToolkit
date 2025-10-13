@@ -1,4 +1,5 @@
 using DMToolkit.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DMToolkit.Controllers;
@@ -15,6 +16,7 @@ public class DMToolkitController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetStartupDataDtoAsync()
     {
         return Ok(await _startupDataService.GetStartupDataDtoAsync());

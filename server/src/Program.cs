@@ -62,6 +62,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+app.Logger.LogInformation("Allowed Origins: {allowedOrigins}", allowedOrigins);
 
 if (string.IsNullOrWhiteSpace(dbConnection))
 {
