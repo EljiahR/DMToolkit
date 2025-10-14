@@ -15,7 +15,7 @@ export interface BackgroundDefinitionDto {
     id: string;
     name: string;
     description: string;
-    abilityScoreIds: string[];
+    abilityScoreDefinitionIds: string[];
     featDefinitionId: string;
     skillDefinitionIds: string[]
 }

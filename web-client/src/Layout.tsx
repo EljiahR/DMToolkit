@@ -11,7 +11,9 @@ const Layout = () => {
     useEffect(() => {
         const getStartupData = async () => {
             try {
+                console.log("Attempting to retrieve startup data...");
                 const data = await apiGetStartupData();
+                console.log("Data retrieved successfully!");
                 dispatch(setAllFromDto(data));
             } catch (e) {
                 console.log("Failed to fetch startup data.", e);

@@ -64,7 +64,7 @@ export const backgroundDefinitionToBo = (backgroundDto: BackgroundDefinitionDto,
         id: backgroundDto.id,
         name: backgroundDto.name,
         description: backgroundDto.description,
-        abilityScoreDefinitions: abilityScoreDefinitions.filter(s => backgroundDto.abilityScoreIds.includes(s.id)),
+        abilityScoreDefinitions: abilityScoreDefinitions.filter(s => backgroundDto.abilityScoreDefinitionIds.includes(s.id)),
         featDefinition: featDefinitions.find((feat) => backgroundDto.featDefinitionId == feat.id)!,
         skillProficiencies: skillDefinitions.filter(s => backgroundDto.skillDefinitionIds.includes(s.id))
     }

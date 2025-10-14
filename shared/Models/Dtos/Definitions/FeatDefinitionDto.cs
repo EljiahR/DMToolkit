@@ -7,5 +7,5 @@ public class FeatDefinitionDto
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public List<FeatDefinitionEffectGroupingDto> AvaibleEffectTables = new();
+    public List<FeatDefinitionEffectGroupingDto> AvailableEffectTables { get; set; } = new();
 }

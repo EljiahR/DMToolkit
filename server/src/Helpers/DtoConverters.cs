@@ -1,3 +1,4 @@
+using System.Text.Json;
 using DMToolkit.Models.Collections;
 using DMToolkit.Models.Definitions;
 using DMToolkit.Models.Entities;
@@ -54,7 +55,7 @@ public static class DtoConverters
             Id = background.Id,
             Name = background.Name,
             Description = background.Description,
-            AbilityScoreIds = background.AbilityScoreDefinitions.Select(a => a.Id).ToList(),
+            AbilityScoreDefinitionIds = background.AbilityScoreDefinitions.Select(a => a.Id).ToList(),
             FeatDefinitionId = background.FeatDefinitionId,
             SkillDefinitionIds = background.SkillDefinitions.Select(s => s.Id).ToList()
         };
@@ -118,7 +119,7 @@ public static class DtoConverters
             Id = feat.Id,
             Name = feat.Name,
             Description = feat.Description,
-            AvaibleEffectTables = ConvertFeatDefinitionFeatEffectJoinTable(feat.FeatDefinitionFeatEffects)
+            AvailableEffectTables = ConvertFeatDefinitionFeatEffectJoinTable(feat.FeatDefinitionFeatEffects)
         };
     }
     public static LineageDefinitionDto ConvertLineage(LineageDefinition lineage)
@@ -128,7 +129,7 @@ public static class DtoConverters
             Id = lineage.Id,
             Name = lineage.Name,
             Description = lineage.Description,
-            FeatIds = lineage.FeatDefinitions.Select(f => f.Id).ToList()
+            FeatDefinitionIds = lineage.FeatDefinitions.Select(f => f.Id).ToList()
         };
     }
     public static SpeciesDefinitionDto ConvertSpecies(SpeciesDefinition species)

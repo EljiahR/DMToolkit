@@ -7,6 +7,8 @@ export default function({className = ""}: {className?: string}) {
     const selectedBackgroundBase = useAppSelector((state) => state.selectedCharacter.background.base);
     const dispatch = useAppDispatch();
 
+    console.log(backgrounds)
+
     useLayoutEffect(() => {
         if (backgrounds.length < 1) {
             // TODO: Error handling

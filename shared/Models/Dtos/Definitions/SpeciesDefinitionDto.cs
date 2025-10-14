@@ -9,5 +9,5 @@ public class SpeciesDefinitionDto
     public int Speed { get; set; } = 0;
     public string Size { get; set; } = string.Empty;
     public ICollection<string> FeatDefinitionIds { get; set; } = new List<string>();
-    public ICollection<LineageDefinitionDto> LineageDefinitions = new List<LineageDefinitionDto>();
+    public ICollection<LineageDefinitionDto> LineageDefinitions { get; set; } = new List<LineageDefinitionDto>();
 }
