@@ -22,6 +22,6 @@ public class Character : WorthBase
     public string Bonds { get; set; } = string.Empty;
     public string Flaws { get; set; } = string.Empty;
     public int ProficiencyBonus { get; set; } = 0;
-    public ICollection<CharacterItemBase> CharacterItemBases { get; set; } = new List<CharacterItemBase>();
+    public ICollection<ItemInstanceBase> ItemInstanceBases { get; set; } = new List<ItemInstanceBase>();
     public ICollection<CharacterSpell> CharacterSpells { get; set; } = new List<CharacterSpell>();
 }

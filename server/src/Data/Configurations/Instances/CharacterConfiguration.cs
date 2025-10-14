@@ -23,8 +23,8 @@ public class CharacterConfiguration : IEntityTypeConfiguration<Character>
             .WithOne()
             .HasForeignKey<Character>(c => c.SpeciesInstanceId);
 
-        // Many-to-one Character <- CharacterItemBases
-        builder.HasMany(c => c.CharacterItemBases)
+        // Many-to-one Character <- ItemInstanceBases
+        builder.HasMany(c => c.ItemInstanceBases)
             .WithOne(j => j.Character)
             .HasForeignKey(j => j.CharacterId);
 
