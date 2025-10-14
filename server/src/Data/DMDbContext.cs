@@ -97,7 +97,6 @@ public class DMDbContext : IdentityDbContext<DMUser>
         builder.ApplyConfiguration(new CharacterCharacterClassInstanceConfiguration());
         builder.ApplyConfiguration(new CharacterClassDefinitionFeatDefinitionConfiguration());
         builder.ApplyConfiguration(new CharacterClassDefinitionItemBaseConfiguration());
-        builder.ApplyConfiguration(new CharacterItemBaseConfiguration());
         builder.ApplyConfiguration(new CharacterSpellConfiguration());
         builder.ApplyConfiguration(new FeatDefinitionFeatEffectConfiguration());
         builder.ApplyConfiguration(new SpellItemConfiguration());

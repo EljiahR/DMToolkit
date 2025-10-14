@@ -6,7 +6,7 @@ namespace DMToolkit.Data.Configurations;
 
 public class JoinTableKeyConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
     where TEntity : class, IJoinTable
-{    
+{
     public void Configure(EntityTypeBuilder<TEntity> builder)
     {
         var keyProps = typeof(TEntity)
@@ -18,5 +18,10 @@ public class JoinTableKeyConfiguration<TEntity> : IEntityTypeConfiguration<TEnti
         {
             builder.HasKey(keyProps.Select(p => p.Name).ToArray());
         }
-    }   
+
+        ExtraConfigure(builder);
+    }
+
+    protected virtual void ExtraConfigure(EntityTypeBuilder<TEntity> builder)
+    { }
 }

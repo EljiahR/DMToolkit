@@ -9,5 +9,5 @@ public class CharacterCharacterClassInstance : IJoinTable
     public required string CharacterClassInstanceId { get; set; }
     public CharacterClassInstance CharacterClassInstance { get; set; } = null!;
     public int Level { get; set; } = 0;
-    public int HpRoll { get; set; } = 0;
+    public List<int> HpRolls { get; set; } = new();
 }

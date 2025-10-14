@@ -6,7 +6,6 @@ public class CharacterDto
     public string Name { get; set; } = string.Empty;
     public string Alignment { get; set; } = string.Empty;
     public int Hp { get; set; } = 1;
-    public List<int> HpRolls { get; set; } = new();
     public int TempHp { get; set; } = 0;
     public CharacterClassDto CharacterClass { get; set; } = new();
     public string ClassInstanceId { get; set; } = string.Empty;
@@ -24,5 +23,4 @@ public class CharacterDto
     public int ProficiencyBonus { get; set; } = 0;
     public Worth Coins { get; set; } = new();
     public List<string> InventoryIds { get; set; } = new();
-    public List<string> EquippedItemIds { get; set; } = new();
 }
