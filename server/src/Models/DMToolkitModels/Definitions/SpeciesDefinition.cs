@@ -7,7 +7,7 @@ public class SpeciesDefinition : IDefinition
     public string Description { get; set; } = string.Empty;
     public string Type { get; set; } = string.Empty;
     public int Speed { get; set; } = 0;
-    public string Size { get; set; } = string.Empty;
+    public List<string> Sizes { get; set; } = new();
     public ICollection<FeatDefinition> FeatDefinitions { get; set; } = new List<FeatDefinition>();
     public ICollection<LineageDefinition> LineageDefinitions = new List<LineageDefinition>();
 }

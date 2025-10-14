@@ -12,5 +12,11 @@ public class SpeciesDefinitionConfiguration : IEntityTypeConfiguration<SpeciesDe
         builder.HasMany(sd => sd.LineageDefinitions)
             .WithOne(ld => ld.SpeciesDefinition)
             .HasForeignKey(ld => ld.SpeciesDefinitionId);
+
+        builder.Property(s => s.Sizes)
+            .HasConversion(
+                v => string.Join(',', v),
+                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()
+            );
     }
 }

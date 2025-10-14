@@ -1,11 +1,10 @@
 namespace DMToolkit.Shared.Models.Dtos.Instances;
 
-public class SpeciesDto
+public class SpeciesInstanceDto
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
-    public List<FeatInstanceDto> Features { get; set; } = new();
-    public List<string> FeatureInstanceIds { get; set; } = new();
-    public LineageDto Lineage { get; set; } = new();
-    public string LineageInstanceId { get; set; } = string.Empty;
-    public string DefinitionId { get; set; } = string.Empty;  
+    public string Size { get; set; } = string.Empty;
+    public LineageInstanceDto? LineageInstance { get; set; } = null;
+    public ICollection<FeatInstanceDto> FeatInstances { get; set; } = new List<FeatInstanceDto>();
+    public string DefinitionId { get; set; } = string.Empty;
 }

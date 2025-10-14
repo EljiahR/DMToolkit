@@ -1,6 +1,6 @@
 namespace DMToolkit.Shared.Models.Dtos;
 
-public class Worth
+public class WorthDto
 {
     public int Cp { get; set; } = 0;
     public int Sp { get; set; } = 0;

@@ -12,5 +12,7 @@ public class FeatEffectConfiguration : IEntityTypeConfiguration<FeatEffect>
         builder.HasMany(fe => fe.FeatDefinitionFeatEffects)
             .WithOne(fdfe => fdfe.FeatEffect)
             .HasForeignKey(fdfe => fdfe.FeatEffectId);
+
+        
     }
 }
