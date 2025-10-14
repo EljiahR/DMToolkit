@@ -32,8 +32,6 @@ export default function() {
     // Available sections: class, background, species, scores, alignment, description
     const sectionIndex = useAppSelector(selectCharacterCreationIndex)
     const ActiveSection = sectionIndex < 7 ? components[sectionIndex] : EmptySection;
-    const data = useAppSelector((state) => state.dmTools);
-    console.log(data);
 
     return (
         <div>

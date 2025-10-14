@@ -20,8 +20,7 @@ export const dmToolsSlice = createSlice({
     reducers: {
         setAllFromDto: (state, action: PayloadAction<StartupDataDto>) => {
             const convertedData = startupDataToBo(action.payload);
-            console.log(convertedData);
-            state = convertedData;
+            return {...state, ...convertedData}
         }
     }
 });
