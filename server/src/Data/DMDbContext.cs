@@ -86,7 +86,8 @@ public class DMDbContext : IdentityDbContext<DMUser>
 
         // Item Base Configurations
         _logger.LogInformation("Applying item configurations...");
-        builder.ApplyConfiguration(new ItemBaseConfiguration());
+        builder.ApplyConfiguration(new ItemDefinitionBaseConfiguration());
+        builder.ApplyConfiguration(new ItemInstanceBaseConfiguration());
 
         // Item Entity Configurations
         builder.ApplyConfiguration(new WeaponPropertyConfiguration());

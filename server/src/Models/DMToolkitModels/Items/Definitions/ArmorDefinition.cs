@@ -3,7 +3,7 @@ using DMToolkit.Shared.Models.Enums;
 
 namespace DMToolkit.Models.Items.Definitions;
 
-public class ArmorDefinition : ItemBase
+public class ArmorDefinition : ItemDefinitionBase, IItemDefinition
 {
     public ArmorCategory ArmorCategory { get; set; } = ArmorCategory.Light;
     public int DexterityCap { get; set; } = 0;

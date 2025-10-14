@@ -3,7 +3,7 @@ using DMToolkit.Models.Items.Entities;
 
 namespace DMToolkit.Models.Items.Definitions;
 
-public class WeaponDefinition : ItemBase
+public class WeaponDefinition : ItemDefinitionBase, IItemDefinition
 {
     public int NumberOfDice { get; set; } = 0;
     public int NumberOfSides { get; set; } = 0;

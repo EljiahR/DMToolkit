@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DMToolkit.Data.Configurations;
 
-public class ItemBaseConfiguration : IEntityTypeConfiguration<ItemBase>
+public class ItemDefinitionBaseConfiguration : IEntityTypeConfiguration<ItemDefinitionBase>
 {
-    public void Configure(EntityTypeBuilder<ItemBase> builder)
+    public void Configure(EntityTypeBuilder<ItemDefinitionBase> builder)
     {
         builder.HasDiscriminator<string>("ItemType")
             .HasValue<Item>("Item")
