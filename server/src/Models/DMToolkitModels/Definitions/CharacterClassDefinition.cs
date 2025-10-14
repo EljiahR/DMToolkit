@@ -1,5 +1,3 @@
-using DMToolkit.Models.Entities;
-using DMToolkit.Models.Items.Bases;
 using DMToolkit.Models.JoinTables;
 
 namespace DMToolkit.Models.Definitions;

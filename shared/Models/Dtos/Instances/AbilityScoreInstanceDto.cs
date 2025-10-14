@@ -3,10 +3,8 @@ namespace DMToolkit.Shared.Models.Dtos.Instances;
 public class AbilityScoreInstanceDto
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
-    public string Key { get; set; } = string.Empty;
-    public string Name { get; set; } = string.Empty;
-    public int Amount { get; set; } = 0;
-    public bool Proficient { get; set; } = false;
-    public List<SkillInstanceDto> Skills { get; set; } = new();
-    public List<string> SkillIds { get; set; } = new();
+    public int Score { get; set; } = 0;
+    public bool IsProficient { get; set; } = false;
+    public ICollection<SkillInstanceDto> SkillInstances { get; set; } = new List<SkillInstanceDto>();
+    public string DefinitionId { get; set; } = string.Empty;
 }
