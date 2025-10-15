@@ -247,7 +247,7 @@ public static class DtoConverters
             DefinitionId = skill.DefinitionId
         };
     }
-    
+
     public static AbilityScoreInstanceDto ConvertAbilityScoreInstance(AbilityScoreInstance score)
     {
         return new()
@@ -257,6 +257,19 @@ public static class DtoConverters
             IsProficient = score.IsProficient,
             SkillInstances = score.SkillInstances.Select(ConvertSkillInstance).ToList(),
             DefinitionId = score.DefinitionId
+        };
+    }
+    
+    public static CharacterClassInstanceDto ConvertCharacterCharacterClassInstance(CharacterCharacterClassInstance joinTable)
+    {
+        return new()
+        {
+            Id = joinTable.CharacterClassInstance.Id,
+            Level = joinTable.Level,
+            HpRolls = joinTable.HpRolls,
+            FeatInstances = null,
+            SubclassInstance = null,
+            DefinitionId = joinTable.CharacterClassInstance.DefinitionId
         };
     }
 }
