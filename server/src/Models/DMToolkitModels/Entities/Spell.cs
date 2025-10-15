@@ -19,5 +19,5 @@ public class Spell
     public ICollection<SpellItem> SpellItems { get; set; } = new List<SpellItem>();
     public string Duration { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public ICollection<SpellEffect> SpellEffects { get; set; } = new List<SpellEffect>();
+    public ICollection<Effect> Effects { get; set; } = new List<Effect>();
 }

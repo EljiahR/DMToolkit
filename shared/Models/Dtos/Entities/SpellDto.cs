@@ -17,5 +17,5 @@ public class SpellDto
     public ICollection<SpellItemDto> MaterialRequirements { get; set; } = new List<SpellItemDto>();
     public string Duration { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public ICollection<string> SpellEffectIds { get; set; } = new List<string>();
+    public ICollection<string> EffectIds { get; set; } = new List<string>();
 }

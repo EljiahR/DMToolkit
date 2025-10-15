@@ -24,10 +24,9 @@ public static class DtoConverters
             CharacterClassDefinitions = startupData.CharacterClassDefinitions.Select(ConvertCharacterClassDefinition).ToList(),
             FeatDefinitions = startupData.FeatDefinitions.Select(ConvertFeat).ToList(),
             SpeciesDefinitions = startupData.SpeciesDefinitions.Select(ConvertSpecies).ToList(),
-            FeatEffects = startupData.FeatEffects.Select(ConvertFeatEffect).ToList(),
+            Effects = startupData.Effects.Select(ConvertFeatEffect).ToList(),
             Schools = startupData.Schools.Select(ConvertSchool).ToList(),
-            Spells = startupData.Spells.Select(ConvertSpell).ToList(),
-            SpellEffects = startupData.SpellEffects.Select(ConvertSpellEffect).ToList()
+            Spells = startupData.Spells.Select(ConvertSpell).ToList()
         };
     }
 
@@ -105,13 +104,13 @@ public static class DtoConverters
             DefaultCha = characterClass.DefaultCha
         };
     }
-    public static List<FeatDefinitionEffectGroupingDto> ConvertFeatDefinitionFeatEffectJoinTable(IEnumerable<FeatDefinitionFeatEffect> joinTables)
+    public static List<FeatDefinitionEffectGroupingDto> ConvertFeatDefinitionFeatEffectJoinTable(IEnumerable<FeatDefinitionEffect> joinTables)
     {
         return joinTables.GroupBy(j => j.Group)
                             .Select(g => new FeatDefinitionEffectGroupingDto
                             {
                                 Group = g.First().Group,
-                                FeatEffectIds = g.Select(t => t.FeatEffectId).ToList()
+                                EffectIds = g.Select(t => t.EffectId).ToList()
                             })
                             .ToList();
     }
@@ -122,7 +121,7 @@ public static class DtoConverters
             Id = feat.Id,
             Name = feat.Name,
             Description = feat.Description,
-            AvailableEffectTables = ConvertFeatDefinitionFeatEffectJoinTable(feat.FeatDefinitionFeatEffects)
+            AvailableEffectTables = ConvertFeatDefinitionFeatEffectJoinTable(feat.FeatDefinitionEffects)
         };
     }
     public static LineageDefinitionDto ConvertLineage(LineageDefinition lineage)
@@ -149,15 +148,15 @@ public static class DtoConverters
             LineageDefinitions = species.LineageDefinitions.Select(ConvertLineage).ToList()
         };
     }
-    public static FeatEffectDto ConvertFeatEffect(FeatEffect featEffect)
+    public static EffectDto ConvertFeatEffect(Effect effect)
     {
         return new()
         {
-            Id = featEffect.Id,
-            Type = featEffect.Type,
-            Title = featEffect.Title,
-            Description = featEffect.Description,
-            Data = featEffect.Data
+            Id = effect.Id,
+            DataType = effect.DataType,
+            Title = effect.Title,
+            Description = effect.Description,
+            Data = effect.Data
         };
     }
     public static SchoolDto ConvertSchool(School school)
@@ -193,17 +192,7 @@ public static class DtoConverters
             MaterialRequirements = ConvertSpellItemBaseJoinTable(spell.SpellItems),
             Duration = spell.Duration,
             Description = spell.Description,
-            SpellEffectIds = spell.SpellEffects.Select(e => e.Id).ToList()
-        };
-    }
-    public static SpellEffectDto ConvertSpellEffect(SpellEffect spellEffect)
-    {
-        return new()
-        {
-            Id = spellEffect.Id,
-            Subtitle = spellEffect.Subtitle,
-            Type = spellEffect.Type,
-            Data = spellEffect.Data
+            EffectIds = spell.Effects.Select(e => e.Id).ToList()
         };
     }
 
