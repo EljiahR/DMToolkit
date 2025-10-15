@@ -16,7 +16,6 @@ public class CharacterDto
     public string Ideals { get; set; } = string.Empty;
     public string Bonds { get; set; } = string.Empty;
     public string Flaws { get; set; } = string.Empty;
-    public int ProficiencyBonus { get; set; } = 0;
     public WorthDto Coins { get; set; } = new();
-    public List<string> InventoryIds { get; set; } = new();
+    public List<string> Inventory { get; set; } = new();
 }

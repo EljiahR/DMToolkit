@@ -2,16 +2,19 @@ using System.Text.Json;
 using DMToolkit.Models.Collections;
 using DMToolkit.Models.Definitions;
 using DMToolkit.Models.Entities;
+using DMToolkit.Models.Instances;
 using DMToolkit.Models.JoinTables;
 using DMToolkit.Shared.Models.Dtos.Collections;
 using DMToolkit.Shared.Models.Dtos.Definitions;
 using DMToolkit.Shared.Models.Dtos.Entities;
+using DMToolkit.Shared.Models.Dtos.Instances;
 using DMToolkit.Shared.Models.Dtos.Joins;
 
 namespace DMToolkit.Helpers;
 
 public static class DtoConverters
 {
+    // Definitions
     public static StartupDataDto ConvertStartupData(StartupData startupData)
     {
         return new StartupDataDto
@@ -141,7 +144,7 @@ public static class DtoConverters
             Description = species.Description,
             Type = species.Type,
             Speed = species.Speed,
-            Size = species.Size,
+            Sizes = species.Sizes,
             FeatDefinitionIds = species.FeatDefinitions.Select(f => f.Id).ToList(),
             LineageDefinitions = species.LineageDefinitions.Select(ConvertLineage).ToList()
         };
@@ -201,6 +204,59 @@ public static class DtoConverters
             Subtitle = spellEffect.Subtitle,
             Type = spellEffect.Type,
             Data = spellEffect.Data
+        };
+    }
+
+    // Instances
+    public static CharacterDto ConvertCharacter(Character character)
+    {
+        return new()
+        {
+            Id = character.Id,
+            Name = character.Name,
+            Alignment = character.Alignment,
+            Hp = character.Hp,
+            TempHp = character.TempHp,
+            CharacterClassInstances = null,
+            BackgroundInstance = null,
+            SpeciesInstance = null,
+            ScoreInstances = character.AbilityScoreInstances.Select(ConvertAbilityScoreInstance).ToList(),
+            PhysicalDescription = character.PhysicalDescription,
+            Personality = character.Personality,
+            Ideals = character.Ideals,
+            Bonds = character.Bonds,
+            Flaws = character.Flaws,
+            Coins = new()
+            {
+                Cp = character.Cp,
+                Sp = character.Sp,
+                Ep = character.Ep,
+                Gp = character.Gp,
+                Pp = character.Pp
+            },
+            Inventory = null
+        };
+    }
+
+    public static SkillInstanceDto ConvertSkillInstance(SkillInstance skill)
+    {
+        return new()
+        {
+            Id = skill.Id,
+            IsProficient = skill.IsProficient,
+            DefinitionId = skill.DefinitionId
+        };
+    }
+    
+    public static AbilityScoreInstanceDto ConvertAbilityScoreInstance(AbilityScoreInstance score)
+    {
+        return new()
+        {
+            Id = score.Id,
+            Score = score.Score,
+            IsProficient = score.IsProficient,
+            SkillInstances = score.SkillInstances.Select(ConvertSkillInstance).ToList(),
+            DefinitionId = score.DefinitionId
         };
     }
 }
