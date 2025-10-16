@@ -11,6 +11,7 @@ using DMToolkit.Shared.Models.Dtos.Definitions;
 using DMToolkit.Shared.Models.Dtos.Entities;
 using DMToolkit.Shared.Models.Dtos.Instances;
 using DMToolkit.Shared.Models.Dtos.Items.Bases;
+using DMToolkit.Shared.Models.Dtos.Items.Definitions;
 using DMToolkit.Shared.Models.Dtos.Items.Instances;
 using DMToolkit.Shared.Models.Dtos.Joins;
 
@@ -31,7 +32,7 @@ public static class DtoConverters
             Effects = startupData.Effects.Select(ConvertFeatEffect).ToList(),
             Schools = startupData.Schools.Select(ConvertSchool).ToList(),
             Spells = startupData.Spells.Select(ConvertSpell).ToList(),
-            ItemDefinitionBases = null
+            ItemDefinitionBases = startupData.ItemDefinitionBases.Select(ConvertItemDefinitionBase).ToList()
         };
     }
 
@@ -199,6 +200,32 @@ public static class DtoConverters
             Description = spell.Description,
             EffectIds = spell.Effects.Select(e => e.Id).ToList()
         };
+    }
+
+    public static ItemDefinitionBaseDto ConvertItemDefinitionBase(ItemDefinitionBase itemBase)
+    {
+        var itemDto = new ItemDefinitionDto
+        {
+            Id = itemBase.Id,
+            Name = itemBase.Name,
+            Description = itemBase.Description,
+            Weight = itemBase.Weight,
+            ItemType = itemBase.ItemType,
+            Worth = new()
+            {
+                Cp = itemBase.Cp,
+                Sp = itemBase.Sp,
+                Ep = itemBase.Ep,
+                Gp = itemBase.Gp,
+                Pp = itemBase.Pp
+            }
+        };
+
+        ItemDefinitionBaseDto itemBaseDto = itemDto;
+
+        
+
+        return itemDto;
     }
 
     // Instances

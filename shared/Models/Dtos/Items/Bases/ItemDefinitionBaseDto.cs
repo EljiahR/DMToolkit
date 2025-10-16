@@ -1,11 +1,12 @@
 using System.Text.Json.Serialization;
+using DMToolkit.Shared.Models.Dtos.Items.Definitions;
 
 namespace DMToolkit.Shared.Models.Dtos.Items.Bases;
 
-// For future reference, creates a $type field equal to "Weapon"
-// [JsonDerivedType(typeof(ItemInstanceDto), "Item")]
-// [JsonDerivedType(typeof(WeaponInstanceDto), "Weapon")] 
-// [JsonDerivedType(typeof(ArmorInstanceDto), "Armor")]
+// For future reference, creates a $type field equal to "Item"
+[JsonDerivedType(typeof(ItemDefinitionDto), "Item")]
+[JsonDerivedType(typeof(WeaponDefinitionDto), "Weapon")] 
+[JsonDerivedType(typeof(ArmorDefinitionDto), "Armor")]
 public abstract class ItemDefinitionBaseDto
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
