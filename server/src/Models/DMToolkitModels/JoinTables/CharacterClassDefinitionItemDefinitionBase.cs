@@ -7,7 +7,7 @@ public class CharacterClassDefinitionItemDefinitionBase : IJoinTable
 {
     public required string CharacterClassDefinitionId { get; set; }
     public CharacterClassDefinition CharacterClassDefinition { get; set; } = null!;
-    public required string ItemBaseId { get; set; }
-    public ItemDefinitionBase ItemBase { get; set; } = null!;
-    public int Group { get; set; } = 0;
+    public required string ItemDefinitionBaseId { get; set; }
+    public ItemDefinitionBase ItemDefinitionBase { get; set; } = null!;
+    public int Quantity { get; set; } = 1;
 }

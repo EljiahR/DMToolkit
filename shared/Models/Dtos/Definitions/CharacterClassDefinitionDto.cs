@@ -11,8 +11,7 @@ public class CharacterClassDefinitionDto
     public int FixedHp { get; set; } = 0;
     public ICollection<SubclassDefinitionDto> SubclassDefinitions { get; set; } = new List<SubclassDefinitionDto>();
     public ICollection<FeatGroupLevelDto> FeatTables { get; set; } = new List<FeatGroupLevelDto>();
-    public ICollection<string> ItemSetAIds { get; set; } = new List<string>();
-    public ICollection<string> ItemSetBIds { get; set; } = new List<string>();
+    public ICollection<string> ItemSetIds { get; set; } = new List<string>();
     public int DefaultStr { get; set; } = 0;
     public int DefaultDex { get; set; } = 0;
     public int DefaultCon { get; set; } = 0;
