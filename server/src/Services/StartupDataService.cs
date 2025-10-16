@@ -44,24 +44,23 @@ public class StartupDataService : IStartupDataService
                                         .Include(c => c.CharacterClassDefinitionItemBases)
                                         .AsNoTracking().ToListAsync();
         var featsTask = _context.FeatDefinitions
-                                .Include(f => f.FeatDefinitionFeatEffects)
+                                .Include(f => f.FeatDefinitionEffects)
                                 .AsNoTracking().ToListAsync();
         var speciesTask = _context.SpeciesDefinitions
                                     .Include(s => s.FeatDefinitions)
                                     .Include(s => s.LineageDefinitions)
                                         .ThenInclude(l => l.FeatDefinitions)
                                     .AsNoTracking().ToListAsync();
-        var featEffectsTask = _context.FeatEffects.AsNoTracking().ToListAsync();
+        var effectsTask = _context.Effects.AsNoTracking().ToListAsync();
         var schoolsTask = _context.Schools.AsNoTracking().ToListAsync();
         var spellsTask = _context.Spells
                                     .Include(s => s.School)
                                     .Include(s => s.CharacterClassDefinitions)
                                     .Include(s => s.SpellItems)
-                                    .Include(s => s.SpellEffects)
+                                    .Include(s => s.Effects)
                                     .AsNoTracking().ToListAsync();
-        var spellEffectsTask = _context.SpellEffects.AsNoTracking().ToListAsync();
 
-        await Task.WhenAll(abilityScoresTask, backgroundsTask, characterClassesTask, featsTask, speciesTask, featEffectsTask, schoolsTask, spellsTask, spellEffectsTask);
+        await Task.WhenAll(abilityScoresTask, backgroundsTask, characterClassesTask, featsTask, speciesTask, effectsTask, schoolsTask, spellsTask);
 
         var startupData = new StartupData
         {
@@ -70,10 +69,9 @@ public class StartupDataService : IStartupDataService
             CharacterClassDefinitions = characterClassesTask.Result,
             FeatDefinitions = featsTask.Result,
             SpeciesDefinitions = speciesTask.Result,
-            FeatEffects = featEffectsTask.Result,
+            Effects = effectsTask.Result,
             Schools = schoolsTask.Result,
-            Spells = spellsTask.Result,
-            SpellEffects = spellEffectsTask.Result
+            Spells = spellsTask.Result
         };
 
         return DtoConverters.ConvertStartupData(startupData);

@@ -31,16 +31,15 @@ public class DMDbContext : IdentityDbContext<DMUser>
     public DbSet<SpeciesDefinition> SpeciesDefinitions { get; set; }
 
     // Entities
-    public DbSet<FeatEffect> FeatEffects { get; set; }
+    public DbSet<Effect> Effects { get; set; }
     public DbSet<School> Schools { get; set; }
     public DbSet<Spell> Spells { get; set; }
-    public DbSet<SpellEffect> SpellEffects { get; set; }
 
     // Instances
     public DbSet<Character> Characters { get; set; }
 
     // Join Tables
-    public DbSet<FeatDefinitionFeatEffect> FeatDefinitionFeatEffects { get; set; }
+    public DbSet<FeatDefinitionEffect> FeatDefinitionFeatEffects { get; set; }
     public DbSet<CharacterClassDefinitionFeatDefinition> CharacterClassDefinitionFeatDefinitions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -104,19 +103,12 @@ public class DMDbContext : IdentityDbContext<DMUser>
 
         // Data Json Converter
         _logger.LogInformation("Applying conversions...");
-        builder.Entity<FeatEffect>()
-            .Property(e => e.Data)
-            .HasConversion(converter)
-            .HasColumnType(isSqlite ? "TEXT" : "jsonb")
-            .Metadata.SetValueComparer(dictionaryComparer);
-
-        builder.Entity<SpellEffect>()
+        builder.Entity<Effect>()
             .Property(e => e.Data)
             .HasConversion(converter)
             .HasColumnType(isSqlite ? "TEXT" : "jsonb")
             .Metadata.SetValueComparer(dictionaryComparer);
             
-
         _logger.LogInformation("Finished adding configurations.");
         base.OnModelCreating(builder);
     }

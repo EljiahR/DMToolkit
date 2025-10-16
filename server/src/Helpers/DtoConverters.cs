@@ -3,11 +3,15 @@ using DMToolkit.Models.Collections;
 using DMToolkit.Models.Definitions;
 using DMToolkit.Models.Entities;
 using DMToolkit.Models.Instances;
+using DMToolkit.Models.Items.Bases;
+using DMToolkit.Models.Items.Instances;
 using DMToolkit.Models.JoinTables;
 using DMToolkit.Shared.Models.Dtos.Collections;
 using DMToolkit.Shared.Models.Dtos.Definitions;
 using DMToolkit.Shared.Models.Dtos.Entities;
 using DMToolkit.Shared.Models.Dtos.Instances;
+using DMToolkit.Shared.Models.Dtos.Items.Bases;
+using DMToolkit.Shared.Models.Dtos.Items.Instances;
 using DMToolkit.Shared.Models.Dtos.Joins;
 
 namespace DMToolkit.Helpers;
@@ -206,8 +210,8 @@ public static class DtoConverters
             Alignment = character.Alignment,
             Hp = character.Hp,
             TempHp = character.TempHp,
-            CharacterClassInstances = null,
-            BackgroundInstance = null,
+            CharacterClassInstances = character.CharacterCharacterClassInstances.Select(ConvertCharacterCharacterClassInstance).ToList(),
+            BackgroundInstance = character.BackgroundInstance != null ? ConvertBackgroundInstance(character.BackgroundInstance) : null,
             SpeciesInstance = null,
             ScoreInstances = character.AbilityScoreInstances.Select(ConvertAbilityScoreInstance).ToList(),
             PhysicalDescription = character.PhysicalDescription,
@@ -223,7 +227,7 @@ public static class DtoConverters
                 Gp = character.Gp,
                 Pp = character.Pp
             },
-            Inventory = null
+            Inventory = character.ItemInstanceBases.Select(ConvertItemInstanceBase).ToList()
         };
     }
 
@@ -248,7 +252,28 @@ public static class DtoConverters
             DefinitionId = score.DefinitionId
         };
     }
-    
+
+    public static FeatInstanceDto ConvertFeatInstance(FeatInstance feat)
+    {
+        return new()
+        {
+            Id = feat.Id,
+            EffectIds = feat.FeatEffects.Select(e => e.Id).ToList(),
+            DefinitionId = feat.DefinitionId
+        };
+    }
+
+    public static SubclassInstanceDto? ConvertSubclassInstance(SubclassInstance? subclass)
+    {
+        if (subclass == null) return null;
+        return new()
+        {
+            Id = subclass.Id,
+            FeatInstances = subclass.FeatInstances.Select(ConvertFeatInstance).ToList(),
+            DefinitionId = subclass.DefinitionId
+        };
+    }
+
     public static CharacterClassInstanceDto ConvertCharacterCharacterClassInstance(CharacterCharacterClassInstance joinTable)
     {
         return new()
@@ -256,9 +281,52 @@ public static class DtoConverters
             Id = joinTable.CharacterClassInstance.Id,
             Level = joinTable.Level,
             HpRolls = joinTable.HpRolls,
-            FeatInstances = null,
-            SubclassInstance = null,
+            FeatInstances = joinTable.CharacterClassInstance.FeatInstances.Select(ConvertFeatInstance).ToList(),
+            SubclassInstance = ConvertSubclassInstance(joinTable.CharacterClassInstance.SubclassInstance),
             DefinitionId = joinTable.CharacterClassInstance.DefinitionId
         };
+    }
+
+    public static BackgroundInstanceDto ConvertBackgroundInstance(BackgroundInstance background)
+    {
+        return new()
+        {
+            Id = background.Id,
+            AbilityScoreDefinitionPlusTwoId = background.AbilityScoreDefinitionPlusTwoId,
+            AbilityScoreDefinitionPlusOneId = background.AbilityScoreDefinitionPlusOneId,
+            FeatInstance = background.FeatInstance != null ? ConvertFeatInstance(background.FeatInstance) : null,
+            DefinitionId = background.DefinitionId
+        };
+    }
+
+    // ItemInstanceBase Converters
+    public static ItemInstanceBaseDto ConvertItemInstanceBase(ItemInstanceBase item)
+    {
+        var itemDto = new ItemInstanceDto()
+        {
+            Id = item.Id,
+            ItemType = "Item",
+            Quantity = item.Quantity,
+            IsEquipped = item.IsEquipped,
+            DefinitionId = item.DefinitionId
+        };
+        
+        ItemInstanceBaseDto baseDto = itemDto;
+
+        if (item is WeaponInstance)
+        {
+            WeaponInstanceDto weaponDto = (WeaponInstanceDto)baseDto;
+
+            return weaponDto;
+        }
+
+        if (item is ArmorInstance)
+        {
+            ArmorInstanceDto armorDto = (ArmorInstanceDto)baseDto;
+
+            return armorDto;
+        }
+
+        return itemDto;
     }
 }

@@ -9,7 +9,7 @@ public class FeatDefinitionConfiguration : IEntityTypeConfiguration<FeatDefiniti
     public void Configure(EntityTypeBuilder<FeatDefinition> builder)
     {
         // Many-to-one FeatDefinition <- FeatDefinitionFeatEffects
-        builder.HasMany(fd => fd.FeatDefinitionFeatEffects)
+        builder.HasMany(fd => fd.FeatDefinitionEffects)
             .WithOne(fdfe => fdfe.FeatDefinition)
             .HasForeignKey(fdfe => fdfe.FeatDefinitionId);
 

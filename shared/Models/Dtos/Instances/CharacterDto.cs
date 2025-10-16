@@ -10,8 +10,8 @@ public class CharacterDto
     public int Hp { get; set; } = 1;
     public int TempHp { get; set; } = 0;
     public List<CharacterClassInstanceDto> CharacterClassInstances { get; set; } = new();
-    public BackgroundInstanceDto BackgroundInstance { get; set; } = new();
-    public SpeciesInstanceDto SpeciesInstance { get; set; } = new();
+    public BackgroundInstanceDto? BackgroundInstance { get; set; } = new();
+    public SpeciesInstanceDto? SpeciesInstance { get; set; } = new();
     public List<AbilityScoreInstanceDto> ScoreInstances { get; set; } = new();
     public string PhysicalDescription { get; set; } = string.Empty;
     public string Personality { get; set; } = string.Empty;
