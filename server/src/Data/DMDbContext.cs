@@ -73,7 +73,6 @@ public class DMDbContext : IdentityDbContext<DMUser>
 
         // Entity configurations
         _logger.LogInformation("Applying entity configurations...");
-        builder.ApplyConfiguration(new FeatEffectConfiguration());
         builder.ApplyConfiguration(new SpellConfiguration());
 
         // Instance Configurations
@@ -95,7 +94,7 @@ public class DMDbContext : IdentityDbContext<DMUser>
         _logger.LogInformation("Applying join table configurations...");
         builder.ApplyConfiguration(new CharacterCharacterClassInstanceConfiguration());
         builder.ApplyConfiguration(new CharacterClassDefinitionFeatDefinitionConfiguration());
-        builder.ApplyConfiguration(new CharacterClassDefinitionItemBaseConfiguration());
+        builder.ApplyConfiguration(new CharacterClassDefinitionItemDefinitionBaseConfiguration());
         builder.ApplyConfiguration(new CharacterSpellConfiguration());
         builder.ApplyConfiguration(new FeatDefinitionFeatEffectConfiguration());
         builder.ApplyConfiguration(new SpellItemConfiguration());

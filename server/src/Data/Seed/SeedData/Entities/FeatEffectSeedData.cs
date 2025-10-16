@@ -2,12 +2,12 @@ using DMToolkit.Models.Entities;
 
 namespace DMToolkit.Data.Seeders.SeedData;
 
-public static class FeatEffectSeedData
+public static class EffectSeedData
 {
     // Effects
-    public static readonly FeatEffect IgnoreCoverEffect = new()
+    public static readonly Effect IgnoreCoverEffect = new()
     {
-        Type = "AttackModifier",
+        DataType = "AttackModifier",
         Title = "Ignore Cover",
         Description = "Your ranged attacks ignore up to three-quarters cover.",
         Data = new Dictionary<string, object>
@@ -16,9 +16,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect LongRangeAccuracyEffect = new()
+    public static readonly Effect LongRangeAccuracyEffect = new()
     {
-        Type = "AttackModifier",
+        DataType = "AttackModifier",
         Title = "Long Range Accuracy",
         Description = "You suffer no disadvantage on ranged attacks made at long range.",
         Data = new Dictionary<string, object>
@@ -27,9 +27,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect PowerShotEffect = new()
+    public static readonly Effect PowerShotEffect = new()
     {
-        Type = "DamageModifier",
+        DataType = "DamageModifier",
         Title = "Power Shot",
         Description = "Before making a ranged attack, you can choose to take a -5 penalty to the roll. If it hits, add +10 damage.",
         Data = new Dictionary<string, object>
@@ -39,9 +39,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect HpFlatBonusEffect = new()
+    public static readonly Effect HpFlatBonusEffect = new()
     {
-        Type = "HitPointModifier",
+        DataType = "HitPointModifier",
         Title = "Flat Bonus",
         Description = "Your maximum hit points increase by 2 for each level you have.",
         Data = new Dictionary<string, object>
@@ -50,9 +50,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect InsightfulReasoningEffect = new()
+    public static readonly Effect InsightfulReasoningEffect = new()
     {
-        Type = "SkillModifier",
+        DataType = "SkillModifier",
         Title = "Insightful Reasoning",
         Description = "Gain a bonus to Insight checks as your study of people and ideas sharpens your perception.",
         Data = new Dictionary<string, object>
@@ -62,9 +62,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect PersuasiveSpeakerEffect = new()
+    public static readonly Effect PersuasiveSpeakerEffect = new()
     {
-        Type = "SkillModifier",
+        DataType = "SkillModifier",
         Title = "Persuasive Speaker",
         Description = "Gain a bonus to Persuasion checks from your ability to frame arguments logically.",
         Data = new Dictionary<string, object>
@@ -74,9 +74,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect ContemplativeRestEffect = new()
+    public static readonly Effect ContemplativeRestEffect = new()
     {
-        Type = "UtilityFeature",
+        DataType = "UtilityFeature",
         Title = "Contemplative Rest",
         Description = "When taking a short or long rest, you can spend 10 minutes in meditation to grant one ally advantage on their next saving throw within the next hour.",
         Data = new Dictionary<string, object>
@@ -87,9 +87,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect ResistExhaustionEffect = new()
+    public static readonly Effect ResistExhaustionEffect = new()
     {
-        Type = "ConditionResistance",
+        DataType = "ConditionResistance",
         Title = "Resist Exhaustion",
         Description = "You gain advantage on saving throws made to resist exhaustion from travel, hunger, or harsh environments.",
         Data = new Dictionary<string, object>
@@ -99,9 +99,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect SurvivalExpertiseEffect = new()
+    public static readonly Effect SurvivalExpertiseEffect = new()
     {
-        Type = "SkillModifier",
+        DataType = "SkillModifier",
         Title = "Survival Expertise",
         Description = "Gain a bonus to Survival checks when foraging for food or navigating difficult terrain.",
         Data = new Dictionary<string, object>
@@ -111,9 +111,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect StopTheAdvanceEffect = new()
+    public static readonly Effect StopTheAdvanceEffect = new()
     {
-        Type = "ReactionTrigger",
+        DataType = "ReactionTrigger",
         Title = "Stop the Advance",
         Description = "When an enemy moves within 5 feet of you, you may use your reaction to reduce their movement speed by half until the end of their turn.",
         Data = new()
@@ -124,9 +124,9 @@ public static class FeatEffectSeedData
             { "Value", 0.5 }
         }
     };
-    public static readonly FeatEffect GuardiansResolveEffect = new()
+    public static readonly Effect GuardiansResolveEffect = new()
     {
-        Type = "DefenseModifier",
+        DataType = "DefenseModifier",
         Title = "Guardian’s Resolve",
         Description = "Gain a +1 bonus to AC while you are within 5 feet of at least one ally.",
         Data = new()
@@ -136,9 +136,9 @@ public static class FeatEffectSeedData
             }
     };
 
-    public static readonly FeatEffect ResistFatigueEffect = new()
+    public static readonly Effect ResistFatigueEffect = new()
     {
-        Type = "ConditionResistance",
+        DataType = "ConditionResistance",
         Title = "Resist Fatigue",
         Description = "Gain advantage on saving throws against exhaustion or effects that cause fatigue.",
         Data = new()
@@ -147,9 +147,9 @@ public static class FeatEffectSeedData
             { "Advantage", true }
         }
     };
-    public static readonly FeatEffect EnduringFortitudeEffect = new()
+    public static readonly Effect EnduringFortitudeEffect = new()
     {
-        Type = "HealthBonus",
+        DataType = "HealthBonus",
         Title = "Enduring Fortitude",
         Description = "Increase your maximum hit points by 1 per character level.",
         Data = new()
@@ -159,9 +159,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect DisciplinedFocusEffect = new()
+    public static readonly Effect DisciplinedFocusEffect = new()
     {
-        Type = "ConcentrationBonus",
+        DataType = "ConcentrationBonus",
         Title = "Disciplined Focus",
         Description = "Gain advantage on concentration checks to maintain magical effects.",
         Data = new()
@@ -171,9 +171,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect EfficientCastingEffect = new()
+    public static readonly Effect EfficientCastingEffect = new()
     {
-        Type = "ResourceModifier",
+        DataType = "ResourceModifier",
         Title = "Efficient Casting",
         Description = "Once per long rest, you may reduce the cost of one spell or ability by 1 point (mana, focus, or equivalent).",
         Data = new()
@@ -185,9 +185,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect SenseMagicEffect = new()
+    public static readonly Effect SenseMagicEffect = new()
     {
-        Type = "DetectionBonus",
+        DataType = "DetectionBonus",
         Title = "Sense Magic",
         Description = "You automatically detect the presence of active magical effects within 15 feet.",
         Data = new()
@@ -196,9 +196,9 @@ public static class FeatEffectSeedData
             { "Range", 15 }
         }
 };
-    public static readonly FeatEffect PreparedMindEffect = new()
+    public static readonly Effect PreparedMindEffect = new()
     {
-        Type = "InitiativeModifier",
+        DataType = "InitiativeModifier",
         Title = "Prepared Mind",
         Description = "Gain a +1 bonus to initiative rolls.",
         Data = new()
@@ -207,9 +207,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect StoneSkinEffect = new()
+    public static readonly Effect StoneSkinEffect = new()
     {
-        Type = "DamageResistance",
+        DataType = "DamageResistance",
         Title = "Stone Skin",
         Description = "Gain resistance to bludgeoning damage from nonmagical sources.",
         Data = new Dictionary<string, object>
@@ -219,9 +219,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect EarthenFocusEffect = new()
+    public static readonly Effect EarthenFocusEffect = new()
     {
-        Type = "SavingThrowBonus",
+        DataType = "SavingThrowBonus",
         Title = "Earthen Focus",
         Description = "You have advantage on Constitution saving throws made to resist exhaustion.",
         Data = new Dictionary<string, object>
@@ -232,9 +232,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static readonly FeatEffect MoltenEmpowermentEffect = new()
+    public static readonly Effect MoltenEmpowermentEffect = new()
     {
-        Type = "TemporaryBuff",
+        DataType = "TemporaryBuff",
         Title = "Molten Empowerment",
         Description = "When reduced below half health, gain +2 Strength until the end of your next turn.",
         Data = new Dictionary<string, object>
@@ -246,9 +246,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static FeatEffect HardenedFleshEffect = new()
+    public static readonly Effect HardenedFleshEffect = new()
     {
-        Type = "PassiveDefense",
+        DataType = "PassiveDefense",
         Title = "Hardened Flesh",
         Description = "Reduce incoming physical damage by 1 while not wearing heavy armor.",
         Data = new Dictionary<string, object>
@@ -258,9 +258,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static FeatEffect AethericSurgeEffect = new()
+    public static readonly Effect AethericSurgeEffect = new()
     {
-        Type = "MagicAmplify",
+        DataType = "MagicAmplify",
         Title = "Aetheric Surge",
         Description = "Once per rest, reroll a spell attack or damage roll and take the higher result.",
         Data = new Dictionary<string, object>
@@ -270,9 +270,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static FeatEffect RadiantPulseEffect = new()
+    public static readonly Effect RadiantPulseEffect = new()
     {
-        Type = "AreaEffect",
+        DataType = "AreaEffect",
         Title = "Radiant Pulse",
         Description = "Emit a burst of radiant light that heals allies or burns enemies within 10 feet.",
         Data = new Dictionary<string, object>
@@ -284,9 +284,9 @@ public static class FeatEffectSeedData
         }
     };
 
-    public static FeatEffect ShadowVeilEffect = new()
+    public static readonly Effect ShadowVeilEffect = new()
     {
-        Type = "StealthBuff",
+        DataType = "StealthBuff",
         Title = "Shadow Veil",
         Description = "Gain advantage on Stealth checks for 1 minute and resistance to radiant damage.",
         Data = new Dictionary<string, object>
@@ -298,22 +298,22 @@ public static class FeatEffectSeedData
     };
 
     // Collections
-    public static readonly List<FeatEffect> SharpshooterEffects = new() { IgnoreCoverEffect, LongRangeAccuracyEffect, PowerShotEffect };
-    public static readonly List<FeatEffect> ToughEffects = new() { HpFlatBonusEffect };
-    public static readonly List<FeatEffect> PhilosopherInsightEffects = new() { InsightfulReasoningEffect, PersuasiveSpeakerEffect, ContemplativeRestEffect };
-    public static readonly List<FeatEffect> TravelersResilienceEffects = new() { ResistExhaustionEffect, SurvivalExpertiseEffect };
-    public static readonly List<FeatEffect> HoldTheLineEffects = new() { StopTheAdvanceEffect, GuardiansResolveEffect };
-    public static readonly List<FeatEffect> IronStaminaEffects = new() { ResistFatigueEffect, EnduringFortitudeEffect };
-    public static readonly List<FeatEffect> FocusChannelEffects = new() { DisciplinedFocusEffect, EfficientCastingEffect };
-    public static readonly List<FeatEffect> ArcaneInstinctEffects = new() { SenseMagicEffect, PreparedMindEffect };
-    public static readonly List<FeatEffect> EnduringResilienceEffects = new() { StoneSkinEffect, EarthenFocusEffect };
-    public static readonly List<FeatEffect> MoltenSurgeEffects = new() { MoltenEmpowermentEffect };
-    public static readonly List<FeatEffect> UnyieldingFormEffects = new() { HardenedFleshEffect };
-    public static readonly List<FeatEffect> EssenceOverflowEffects = new() { AethericSurgeEffect };
-    public static readonly List<FeatEffect> RadiantPulseEffects = new() { RadiantPulseEffect };
-    public static readonly List<FeatEffect> VeilOfDuskEffects = new() { ShadowVeilEffect };
+    public static readonly List<Effect> SharpshooterEffects = new() { IgnoreCoverEffect, LongRangeAccuracyEffect, PowerShotEffect };
+    public static readonly List<Effect> ToughEffects = new() { HpFlatBonusEffect };
+    public static readonly List<Effect> PhilosopherInsightEffects = new() { InsightfulReasoningEffect, PersuasiveSpeakerEffect, ContemplativeRestEffect };
+    public static readonly List<Effect> TravelersResilienceEffects = new() { ResistExhaustionEffect, SurvivalExpertiseEffect };
+    public static readonly List<Effect> HoldTheLineEffects = new() { StopTheAdvanceEffect, GuardiansResolveEffect };
+    public static readonly List<Effect> IronStaminaEffects = new() { ResistFatigueEffect, EnduringFortitudeEffect };
+    public static readonly List<Effect> FocusChannelEffects = new() { DisciplinedFocusEffect, EfficientCastingEffect };
+    public static readonly List<Effect> ArcaneInstinctEffects = new() { SenseMagicEffect, PreparedMindEffect };
+    public static readonly List<Effect> EnduringResilienceEffects = new() { StoneSkinEffect, EarthenFocusEffect };
+    public static readonly List<Effect> MoltenSurgeEffects = new() { MoltenEmpowermentEffect };
+    public static readonly List<Effect> UnyieldingFormEffects = new() { HardenedFleshEffect };
+    public static readonly List<Effect> EssenceOverflowEffects = new() { AethericSurgeEffect };
+    public static readonly List<Effect> RadiantPulseEffects = new() { RadiantPulseEffect };
+    public static readonly List<Effect> VeilOfDuskEffects = new() { ShadowVeilEffect };
 
-    public static readonly List<FeatEffect> AllEffects = new()
+    public static readonly List<Effect> AllEffects = new()
     {
         IgnoreCoverEffect,
         LongRangeAccuracyEffect,

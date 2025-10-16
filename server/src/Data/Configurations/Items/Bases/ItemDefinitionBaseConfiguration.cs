@@ -11,7 +11,7 @@ public class ItemDefinitionBaseConfiguration : IEntityTypeConfiguration<ItemDefi
     public void Configure(EntityTypeBuilder<ItemDefinitionBase> builder)
     {
         builder.HasDiscriminator<string>("ItemType")
-            .HasValue<Item>("Item")
+            .HasValue<ItemDefinition>("Item")
             .HasValue<WeaponDefinition>("Weapon")
             .HasValue<ArmorDefinition>("Armor");
     }

@@ -19,11 +19,11 @@ public class TestDataSeeder
         {
             try
             {
-                if (!_context.FeatEffects.Any())
+                if (!_context.Effects.Any())
                 {
                     saveFlag = true;
                     _logger.LogInformation("Adding feat effects...");
-                    _context.AddRange(FeatEffectSeedData.AllEffects);
+                    _context.AddRange(EffectSeedData.AllEffects);
                 }
 
                 if (!_context.FeatDefinitions.Any())
@@ -44,7 +44,7 @@ public class TestDataSeeder
                 {
                     saveFlag = true;
                     _logger.LogInformation("Adding feat definition to feat effect join tables...");
-                    _context.AddRange(FeatDefinitionFeatEffectSeedData.AllTables);
+                    _context.AddRange(FeatDefinitionEffectSeedData.AllTables);
                 }
                 
                 if (!_context.AbilityScoreDefinitions.Any())

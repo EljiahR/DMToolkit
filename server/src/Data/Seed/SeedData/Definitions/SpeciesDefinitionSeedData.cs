@@ -10,7 +10,7 @@ public static class SpeciesDefinitionSeedData
         Description = "Forged by the slow patience of the mountains, Stoneborn are sturdy beings with skin like granite and hearts that beat in rhythm with the earth itself. They value endurance, tradition, and the slow but unstoppable progress of time.",
         Type = "Humanoid",
         Speed = 25,
-        Size = "Medium",
+        Sizes = ["Medium"],
         FeatDefinitions = new List<FeatDefinition>()
         {
             FeatDefinitionSeedData.EnduringResilienceDefinition
@@ -23,7 +23,7 @@ public static class SpeciesDefinitionSeedData
         Description = "Aetherborn are ephemeral beings formed of condensed magical energy and fading memories. Their forms shimmer with faint light, and their voices carry an otherworldly resonance.",
         Type = "Elemental",
         Speed = 30,
-        Size = "Medium",
+        Sizes = ["Medium"],
         FeatDefinitions = new List<FeatDefinition>
         {
             FeatDefinitionSeedData.EssenceOverflowDefinition

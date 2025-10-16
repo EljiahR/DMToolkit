@@ -30,7 +30,8 @@ public static class DtoConverters
             SpeciesDefinitions = startupData.SpeciesDefinitions.Select(ConvertSpecies).ToList(),
             Effects = startupData.Effects.Select(ConvertFeatEffect).ToList(),
             Schools = startupData.Schools.Select(ConvertSchool).ToList(),
-            Spells = startupData.Spells.Select(ConvertSpell).ToList()
+            Spells = startupData.Spells.Select(ConvertSpell).ToList(),
+            ItemDefinitionBases = null
         };
     }
 
