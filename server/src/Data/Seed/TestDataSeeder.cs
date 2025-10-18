@@ -40,6 +40,13 @@ public class TestDataSeeder
                     _context.SaveChanges();
                 }
 
+                if (!_context.ItemDefinitions.Any())
+                {
+                    saveFlag = true;
+                    _logger.LogInformation("Adding item definitions...");
+                    _context.AddRange(ItemDefinitionBaseSeedData.AllItemDefinitions);
+                }
+
                 if (!_context.FeatDefinitionFeatEffects.Any())
                 {
                     saveFlag = true;

@@ -1,3 +1,5 @@
+using DMToolkit.Models.JoinTables;
+
 namespace DMToolkit.Models.Definitions;
 
 public class BackgroundDefinition : IDefinition
@@ -8,5 +10,7 @@ public class BackgroundDefinition : IDefinition
     public ICollection<AbilityScoreDefinition> AbilityScoreDefinitions { get; set; } = new List<AbilityScoreDefinition>();
     public string FeatDefinitionId { get; set; } = string.Empty;
     public FeatDefinition? FeatDefinition { get; set; } = null;
-    public ICollection<SkillDefinition> SkillDefinitions { get; set; } = new List<SkillDefinition>(); 
+    public ICollection<SkillDefinition> SkillDefinitions { get; set; } = new List<SkillDefinition>();
+    public ICollection<BackgroundDefinitionItemDefinitionBase> BackgroundDefinitionItemDefinitionBases { get; set; } = new List<BackgroundDefinitionItemDefinitionBase>();
+    public int StartingGp { get; set; } = 50;
 }

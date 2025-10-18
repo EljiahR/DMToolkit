@@ -4,6 +4,7 @@ using DMToolkit.Models;
 using DMToolkit.Models.Definitions;
 using DMToolkit.Models.Entities;
 using DMToolkit.Models.Instances;
+using DMToolkit.Models.Items.Bases;
 using DMToolkit.Models.JoinTables;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,9 @@ public class DMDbContext : IdentityDbContext<DMUser>
 
     // Instances
     public DbSet<Character> Characters { get; set; }
+
+    // Item Definitions
+    public DbSet<ItemDefinitionBase> ItemDefinitions { get; set; }
 
     // Join Tables
     public DbSet<FeatDefinitionEffect> FeatDefinitionFeatEffects { get; set; }
@@ -92,6 +96,7 @@ public class DMDbContext : IdentityDbContext<DMUser>
 
         // Join Table Configurations
         _logger.LogInformation("Applying join table configurations...");
+        builder.ApplyConfiguration(new BackgroundDefinitionItemDefinitionBaseConfiguration());
         builder.ApplyConfiguration(new CharacterCharacterClassInstanceConfiguration());
         builder.ApplyConfiguration(new CharacterClassDefinitionFeatDefinitionConfiguration());
         builder.ApplyConfiguration(new CharacterClassDefinitionItemDefinitionBaseConfiguration());
