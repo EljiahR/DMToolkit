@@ -1,4 +1,5 @@
 import type { FeatGroupLevel, FeatGroupLevelDto } from "../relationships/featGroupLevel";
+import type { ItemDefinitionBaseQuantity, ItemDefinitionBaseQuantityDto } from "../relationships/itemDefinitionBaseQuantity";
 import type { SubclassDefinition, SubclassDefinitionDto } from "./subclassDefinition";
 
 export interface CharacterClassDefinition {
@@ -9,8 +10,8 @@ export interface CharacterClassDefinition {
     fixedHp: number;
     subclassDefinitions: SubclassDefinition[]
     featTables: FeatGroupLevel[];
-    itemSetA: null;
-    itemSetB: null;
+    startingGp: number;
+    itemDefinitionBaseQuantities: ItemDefinitionBaseQuantity[];
     defaultStr: number;
     defaultDex: number;
     defaultCon: number;
@@ -27,8 +28,8 @@ export interface CharacterClassDefinitionDto {
     fixedHp: number;
     subclassDefinitions: SubclassDefinitionDto[]
     featTables: FeatGroupLevelDto[];
-    itemSetAIds: string[];
-    itemSetBIds: string[];
+    startingGp: number;
+    itemDefinitionBaseQuantities: ItemDefinitionBaseQuantityDto[];
     defaultStr: number;
     defaultDex: number;
     defaultCon: number;

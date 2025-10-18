@@ -1,11 +1,11 @@
-import type { FeatEffect } from "../entities/effect";
+import type { Effect } from "../entities/effect";
 
 export interface FeatDefinitionEffectGrouping {
     group: number;
-    featEffects: FeatEffect[];
+    effects: Effect[];
 }
 
 export interface FeatDefinitionEffectGroupingDto {
     group: number;
-    featEffectIds: string[];
+    effectIds: string[];
 }
