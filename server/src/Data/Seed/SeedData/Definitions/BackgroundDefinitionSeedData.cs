@@ -11,7 +11,6 @@ public static class BackgroundDefinitionSeedData
         AbilityScoreDefinitions = new List<AbilityScoreDefinition> { AbilityScoreDefinitionSeedData.IntDefinition, AbilityScoreDefinitionSeedData.WisDefinition, AbilityScoreDefinitionSeedData.ChaDefinition },
         FeatDefinition = FeatDefinitionSeedData.PhilosopherInsightDefinition,
         SkillDefinitions = new List<SkillDefinition> { SkillDefinitionSeedData.ArcanaDefinition, SkillDefinitionSeedData.InsightDefinition },
-        
     };
 
     public static readonly BackgroundDefinition WayfarerBackground = new()

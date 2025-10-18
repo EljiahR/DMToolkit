@@ -45,6 +45,8 @@ public class DMDbContext : IdentityDbContext<DMUser>
     // Join Tables
     public DbSet<FeatDefinitionEffect> FeatDefinitionFeatEffects { get; set; }
     public DbSet<CharacterClassDefinitionFeatDefinition> CharacterClassDefinitionFeatDefinitions { get; set; }
+    public DbSet<BackgroundDefinitionItemDefinitionBase> BackgroundDefinitionItemDefinitionBases { get; set; }
+    public DbSet<CharacterClassDefinitionItemDefinitionBase> CharacterClassDefinitionItemDefinitionBases { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

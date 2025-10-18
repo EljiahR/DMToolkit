@@ -109,6 +109,26 @@ public class TestDataSeeder
                     _logger.LogInformation("Adding character class to feat definitions join tables...");
                     _context.AddRange(CharacterClassDefinitionFeatDefinitionSeedData.AllClassFeatDefinitionTables);
                 }
+
+                if (!_context.CharacterClassDefinitionItemDefinitionBases.Any())
+                {
+                    saveFlag = true;
+                    _logger.LogInformation("Adding character class to item definition base join tables...");
+                    _context.AddRange(CharacterClassDefinitionItemDefinitionBaseSeedData.AllTables);
+                }
+
+                if (saveFlag)
+                {
+                    _logger.LogInformation("Saving changes...");
+                    _context.SaveChanges();
+                }
+
+                if (!_context.BackgroundDefinitionItemDefinitionBases.Any())
+                {
+                    saveFlag = true;
+                    _logger.LogInformation("Adding background definition to item definition base join tables...");
+                    _context.AddRange(BackgroundDefinitionItemDefinitionBaseSeedData.AllTables);
+                }
                 
                 if (saveFlag)
                 {
