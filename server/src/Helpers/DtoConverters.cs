@@ -64,7 +64,9 @@ public static class DtoConverters
             Description = background.Description,
             AbilityScoreDefinitionIds = background.AbilityScoreDefinitions.Select(a => a.Id).ToList(),
             FeatDefinitionId = background.FeatDefinitionId,
-            SkillDefinitionIds = background.SkillDefinitions.Select(s => s.Id).ToList()
+            SkillDefinitionIds = background.SkillDefinitions.Select(s => s.Id).ToList(),
+            ItemDefinitionBaseQuantities = background.BackgroundDefinitionItemDefinitionBases.Select(a => new ItemDefinitionBaseQuantity { ItemDefinitionBaseId = a.ItemDefinitionBaseId, Quantity = a.Quantity }).ToList(),
+            StartingGp = background.StartingGp
         };
     }
     public static List<FeatGroupLevelDto> ConvertFeatTables(IEnumerable<IClassFeat> featTables)
@@ -99,7 +101,8 @@ public static class DtoConverters
             FixedHp = characterClass.FixedHp,
             SubclassDefinitions = characterClass.SubclassDefinitions.Select(ConvertSubclassDefintion).ToList(),
             FeatTables = ConvertFeatTables(characterClass.CharacterClassDefinitionFeatDefinitions),
-            ItemSetIds = characterClass.CharacterClassDefinitionItemDefinitionBases.Select(a => a.ItemDefinitionBaseId).ToList(),
+            ItemDefinitionBaseQuantities = characterClass.CharacterClassDefinitionItemDefinitionBases.Select(a => new ItemDefinitionBaseQuantity {ItemDefinitionBaseId = a.ItemDefinitionBaseId, Quantity = a.Quantity }).ToList(),
+            StartingGp = characterClass.StartingGp,
             DefaultStr = characterClass.DefaultStr,
             DefaultDex = characterClass.DefaultDex,
             DefaultCon = characterClass.DefaultCon,

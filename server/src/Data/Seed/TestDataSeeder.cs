@@ -40,7 +40,7 @@ public class TestDataSeeder
                     _context.SaveChanges();
                 }
 
-                if (!_context.ItemDefinitions.Any())
+                if (!_context.ItemDefinitionBases.Any())
                 {
                     saveFlag = true;
                     _logger.LogInformation("Adding item definitions...");

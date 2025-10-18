@@ -1,6 +1,5 @@
 using DMToolkit.Models.Items.Bases;
 using DMToolkit.Models.Items.Definitions;
-using DMToolkit.Models.Items.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

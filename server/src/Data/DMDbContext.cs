@@ -40,7 +40,7 @@ public class DMDbContext : IdentityDbContext<DMUser>
     public DbSet<Character> Characters { get; set; }
 
     // Item Definitions
-    public DbSet<ItemDefinitionBase> ItemDefinitions { get; set; }
+    public DbSet<ItemDefinitionBase> ItemDefinitionBases { get; set; }
 
     // Join Tables
     public DbSet<FeatDefinitionEffect> FeatDefinitionFeatEffects { get; set; }

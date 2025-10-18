@@ -36,16 +36,18 @@ public class StartupDataService : IStartupDataService
         var backgroundsTask = _context.BackgroundDefinitions
                                         .Include(b => b.AbilityScoreDefinitions)
                                         .Include(b => b.SkillDefinitions)
+                                        .Include(b => b.BackgroundDefinitionItemDefinitionBases)
                                         .AsNoTracking().ToListAsync();
         var characterClassesTask = _context.CharacterClassDefinitions
                                         .Include(c => c.SubclassDefinitions)
                                             .ThenInclude(s => s.SubclassDefinitionFeatDefinitions)
                                         .Include(c => c.CharacterClassDefinitionFeatDefinitions)
-                                        .Include(c => c.CharacterClassDefinitionItemBases)
+                                        .Include(c => c.CharacterClassDefinitionItemDefinitionBases)
                                         .AsNoTracking().ToListAsync();
         var featsTask = _context.FeatDefinitions
                                 .Include(f => f.FeatDefinitionEffects)
                                 .AsNoTracking().ToListAsync();
+        var itemsTask = _context.ItemDefinitionBases.AsNoTracking().ToListAsync();
         var speciesTask = _context.SpeciesDefinitions
                                     .Include(s => s.FeatDefinitions)
                                     .Include(s => s.LineageDefinitions)
@@ -60,7 +62,7 @@ public class StartupDataService : IStartupDataService
                                     .Include(s => s.Effects)
                                     .AsNoTracking().ToListAsync();
 
-        await Task.WhenAll(abilityScoresTask, backgroundsTask, characterClassesTask, featsTask, speciesTask, effectsTask, schoolsTask, spellsTask);
+        await Task.WhenAll(abilityScoresTask, backgroundsTask, characterClassesTask, featsTask, itemsTask, speciesTask, effectsTask, schoolsTask, spellsTask);
 
         var startupData = new StartupData
         {
@@ -68,6 +70,7 @@ public class StartupDataService : IStartupDataService
             BackgroundDefinitions = backgroundsTask.Result,
             CharacterClassDefinitions = characterClassesTask.Result,
             FeatDefinitions = featsTask.Result,
+            ItemDefinitionBases = itemsTask.Result,
             SpeciesDefinitions = speciesTask.Result,
             Effects = effectsTask.Result,
             Schools = schoolsTask.Result,
