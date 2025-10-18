@@ -87,8 +87,8 @@ public class DMDbContext : IdentityDbContext<DMUser>
         builder.ApplyConfiguration(new ItemDefinitionBaseConfiguration());
         builder.ApplyConfiguration(new ItemInstanceBaseConfiguration());
 
-        // Item Entity Configurations
-        builder.ApplyConfiguration(new WeaponPropertyConfiguration());
+        // Item Definition Configurations
+        builder.ApplyConfiguration(new WeaponDefinitionConfiguration());
 
         // Join Table Configurations
         _logger.LogInformation("Applying join table configurations...");
