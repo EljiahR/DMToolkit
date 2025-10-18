@@ -1,5 +1,5 @@
 import type { FeatDefinition } from "./definitions/featDefinition";
-import type { FeatEffect } from "./entities/featEffect";
+import type { FeatEffect } from "./entities/effect";
 
 export interface Feature {
     id: string;

@@ -7,7 +7,6 @@ public static class EffectSeedData
     // Effects
     public static readonly Effect IgnoreCoverEffect = new()
     {
-        DataType = "AttackModifier",
         Title = "Ignore Cover",
         Description = "Your ranged attacks ignore up to three-quarters cover.",
         Data = new Dictionary<string, object>
@@ -18,7 +17,6 @@ public static class EffectSeedData
 
     public static readonly Effect LongRangeAccuracyEffect = new()
     {
-        DataType = "AttackModifier",
         Title = "Long Range Accuracy",
         Description = "You suffer no disadvantage on ranged attacks made at long range.",
         Data = new Dictionary<string, object>
@@ -29,7 +27,6 @@ public static class EffectSeedData
 
     public static readonly Effect PowerShotEffect = new()
     {
-        DataType = "DamageModifier",
         Title = "Power Shot",
         Description = "Before making a ranged attack, you can choose to take a -5 penalty to the roll. If it hits, add +10 damage.",
         Data = new Dictionary<string, object>
@@ -41,7 +38,6 @@ public static class EffectSeedData
 
     public static readonly Effect HpFlatBonusEffect = new()
     {
-        DataType = "HitPointModifier",
         Title = "Flat Bonus",
         Description = "Your maximum hit points increase by 2 for each level you have.",
         Data = new Dictionary<string, object>
@@ -52,7 +48,6 @@ public static class EffectSeedData
 
     public static readonly Effect InsightfulReasoningEffect = new()
     {
-        DataType = "SkillModifier",
         Title = "Insightful Reasoning",
         Description = "Gain a bonus to Insight checks as your study of people and ideas sharpens your perception.",
         Data = new Dictionary<string, object>
@@ -64,7 +59,6 @@ public static class EffectSeedData
 
     public static readonly Effect PersuasiveSpeakerEffect = new()
     {
-        DataType = "SkillModifier",
         Title = "Persuasive Speaker",
         Description = "Gain a bonus to Persuasion checks from your ability to frame arguments logically.",
         Data = new Dictionary<string, object>
@@ -76,7 +70,6 @@ public static class EffectSeedData
 
     public static readonly Effect ContemplativeRestEffect = new()
     {
-        DataType = "UtilityFeature",
         Title = "Contemplative Rest",
         Description = "When taking a short or long rest, you can spend 10 minutes in meditation to grant one ally advantage on their next saving throw within the next hour.",
         Data = new Dictionary<string, object>
@@ -89,7 +82,6 @@ public static class EffectSeedData
 
     public static readonly Effect ResistExhaustionEffect = new()
     {
-        DataType = "ConditionResistance",
         Title = "Resist Exhaustion",
         Description = "You gain advantage on saving throws made to resist exhaustion from travel, hunger, or harsh environments.",
         Data = new Dictionary<string, object>
@@ -101,8 +93,7 @@ public static class EffectSeedData
 
     public static readonly Effect SurvivalExpertiseEffect = new()
     {
-        DataType = "SkillModifier",
-        Title = "Survival Expertise",
+		Title = "Survival Expertise",
         Description = "Gain a bonus to Survival checks when foraging for food or navigating difficult terrain.",
         Data = new Dictionary<string, object>
         {
@@ -113,8 +104,7 @@ public static class EffectSeedData
 
     public static readonly Effect StopTheAdvanceEffect = new()
     {
-        DataType = "ReactionTrigger",
-        Title = "Stop the Advance",
+		Title = "Stop the Advance",
         Description = "When an enemy moves within 5 feet of you, you may use your reaction to reduce their movement speed by half until the end of their turn.",
         Data = new()
         {
@@ -126,8 +116,7 @@ public static class EffectSeedData
     };
     public static readonly Effect GuardiansResolveEffect = new()
     {
-        DataType = "DefenseModifier",
-        Title = "Guardian’s Resolve",
+		Title = "Guardian’s Resolve",
         Description = "Gain a +1 bonus to AC while you are within 5 feet of at least one ally.",
         Data = new()
             {
@@ -138,8 +127,7 @@ public static class EffectSeedData
 
     public static readonly Effect ResistFatigueEffect = new()
     {
-        DataType = "ConditionResistance",
-        Title = "Resist Fatigue",
+		Title = "Resist Fatigue",
         Description = "Gain advantage on saving throws against exhaustion or effects that cause fatigue.",
         Data = new()
         {
@@ -149,8 +137,7 @@ public static class EffectSeedData
     };
     public static readonly Effect EnduringFortitudeEffect = new()
     {
-        DataType = "HealthBonus",
-        Title = "Enduring Fortitude",
+		Title = "Enduring Fortitude",
         Description = "Increase your maximum hit points by 1 per character level.",
         Data = new()
         {
@@ -161,8 +148,7 @@ public static class EffectSeedData
 
     public static readonly Effect DisciplinedFocusEffect = new()
     {
-        DataType = "ConcentrationBonus",
-        Title = "Disciplined Focus",
+		Title = "Disciplined Focus",
         Description = "Gain advantage on concentration checks to maintain magical effects.",
         Data = new()
         {
@@ -173,8 +159,7 @@ public static class EffectSeedData
 
     public static readonly Effect EfficientCastingEffect = new()
     {
-        DataType = "ResourceModifier",
-        Title = "Efficient Casting",
+		Title = "Efficient Casting",
         Description = "Once per long rest, you may reduce the cost of one spell or ability by 1 point (mana, focus, or equivalent).",
         Data = new()
         {
@@ -187,8 +172,7 @@ public static class EffectSeedData
 
     public static readonly Effect SenseMagicEffect = new()
     {
-        DataType = "DetectionBonus",
-        Title = "Sense Magic",
+		Title = "Sense Magic",
         Description = "You automatically detect the presence of active magical effects within 15 feet.",
         Data = new()
         {
@@ -198,8 +182,7 @@ public static class EffectSeedData
 };
     public static readonly Effect PreparedMindEffect = new()
     {
-        DataType = "InitiativeModifier",
-        Title = "Prepared Mind",
+		Title = "Prepared Mind",
         Description = "Gain a +1 bonus to initiative rolls.",
         Data = new()
         {
@@ -209,8 +192,7 @@ public static class EffectSeedData
 
     public static readonly Effect StoneSkinEffect = new()
     {
-        DataType = "DamageResistance",
-        Title = "Stone Skin",
+		Title = "Stone Skin",
         Description = "Gain resistance to bludgeoning damage from nonmagical sources.",
         Data = new Dictionary<string, object>
         {
@@ -221,8 +203,7 @@ public static class EffectSeedData
 
     public static readonly Effect EarthenFocusEffect = new()
     {
-        DataType = "SavingThrowBonus",
-        Title = "Earthen Focus",
+		Title = "Earthen Focus",
         Description = "You have advantage on Constitution saving throws made to resist exhaustion.",
         Data = new Dictionary<string, object>
         {
@@ -234,8 +215,7 @@ public static class EffectSeedData
 
     public static readonly Effect MoltenEmpowermentEffect = new()
     {
-        DataType = "TemporaryBuff",
-        Title = "Molten Empowerment",
+		Title = "Molten Empowerment",
         Description = "When reduced below half health, gain +2 Strength until the end of your next turn.",
         Data = new Dictionary<string, object>
         {
@@ -248,8 +228,7 @@ public static class EffectSeedData
 
     public static readonly Effect HardenedFleshEffect = new()
     {
-        DataType = "PassiveDefense",
-        Title = "Hardened Flesh",
+		Title = "Hardened Flesh",
         Description = "Reduce incoming physical damage by 1 while not wearing heavy armor.",
         Data = new Dictionary<string, object>
         {
@@ -260,8 +239,7 @@ public static class EffectSeedData
 
     public static readonly Effect AethericSurgeEffect = new()
     {
-        DataType = "MagicAmplify",
-        Title = "Aetheric Surge",
+		Title = "Aetheric Surge",
         Description = "Once per rest, reroll a spell attack or damage roll and take the higher result.",
         Data = new Dictionary<string, object>
         {
@@ -272,8 +250,7 @@ public static class EffectSeedData
 
     public static readonly Effect RadiantPulseEffect = new()
     {
-        DataType = "AreaEffect",
-        Title = "Radiant Pulse",
+		Title = "Radiant Pulse",
         Description = "Emit a burst of radiant light that heals allies or burns enemies within 10 feet.",
         Data = new Dictionary<string, object>
         {
@@ -286,8 +263,7 @@ public static class EffectSeedData
 
     public static readonly Effect ShadowVeilEffect = new()
     {
-        DataType = "StealthBuff",
-        Title = "Shadow Veil",
+		Title = "Shadow Veil",
         Description = "Gain advantage on Stealth checks for 1 minute and resistance to radiant damage.",
         Data = new Dictionary<string, object>
         {

@@ -14,7 +14,7 @@ import type { BackgroundDefinition } from "../types/dm-tool-types/definitions/ba
 import type { SpeciesDefinition } from "../types/dm-tool-types/definitions/speciesDefinition";
 import type { LineageDefinition } from "../types/dm-tool-types/definitions/lineageDefinition";
 import type { Feature } from "../types/dm-tool-types/feature";
-import type { FeatEffect } from "../types/dm-tool-types/entities/featEffect";
+import type { FeatEffect } from "../types/dm-tool-types/entities/effect";
 
 const initialState = generateEmptyCharacter();
 

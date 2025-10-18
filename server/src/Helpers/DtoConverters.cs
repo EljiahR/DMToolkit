@@ -161,6 +161,7 @@ public static class DtoConverters
         {
             Id = effect.Id,
             DataType = effect.DataType,
+            OriginType = effect.OriginType,
             Title = effect.Title,
             Description = effect.Description,
             Data = effect.Data

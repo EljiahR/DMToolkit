@@ -1,4 +1,4 @@
-import type { FeatEffect } from "../entities/featEffect";
+import type { FeatEffect } from "../entities/effect";
 
 export interface FeatDefinitionEffectGrouping {
     group: number;

@@ -10,7 +10,7 @@ import type { LineageDefinition, LineageDefinitionDto } from "../types/dm-tool-t
 import type { SkillDefinition, SkillDefinitionDto } from "../types/dm-tool-types/definitions/skillDefinition";
 import type { SpeciesDefinition, SpeciesDefinitionDto } from "../types/dm-tool-types/definitions/speciesDefinition";
 import type { SubclassDefinition, SubclassDefinitionDto } from "../types/dm-tool-types/definitions/subclassDefinition";
-import type { FeatEffect, FeatEffectDto } from "../types/dm-tool-types/entities/featEffect";
+import type { FeatEffect, FeatEffectDto } from "../types/dm-tool-types/entities/effect";
 import type { School } from "../types/dm-tool-types/entities/school";
 import type { Spell, SpellDto } from "../types/dm-tool-types/entities/spell";
 import type { SpellEffect } from "../types/dm-tool-types/entities/spellEffect";

@@ -3,7 +3,7 @@ import type { BackgroundDefinition, BackgroundDefinitionDto } from "../definitio
 import type { CharacterClassDefinition, CharacterClassDefinitionDto } from "../definitions/characterClassDefinition";
 import type { FeatDefinition, FeatDefinitionDto } from "../definitions/featDefinition";
 import type { SpeciesDefinition, SpeciesDefinitionDto } from "../definitions/speciesDefinition";
-import type { FeatEffect, FeatEffectDto } from "../entities/featEffect";
+import type { FeatEffect, FeatEffectDto } from "../entities/effect";
 import type { School, SchoolDto } from "../entities/school";
 import type { Spell, SpellDto } from "../entities/spell";
 import type { SpellEffect, SpellEffectDto } from "../entities/spellEffect";
