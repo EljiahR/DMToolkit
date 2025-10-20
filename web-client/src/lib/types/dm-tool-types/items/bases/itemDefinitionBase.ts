@@ -1,4 +1,4 @@
-import type { Worth, WorthDto } from "../../items";
+import type { Worth, WorthDto } from "./worth";
 
 export interface ItemDefinitionBase {
     id: string;
