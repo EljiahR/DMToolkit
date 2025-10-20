@@ -2,5 +2,8 @@ namespace DMToolkit.Shared.Models.Enums;
 
 public enum DataType
 {
-    Other
+    Other,
+    AbilityScoreBonus,
+    InitiativeBonus,
+    PassivePerceptionBonus
 }

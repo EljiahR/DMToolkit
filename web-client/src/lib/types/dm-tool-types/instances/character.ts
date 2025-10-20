@@ -1,6 +1,6 @@
-import type { ItemDefinitionBase, ItemDefinitionBaseDto } from "../items/bases/itemDefinitionBase";
+import type { ItemInstanceBase, ItemInstanceBaseDto } from "../items/bases/itemInstanceBase";
 import type { Worth, WorthDto } from "../items/bases/worth";
-import type { AbilityScoreInstance, AbilityScoreInstanceDto } from "./abilityScoreInstance";
+import type { AbilityScoreInstanceDto, AbilityScores } from "./abilityScoreInstance";
 import type { BackgroundInstance, BackgroundInstanceDto } from "./backgroundInstance";
 import type { CharacterClassInstance, CharacterClassInstanceDto } from "./characterClassInstance";
 import type { SpeciesInstance, SpeciesInstanceDto } from "./speciesInstance";
@@ -14,14 +14,14 @@ export interface Character {
     characterClassInstances: CharacterClassInstance[];
     backgroundInstance: BackgroundInstance | null;
     speciesInstance: SpeciesInstance | null;
-    scoreInstances: AbilityScoreInstance[];
+    scores: AbilityScores;
     physicalDescription: string;
     personality: string;
     ideals: string;
     bonds: string;
     flaws: string;
     coins: Worth;
-    inventory: ItemDefinitionBase[];
+    inventory: ItemInstanceBase[];
 }
 
 export interface CharacterDto {
@@ -40,5 +40,5 @@ export interface CharacterDto {
     bonds: string;
     flaws: string;
     coins: WorthDto;
-    inventory: ItemDefinitionBaseDto[];
+    inventory: ItemInstanceBaseDto[];
 }

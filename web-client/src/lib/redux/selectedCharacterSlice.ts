@@ -1,53 +1,48 @@
 import { createSelector, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { getModifier, rollStat } from "../dm-tools/stats";
-import { backgroundBaseReset, classBaseReset, lineageBaseReset, speciesBaseReset } from "../dm-tools/definitionResetConverters";
 import type { GeneratedTraits } from "../dm-tools/traitGenerator";
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
 import type { RootState } from "./store";
 import type { StringAndNumber, ZeroOrOne } from "../types/miscTypes";
 import { generateEmptyCharacter, generateEmptyWallet } from "./initialCharacterSliceState";
-import type { AbilityScoreBonusFeatEffectData, SimpleBonusFeatEffectData } from "../types/featEffectDataTypes";
-import type { AbilityScores } from "../types/dm-tool-types/stats";
-import type { Armor, Weapon } from "../types/dm-tool-types/items";
 import type { CharacterClassDefinition } from "../types/dm-tool-types/definitions/characterClassDefinition";
 import type { BackgroundDefinition } from "../types/dm-tool-types/definitions/backgroundDefinition";
 import type { SpeciesDefinition } from "../types/dm-tool-types/definitions/speciesDefinition";
 import type { LineageDefinition } from "../types/dm-tool-types/definitions/lineageDefinition";
-import type { Feature } from "../types/dm-tool-types/feature";
-import type { FeatEffect } from "../types/dm-tool-types/entities/effect";
+import type { AbilityScores } from "../types/dm-tool-types/instances/abilityScoreInstance";
+import type { FeatInstance } from "../types/dm-tool-types/instances/featInstance";
+import type { Effect } from "../types/dm-tool-types/entities/effect";
+import { DataType } from "../types/dm-tool-types/enums/dataType";
+import type { AbilityScoreBonus, SimpleBonus } from "../types/dm-tool-types/entities/effectDataTypes";
+import { backgroundDefinitionReset, classDefinitionReset, lineageDefinitionReset, speciesDefinitionReset } from "../dm-tools/definitionResetConverters";
+import type { Character } from "../types/dm-tool-types/instances/character";
+import type { AbilityScoreAbbreviations } from "./types";
+import type { WeaponInstance } from "../types/dm-tool-types/items/instances/weaponInstance";
+import type { ArmorInstance } from "../types/dm-tool-types/items/instances/armorInstance";
 
-const initialState = generateEmptyCharacter();
+const initialState: Character = generateEmptyCharacter();
 
 export const selectedCharacterSlice = createSlice({
     name: "selectedCharacter",
     initialState,
     reducers: {
-        // Keep getting a false-positive for state not being used here
-        // @ts-ignore
-        setNewCharacter: (state, action: PayloadAction<{defaultClass: CharacterClassBase, defaultBackground: BackgroundBase, defaultSpecies: SpeciesBase }>) => {
-            state = {
-                id: "",
-                name: "",
-                alignment: "",
-                hp: 1,
-                hpRolls: [action.payload.defaultClass.hitDie],
-                tempHp: 0,
-                characterClass: classBaseReset(action.payload.defaultClass, ""),
-                background: backgroundBaseReset(action.payload.defaultBackground, ""),
-                species: speciesBaseReset(action.payload.defaultSpecies, "", ""),
-                scores: getStandardScores(),
-                physicalDescription: "",
-                personality: "",
-                ideals: "",
-                bonds: "",
-                flaws: "",
-                proficiencyBonus: 0,
-                coins: generateEmptyWallet(), 
-                inventory: [],
-                equippedItems: [],
-                knownSpells: [],
-                readiedSpells: []
-            }
+        setNewCharacter: (state, action: PayloadAction<{defaultClass: CharacterClassDefinition, defaultBackground: BackgroundDefinition, defaultSpecies: SpeciesDefinition }>) => {
+            state.id = "";
+            state.name = "";
+            state.alignment = "";
+            state.hp = 1;
+            state.tempHp = 0;
+            state.characterClassInstances = [classDefinitionReset(action.payload.defaultClass, "")];
+            state.backgroundInstance = backgroundDefinitionReset(action.payload.defaultBackground, "");
+            state.speciesInstance = speciesDefinitionReset(action.payload.defaultSpecies, action.payload.defaultSpecies.size, "", "");
+            state.scores = getStandardScores();
+            state.physicalDescription = "";
+            state.personality = "";
+            state.ideals = "";
+            state.bonds = "";
+            state.flaws = "";
+            state.coins = generateEmptyWallet();
+            state.inventory = [];
         },
         setName: (state, action: PayloadAction<string>) => {
             state.name = action.payload
@@ -55,84 +50,90 @@ export const selectedCharacterSlice = createSlice({
         setAlignment: (state, action: PayloadAction<string>) => {
             state.alignment = action.payload;
         },
-        setCharacterClassBase: (state, action: PayloadAction<CharacterClassDefinition>) => {
-            state.characterClass = classBaseReset(action.payload, state.characterClass.id);
+        setCharacterClassDefinition: (state, action: PayloadAction<CharacterClassDefinition>) => {
+            state.characterClassInstances = [classDefinitionReset(action.payload, state.characterClassInstances[0].id)];
         },
         setBackgroundBase: (state, action: PayloadAction<BackgroundDefinition>) => {
-            state.background = backgroundBaseReset(action.payload, state.background.id);
+            state.backgroundInstance = backgroundDefinitionReset(action.payload, state.backgroundInstance?.id ?? "");
         },
-        setBackgroundScores: (state, action: PayloadAction<{scoreId: string, index: ZeroOrOne}>) => {
-            state.background.abilityScores[action.payload.index] = action.payload.scoreId;
+        setBackgroundScores: (state, action: PayloadAction<{scoreAbbreviation: AbilityScoreAbbreviations, index: ZeroOrOne}>) => {
+            if (action.payload.index == 0 && state.backgroundInstance) {
+                state.backgroundInstance.abilityScoreDefinitionPlusTwo = state.scores[action.payload.scoreAbbreviation].definition;
+            } else if (action.payload.index == 1 && state.backgroundInstance) {
+                state.backgroundInstance.abilityScoreDefinitionPlusOne = state.scores[action.payload.scoreAbbreviation].definition;
+            }
         },
         setSpeciesBase: (state, action: PayloadAction<SpeciesDefinition>) => {
-            state.species = speciesBaseReset(action.payload, state.species.id, state.species.lineage.id);
+            state.speciesInstance = speciesDefinitionReset(action.payload, action.payload.size, state.speciesInstance?.id ?? "", state.speciesInstance?.lineageInstance?.id ?? "");
         },
         setLineageBase: (state, action: PayloadAction<LineageDefinition>) => {
-            state.species.lineage= lineageBaseReset(action.payload, state.species.lineage.id)
+            if (state.speciesInstance) {
+                state.speciesInstance.lineageInstance = lineageDefinitionReset(action.payload, state.speciesInstance.lineageInstance?.id ?? "")
+            }
         },
-        setScore: (state, action: PayloadAction<{scoreId: string, amount: string}>) => {
+        setScore: (state, action: PayloadAction<{scoreAbbreviation: AbilityScoreAbbreviations, amount: string}>) => {
             var filteredAmount = parseInt(action.payload.amount);
             filteredAmount = filteredAmount > 20 ? 20 : filteredAmount < 1 ? 1 : filteredAmount;
-            state.scores[action.payload.scoreId].amount = filteredAmount;
+            state.scores[action.payload.scoreAbbreviation].score = filteredAmount;
         },
         setScores: (state, action: PayloadAction<AbilityScores>) => {
             state.scores = action.payload;
         },
-        swapScores: (state, action: PayloadAction<{scoreIdA: string, scoreIdB: string}>) => {
-            const { scoreIdA, scoreIdB } = action.payload;
-            [state.scores[scoreIdA].amount, state.scores[scoreIdB].amount] = [state.scores[scoreIdB].amount, state.scores[scoreIdA].amount]
+        swapScores: (state, action: PayloadAction<{scoreAbbreviationA: AbilityScoreAbbreviations, scoreAbbreviationB: AbilityScoreAbbreviations}>) => {
+            const { scoreAbbreviationA, scoreAbbreviationB } = action.payload;
+            [state.scores[scoreAbbreviationA].score, state.scores[scoreAbbreviationB].score] = [state.scores[scoreAbbreviationB].score, state.scores[scoreAbbreviationA].score]
         },
         setScoresToStandard: (state) => {
-            state.scores.str.amount = 15;
-            state.scores.dex.amount = 14;
-            state.scores.con.amount = 13;
-            state.scores.int.amount = 12;
-            state.scores.wis.amount = 10;
-            state.scores.cha.amount = 8;
+            state.scores.str.score = 15;
+            state.scores.dex.score = 14;
+            state.scores.con.score = 13;
+            state.scores.int.score = 12;
+            state.scores.wis.score = 10;
+            state.scores.cha.score = 8;
         },
         setScoresToBase: (state) => {
-            state.scores.str.amount = 8;
-            state.scores.dex.amount = 8;
-            state.scores.con.amount = 8;
-            state.scores.int.amount = 8;
-            state.scores.wis.amount = 8;
-            state.scores.cha.amount = 8;
+            state.scores.str.score = 8;
+            state.scores.dex.score = 8;
+            state.scores.con.score = 8;
+            state.scores.int.score = 8;
+            state.scores.wis.score = 8;
+            state.scores.cha.score = 8;
         },
         setScoresToMinimum: (state) => {
-            state.scores.str.amount = 1;
-            state.scores.dex.amount = 1;
-            state.scores.con.amount = 1;
-            state.scores.int.amount = 1;
-            state.scores.wis.amount = 1;
-            state.scores.cha.amount = 1;
+            state.scores.str.score = 1;
+            state.scores.dex.score = 1;
+            state.scores.con.score = 1;
+            state.scores.int.score = 1;
+            state.scores.wis.score = 1;
+            state.scores.cha.score = 1;
         },
-        setScoreToRandom: (state, action: PayloadAction<string>) => {
-            state.scores[action.payload].amount = rollStat();
+        setScoreToRandom: (state, action: PayloadAction<AbilityScoreAbbreviations>) => {
+            state.scores[action.payload].score = rollStat();
         },
         setScoresToRandom: (state) => {
-            state.scores.str.amount = rollStat();
-            state.scores.dex.amount = rollStat();
-            state.scores.con.amount = rollStat();
-            state.scores.int.amount = rollStat();
-            state.scores.wis.amount = rollStat();
-            state.scores.cha.amount = rollStat();
+            state.scores.str.score = rollStat();
+            state.scores.dex.score = rollStat();
+            state.scores.con.score = rollStat();
+            state.scores.int.score = rollStat();
+            state.scores.wis.score = rollStat();
+            state.scores.cha.score = rollStat();
         },
-        addOneToScore: (state, action: PayloadAction<string>) => {
-            state.scores[action.payload].amount += 1;
+        addOneToScore: (state, action: PayloadAction<AbilityScoreAbbreviations>) => {
+            state.scores[action.payload].score += 1;
         },
-        subtractOneFromScore: (state, action: PayloadAction<string>) => {
-            state.scores[action.payload].amount -= 1;
+        subtractOneFromScore: (state, action: PayloadAction<AbilityScoreAbbreviations>) => {
+            state.scores[action.payload].score -= 1;
         },
         setScoresToClassDefault: (state, action: PayloadAction<number[] | undefined>) => {
             if (state.scores == null) {
                 state.scores = getStandardScores();
             }
-            state.scores.str.amount = action.payload ? action.payload[0] : state.characterClass.base.defaultStr ?? 8;
-            state.scores.dex.amount = action.payload ? action.payload[1] : state.characterClass.base.defaultDex ?? 8;
-            state.scores.con.amount = action.payload ? action.payload[2] : state.characterClass.base.defaultCon ?? 8;
-            state.scores.int.amount = action.payload ? action.payload[3] : state.characterClass.base.defaultInt ?? 8;
-            state.scores.wis.amount = action.payload ? action.payload[4] : state.characterClass.base.defaultWis ?? 8;
-            state.scores.cha.amount = action.payload ? action.payload[5] : state.characterClass.base.defaultCha ?? 8;
+            state.scores.str.score = action.payload ? action.payload[0] : state.characterClassInstances[0].definition.defaultStr ?? 8;
+            state.scores.dex.score = action.payload ? action.payload[1] : state.characterClassInstances[0].definition.defaultDex ?? 8;
+            state.scores.con.score = action.payload ? action.payload[2] : state.characterClassInstances[0].definition.defaultCon ?? 8;
+            state.scores.int.score = action.payload ? action.payload[3] : state.characterClassInstances[0].definition.defaultInt ?? 8;
+            state.scores.wis.score = action.payload ? action.payload[4] : state.characterClassInstances[0].definition.defaultWis ?? 8;
+            state.scores.cha.score = action.payload ? action.payload[5] : state.characterClassInstances[0].definition.defaultCha ?? 8;
         },
         setPhysicalDescription: (state, action: PayloadAction<string>) => {
             state.physicalDescription = action.payload;
@@ -156,14 +157,17 @@ export const selectedCharacterSlice = createSlice({
     }
 });
 
-export const selectAllFeatures = (state: RootState) => {
-    const allFeatures: Feature[] = [];
-    allFeatures.concat(state.selectedCharacter.background.features);
-    allFeatures.concat(state.selectedCharacter.characterClass.features);
-    if (state.selectedCharacter.characterClass.subclass) {
-        allFeatures.concat(state.selectedCharacter.characterClass.subclass.features);
-    }
-    return allFeatures;
+export const selectAllFeats = (state: RootState) => {
+    
+    const allFeats: FeatInstance[] = [];
+    if (state.selectedCharacter.backgroundInstance && state.selectedCharacter.backgroundInstance.featInstance) allFeats.concat([state.selectedCharacter.backgroundInstance.featInstance]);
+    state.selectedCharacter.characterClassInstances.forEach((characterClass) => {
+        allFeats.concat(characterClass.featInstances);
+        if (characterClass.subclassInstance) {
+            allFeats.concat(characterClass.subclassInstance.featInstances);
+        }
+    });
+    return allFeats;
 }
 
 export const selectAllAbilityScores = (state: RootState) => {
@@ -171,9 +175,9 @@ export const selectAllAbilityScores = (state: RootState) => {
 }
 
 export const selectAllFeatEffects = createSelector(
-    [selectAllFeatures],
+    [selectAllFeats],
     (allFeatures) => {
-        const allFeatEffects: FeatEffect[] = [];
+        const allFeatEffects: Effect[] = [];
         allFeatures.forEach((feat) => allFeatEffects.concat(feat.effects));
         return allFeatEffects;
     }
@@ -182,21 +186,21 @@ export const selectAllFeatEffects = createSelector(
 export const selectAllAbilityScoreFeatEffects = createSelector(
     [selectAllFeatEffects],
     (allFeatEffects) => {
-        return allFeatEffects.filter((featEffect) => featEffect.type == "abilityScoreBonus");
+        return allFeatEffects.filter((featEffect) => featEffect.dataType == DataType.AbilityScoreBonus);
     }
 );
 
 export const selectAllInitiativeBonuseFeatEffects = createSelector(
     [selectAllFeatEffects],
     (allFeatEffects) => {
-        return allFeatEffects.filter((featEffect) => featEffect.type == "initiativeBonus");
+        return allFeatEffects.filter((featEffect) => featEffect.dataType == DataType.InitiativeBonus);
     }
 );
 
 export const selectAllPassPerceptionBonusFeatEffects = createSelector(
     [selectAllFeatEffects],
     (allFeatEffects) => {
-        return allFeatEffects.filter((featEffect) => featEffect.type == "passivePerceptionBonus");
+        return allFeatEffects.filter((featEffect) => featEffect.dataType == DataType.PassivePerceptionBonus);
     }
 )
 
@@ -213,8 +217,8 @@ export const selectAllAbilityScoreFeatEffectBonuses = createSelector(
         };
 
         allAbilityScoreEffects.forEach((abilityEffect) => {
-            const data = abilityEffect.data as AbilityScoreBonusFeatEffectData;
-            bonuses[data.statId] += data.amount;
+            const data = abilityEffect.data as AbilityScoreBonus;
+            bonuses[data.scoreAbbreviation] += data.bonusAmount;
         });
 
         return bonuses;
@@ -225,12 +229,12 @@ export const selectAllAbilityScoreModifiers = createSelector(
     [selectAllAbilityScores, selectAllAbilityScoreFeatEffectBonuses],
     (abilityScores, abilityScoreBonuses) => {
         const modifiers: StringAndNumber = {
-            "str": getModifier(abilityScores["str"].amount + abilityScoreBonuses["str"]),
-            "dex": getModifier(abilityScores["dex"].amount + abilityScoreBonuses["dex"]),
-            "con": getModifier(abilityScores["con"].amount + abilityScoreBonuses["con"]),
-            "int": getModifier(abilityScores["int"].amount + abilityScoreBonuses["int"]),
-            "wis": getModifier(abilityScores["wis"].amount + abilityScoreBonuses["wis"]),
-            "cha": getModifier(abilityScores["cha"].amount + abilityScoreBonuses["cha"])
+            "str": getModifier(abilityScores["str"].score + abilityScoreBonuses["str"]),
+            "dex": getModifier(abilityScores["dex"].score + abilityScoreBonuses["dex"]),
+            "con": getModifier(abilityScores["con"].score + abilityScoreBonuses["con"]),
+            "int": getModifier(abilityScores["int"].score + abilityScoreBonuses["int"]),
+            "wis": getModifier(abilityScores["wis"].score + abilityScoreBonuses["wis"]),
+            "cha": getModifier(abilityScores["cha"].score + abilityScoreBonuses["cha"])
         };
 
         return modifiers
@@ -242,33 +246,42 @@ export const selectInitiative = createSelector(
     (initiativeFeatEffects, modifiers) => {
         var initiative = modifiers["dex"];
         initiativeFeatEffects.forEach((initiativeFeatEffect) => {
-            const data = initiativeFeatEffect.data as SimpleBonusFeatEffectData;
-            initiative += data.amount;
+            const data = initiativeFeatEffect.data as SimpleBonus;
+            initiative += data.bonusAmount;
         });
         return initiative;
     }
 );
 
-export const selectProficiencyBonus = (state: RootState) => {
-    return state.selectedCharacter.proficiencyBonus;
+export const selectTotalLevel = (state: RootState) => {
+    return state.selectedCharacter.characterClassInstances.reduce((currentLevel, characterClass) => {
+        return currentLevel + characterClass.level;
+    }, 0);
 }
 
+export const selectProficiencyBonus = createSelector(
+    [selectTotalLevel],
+    (totalLevel) => {
+        return 2 + (totalLevel % 4);
+    }
+);
+
 export const selectSpeed = (state: RootState) => {
-    return state.selectedCharacter.species.definition.speed;
+    return state.selectedCharacter.speciesInstance?.definition.speed ?? 0;
 }
 
 export const selectSize = (state: RootState) => {
-    return state.selectedCharacter.species.definition.size;
+    return state.selectedCharacter.speciesInstance?.size ?? "";
 }
 
 export const selectPassivePerception = createSelector(
     [selectAllPassPerceptionBonusFeatEffects, selectAllAbilityScoreModifiers, selectAllAbilityScores, selectProficiencyBonus],
     (passivePerceptionEffects, modifiers, scores, proficiencyBonus) => {
         const perceptionSkill = scores["wis"].skillInstances.find((skill) => skill.definition.name == "Perception");
-        var passivePerception = 10 + modifiers["wis"] + (perceptionSkill && perceptionSkill.proficient ? proficiencyBonus : 0);
+        var passivePerception = 10 + modifiers["wis"] + (perceptionSkill && perceptionSkill.isProficient ? proficiencyBonus : 0);
         passivePerceptionEffects.forEach((effect) => {
-            const data = effect.data as SimpleBonusFeatEffectData;
-            passivePerception += data.amount;
+            const data = effect.data as SimpleBonus;
+            passivePerception += data.bonusAmount;
         });
 
         return passivePerception;
@@ -280,7 +293,10 @@ export const selectHp = (state: RootState) => {
 };
 
 export const selectHpRolls = (state: RootState) => {
-    return state.selectedCharacter.hpRolls;
+    const emptyNumberArray: number[] = [];
+    return state.selectedCharacter.characterClassInstances.reduce((rolls, characterClass) => {
+        return [...rolls, ...characterClass.hpRolls];
+    }, emptyNumberArray);
 };
 
 export const selectHpMax = createSelector(
@@ -296,31 +312,24 @@ export const selectInventory = (state: RootState) => {
 };
 
 export const selectAllEquippedItems = (state: RootState) => {
-    return state.selectedCharacter.equippedItems;
+    return state.selectedCharacter.inventory.filter((item) => item.isEquipped);
 };
 
-export const selectAllEquippedItemIds = (state: RootState) => {
-    return state.selectedCharacter.equippedItems.map((item) => item.id);
-}
-
-export const selectNonEquippedItems = createSelector(
-    [selectInventory, selectAllEquippedItemIds],
-    (allItems, equippedItemIds) => {
-        return allItems.filter((item) => !equippedItemIds.includes(item.id))
-    }
-)
+export const selectAllNonEquippedItems = (state: RootState) => {
+    return state.selectedCharacter.inventory.filter((item) => !item.isEquipped);
+};
 
 export const selectAllEquippedWeapons = createSelector(
     [selectAllEquippedItems],
     (equipment) => {
-        return equipment.filter((item) => item.category == "Weapon") as Weapon[];
+        return equipment.filter((item) => item.itemType == "Weapon") as WeaponInstance[];
     }
 );
 
 export const selectAllEquippedArmor = createSelector(
     [selectAllEquippedItems],
     (equipment) => {
-        return equipment.filter((item) => item.category == "Armor") as Armor[];
+        return equipment.filter((item) => item.itemType == "Armor") as ArmorInstance[];
     }
 );
 
@@ -328,7 +337,7 @@ export const selectAC = createSelector(
     [selectAllEquippedArmor, selectAllAbilityScoreModifiers],
     (armor, modifiers) => {
         var ac = 10;
-        const equippedArmor = armor.find((item) => item.armorCategory != "Shield");
+        const equippedArmor = armor.find((item) => item.definition. != "Shield");
         if (equippedArmor) {
             ac = equippedArmor.acBase;
             ac += equippedArmor.hasDexterityCap ? Math.min(equippedArmor.dexterityCap, modifiers["dex"]) : modifiers["dex"];

@@ -16,3 +16,13 @@ export interface AbilityScoreInstanceDto {
     skillInstances: SkillInstanceDto[];
     definitionId: string;
 }
+
+export interface AbilityScores {
+    [key: string]: AbilityScoreInstance;
+    "str": AbilityScoreInstance;
+    "dex": AbilityScoreInstance;
+    "con": AbilityScoreInstance;
+    "int": AbilityScoreInstance;
+    "wis": AbilityScoreInstance;
+    "cha": AbilityScoreInstance;
+}

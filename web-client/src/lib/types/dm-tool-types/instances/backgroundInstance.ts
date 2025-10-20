@@ -6,7 +6,7 @@ export interface BackgroundInstance {
     id: string;
     abilityScoreDefinitionPlusTwo: AbilityScoreDefinition | null;
     abilityScoreDefinitionPlusOne: AbilityScoreDefinition | null;
-    featInstance: FeatInstance;
+    featInstance: FeatInstance | null;
     definition: BackgroundDefinition;
 }
 

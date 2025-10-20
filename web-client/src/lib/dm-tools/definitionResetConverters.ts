@@ -1,45 +1,48 @@
-import type { Background } from "../types/dm-tool-types/background";
-import type { CharacterClass } from "../types/dm-tool-types/characterClass";
 import type { BackgroundDefinition } from "../types/dm-tool-types/definitions/backgroundDefinition";
 import type { CharacterClassDefinition } from "../types/dm-tool-types/definitions/characterClassDefinition";
 import type { LineageDefinition } from "../types/dm-tool-types/definitions/lineageDefinition";
 import type { SpeciesDefinition } from "../types/dm-tool-types/definitions/speciesDefinition";
-import type { Lineage, Species } from "../types/dm-tool-types/species";
+import type { BackgroundInstance } from "../types/dm-tool-types/instances/backgroundInstance";
+import type { CharacterClassInstance } from "../types/dm-tool-types/instances/characterClassInstance";
+import type { LineageInstance } from "../types/dm-tool-types/instances/lineageInstance";
+import type { SpeciesInstance } from "../types/dm-tool-types/instances/speciesInstance";
 
 
-export const classBaseReset = (characterClass: CharacterClassDefinition, id: string): CharacterClass => {
+export const classDefinitionReset = (definition: CharacterClassDefinition, id: string): CharacterClassInstance => {
     return {
         id,
         level: 0,
-        subclass: null,
-        features: [],
-        base: characterClass
+        subclassInstance: null,
+        featInstances: [],
+        definition,
+        hpRolls: []
     }
 }
 
-export const backgroundBaseReset = (base: BackgroundDefinition, id: string): Background => {
+export const backgroundDefinitionReset = (definition: BackgroundDefinition, id: string): BackgroundInstance => {
     return {
         id,
-        abilityScores: ["", ""],
-        features: [],
-        skillProficiencies: [],
-        base
+        abilityScoreDefinitionPlusTwo: null,
+        abilityScoreDefinitionPlusOne: null,
+        featInstance: null,
+        definition
     };
 }
 
-export const lineageBaseReset = (lineage: LineageDefinition, id: string): Lineage => {
+export const lineageDefinitionReset = (definition: LineageDefinition, id: string): LineageInstance => {
     return {
         id,
-        features: [],
-        definition: lineage
+        featInstances: [],
+        definition
     }
 } 
 
-export const speciesBaseReset = (species: SpeciesDefinition, id: string, lineageId: string): Species => {
+export const speciesDefinitionReset = (definition: SpeciesDefinition, size: string, id: string, lineageId: string): SpeciesInstance => {
     return {
         id,
-        features: [],
-        lineage: lineageBaseReset(species.lineageDefinitions[0], lineageId),
-        definition: species
+        featInstances: [],
+        size,
+        lineageInstance: lineageDefinitionReset(definition.lineageDefinitions[0], lineageId),
+        definition
     }
 }

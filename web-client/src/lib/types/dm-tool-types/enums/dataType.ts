@@ -1,3 +1,6 @@
 export const enum DataType {
-    Other
+    Other,
+    AbilityScoreBonus,
+    InitiativeBonus,
+    PassivePerceptionBonus
 }

@@ -14,3 +14,5 @@ export interface UISlice {
     characterDisplayNavigation: CharacterDisplayNavigationOptions;
     characterCreationNavigationIndex: CharacterCreationNavigationIndexes;
 }
+
+export type AbilityScoreAbbreviations = "str" | "dex" | "con" | "int" | "wis" | "cha";
