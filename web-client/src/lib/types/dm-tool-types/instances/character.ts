@@ -1,5 +1,6 @@
 import type { ItemInstanceBase, ItemInstanceBaseDto } from "../items/bases/itemInstanceBase";
 import type { Worth, WorthDto } from "../items/bases/worth";
+import type { CharacterSpell, CharacterSpellDto } from "../relationships/characterSpell";
 import type { AbilityScoreInstanceDto, AbilityScores } from "./abilityScoreInstance";
 import type { BackgroundInstance, BackgroundInstanceDto } from "./backgroundInstance";
 import type { CharacterClassInstance, CharacterClassInstanceDto } from "./characterClassInstance";
@@ -22,6 +23,7 @@ export interface Character {
     flaws: string;
     coins: Worth;
     inventory: ItemInstanceBase[];
+    characterSpells: CharacterSpell[];
 }
 
 export interface CharacterDto {
@@ -41,4 +43,5 @@ export interface CharacterDto {
     flaws: string;
     coins: WorthDto;
     inventory: ItemInstanceBaseDto[];
+    characterSpells: CharacterSpellDto[];
 }

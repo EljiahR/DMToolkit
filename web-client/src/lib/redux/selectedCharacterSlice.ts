@@ -19,6 +19,8 @@ import type { Character } from "../types/dm-tool-types/instances/character";
 import type { AbilityScoreAbbreviations } from "./types";
 import type { WeaponInstance } from "../types/dm-tool-types/items/instances/weaponInstance";
 import type { ArmorInstance } from "../types/dm-tool-types/items/instances/armorInstance";
+import type { Spell } from "../types/dm-tool-types/entities/spell";
+import { ArmorCategory } from "../types/dm-tool-types/enums/armorCategory";
 
 const initialState: Character = generateEmptyCharacter();
 
@@ -43,6 +45,7 @@ export const selectedCharacterSlice = createSlice({
             state.flaws = "";
             state.coins = generateEmptyWallet();
             state.inventory = [];
+            state.characterSpells = [];
         },
         setName: (state, action: PayloadAction<string>) => {
             state.name = action.payload
@@ -293,10 +296,11 @@ export const selectHp = (state: RootState) => {
 };
 
 export const selectHpRolls = (state: RootState) => {
-    const emptyNumberArray: number[] = [];
-    return state.selectedCharacter.characterClassInstances.reduce((rolls, characterClass) => {
-        return [...rolls, ...characterClass.hpRolls];
-    }, emptyNumberArray);
+    return state.selectedCharacter.characterClassInstances.reduce((rolls: number[], characterClass) => {
+        rolls.push(...characterClass.hpRolls);
+        
+        return rolls;
+    }, []);
 };
 
 export const selectHpMax = createSelector(
@@ -337,15 +341,15 @@ export const selectAC = createSelector(
     [selectAllEquippedArmor, selectAllAbilityScoreModifiers],
     (armor, modifiers) => {
         var ac = 10;
-        const equippedArmor = armor.find((item) => item.definition. != "Shield");
+        const equippedArmor = armor.find((item) => item.definition.armorCategory != ArmorCategory.Shield);
         if (equippedArmor) {
-            ac = equippedArmor.acBase;
-            ac += equippedArmor.hasDexterityCap ? Math.min(equippedArmor.dexterityCap, modifiers["dex"]) : modifiers["dex"];
+            ac = equippedArmor.definition.baseAC;
+            ac += equippedArmor.definition.hasDexterityCap ? Math.min(equippedArmor.definition.dexterityCap, modifiers["dex"]) : modifiers["dex"];
         } else {
             ac += modifiers["dex"];
         };
 
-        const shield = armor.find((item) => item.armorCategory == "Shield");
+        const shield = armor.find((item) => item.definition.armorCategory == ArmorCategory.Shield);
         if (shield) {
             ac += 2;
         }
@@ -354,13 +358,25 @@ export const selectAC = createSelector(
     }
 );
 
-export const selectKnownSpells = (state: RootState) => {
-    return state.selectedCharacter.knownSpells;
+export const selectUnpreparedSpells = (state: RootState) => {
+    return state.selectedCharacter.characterSpells.reduce((spells: Spell[], characterSpell) => {
+        if (!characterSpell.isPrepared) {
+            spells.push(characterSpell.spell);
+        }
+
+        return spells
+    }, []);
 }
 
-export const selectReadiedSpells = (state: RootState) => {
-    return state.selectedCharacter.readiedSpells;
+export const selectPreparedSpells = (state: RootState) => {
+    return state.selectedCharacter.characterSpells.reduce((spells: Spell[], characterSpell) => {
+        if (characterSpell.isPrepared) {
+            spells.push(characterSpell.spell);
+        }
+
+        return spells
+    }, []);
 }
 
-export const { setNewCharacter, setName, setAlignment, setCharacterClassBase, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
+export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

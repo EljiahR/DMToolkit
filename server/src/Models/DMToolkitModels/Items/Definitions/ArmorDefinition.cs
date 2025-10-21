@@ -6,6 +6,7 @@ namespace DMToolkit.Models.Items.Definitions;
 public class ArmorDefinition : ItemDefinitionBase, IItemDefinition
 {
     public ArmorCategory ArmorCategory { get; set; } = ArmorCategory.Light;
+    public int BaseAC { get; set; } = 0;
     public int DexterityCap { get; set; } = 0;
     public bool HasDexterityCap { get; set; } = false;
     public int StrengthRequirement { get; set; } = 0;

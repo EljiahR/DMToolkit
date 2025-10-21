@@ -1,14 +1,15 @@
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
 import { Copper, Electum, Gold, Platinum, Silver } from "../dm-tools/staticElements";
-import type { Background } from "../types/dm-tool-types/background";
-import type { Character } from "../types/dm-tool-types/character";
-import type { CharacterClass, } from "../types/dm-tool-types/characterClass";
 import type { BackgroundDefinition } from "../types/dm-tool-types/definitions/backgroundDefinition";
 import type { CharacterClassDefinition } from "../types/dm-tool-types/definitions/characterClassDefinition";
 import type { LineageDefinition } from "../types/dm-tool-types/definitions/lineageDefinition";
 import type { SpeciesDefinition } from "../types/dm-tool-types/definitions/speciesDefinition";
-import type { Worth } from "../types/dm-tool-types/items";
-import type { Lineage, Species } from "../types/dm-tool-types/species";
+import type { BackgroundInstance } from "../types/dm-tool-types/instances/backgroundInstance";
+import type { Character } from "../types/dm-tool-types/instances/character";
+import type { CharacterClassInstance } from "../types/dm-tool-types/instances/characterClassInstance";
+import type { LineageInstance } from "../types/dm-tool-types/instances/lineageInstance";
+import type { SpeciesInstance } from "../types/dm-tool-types/instances/speciesInstance";
+import type { Worth } from "../types/dm-tool-types/items/bases/worth";
 
 const defaultCharacterClassDefinition: CharacterClassDefinition = {
     id: "default",
@@ -24,16 +25,17 @@ const defaultCharacterClassDefinition: CharacterClassDefinition = {
     defaultInt: 8,
     defaultWis: 8,
     defaultCha: 8,
-    itemSetA: null,
-    itemSetB: null
+    itemDefinitionBaseQuantities: [],
+    startingGp: 0
 }
 
-const characterClass: CharacterClass = {
+const characterClass: CharacterClassInstance = {
     id: "0",
     level: 0,
-    subclass: null,
-    features: [],
-    base: defaultCharacterClassDefinition
+    subclassInstance: null,
+    featInstances: [],
+    definition: defaultCharacterClassDefinition,
+    hpRolls: []
 }
 
 const defaultBackgroundDefinition: BackgroundDefinition = {
@@ -45,12 +47,12 @@ const defaultBackgroundDefinition: BackgroundDefinition = {
     skillProficiencies: []
 }
 
-const background: Background = {
+const background: BackgroundInstance = {
     id: "0",
-    abilityScores: ["", ""],
-    features: [],
-    skillProficiencies: [],
-    base: defaultBackgroundDefinition
+    abilityScoreDefinitionPlusTwo: null,
+    abilityScoreDefinitionPlusOne: null,
+    featInstance: null,
+    definition: defaultBackgroundDefinition
 }
 
 const defaultLineageDefinition: LineageDefinition = {
@@ -60,9 +62,9 @@ const defaultLineageDefinition: LineageDefinition = {
     featDefinitions: [],
 }
 
-const lineage: Lineage = {
+const lineageInstance: LineageInstance = {
     id: "0",
-    features: [],
+    featInstances: [],
     definition: defaultLineageDefinition
 }
 
@@ -77,10 +79,11 @@ const defaultSpeciesDefinition: SpeciesDefinition = {
     lineageDefinitions: [defaultLineageDefinition]
 }
 
-const species: Species = {
+const species: SpeciesInstance = {
     id: "0",
-    features: [],
-    lineage,
+    featInstances: [],
+    size: "",
+    lineageInstance,
     definition: defaultSpeciesDefinition
 }
 
@@ -100,22 +103,18 @@ export const generateEmptyCharacter = (): Character => {
         name: "",
         alignment: "unaligned",
         hp: 1,
-        hpRolls: [1],
         tempHp: 0, 
-        characterClass,
-        background,
-        species,
+        characterClassInstances: [characterClass],
+        backgroundInstance: background,
+        speciesInstance: species,
         scores: getStandardScores(),
         physicalDescription: "",
         personality: "",
         ideals: "",
         bonds: "",
         flaws: "",
-        proficiencyBonus: 0,
         coins: generateEmptyWallet(),
         inventory: [],
-        equippedItems: [],
-        knownSpells: [],
-        readiedSpells: []
+        characterSpells: []
     };
 } 

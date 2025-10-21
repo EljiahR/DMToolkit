@@ -3,6 +3,7 @@ import type { ItemDefinitionBase, ItemDefinitionBaseDto } from "../bases/itemDef
 
 export interface ArmorDefinition extends ItemDefinitionBase {
     armorCategory: ArmorCategory;
+    baseAC: number;
     dexterityCap: number;
     hasDexterityCap: boolean;
     strengthRequirement: number;

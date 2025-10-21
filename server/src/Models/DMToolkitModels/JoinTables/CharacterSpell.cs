@@ -9,5 +9,5 @@ public class CharacterSpell : IJoinTable
     public Character Character { get; set; } = null!;
     public required string SpellId { get; set; }
     public Spell Spell { get; set; } = null!;
-    public bool IsReadied { get; set; } = false;
+    public bool IsPrepared { get; set; } = false;
 }

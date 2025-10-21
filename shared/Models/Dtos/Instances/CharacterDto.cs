@@ -1,4 +1,6 @@
+using DMToolkit.Shared.Models.Dtos.Entities;
 using DMToolkit.Shared.Models.Dtos.Items.Bases;
+using DMToolkit.Shared.Models.Dtos.Joins;
 
 namespace DMToolkit.Shared.Models.Dtos.Instances;
 
@@ -20,4 +22,5 @@ public class CharacterDto
     public string Flaws { get; set; } = string.Empty;
     public WorthDto Coins { get; set; } = new();
     public List<ItemInstanceBaseDto> Inventory { get; set; } = new();
+    public List<CharacterSpellDto> CharacterSpells { get; set; } = new();
 }
