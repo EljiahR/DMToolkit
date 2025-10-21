@@ -16,8 +16,8 @@ export const characterClasses: CharacterClassDefinition[] = [
         defaultCha: 8,
         hitDie: 12,
         fixedHp: 7,
-        itemSetA: null,
-        itemSetB: null
+        itemDefinitionBaseQuantities: [],
+        startingGp: 50
     },
     {
         id: "cheating",
@@ -33,7 +33,7 @@ export const characterClasses: CharacterClassDefinition[] = [
         defaultCha: 8,
         hitDie: 6,
         fixedHp: 4,
-        itemSetA: null,
-        itemSetB: null
+        itemDefinitionBaseQuantities: [],
+        startingGp: 50
     }
 ];

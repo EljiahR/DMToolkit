@@ -56,14 +56,14 @@ export const selectedCharacterSlice = createSlice({
         setCharacterClassDefinition: (state, action: PayloadAction<CharacterClassDefinition>) => {
             state.characterClassInstances = [classDefinitionReset(action.payload, state.characterClassInstances[0].id)];
         },
-        setBackgroundBase: (state, action: PayloadAction<BackgroundDefinition>) => {
+        setBackgroundDefinition: (state, action: PayloadAction<BackgroundDefinition>) => {
             state.backgroundInstance = backgroundDefinitionReset(action.payload, state.backgroundInstance?.id ?? "");
         },
-        setBackgroundScores: (state, action: PayloadAction<{scoreAbbreviation: AbilityScoreAbbreviations, index: ZeroOrOne}>) => {
+        setBackgroundScores: (state, action: PayloadAction<{scoreAbbreviation: AbilityScoreAbbreviations | "", index: ZeroOrOne}>) => {
             if (action.payload.index == 0 && state.backgroundInstance) {
-                state.backgroundInstance.abilityScoreDefinitionPlusTwo = state.scores[action.payload.scoreAbbreviation].definition;
+                state.backgroundInstance.abilityScoreDefinitionPlusTwo = action.payload.scoreAbbreviation == "" ? null : state.scores[action.payload.scoreAbbreviation].definition;
             } else if (action.payload.index == 1 && state.backgroundInstance) {
-                state.backgroundInstance.abilityScoreDefinitionPlusOne = state.scores[action.payload.scoreAbbreviation].definition;
+                state.backgroundInstance.abilityScoreDefinitionPlusOne = action.payload.scoreAbbreviation == "" ? null : state.scores[action.payload.scoreAbbreviation].definition;
             }
         },
         setSpeciesBase: (state, action: PayloadAction<SpeciesDefinition>) => {
@@ -358,6 +358,10 @@ export const selectAC = createSelector(
     }
 );
 
+export const selectAllSpells = (state: RootState) => {
+    return state.selectedCharacter.characterSpells.map((characterSpell) => characterSpell.spell);
+}
+
 export const selectUnpreparedSpells = (state: RootState) => {
     return state.selectedCharacter.characterSpells.reduce((spells: Spell[], characterSpell) => {
         if (!characterSpell.isPrepared) {
@@ -378,5 +382,5 @@ export const selectPreparedSpells = (state: RootState) => {
     }, []);
 }
 
-export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setBackgroundBase, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
+export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setBackgroundDefinition, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

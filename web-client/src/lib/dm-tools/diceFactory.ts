@@ -3,6 +3,7 @@ export type Dice = {
     numberOfDice: number;
     description: () => string;
     roll: () => number;
+    toString: () => string;
 }
 
 export default function(numberOfSides: number, numberOfDice: number): Dice {
@@ -16,6 +17,7 @@ export default function(numberOfSides: number, numberOfDice: number): Dice {
                 total += Math.floor(Math.random() * numberOfSides) + 1;
             }
             return total;
-        }
+        },
+        toString: () => numberOfDice + "d" + numberOfSides
     }
 };

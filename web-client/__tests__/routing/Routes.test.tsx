@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import App from "../../src/App"
 import { screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+// import userEvent from "@testing-library/user-event";
 import renderWithAll from "../renderOptions/renderWithAll";
 import { characterClasses } from "../seedData/characterClasses";
 import { characterBackgrounds } from "../seedData/characterBackgrounds";

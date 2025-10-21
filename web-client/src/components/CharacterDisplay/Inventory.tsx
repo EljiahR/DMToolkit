@@ -1,10 +1,10 @@
 import { useAppSelector } from "../../lib/redux/hooks"
-import { selectAllEquippedItems, selectNonEquippedItems } from "../../lib/redux/selectedCharacterSlice"
-import type { AllItemTypes } from "../../lib/types/dm-tool-types/items";
+import { selectAllEquippedItems, selectAllNonEquippedItems } from "../../lib/redux/selectedCharacterSlice"
+import type { ItemInstanceBase } from "../../lib/types/dm-tool-types/items/bases/itemInstanceBase";
 
 export default function() {
     const equipment = useAppSelector(selectAllEquippedItems);
-    const inventory = useAppSelector(selectNonEquippedItems);
+    const inventory = useAppSelector(selectAllNonEquippedItems);
     
     return (
         <div id="inventory-section">
@@ -27,13 +27,13 @@ export default function() {
 };
 
 interface ItemDisplayProps {
-    item: AllItemTypes
+    item: ItemInstanceBase;
 }
 
 const ItemDisplay = ({item}: ItemDisplayProps) => {
     return (
         <div className="item-display">
-            <p>{item.name}</p>
+            <p>{item.definition.name}</p>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import Combat from "../components/CharacterDisplay/Combat";
-import Features from "../components/CharacterDisplay/Features";
+import Features from "../components/CharacterDisplay/Feats";
 import Inventory from "../components/CharacterDisplay/Inventory";
 import Navigation from "../components/CharacterDisplay/Navigation";
 import Overview from "../components/CharacterDisplay/Overview";

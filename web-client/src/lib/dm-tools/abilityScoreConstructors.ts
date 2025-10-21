@@ -1,5 +1,5 @@
 import type { AbilityScoreDefinition } from "../types/dm-tool-types/definitions/abilityScoreDefinition";
-import type { AbilityScoreInstance, AbilityScores } from "../types/dm-tool-types/stats"
+import type { AbilityScoreInstance, AbilityScores } from "../types/dm-tool-types/instances/abilityScoreInstance";
 
 const defaultScoreDefinitions: AbilityScoreDefinition[] = [
     
@@ -51,8 +51,8 @@ const defaultScoreDefinitions: AbilityScoreDefinition[] = [
 const scoreGenerator = (scoreId: string, amount: number, definition: AbilityScoreDefinition): AbilityScoreInstance => {
     return {
         id: scoreId,
-        amount,
-        proficient: false,
+        score: amount,
+        isProficient: false,
         skillInstances: [],
         definition
     }
@@ -70,5 +70,5 @@ export const getStandardScores = (scores: [number, number, number, number, numbe
 };
 
 export const getScoreModifier = (score: AbilityScoreInstance): number => {
-        return Math.floor((score.amount) / 2) - 5
+        return Math.floor((score.score) / 2) - 5
 }

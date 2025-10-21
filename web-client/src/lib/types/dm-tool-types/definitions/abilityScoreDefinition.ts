@@ -1,9 +1,10 @@
+import type { AbilityScoreAbbreviations } from "../../../redux/types";
 import type { SkillDefinition, SkillDefinitionDto } from "./skillDefinition";
 
 export interface AbilityScoreDefinition{
     id: string;
     name: string;
-    abbreviation: string;
+    abbreviation: AbilityScoreAbbreviations;
     description: string;
     skillDefinitions: SkillDefinition[];
 }
@@ -11,7 +12,7 @@ export interface AbilityScoreDefinition{
 export interface AbilityScoreDefinitionDto {
     id: string;
     name: string;
-    abbreviation: string;
+    abbreviation: AbilityScoreAbbreviations;
     description: string;
     skillDefinitions: SkillDefinitionDto[];
 }

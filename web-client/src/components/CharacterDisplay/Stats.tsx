@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../lib/redux/hooks"
 import { selectAllAbilityScoreFeatEffectBonuses, selectAllAbilityScoreModifiers, selectAllAbilityScores, selectInitiative, selectPassivePerception, selectProficiencyBonus, selectSize, selectSpeed } from "../../lib/redux/selectedCharacterSlice";
-import type { AbilityScoreInstance } from "../../lib/types/dm-tool-types/stats";
+import type { AbilityScoreInstance } from "../../lib/types/dm-tool-types/instances/abilityScoreInstance";
 
 export default function() {
     const proficiencyBonus = useAppSelector(selectProficiencyBonus);
@@ -64,12 +64,12 @@ const AbilityScoreDisplay = ({score, bonus, modifier, proficiencyBonus}: Ability
                 <p>Modifier</p>
             </div>
             <div className="score-total">
-                <p>{score.amount + bonus}</p>
+                <p>{score.score + bonus}</p>
             </div>
             <div className="throws">
                 <div className="saving-throw">
-                    <div className={`proficiency-check ${score.proficient ? "checked" : ""}`}></div>
-                    <p>{score.proficient ? modifier + proficiencyBonus : modifier}</p>
+                    <div className={`proficiency-check ${score.isProficient ? "checked" : ""}`}></div>
+                    <p>{score.isProficient ? modifier + proficiencyBonus : modifier}</p>
                     <p>Saving Throw</p>
                 </div>
                 <div className="skill-checks">
@@ -78,8 +78,8 @@ const AbilityScoreDisplay = ({score, bonus, modifier, proficiencyBonus}: Ability
                 {score.skillInstances.map((skill) => {
                     return (
                         <div className="saving-throw" key={skill.definition.name}>
-                            <div className={`proficiency-check ${skill.proficient ? "checked" : ""}`}></div>
-                            <p>{skill.proficient ? modifier + proficiencyBonus : modifier}</p>
+                            <div className={`proficiency-check ${skill.isProficient ? "checked" : ""}`}></div>
+                            <p>{skill.isProficient ? modifier + proficiencyBonus : modifier}</p>
                             <p>{skill.definition.name}</p>
                         </div>
                     )

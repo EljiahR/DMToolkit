@@ -5,7 +5,8 @@ import { setBonds, setFlaws, setIdeals, setName, setPersonality, setPhysicalDesc
 export default function({className = ""}: {className?: string}) {
     const name = useAppSelector((state) => state.selectedCharacter.name);
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
-    const bonuses = useAppSelector((state) => state.selectedCharacter.background.abilityScores);
+    const plusTwoBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusTwo);
+    const plusOneBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusOne);
     const physicalDescription = useAppSelector((state) => state.selectedCharacter.physicalDescription);
     const personality = useAppSelector((state) => state.selectedCharacter.personality);
     const ideals = useAppSelector((state) => state.selectedCharacter.ideals);
@@ -14,7 +15,7 @@ export default function({className = ""}: {className?: string}) {
     const dispatch = useAppDispatch();
     
     const handleRandomizeTraits = () => {
-        dispatch(setTraits(traitGenerator(scores, bonuses)));
+        dispatch(setTraits(traitGenerator(scores, [plusTwoBonus?.abbreviation ?? "", plusOneBonus?.abbreviation ?? ""])));
     };
 
     return (

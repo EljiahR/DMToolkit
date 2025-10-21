@@ -1,31 +1,34 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks"
-import { setBackgroundBase, setBackgroundScores } from "../../../lib/redux/selectedCharacterSlice";
+import { setBackgroundDefinition, setBackgroundScores } from "../../../lib/redux/selectedCharacterSlice";
 import type { ZeroOrOne } from "../../../lib/types/miscTypes";
+import type { AbilityScoreAbbreviations } from "../../../lib/redux/types";
 
 export default function() {
     const dispatch = useAppDispatch();
     const allBackgrounds = useAppSelector((state) => state.dmTools.backgroundDefinitions);
-    const backgroundBase = useAppSelector((state) => state.selectedCharacter.background.base);
+    const backgroundDefinition = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.definition ?? null);
     const playerScores = useAppSelector((state) => state.selectedCharacter.scores);
-    const instanceBonuses = useAppSelector((state) => state.selectedCharacter.background.abilityScores);
+    const plusTwoBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusTwo ?? null);
+    const plusOneBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusOne ?? null);
 
     useLayoutEffect(() => {
-        if (backgroundBase == null) {
-            dispatch(setBackgroundBase(allBackgrounds[0]));
+        if (backgroundDefinition == null) {
+            dispatch(setBackgroundDefinition(allBackgrounds[0]));
         }
     }, []);
 
-    const handleBonusChange = (scoreId: string, index: ZeroOrOne) => {
-        if (instanceBonuses && instanceBonuses[0] != scoreId && instanceBonuses[1] != scoreId) {
-            dispatch(setBackgroundScores({scoreId, index}));
+    const handleBonusChange = (value: string, index: ZeroOrOne) => {
+        const scoreAbbreviation = value as AbilityScoreAbbreviations | ""; 
+        if (plusTwoBonus && plusTwoBonus.abbreviation != scoreAbbreviation && plusOneBonus && plusOneBonus.abbreviation != scoreAbbreviation) {
+            dispatch(setBackgroundScores({scoreAbbreviation, index}));
         }
     }
     
     return (
         <div>
             <label htmlFor="plusTwo">+2</label>
-            <select id="plusTwo" value={instanceBonuses ? instanceBonuses[0] : ""} onChange={(e) => handleBonusChange(e.target.value, 0)}>
+            <select id="plusTwo" value={plusTwoBonus?.abbreviation ?? ""} onChange={(e) => handleBonusChange(e.target.value, 0)}>
                 <option value=""></option>
                 {Object.keys(playerScores).map((scoreId) => {
                     return (
@@ -34,7 +37,7 @@ export default function() {
                 })}
             </select>
             <label htmlFor="plusOne">+1</label>
-            <select id="plusOne" value={instanceBonuses ? instanceBonuses[1] : ""} onChange={(e) => handleBonusChange(e.target.value, 1)}>
+            <select id="plusOne" value={plusOneBonus?.abbreviation ?? ""} onChange={(e) => handleBonusChange(e.target.value, 1)}>
                 <option value=""></option>
                 {Object.keys(playerScores).map((scoreId) => {
                     return (

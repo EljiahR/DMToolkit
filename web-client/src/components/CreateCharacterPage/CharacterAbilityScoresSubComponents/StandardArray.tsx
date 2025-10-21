@@ -4,14 +4,16 @@ import { arraySwap, SortableContext, sortableKeyboardCoordinates, useSortable } 
 import { CSS } from "@dnd-kit/utilities";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
 import { setScoresToStandard, swapScores } from "../../../lib/redux/selectedCharacterSlice";
-import type { AbilityScoreInstance } from "../../../lib/types/dm-tool-types/stats";
+import type { AbilityScoreAbbreviations } from "../../../lib/redux/types";
+import type { AbilityScoreInstance } from "../../../lib/types/dm-tool-types/instances/abilityScoreInstance";
 
 export default function() {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
-    const bonuses = useAppSelector((state) => state.selectedCharacter.background.abilityScores);
+    const plusTwoBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusTwo);
+    const plusOneBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusOne);
     const dispatch = useAppDispatch();
 
-    const [items, setItems] = useState(["str", "dex", "con", "int", "wis", "cha"]);
+    const [items, setItems] = useState<AbilityScoreAbbreviations[]>(["str", "dex", "con", "int", "wis", "cha"]);
     const sensors = useSensors(
         useSensor(PointerSensor),
         useSensor(KeyboardSensor, {
@@ -23,16 +25,18 @@ export default function() {
         dispatch(setScoresToStandard());
     }, []);
 
-    const handleScoreSwap = (scoreIdA: string, scoreIdB: string) => {
-        dispatch(swapScores({scoreIdA, scoreIdB}));
+    const handleScoreSwap = (valueA: string, valueB: string) => {
+        const scoreAbbreviationA = valueA as AbilityScoreAbbreviations;
+        const scoreAbbreviationB = valueB as AbilityScoreAbbreviations;
+        dispatch(swapScores({scoreAbbreviationA, scoreAbbreviationB}));
     }
 
     const handleDragEnd = (event: DragEndEvent) => {
         const {active, over} = event;
         if (over != null && active.id !== over.id) {
             setItems((items) => {
-                const oldIndex = items.indexOf(active.id.toString());
-                const newIndex = items.indexOf(over.id.toString());
+                const oldIndex = items.indexOf(active.id.toString() as AbilityScoreAbbreviations);
+                const newIndex = items.indexOf(over.id.toString() as AbilityScoreAbbreviations);
                 
                 return arraySwap(items, oldIndex, newIndex);
             });
@@ -47,7 +51,7 @@ export default function() {
             <div id="standard-array">
                 <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                     <SortableContext items={items}>
-                        {items.map(score => <SortableScore key={score} score={scores[score]} bonus={bonuses.includes(score) ? 2 - bonuses.indexOf(score) : 0} />)}
+                        {items.map(item => <SortableScore key={item} score={scores[item]} bonus={plusTwoBonus?.abbreviation == item ? 2 : plusOneBonus?.abbreviation == item ? 1 : 0} />)}
                     </SortableContext>
                 </DndContext>
             </div>
@@ -68,6 +72,6 @@ const SortableScore = ({ score, bonus }: SortableScoreProps) => {
     };
 
     return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>{`${score.definition.name}: ${bonus > 0 ? `${score.amount} +${bonus}` : score.amount}`}</div>
+        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>{`${score.definition.name}: ${bonus > 0 ? `${score.score} +${bonus}` : score.score}`}</div>
     )
 }

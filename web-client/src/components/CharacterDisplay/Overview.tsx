@@ -7,11 +7,11 @@ export default function() {
         <div>
             <div id="basic-overview">
                 <h3>{selectedCharacter.name}</h3>
-                <p>{selectedCharacter.characterClass.base.name}</p>
+                <p>{selectedCharacter.characterClassInstances[0].definition.name}</p>
             </div>
             <div id="origin">
-                <p>{selectedCharacter.species.definition.name}</p>
-                <p>{selectedCharacter.background.base.name}</p>
+                <p>{selectedCharacter.speciesInstance?.definition.name ?? ""}</p>
+                <p>{selectedCharacter.backgroundInstance?.definition.name ?? ""}</p>
             </div>
             <div id="alignment">
                 <p>{selectedCharacter.alignment}</p>

@@ -1,11 +1,11 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
-import { setCharacterClassBase } from "../../lib/redux/selectedCharacterSlice";
+import { setCharacterClassDefinition } from "../../lib/redux/selectedCharacterSlice";
 
 
 export default function({className = ""}: {className?: string}) {
     const availableClasses = useAppSelector((state) => state.dmTools.characterClassDefinitions);
-    const selectedClassBase = useAppSelector((state) => state.selectedCharacter.characterClass.base);
+    const selectedClassBase = useAppSelector((state) => state.selectedCharacter.characterClassInstances[0].definition);
     const dispatch = useAppDispatch();
     
     useLayoutEffect(() => {
@@ -14,7 +14,7 @@ export default function({className = ""}: {className?: string}) {
         }
         
         if ((selectedClassBase == null || selectedClassBase.id == "default") && availableClasses.length > 0) {
-            dispatch(setCharacterClassBase(availableClasses[0]));
+            dispatch(setCharacterClassDefinition(availableClasses[0]));
         }
     });
 
@@ -25,7 +25,7 @@ export default function({className = ""}: {className?: string}) {
             // MORE ERROR HANDLING
         }
 
-        dispatch(setCharacterClassBase(newClass!));
+        dispatch(setCharacterClassDefinition(newClass!));
     }
 
     return (

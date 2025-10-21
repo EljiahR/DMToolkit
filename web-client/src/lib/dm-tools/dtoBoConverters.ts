@@ -1,6 +1,3 @@
-import type { Background, BackgroundDto } from "../types/dm-tool-types/background";
-import type { Character, CharacterDto } from "../types/dm-tool-types/character";
-import type { CharacterClass, CharacterClassDto, Subclass, SubclassDto } from "../types/dm-tool-types/characterClass";
 import type { StartupData, StartupDataDto } from "../types/dm-tool-types/collections/startupData";
 import type { AbilityScoreDefinition, AbilityScoreDefinitionDto } from "../types/dm-tool-types/definitions/abilityScoreDefinition";
 import type { BackgroundDefinition, BackgroundDefinitionDto } from "../types/dm-tool-types/definitions/backgroundDefinition";
@@ -10,16 +7,13 @@ import type { LineageDefinition, LineageDefinitionDto } from "../types/dm-tool-t
 import type { SkillDefinition, SkillDefinitionDto } from "../types/dm-tool-types/definitions/skillDefinition";
 import type { SpeciesDefinition, SpeciesDefinitionDto } from "../types/dm-tool-types/definitions/speciesDefinition";
 import type { SubclassDefinition, SubclassDefinitionDto } from "../types/dm-tool-types/definitions/subclassDefinition";
-import type { FeatEffect, FeatEffectDto } from "../types/dm-tool-types/entities/effect";
+import type { Effect, EffectDto } from "../types/dm-tool-types/entities/effect";
 import type { School } from "../types/dm-tool-types/entities/school";
 import type { Spell, SpellDto } from "../types/dm-tool-types/entities/spell";
-import type { SpellEffect } from "../types/dm-tool-types/entities/spellEffect";
-import type { Feature, FeatureDto } from "../types/dm-tool-types/feature";
-import type { AllItemTypes, Armor, ArmorDto, Item, ItemDto, Weapon, WeaponDto, WeaponMastery, WeaponMasteryDto, WeaponProperty, WeaponPropertyDto, Worth, WorthDto } from "../types/dm-tool-types/items";
+import type { ItemDefinitionBase } from "../types/dm-tool-types/items/bases/itemDefinitionBase";
 import type { FeatDefinitionEffectGrouping, FeatDefinitionEffectGroupingDto } from "../types/dm-tool-types/relationships/featDefinitionEffectGroupingDto";
 import type { FeatGroupLevel, FeatGroupLevelDto } from "../types/dm-tool-types/relationships/featGroupLevel";
-import type { Lineage, LineageDto, Species, SpeciesDto } from "../types/dm-tool-types/species";
-import type { AbilityScoreInstance, AbilityScoreInstanceDto, AbilityScores, SkillInstance, SkillInstanceDto } from "../types/dm-tool-types/stats";
+import type { ItemDefinitionBaseQuantity, ItemDefinitionBaseQuantityDto } from "../types/dm-tool-types/relationships/itemDefinitionBaseQuantity";
 
 // Definitions
 
@@ -41,16 +35,16 @@ const abilityScoreDefinitionToBo = (score: AbilityScoreDefinitionDto): AbilitySc
     }
 }
 
-const featDefinitionEffectGroupingToBo = (tables: FeatDefinitionEffectGroupingDto[], effects: FeatEffect[]): FeatDefinitionEffectGrouping[] => {
+const featDefinitionEffectGroupingToBo = (tables: FeatDefinitionEffectGroupingDto[], effects: Effect[]): FeatDefinitionEffectGrouping[] => {
     return tables.map(t => {
         return {
             group: t.group,
-            featEffects: effects.filter(e => t.featEffectIds.includes(e.id))
+            effects: effects.filter(e => t.effectIds.includes(e.id))
         }
     })
 }
 
-export const featDefinitionToBo = (featDto: FeatDefinitionDto, effects: FeatEffectDto[]): FeatDefinition => {
+export const featDefinitionToBo = (featDto: FeatDefinitionDto, effects: EffectDto[]): FeatDefinition => {
     return {
         id: featDto.id,
         name: featDto.name,
@@ -89,6 +83,20 @@ export const subclassDefinitionToBo = (subclassDto: SubclassDefinitionDto, featD
     }
 }
 
+export const itemDefinitionBaseQuantitiesToBo = (itemDefinitionBaseQuantities: ItemDefinitionBaseQuantityDto[], itemDefinitionBases: ItemDefinitionBase[]): ItemDefinitionBaseQuantity[] => {
+    return itemDefinitionBaseQuantities.reduce((currentList: ItemDefinitionBaseQuantity[], itemDefinitionBaseQuantity) => {
+        const item = itemDefinitionBases.find(itemDefinitionBase => itemDefinitionBase.id == itemDefinitionBaseQuantity.itemDefinitionBaseId);
+        
+        if (item) {
+            currentList.push({
+                quantity: itemDefinitionBaseQuantity.quantity,
+                itemDefinitionBase: item
+            })
+        }
+        
+    }, [])
+}
+
 export const characterClassDefinitionToBo = (classDto: CharacterClassDefinitionDto, featDefinitions: FeatDefinition[]): CharacterClassDefinition => {
     return {
         id: classDto.id,
@@ -104,8 +112,7 @@ export const characterClassDefinitionToBo = (classDto: CharacterClassDefinitionD
         defaultInt: classDto.defaultInt,
         defaultWis: classDto.defaultWis,
         defaultCha: classDto.defaultCha,
-        itemSetA: null,
-        itemSetB: null
+        itemDefinitionBaseQuantities: classDto.itemDefinitionBaseQuantities
     }
 }
 

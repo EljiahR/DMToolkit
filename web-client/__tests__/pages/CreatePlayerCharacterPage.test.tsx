@@ -4,7 +4,7 @@ import CreatePlayerCharacterPage from "../../src/pages/CreatePlayerCharacterPage
 import userEvent from "@testing-library/user-event";
 import { characterClasses } from "../seedData/characterClasses";
 import { characterBackgrounds } from "../seedData/characterBackgrounds";
-import { characterSpecies, lineages } from "../seedData/characterSpecies";
+import { characterSpecies } from "../seedData/characterSpecies";
 import renderWithAll from "../renderOptions/renderWithAll";
 
 describe("CreatePlayerCharacter page", () => {
