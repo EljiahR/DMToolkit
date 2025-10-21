@@ -1,7 +1,7 @@
 import type { ItemDefinitionBase } from "../items/bases/itemDefinitionBase";
 
 export interface ItemDefinitionBaseQuantity {
-    itemDefinitionBase: ItemDefinitionBase[];
+    itemDefinitionBase: ItemDefinitionBase;
     quantity: number;
 }
 
