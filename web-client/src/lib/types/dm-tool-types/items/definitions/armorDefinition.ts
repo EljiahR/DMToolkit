@@ -14,6 +14,7 @@ export interface ArmorDefinition extends ItemDefinitionBase {
 
 export interface ArmorDefinitionDto extends ItemDefinitionBaseDto {
     armorCategory: ArmorCategory;
+    baseAC: number;
     dexterityCap: number;
     hasDexterityCap: boolean;
     strengthRequirement: number;

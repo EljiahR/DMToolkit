@@ -13,6 +13,6 @@ export interface WeaponDefinitionDto extends ItemDefinitionBaseDto {
     numberOfDice: number;
     numberOfSides: number;
     damageType: string;
-    weaponProperties: Effect[];
-    weaponMastery: Effect | null;
+    weaponPropertyIds: string[];
+    weaponMasteryId: string;
 }

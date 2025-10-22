@@ -3,10 +3,10 @@ import type { BackgroundDefinition, BackgroundDefinitionDto } from "../definitio
 import type { CharacterClassDefinition, CharacterClassDefinitionDto } from "../definitions/characterClassDefinition";
 import type { FeatDefinition, FeatDefinitionDto } from "../definitions/featDefinition";
 import type { SpeciesDefinition, SpeciesDefinitionDto } from "../definitions/speciesDefinition";
-import type { FeatEffect, FeatEffectDto } from "../entities/effect";
+import type { Effect, EffectDto } from "../entities/effect";
 import type { School, SchoolDto } from "../entities/school";
 import type { Spell, SpellDto } from "../entities/spell";
-import type { SpellEffect, SpellEffectDto } from "../entities/spellEffect";
+import type { ItemDefinitionBase, ItemDefinitionBaseDto } from "../items/bases/itemDefinitionBase";
 
 export interface StartupData {
     abilityScoreDefinitions: AbilityScoreDefinition[];
@@ -14,10 +14,10 @@ export interface StartupData {
     characterClassDefinitions: CharacterClassDefinition[];
     featDefinitions: FeatDefinition[];
     speciesDefinitions: SpeciesDefinition[];
-    featEffects: FeatEffect[];
+    effects: Effect[];
+    itemDefinitionBases: ItemDefinitionBase[];
     schools: School[];
     spells: Spell[];
-    spellEffects: SpellEffect[];
 }
 
 export interface StartupDataDto {
@@ -26,8 +26,8 @@ export interface StartupDataDto {
     characterClassDefinitions: CharacterClassDefinitionDto[];
     featDefinitions: FeatDefinitionDto[];
     speciesDefinitions: SpeciesDefinitionDto[];
-    featEffects: FeatEffectDto[];
+    effects: EffectDto[];
+    itemDefinitionBases: ItemDefinitionBaseDto[];
     schools: SchoolDto[];
     spells: SpellDto[];
-    spellEffects: SpellEffectDto[];
 }
