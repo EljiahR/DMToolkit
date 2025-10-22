@@ -10,12 +10,19 @@ import type { SubclassDefinition, SubclassDefinitionDto } from "../types/dm-tool
 import type { Effect, EffectDto } from "../types/dm-tool-types/entities/effect";
 import type { School } from "../types/dm-tool-types/entities/school";
 import type { Spell, SpellDto } from "../types/dm-tool-types/entities/spell";
+import type { AbilityScoreInstance, AbilityScoreInstanceDto, AbilityScores } from "../types/dm-tool-types/instances/abilityScoreInstance";
 import type { BackgroundInstance, BackgroundInstanceDto } from "../types/dm-tool-types/instances/backgroundInstance";
+import type { Character, CharacterDto } from "../types/dm-tool-types/instances/character";
 import type { CharacterClassInstance, CharacterClassInstanceDto } from "../types/dm-tool-types/instances/characterClassInstance";
 import type { FeatInstance, FeatInstanceDto } from "../types/dm-tool-types/instances/featInstance";
 import type { LineageInstance, LineageInstanceDto } from "../types/dm-tool-types/instances/lineageInstance";
+import type { SkillInstance, SkillInstanceDto } from "../types/dm-tool-types/instances/skillInstance";
+import type { SpeciesInstance, SpeciesInstanceDto } from "../types/dm-tool-types/instances/speciesInstance";
 import type { SubclassInstance, SubclassInstanceDto } from "../types/dm-tool-types/instances/subclassInstance";
 import type { ItemDefinitionBase } from "../types/dm-tool-types/items/bases/itemDefinitionBase";
+import type { ItemInstanceBase, ItemInstanceBaseDto } from "../types/dm-tool-types/items/bases/itemInstanceBase";
+import type { Worth, WorthDto } from "../types/dm-tool-types/items/bases/worth";
+import type { ItemInstance } from "../types/dm-tool-types/items/instances/itemInstance";
 import type { FeatDefinitionEffectGrouping, FeatDefinitionEffectGroupingDto } from "../types/dm-tool-types/relationships/featDefinitionEffectGroupingDto";
 import type { FeatGroupLevel, FeatGroupLevelDto } from "../types/dm-tool-types/relationships/featGroupLevel";
 import type { ItemDefinitionBaseQuantity, ItemDefinitionBaseQuantityDto } from "../types/dm-tool-types/relationships/itemDefinitionBaseQuantity";
@@ -195,13 +202,14 @@ export const lineageInstanceToBo = (lineageDto: LineageInstanceDto, lineageDefin
     }
 }
 
-export const speciesInstanceToBo = (speciesDto: SpeciesDto, speciesDefinitions: SpeciesDefinition[], effects: FeatEffect[], featDefinitions: FeatDefinition[]): Species => {
+export const speciesInstanceToBo = (speciesDto: SpeciesInstanceDto, speciesDefinitions: SpeciesDefinition[], effects: Effect[], featDefinitions: FeatDefinition[]): SpeciesInstance => {
     const definition = speciesDefinitions.find(s => s.id == speciesDto.definitionId)!;
 
     return {
         id: speciesDto.id,
-        features: featureInstancesToBo(speciesDto.features, effects, featDefinitions),
-        lineage: lineageInstanceToBo(speciesDto.lineage, definition.lineageDefinitions, effects, featDefinitions),
+        featInstances: featInstancesToBo(speciesDto.featInstances, effects, featDefinitions),
+        lineageInstance: speciesDto.lineageInstance != null ? lineageInstanceToBo(speciesDto.lineageInstance, definition.lineageDefinitions, effects, featDefinitions) : null,
+        size: speciesDto.size,
         definition: definition
     }
 }
@@ -210,7 +218,7 @@ export const skillInstancesToBo = (skillDtos: SkillInstanceDto[], skillDefinitio
     return skillDtos.map(s => {
         return {
             id: s.id,
-            proficient: s.proficient,
+            isProficient: s.isProficient,
             definition: skillDefinitions.find(d => d.id == s.id)!
         }
     })
@@ -220,8 +228,8 @@ export const abilityScoreInstanceToBo = (score: AbilityScoreInstanceDto, scoreDe
     const definition = scoreDefinitions.find(s => s.id == score.id)!;
     return {
         id: score.id,
-        amount: score.amount,
-        proficient: score.proficient,
+        score: score.score,
+        isProficient: score.isProficient,
         skillInstances: skillInstancesToBo(score.skillInstances, definition.skillDefinitions),
         definition
     }
@@ -240,7 +248,7 @@ export const scoresToBo = (scoreDtos: AbilityScoreInstanceDto[], scoreDefinition
     }
 }
 
-export const spellToBo = (spellDto: SpellDto, schools: School[], characterClassDefinitions: CharacterClassDefinition[], spellEffects: SpellEffect[]): Spell => {
+export const spellToBo = (spellDto: SpellDto, schools: School[], characterClassDefinitions: CharacterClassDefinition[], effect: Effect[]): Spell => {
     return {
         id: spellDto.id,
         name: spellDto.name,
@@ -255,7 +263,7 @@ export const spellToBo = (spellDto: SpellDto, schools: School[], characterClassD
         materialRequirements: [],
         duration: spellDto.duration,
         description: spellDto.description,
-        spellEffects: spellEffects.filter(e => spellDto.spellEffectIds.includes(e.id))
+        spellEffects: effect.filter(e => spellDto.spellEffectIds.includes(e.id))
     }
 }
 
@@ -263,102 +271,73 @@ export const coinsToBo = (coinsDto: WorthDto): Worth => {
     return {
         cp: {
             name: "Copper",
-            shortName: "cp",
+            abbreviation: "cp",
             nextStep: 10,
             amount: coinsDto.cp
         },
         sp: {
             name: "Silver",
-            shortName: "sp",
+            abbreviation: "sp",
             nextStep: 5,
             amount: coinsDto.sp
         },
         ep: {
             name: "Electum",
-            shortName: "cp",
+            abbreviation: "cp",
             nextStep: 2,
             amount: coinsDto.ep
         },
         gp: {
             name: "Gold",
-            shortName: "cp",
+            abbreviation: "cp",
             nextStep: 10,
             amount: coinsDto.gp
         },
         pp: {
             name: "Platinum",
-            shortName: "cp",
+            abbreviation: "cp",
             nextStep: 0,
             amount: coinsDto.pp
         },
     }
 };
 
-export const itemToBo = (itemDto: ItemDto): Item => {
+export const itemToBo = (itemDto: Item): Item => {
     return {
         ...itemDto,
         worth: coinsToBo(itemDto.worth)
     }
 };
 
-export const weaponPropertyToBo = (propertyDto: WeaponPropertyDto): WeaponProperty => {
-    return {
-        ...propertyDto
-    }
+export const inventoryToBo = (inventoryDto: ItemInstanceBaseDto[], allItems: ItemDefinitionBase[]): ItemInstanceBase[] => {
+    return inventoryDto.map((itemDto) => {
+        
+        const item = {
+            id: itemDto.id,
+            
+        }
+    })
 }
 
-export const WeaponMasteryToBo = (masteryDto: WeaponMasteryDto): WeaponMastery => {
-    return {
-        ...masteryDto
-    }
-}
-
-export const weaponToBo = (weaponDto: WeaponDto, weaponProperties: WeaponProperty[], masteries: WeaponMastery[]): Weapon => {
-    return {
-        ...weaponDto,
-        properties: weaponProperties.filter((property) => weaponDto.propertyIds.includes(property.id)),
-        mastery: masteries.find((mastery) => mastery.id == weaponDto.masteryId)!,
-        worth: coinsToBo(weaponDto.worth)
-    }
-}
-
-export const armorToBo = (armorDto: ArmorDto): Armor => {
-    return {
-        ...armorDto,
-        worth: coinsToBo(armorDto.worth)
-    }
-}
-
-export const inventoryToBo = (ids: string[], allItems: AllItemTypes[]): AllItemTypes[] => {
-    return allItems.filter((item) => ids.includes(item.id)); // Can be optimised for sure
-}
-
-export const characterToBo = (abilityScoreDefinitions: AbilityScoreDefinition[], characterDto: CharacterDto, classDefinitions: CharacterClassDefinition[], backgroundDefinitions: BackgroundDefinition[], subclasses: SubclassDefinition[], speciesDefinitions: SpeciesDefinition[], effects: FeatEffect[], featDefinitions: FeatDefinition[], allItems: AllItemTypes[]): Character => {
-    const inventory = inventoryToBo(characterDto.inventoryIds, allItems);
-    const knownSpells: Spell[] = [];
-
+export const characterToBo = (abilityScoreDefinitions: AbilityScoreDefinition[], characterDto: CharacterDto, classDefinitions: CharacterClassDefinition[], backgroundDefinitions: BackgroundDefinition[], subclasses: SubclassDefinition[], speciesDefinitions: SpeciesDefinition[], effects: Effect[], featDefinitions: FeatDefinition[], allItems: ItemDefinitionBase[]): Character => {
     return {
         id: characterDto.id,
         name: characterDto.name,
         alignment: characterDto.alignment,
-        characterClass: classInstanceToBo(characterDto.characterClass, classDefinitions, subclasses, effects, featDefinitions),
-        background: backgroundInstanceToBo(characterDto.background, backgroundDefinitions, effects, featDefinitions),
-        species: speciesInstanceToBo(characterDto.species, speciesDefinitions, effects, featDefinitions),
-        scores: scoresToBo(characterDto.scores, abilityScoreDefinitions),
+        characterClassInstances: classInstancesToBo(characterDto.characterClassInstances, classDefinitions, subclasses, effects, featDefinitions),
+        backgroundInstance: characterDto.backgroundInstance != null ? backgroundInstanceToBo(characterDto.backgroundInstance, backgroundDefinitions, effects, featDefinitions, abilityScoreDefinitions) : null,
+        speciesInstance: characterDto.speciesInstance != null ? speciesInstanceToBo(characterDto.speciesInstance, speciesDefinitions, effects, featDefinitions) : null,
+        scores: scoresToBo(characterDto.scoreInstances, abilityScoreDefinitions),
         physicalDescription: characterDto.physicalDescription,
         personality: characterDto.personality,
         ideals: characterDto.ideals,
         bonds: characterDto.bonds,
         flaws: characterDto.flaws,
-        proficiencyBonus: characterDto.proficiencyBonus,
         hp: characterDto.hp,
-        hpRolls: characterDto.hpRolls,
         tempHp: characterDto.tempHp,
         coins: coinsToBo(characterDto.coins),
-        inventory,
-        equippedItems: inventoryToBo(characterDto.equippedItemIds, inventory),
-        knownSpells,
-        readiedSpells: knownSpells
+        inventory: inventoryToBo(characterDto.inventory),
+        characterSpells:  
     }
 }
 
