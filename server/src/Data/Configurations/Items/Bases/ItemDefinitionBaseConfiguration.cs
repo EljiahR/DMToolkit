@@ -1,9 +1,9 @@
-using DMToolkit.Models.Items.Bases;
-using DMToolkit.Models.Items.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.Items.Bases;
+using DMToolkit.API.Models.DMToolkitModels.Items.Definitions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DMToolkit.Data.Configurations;
+namespace DMToolkit.API.Data.Configurations.Items.Bases;
 
 public class ItemDefinitionBaseConfiguration : IEntityTypeConfiguration<ItemDefinitionBase>
 {

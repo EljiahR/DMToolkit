@@ -1,4 +1,4 @@
-namespace DMToolkit.Shared.Models.Dtos.Definitions;
+namespace SharedModels.Models.Dtos.Definitions;
 
 public class SpeciesDefinitionDto
 {

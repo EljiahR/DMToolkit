@@ -1,6 +1,6 @@
-using DMToolkit.Models.JoinTables;
+using DMToolkit.API.Models.DMToolkitModels.JoinTables;
 
-namespace DMToolkit.Data.Configurations;
+namespace DMToolkit.API.Data.Configurations.JoinTables;
 
 public class SubclassDefinitionFeatDefinitionConfiguration : JoinTableKeyConfiguration<SubclassDefinitionFeatDefinition>
 { }

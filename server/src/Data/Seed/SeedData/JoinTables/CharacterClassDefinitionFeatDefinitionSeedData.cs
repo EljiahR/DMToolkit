@@ -1,6 +1,7 @@
-using DMToolkit.Models.JoinTables;
+using DMToolkit.API.Data.Seed.SeedData.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.JoinTables;
 
-namespace DMToolkit.Data.Seeders.SeedData;
+namespace DMToolkit.API.Data.Seed.SeedData.JoinTables;
 
 public static class CharacterClassDefinitionFeatDefinitionSeedData
 {

@@ -1,11 +1,11 @@
-using DMToolkit.Data;
-using DMToolkit.Helpers;
-using DMToolkit.Models.Collections;
-using DMToolkit.Shared.Models.Dtos.Collections;
+using DMToolkit.API.Data;
+using DMToolkit.API.Helpers;
+using DMToolkit.API.Models.DMToolkitModels.Collections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using SharedModels.Models.Dtos.Collections;
 
-namespace DMToolkit.Services;
+namespace DMToolkit.API.Services;
 
 public class StartupDataService : IStartupDataService
 {

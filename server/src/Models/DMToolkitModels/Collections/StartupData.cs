@@ -1,8 +1,8 @@
-using DMToolkit.Models.Definitions;
-using DMToolkit.Models.Entities;
-using DMToolkit.Models.Items.Bases;
+using DMToolkit.API.Models.DMToolkitModels.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.Entities;
+using DMToolkit.API.Models.DMToolkitModels.Items.Bases;
 
-namespace DMToolkit.Models.Collections;
+namespace DMToolkit.API.Models.DMToolkitModels.Collections;
 
 public class StartupData
 {

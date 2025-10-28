@@ -1,7 +1,7 @@
-using DMToolkit.Models.JoinTables;
+using DMToolkit.API.Models.DMToolkitModels.JoinTables;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DMToolkit.Data.Configurations;
+namespace DMToolkit.API.Data.Configurations.JoinTables;
 
 public class CharacterCharacterClassInstanceConfiguration : JoinTableKeyConfiguration<CharacterCharacterClassInstance>
 {

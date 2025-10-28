@@ -1,8 +1,8 @@
-using DMToolkit.Models.Items.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.Items.Definitions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DMToolkit.Data.Configurations;
+namespace DMToolkit.API.Data.Configurations.Items.Definitions;
 
 public class WeaponDefinitionConfiguration : IEntityTypeConfiguration<WeaponDefinition>
 {

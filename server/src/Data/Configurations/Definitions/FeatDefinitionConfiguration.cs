@@ -1,8 +1,8 @@
-using DMToolkit.Models.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.Definitions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DMToolkit.Data.Configurations;
+namespace DMToolkit.API.Data.Configurations.Definitions;
 
 public class FeatDefinitionConfiguration : IEntityTypeConfiguration<FeatDefinition>
 {

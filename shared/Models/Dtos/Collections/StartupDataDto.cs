@@ -1,8 +1,8 @@
-using DMToolkit.Shared.Models.Dtos.Definitions;
-using DMToolkit.Shared.Models.Dtos.Entities;
-using DMToolkit.Shared.Models.Dtos.Items.Bases;
+using SharedModels.Models.Dtos.Definitions;
+using SharedModels.Models.Dtos.Entities;
+using SharedModels.Models.Dtos.Items.Bases;
 
-namespace DMToolkit.Shared.Models.Dtos.Collections;
+namespace SharedModels.Models.Dtos.Collections;
 
 public class StartupDataDto
 {

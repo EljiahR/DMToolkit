@@ -1,6 +1,6 @@
-using DMToolkit.Shared.Models.Enums;
+using SharedModels.Enums;
 
-namespace DMToolkit.Shared.Models.Dtos.Entities;
+namespace SharedModels.Models.Dtos.Entities;
 
 public class EffectDto
 {

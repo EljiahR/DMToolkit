@@ -1,7 +1,7 @@
-using DMToolkit.Models.Definitions;
-using DMToolkit.Models.Entities;
+using DMToolkit.API.Models.DMToolkitModels.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.Entities;
 
-namespace DMToolkit.Models.JoinTables;
+namespace DMToolkit.API.Models.DMToolkitModels.JoinTables;
 
 public class FeatDefinitionEffect : IJoinTable
 {

@@ -1,17 +1,22 @@
 using System.Text.Json;
-using DMToolkit.Data.Configurations;
-using DMToolkit.Models;
-using DMToolkit.Models.Definitions;
-using DMToolkit.Models.Entities;
-using DMToolkit.Models.Instances;
-using DMToolkit.Models.Items.Bases;
-using DMToolkit.Models.JoinTables;
+using DMToolkit.API.Data.Configurations.Definitions;
+using DMToolkit.API.Data.Configurations.Entities;
+using DMToolkit.API.Data.Configurations.Instances;
+using DMToolkit.API.Data.Configurations.Items.Bases;
+using DMToolkit.API.Data.Configurations.Items.Definitions;
+using DMToolkit.API.Data.Configurations.JoinTables;
+using DMToolkit.API.Models;
+using DMToolkit.API.Models.DMToolkitModels.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.Entities;
+using DMToolkit.API.Models.DMToolkitModels.Instances;
+using DMToolkit.API.Models.DMToolkitModels.Items.Bases;
+using DMToolkit.API.Models.DMToolkitModels.JoinTables;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DMToolkit.Data;
+namespace DMToolkit.API.Data;
 
 public class DMDbContext : IdentityDbContext<DMUser>
 {

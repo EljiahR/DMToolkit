@@ -1,6 +1,6 @@
-using DMToolkit.Models.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.Definitions;
 
-namespace DMToolkit.Models.Instances;
+namespace DMToolkit.API.Models.DMToolkitModels.Instances;
 
 public class BackgroundInstance : IDefinitionInstance<BackgroundDefinition>
 {

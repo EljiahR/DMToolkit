@@ -1,7 +1,7 @@
-using DMToolkit.Models.Definitions;
-using DMToolkit.Models.Items.Bases;
+using DMToolkit.API.Models.DMToolkitModels.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.Items.Bases;
 
-namespace DMToolkit.Models.JoinTables;
+namespace DMToolkit.API.Models.DMToolkitModels.JoinTables;
 
 public class CharacterClassDefinitionItemDefinitionBase : IJoinTable
 {

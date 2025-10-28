@@ -1,5 +1,5 @@
-using DMToolkit.Models.Items.Bases;
+using DMToolkit.API.Models.DMToolkitModels.Items.Bases;
 
-namespace DMToolkit.Models.Items.Definitions;
+namespace DMToolkit.API.Models.DMToolkitModels.Items.Definitions;
 
 public class ItemDefinition : ItemDefinitionBase, IItemDefinition { }

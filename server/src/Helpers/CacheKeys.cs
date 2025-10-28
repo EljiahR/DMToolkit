@@ -1,4 +1,4 @@
-namespace DMToolkit.Helpers;
+namespace DMToolkit.API.Helpers;
 
 public static class CacheKeys
 {

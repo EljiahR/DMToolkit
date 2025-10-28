@@ -1,4 +1,4 @@
-namespace DMToolkit.Models.Items.Bases;
+namespace DMToolkit.API.Models.DMToolkitModels.Items.Bases;
 
 public abstract class ItemDefinitionBase : WorthBase
 {

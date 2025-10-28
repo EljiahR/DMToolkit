@@ -1,8 +1,8 @@
-using DMToolkit.Models.Items.Bases;
-using DMToolkit.Models.Items.Definitions;
-using DMToolkit.Shared.Models.Enums;
+using DMToolkit.API.Models.DMToolkitModels.Items.Bases;
+using DMToolkit.API.Models.DMToolkitModels.Items.Definitions;
+using SharedModels.Enums;
 
-namespace DMToolkit.Data.Seeders.SeedData;
+namespace DMToolkit.API.Data.Seed.SeedData.Items.Definitions;
 
 public static class ItemDefinitionBaseSeedData
 {

@@ -1,6 +1,6 @@
-using DMToolkit.Models.Entities;
+using DMToolkit.API.Models.DMToolkitModels.Entities;
 
-namespace DMToolkit.Data.Seeders.SeedData;
+namespace DMToolkit.API.Data.Seed.SeedData.Entities;
 
 public static class EffectSeedData
 {

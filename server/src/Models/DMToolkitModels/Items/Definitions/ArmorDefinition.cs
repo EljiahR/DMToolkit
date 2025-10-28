@@ -1,7 +1,7 @@
-using DMToolkit.Models.Items.Bases;
-using DMToolkit.Shared.Models.Enums;
+using DMToolkit.API.Models.DMToolkitModels.Items.Bases;
+using SharedModels.Enums;
 
-namespace DMToolkit.Models.Items.Definitions;
+namespace DMToolkit.API.Models.DMToolkitModels.Items.Definitions;
 
 public class ArmorDefinition : ItemDefinitionBase, IItemDefinition
 {

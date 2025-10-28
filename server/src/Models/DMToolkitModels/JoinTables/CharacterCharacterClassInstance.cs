@@ -1,6 +1,6 @@
-using DMToolkit.Models.Instances;
+using DMToolkit.API.Models.DMToolkitModels.Instances;
 
-namespace DMToolkit.Models.JoinTables;
+namespace DMToolkit.API.Models.DMToolkitModels.JoinTables;
 
 public class CharacterCharacterClassInstance : IJoinTable
 {

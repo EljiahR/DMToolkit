@@ -1,6 +1,6 @@
-using DMToolkit.Models.Items.Bases;
+using DMToolkit.API.Models.DMToolkitModels.Items.Bases;
 
-namespace DMToolkit.Models.Items.Instances;
+namespace DMToolkit.API.Models.DMToolkitModels.Items.Instances;
 
 public class ArmorInstance : ItemInstanceBase, IItemInstance
 {

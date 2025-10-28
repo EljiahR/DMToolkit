@@ -1,4 +1,4 @@
-namespace DMToolkit.Models.Definitions;
+namespace DMToolkit.API.Models.DMToolkitModels.Definitions;
 
 public interface IDefinition
 {

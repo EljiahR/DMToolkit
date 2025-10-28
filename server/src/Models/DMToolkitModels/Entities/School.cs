@@ -1,4 +1,4 @@
-namespace DMToolkit.Models.Entities;
+namespace DMToolkit.API.Models.DMToolkitModels.Entities;
 
 public class School
 {
