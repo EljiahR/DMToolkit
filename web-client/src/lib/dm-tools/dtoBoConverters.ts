@@ -32,7 +32,6 @@ import type { CharacterSpell, CharacterSpellDto } from "../types/dm-tool-types/r
 import type { FeatDefinitionEffectGrouping, FeatDefinitionEffectGroupingDto } from "../types/dm-tool-types/relationships/featDefinitionEffectGroupingDto";
 import type { FeatGroupLevel, FeatGroupLevelDto } from "../types/dm-tool-types/relationships/featGroupLevel";
 import type { ItemDefinitionBaseQuantity, ItemDefinitionBaseQuantityDto } from "../types/dm-tool-types/relationships/itemDefinitionBaseQuantity";
-import diceFactory from "./diceFactory";
 
 // Definitions
 
@@ -322,7 +321,8 @@ export const itemDefinitionBaseToBo = (itemDefinitionBaseDtos: ItemDefinitionBas
 
         if (item.itemType == "Weapon") {
             const weapon = item as WeaponDefinition;
-            weapon.dice = diceFactory((itemDefinitionBaseDto as WeaponDefinitionDto).numberOfSides, (itemDefinitionBaseDto as WeaponDefinitionDto).numberOfDice);
+            weapon.numberOfDice = (itemDefinitionBaseDto as WeaponDefinitionDto).numberOfDice
+            weapon.numberOfSides = (itemDefinitionBaseDto as WeaponDefinitionDto).numberOfSides
             weapon.damageType = (itemDefinitionBaseDto as WeaponDefinitionDto).damageType;
             weapon.weaponProperties = effects.filter((effect) => (itemDefinitionBaseDto as WeaponDefinitionDto).weaponPropertyIds.includes(effect.id));
             weapon.weaponMastery = effects.find((effect) => effect.id == (itemDefinitionBaseDto as WeaponDefinitionDto).weaponMasteryId) ?? null;

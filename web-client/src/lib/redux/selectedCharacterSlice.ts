@@ -75,7 +75,7 @@ export const selectedCharacterSlice = createSlice({
             }
         },
         setScore: (state, action: PayloadAction<{scoreAbbreviation: AbilityScoreAbbreviations, amount: string}>) => {
-            var filteredAmount = parseInt(action.payload.amount);
+            let filteredAmount = parseInt(action.payload.amount);
             filteredAmount = filteredAmount > 20 ? 20 : filteredAmount < 1 ? 1 : filteredAmount;
             state.scores[action.payload.scoreAbbreviation].score = filteredAmount;
         },
@@ -247,7 +247,7 @@ export const selectAllAbilityScoreModifiers = createSelector(
 export const selectInitiative = createSelector(
     [selectAllInitiativeBonuseFeatEffects, selectAllAbilityScoreModifiers],
     (initiativeFeatEffects, modifiers) => {
-        var initiative = modifiers["dex"];
+        let initiative = modifiers["dex"];
         initiativeFeatEffects.forEach((initiativeFeatEffect) => {
             const data = initiativeFeatEffect.data as SimpleBonus;
             initiative += data.bonusAmount;
@@ -281,7 +281,7 @@ export const selectPassivePerception = createSelector(
     [selectAllPassPerceptionBonusFeatEffects, selectAllAbilityScoreModifiers, selectAllAbilityScores, selectProficiencyBonus],
     (passivePerceptionEffects, modifiers, scores, proficiencyBonus) => {
         const perceptionSkill = scores["wis"].skillInstances.find((skill) => skill.definition.name == "Perception");
-        var passivePerception = 10 + modifiers["wis"] + (perceptionSkill && perceptionSkill.isProficient ? proficiencyBonus : 0);
+        let passivePerception = 10 + modifiers["wis"] + (perceptionSkill && perceptionSkill.isProficient ? proficiencyBonus : 0);
         passivePerceptionEffects.forEach((effect) => {
             const data = effect.data as SimpleBonus;
             passivePerception += data.bonusAmount;
@@ -340,7 +340,7 @@ export const selectAllEquippedArmor = createSelector(
 export const selectAC = createSelector(
     [selectAllEquippedArmor, selectAllAbilityScoreModifiers],
     (armor, modifiers) => {
-        var ac = 10;
+        let ac = 10;
         const equippedArmor = armor.find((item) => item.definition.armorCategory != ArmorCategory.Shield);
         if (equippedArmor) {
             ac = equippedArmor.definition.baseAC;
