@@ -13,4 +13,8 @@ public class ArmorDefinition : ItemDefinitionBase, IItemDefinition
     public bool HasStealthDisadvantage { get; set; } = false;
     public string Don { get; set; } = string.Empty;
     public string Doff { get; set; } = string.Empty;
+    public ArmorDefinition()
+    {
+        ItemType = "Armor";
+    }
 }

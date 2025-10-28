@@ -3,6 +3,7 @@ using DMToolkit.Models.Definitions;
 using DMToolkit.Models.Entities;
 using DMToolkit.Models.Instances;
 using DMToolkit.Models.Items.Bases;
+using DMToolkit.Models.Items.Definitions;
 using DMToolkit.Models.Items.Instances;
 using DMToolkit.Models.JoinTables;
 using DMToolkit.Shared.Models.Dtos.Collections;
@@ -206,26 +207,53 @@ public static class DtoConverters
 
     public static ItemDefinitionBaseDto ConvertItemDefinitionBase(ItemDefinitionBase itemBase)
     {
-        var itemDto = new ItemDefinitionDto
+        ItemDefinitionBaseDto itemDto;
+
+        switch (itemBase.ItemType)
         {
-            Id = itemBase.Id,
-            Name = itemBase.Name,
-            Description = itemBase.Description,
-            Weight = itemBase.Weight,
-            ItemType = itemBase.ItemType,
-            Worth = new()
-            {
-                Cp = itemBase.Cp,
-                Sp = itemBase.Sp,
-                Ep = itemBase.Ep,
-                Gp = itemBase.Gp,
-                Pp = itemBase.Pp
-            }
+            case "Weapon":
+                var weapon = (itemBase as WeaponDefinition)!;
+                itemDto = new WeaponDefinitionDto()
+                {
+                    DamageType = weapon.DamageType,
+                    NumberOfDice = weapon.NumberOfDice,
+                    NumberOfSides = weapon.NumberOfSides,
+                    WeaponMasteryId = weapon.WeaponMasteryId,
+                    WeaponPropertyIds = weapon.WeaponProperties.Select(e => e.Id).ToList()
+                };
+                break;
+            case "Armor":
+                var armor = (itemBase as ArmorDefinition)!;
+                itemDto = new ArmorDefinitionDto()
+                {
+                    BaseAC = armor.BaseAC,
+                    DexterityCap = armor.DexterityCap,
+                    HasDexterityCap = armor.HasDexterityCap,
+                    HasStealthDisadvantage = armor.HasStealthDisadvantage,
+                    Don = armor.Don,
+                    Doff = armor.Doff,
+                    ArmorCategory = armor.ArmorCategory
+                };
+                break;
+            default:
+                itemDto = new ItemDefinitionDto();
+                break;
+                
+        }
+
+        itemDto.Id = itemBase.Id;
+        itemDto.Name = itemBase.Name;
+        itemDto.Description = itemBase.Description;
+        itemDto.Weight = itemBase.Weight;
+        itemDto.ItemType = itemBase.ItemType;
+        itemDto.Worth = new()
+        {
+            Cp = itemBase.Cp,
+            Sp = itemBase.Sp,
+            Ep = itemBase.Ep,
+            Gp = itemBase.Gp,
+            Pp = itemBase.Pp
         };
-
-        ItemDefinitionBaseDto itemBaseDto = itemDto;
-
-        
 
         return itemDto;
     }
