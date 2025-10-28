@@ -1,7 +1,7 @@
-using DMToolkit.Models.Items.Bases;
-using DMToolkit.Models.JoinTables;
+using DMToolkit.API.Models.DMToolkitModels.Items.Bases;
+using DMToolkit.API.Models.DMToolkitModels.JoinTables;
 
-namespace DMToolkit.Models.Instances;
+namespace DMToolkit.API.Models.DMToolkitModels.Instances;
 
 public class Character : WorthBase
 {

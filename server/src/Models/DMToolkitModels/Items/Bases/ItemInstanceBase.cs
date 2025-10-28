@@ -1,6 +1,6 @@
-using DMToolkit.Models.Instances;
+using DMToolkit.API.Models.DMToolkitModels.Instances;
 
-namespace DMToolkit.Models.Items.Bases;
+namespace DMToolkit.API.Models.DMToolkitModels.Items.Bases;
 
 public abstract class ItemInstanceBase
 {

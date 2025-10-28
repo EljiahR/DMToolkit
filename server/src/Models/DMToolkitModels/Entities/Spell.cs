@@ -1,7 +1,7 @@
-using DMToolkit.Models.Definitions;
-using DMToolkit.Models.JoinTables;
+using DMToolkit.API.Models.DMToolkitModels.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.JoinTables;
 
-namespace DMToolkit.Models.Entities;
+namespace DMToolkit.API.Models.DMToolkitModels.Entities;
 
 public class Spell
 {

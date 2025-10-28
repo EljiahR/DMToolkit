@@ -1,8 +1,8 @@
-using DMToolkit.Services;
+using DMToolkit.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DMToolkit.Controllers;
+namespace DMToolkit.API.Controllers;
 
 [Route("[controller]")]
 [ApiController]

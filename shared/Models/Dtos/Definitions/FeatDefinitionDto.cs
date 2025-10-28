@@ -1,6 +1,6 @@
-using DMToolkit.Shared.Models.Dtos.Joins;
+using SharedModels.Models.Dtos.Joins;
 
-namespace DMToolkit.Shared.Models.Dtos.Definitions;
+namespace SharedModels.Models.Dtos.Definitions;
 
 public class FeatDefinitionDto
 {

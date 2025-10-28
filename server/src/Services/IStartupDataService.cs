@@ -1,6 +1,6 @@
-using DMToolkit.Shared.Models.Dtos.Collections;
+using SharedModels.Models.Dtos.Collections;
 
-namespace DMToolkit.Services;
+namespace DMToolkit.API.Services;
 
 public interface IStartupDataService
 {

@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using DMToolkit.Shared.Models.Dtos.Items.Definitions;
+using SharedModels.Models.Dtos.Items.Definitions;
 
-namespace DMToolkit.Shared.Models.Dtos.Items.Bases;
+namespace SharedModels.Models.Dtos.Items.Bases;
 
 // For future reference, creates a $type field equal to "Item"
 [JsonDerivedType(typeof(ItemDefinitionDto), "Item")]

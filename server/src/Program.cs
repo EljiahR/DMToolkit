@@ -1,7 +1,8 @@
-using DMToolkit.Data;
-using DMToolkit.Data.Seeders;
-using DMToolkit.Models;
-using DMToolkit.Services;
+using DMToolkit.API;
+using DMToolkit.API.Data;
+using DMToolkit.API.Data.Seed;
+using DMToolkit.API.Models;
+using DMToolkit.API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -128,7 +129,10 @@ app.MapControllers();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+namespace DMToolkit.API
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+    {
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
 }

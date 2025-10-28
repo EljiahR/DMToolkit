@@ -1,4 +1,4 @@
-namespace DMToolkit.Shared.Models.Dtos.Joins;
+namespace SharedModels.Models.Dtos.Joins;
 
 public class FeatDefinitionEffectGroupingDto
 {

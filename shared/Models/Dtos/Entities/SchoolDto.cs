@@ -1,4 +1,4 @@
-namespace DMToolkit.Shared.Models.Dtos.Entities;
+namespace SharedModels.Models.Dtos.Entities;
 
 public class SchoolDto
 {

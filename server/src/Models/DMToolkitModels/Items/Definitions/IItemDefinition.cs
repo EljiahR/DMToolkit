@@ -1,4 +1,4 @@
-namespace DMToolkit.Models.Items.Definitions;
+namespace DMToolkit.API.Models.DMToolkitModels.Items.Definitions;
 
 public interface IItemDefinition
 {

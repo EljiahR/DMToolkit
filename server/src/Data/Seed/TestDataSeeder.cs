@@ -1,6 +1,9 @@
-using DMToolkit.Data.Seeders.SeedData;
+using DMToolkit.API.Data.Seed.SeedData.Definitions;
+using DMToolkit.API.Data.Seed.SeedData.Entities;
+using DMToolkit.API.Data.Seed.SeedData.Items.Definitions;
+using DMToolkit.API.Data.Seed.SeedData.JoinTables;
 
-namespace DMToolkit.Data.Seeders;
+namespace DMToolkit.API.Data.Seed;
 
 public class TestDataSeeder
 {

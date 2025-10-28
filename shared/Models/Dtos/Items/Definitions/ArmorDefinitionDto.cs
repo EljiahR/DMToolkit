@@ -1,7 +1,7 @@
-using DMToolkit.Shared.Models.Dtos.Items.Bases;
-using DMToolkit.Shared.Models.Enums;
+using SharedModels.Enums;
+using SharedModels.Models.Dtos.Items.Bases;
 
-namespace DMToolkit.Shared.Models.Dtos.Items.Definitions;
+namespace SharedModels.Models.Dtos.Items.Definitions;
 
 public class ArmorDefinitionDto : ItemDefinitionBaseDto
 {

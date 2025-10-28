@@ -1,4 +1,4 @@
-namespace DMToolkit.Shared.Models.Dtos.Instances;
+namespace SharedModels.Models.Dtos.Instances;
 
 public class AbilityScoreInstanceDto
 {

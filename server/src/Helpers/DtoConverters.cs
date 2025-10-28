@@ -1,21 +1,21 @@
-using DMToolkit.Models.Collections;
-using DMToolkit.Models.Definitions;
-using DMToolkit.Models.Entities;
-using DMToolkit.Models.Instances;
-using DMToolkit.Models.Items.Bases;
-using DMToolkit.Models.Items.Definitions;
-using DMToolkit.Models.Items.Instances;
-using DMToolkit.Models.JoinTables;
-using DMToolkit.Shared.Models.Dtos.Collections;
-using DMToolkit.Shared.Models.Dtos.Definitions;
-using DMToolkit.Shared.Models.Dtos.Entities;
-using DMToolkit.Shared.Models.Dtos.Instances;
-using DMToolkit.Shared.Models.Dtos.Items.Bases;
-using DMToolkit.Shared.Models.Dtos.Items.Definitions;
-using DMToolkit.Shared.Models.Dtos.Items.Instances;
-using DMToolkit.Shared.Models.Dtos.Joins;
+using DMToolkit.API.Models.DMToolkitModels.Collections;
+using DMToolkit.API.Models.DMToolkitModels.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.Entities;
+using DMToolkit.API.Models.DMToolkitModels.Instances;
+using DMToolkit.API.Models.DMToolkitModels.Items.Bases;
+using DMToolkit.API.Models.DMToolkitModels.Items.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.Items.Instances;
+using DMToolkit.API.Models.DMToolkitModels.JoinTables;
+using SharedModels.Models.Dtos.Collections;
+using SharedModels.Models.Dtos.Definitions;
+using SharedModels.Models.Dtos.Entities;
+using SharedModels.Models.Dtos.Instances;
+using SharedModels.Models.Dtos.Items.Bases;
+using SharedModels.Models.Dtos.Items.Definitions;
+using SharedModels.Models.Dtos.Items.Instances;
+using SharedModels.Models.Dtos.Joins;
 
-namespace DMToolkit.Helpers;
+namespace DMToolkit.API.Helpers;
 
 public static class DtoConverters
 {
@@ -36,7 +36,7 @@ public static class DtoConverters
         };
     }
 
-    public static SkillDefinitionDto ConvertSkillDefinition(SkillDefinition skill)
+    private static SkillDefinitionDto ConvertSkillDefinition(SkillDefinition skill)
     {
         return new()
         {
@@ -45,7 +45,7 @@ public static class DtoConverters
             Description = skill.Description
         };
     }
-    public static AbilityScoreDefinitionDto ConvertAbilityScoreDefinition(AbilityScoreDefinition abilityScore)
+    private static AbilityScoreDefinitionDto ConvertAbilityScoreDefinition(AbilityScoreDefinition abilityScore)
     {
         return new()
         {
@@ -56,7 +56,7 @@ public static class DtoConverters
             SkillDefinitions = abilityScore.SkillDefinitions.Select(ConvertSkillDefinition).ToList()
         };
     }
-    public static BackgroundDefinitionDto ConvertBackgroundDefinition(BackgroundDefinition background)
+    private static BackgroundDefinitionDto ConvertBackgroundDefinition(BackgroundDefinition background)
     {
         return new()
         {
@@ -70,7 +70,7 @@ public static class DtoConverters
             StartingGp = background.StartingGp
         };
     }
-    public static List<FeatGroupLevelDto> ConvertFeatTables(IEnumerable<IClassFeat> featTables)
+    private static List<FeatGroupLevelDto> ConvertFeatTables(IEnumerable<IClassFeat> featTables)
     {
         return featTables.GroupBy(t => new {t.Group, t.Level})
                         .Select(t => new FeatGroupLevelDto
@@ -81,7 +81,7 @@ public static class DtoConverters
                         })
                         .ToList();
     }
-    public static SubclassDefinitionDto ConvertSubclassDefintion(SubclassDefinition subclass)
+    private static SubclassDefinitionDto ConvertSubclassDefintion(SubclassDefinition subclass)
     {
         return new()
         {
@@ -91,7 +91,7 @@ public static class DtoConverters
             FeatTables = ConvertFeatTables(subclass.SubclassDefinitionFeatDefinitions)
         };
     }
-    public static CharacterClassDefinitionDto ConvertCharacterClassDefinition(CharacterClassDefinition characterClass)
+    private static CharacterClassDefinitionDto ConvertCharacterClassDefinition(CharacterClassDefinition characterClass)
     {
         return new()
         {
@@ -112,7 +112,7 @@ public static class DtoConverters
             DefaultCha = characterClass.DefaultCha
         };
     }
-    public static List<FeatDefinitionEffectGroupingDto> ConvertFeatDefinitionFeatEffectJoinTable(IEnumerable<FeatDefinitionEffect> joinTables)
+    private static List<FeatDefinitionEffectGroupingDto> ConvertFeatDefinitionFeatEffectJoinTable(IEnumerable<FeatDefinitionEffect> joinTables)
     {
         return joinTables.GroupBy(j => j.Group)
                             .Select(g => new FeatDefinitionEffectGroupingDto
@@ -122,7 +122,7 @@ public static class DtoConverters
                             })
                             .ToList();
     }
-    public static FeatDefinitionDto ConvertFeat(FeatDefinition feat)
+    private static FeatDefinitionDto ConvertFeat(FeatDefinition feat)
     {
         return new()
         {
@@ -132,7 +132,7 @@ public static class DtoConverters
             AvailableEffectTables = ConvertFeatDefinitionFeatEffectJoinTable(feat.FeatDefinitionEffects)
         };
     }
-    public static LineageDefinitionDto ConvertLineage(LineageDefinition lineage)
+    private static LineageDefinitionDto ConvertLineage(LineageDefinition lineage)
     {
         return new()
         {
@@ -142,7 +142,7 @@ public static class DtoConverters
             FeatDefinitionIds = lineage.FeatDefinitions.Select(f => f.Id).ToList()
         };
     }
-    public static SpeciesDefinitionDto ConvertSpecies(SpeciesDefinition species)
+    private static SpeciesDefinitionDto ConvertSpecies(SpeciesDefinition species)
     {
         return new()
         {
@@ -156,7 +156,7 @@ public static class DtoConverters
             LineageDefinitions = species.LineageDefinitions.Select(ConvertLineage).ToList()
         };
     }
-    public static EffectDto ConvertFeatEffect(Effect effect)
+    private static EffectDto ConvertFeatEffect(Effect effect)
     {
         return new()
         {
@@ -168,7 +168,7 @@ public static class DtoConverters
             Data = effect.Data
         };
     }
-    public static SchoolDto ConvertSchool(School school)
+    private static SchoolDto ConvertSchool(School school)
     {
         return new()
         {
@@ -176,7 +176,7 @@ public static class DtoConverters
             Name = school.Name
         };
     }
-    public static List<SpellItemDto> ConvertSpellItemBaseJoinTable(IEnumerable<SpellItem> spellItems)
+    private static List<SpellItemDto> ConvertSpellItemBaseJoinTable(IEnumerable<SpellItem> spellItems)
     {
         return spellItems.Select(s => new SpellItemDto
         {
@@ -184,7 +184,7 @@ public static class DtoConverters
             AmountRequired = s.AmountRequired
         }).ToList();
     }
-    public static SpellDto ConvertSpell(Spell spell)
+    private static SpellDto ConvertSpell(Spell spell)
     {
         return new()
         {
@@ -205,7 +205,7 @@ public static class DtoConverters
         };
     }
 
-    public static ItemDefinitionBaseDto ConvertItemDefinitionBase(ItemDefinitionBase itemBase)
+    private static ItemDefinitionBaseDto ConvertItemDefinitionBase(ItemDefinitionBase itemBase)
     {
         ItemDefinitionBaseDto itemDto;
 
@@ -289,7 +289,7 @@ public static class DtoConverters
         };
     }
 
-    public static SkillInstanceDto ConvertSkillInstance(SkillInstance skill)
+    private static SkillInstanceDto ConvertSkillInstance(SkillInstance skill)
     {
         return new()
         {
@@ -299,7 +299,7 @@ public static class DtoConverters
         };
     }
 
-    public static AbilityScoreInstanceDto ConvertAbilityScoreInstance(AbilityScoreInstance score)
+    private static AbilityScoreInstanceDto ConvertAbilityScoreInstance(AbilityScoreInstance score)
     {
         return new()
         {
@@ -311,7 +311,7 @@ public static class DtoConverters
         };
     }
 
-    public static FeatInstanceDto ConvertFeatInstance(FeatInstance feat)
+    private static FeatInstanceDto ConvertFeatInstance(FeatInstance feat)
     {
         return new()
         {
@@ -321,7 +321,7 @@ public static class DtoConverters
         };
     }
 
-    public static SubclassInstanceDto? ConvertSubclassInstance(SubclassInstance? subclass)
+    private static SubclassInstanceDto? ConvertSubclassInstance(SubclassInstance? subclass)
     {
         if (subclass == null) return null;
         return new()
@@ -332,7 +332,7 @@ public static class DtoConverters
         };
     }
 
-    public static CharacterClassInstanceDto ConvertCharacterCharacterClassInstance(CharacterCharacterClassInstance joinTable)
+    private static CharacterClassInstanceDto ConvertCharacterCharacterClassInstance(CharacterCharacterClassInstance joinTable)
     {
         return new()
         {
@@ -345,7 +345,7 @@ public static class DtoConverters
         };
     }
 
-    public static BackgroundInstanceDto ConvertBackgroundInstance(BackgroundInstance background)
+    private static BackgroundInstanceDto ConvertBackgroundInstance(BackgroundInstance background)
     {
         return new()
         {
@@ -358,7 +358,7 @@ public static class DtoConverters
     }
 
     // ItemInstanceBase Converters
-    public static ItemInstanceBaseDto ConvertItemInstanceBase(ItemInstanceBase item)
+    private static ItemInstanceBaseDto ConvertItemInstanceBase(ItemInstanceBase item)
     {
         var itemDto = new ItemInstanceDto()
         {

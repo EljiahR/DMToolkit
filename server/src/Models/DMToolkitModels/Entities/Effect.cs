@@ -1,8 +1,8 @@
-using DMToolkit.Models.Items.Definitions;
-using DMToolkit.Models.JoinTables;
-using DMToolkit.Shared.Models.Enums;
+using DMToolkit.API.Models.DMToolkitModels.Items.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.JoinTables;
+using SharedModels.Enums;
 
-namespace DMToolkit.Models.Entities;
+namespace DMToolkit.API.Models.DMToolkitModels.Entities;
 
 public class Effect
 {

@@ -1,9 +1,9 @@
-using DMToolkit.Models.Definitions;
-using DMToolkit.Models.Instances;
+using DMToolkit.API.Models.DMToolkitModels.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.Instances;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DMToolkit.Data.Configurations;
+namespace DMToolkit.API.Data.Configurations.Instances;
 
 public class GenericInstanceConfiguration<TEntity, TDefinition> : IEntityTypeConfiguration<TEntity>
     where TEntity : class, IDefinitionInstance<TDefinition>

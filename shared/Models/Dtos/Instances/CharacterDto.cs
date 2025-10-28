@@ -1,8 +1,7 @@
-using DMToolkit.Shared.Models.Dtos.Entities;
-using DMToolkit.Shared.Models.Dtos.Items.Bases;
-using DMToolkit.Shared.Models.Dtos.Joins;
+using SharedModels.Models.Dtos.Items.Bases;
+using SharedModels.Models.Dtos.Joins;
 
-namespace DMToolkit.Shared.Models.Dtos.Instances;
+namespace SharedModels.Models.Dtos.Instances;
 
 public class CharacterDto
 {

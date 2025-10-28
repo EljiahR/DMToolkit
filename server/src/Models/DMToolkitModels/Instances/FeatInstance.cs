@@ -1,7 +1,7 @@
-using DMToolkit.Models.Definitions;
-using DMToolkit.Models.Entities;
+using DMToolkit.API.Models.DMToolkitModels.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.Entities;
 
-namespace DMToolkit.Models.Instances;
+namespace DMToolkit.API.Models.DMToolkitModels.Instances;
 
 public class FeatInstance : IDefinitionInstance<FeatDefinition>
 {

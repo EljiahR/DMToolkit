@@ -1,8 +1,8 @@
-using DMToolkit.Models.Entities;
+using DMToolkit.API.Models.DMToolkitModels.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DMToolkit.Data.Configurations;
+namespace DMToolkit.API.Data.Configurations.Entities;
 
 public class SpellConfiguration : IEntityTypeConfiguration<Spell>
 {

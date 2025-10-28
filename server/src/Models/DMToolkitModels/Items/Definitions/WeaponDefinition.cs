@@ -1,7 +1,7 @@
-using DMToolkit.Models.Entities;
-using DMToolkit.Models.Items.Bases;
+using DMToolkit.API.Models.DMToolkitModels.Entities;
+using DMToolkit.API.Models.DMToolkitModels.Items.Bases;
 
-namespace DMToolkit.Models.Items.Definitions;
+namespace DMToolkit.API.Models.DMToolkitModels.Items.Definitions;
 
 public class WeaponDefinition : ItemDefinitionBase, IItemDefinition
 {

@@ -1,8 +1,8 @@
-using DMToolkit.Models.Instances;
+using DMToolkit.API.Models.DMToolkitModels.Instances;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DMToolkit.Data.Configurations;
+namespace DMToolkit.API.Data.Configurations.Instances;
 
 public class CharacterConfiguration : IEntityTypeConfiguration<Character>
 {

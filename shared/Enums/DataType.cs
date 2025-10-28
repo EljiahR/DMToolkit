@@ -1,4 +1,4 @@
-namespace DMToolkit.Shared.Models.Enums;
+namespace SharedModels.Enums;
 
 public enum DataType
 {

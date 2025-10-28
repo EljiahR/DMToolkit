@@ -1,6 +1,6 @@
-using DMToolkit.Shared.Models.Dtos.Joins;
+using SharedModels.Models.Dtos.Joins;
 
-namespace DMToolkit.Shared.Models.Dtos.Entities;
+namespace SharedModels.Models.Dtos.Entities;
 
 public class SpellDto
 {

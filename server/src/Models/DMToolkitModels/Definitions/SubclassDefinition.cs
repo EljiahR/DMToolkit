@@ -1,6 +1,6 @@
-using DMToolkit.Models.JoinTables;
+using DMToolkit.API.Models.DMToolkitModels.JoinTables;
 
-namespace DMToolkit.Models.Definitions;
+namespace DMToolkit.API.Models.DMToolkitModels.Definitions;
 
 public class SubclassDefinition : IDefinition
 {

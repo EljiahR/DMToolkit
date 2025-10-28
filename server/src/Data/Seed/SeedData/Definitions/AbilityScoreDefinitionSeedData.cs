@@ -1,6 +1,6 @@
-using DMToolkit.Models.Definitions;
+using DMToolkit.API.Models.DMToolkitModels.Definitions;
 
-namespace DMToolkit.Data.Seeders.SeedData;
+namespace DMToolkit.API.Data.Seed.SeedData.Definitions;
 
 public static class AbilityScoreDefinitionSeedData
 {

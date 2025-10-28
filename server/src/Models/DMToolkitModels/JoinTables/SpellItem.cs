@@ -1,7 +1,7 @@
-using DMToolkit.Models.Entities;
-using DMToolkit.Models.Items.Bases;
+using DMToolkit.API.Models.DMToolkitModels.Entities;
+using DMToolkit.API.Models.DMToolkitModels.Items.Bases;
 
-namespace DMToolkit.Models.JoinTables;
+namespace DMToolkit.API.Models.DMToolkitModels.JoinTables;
 
 public class SpellItem : IJoinTable
 {

@@ -1,6 +1,6 @@
-using DMToolkit.Shared.Models.Dtos.Items.Bases;
+using SharedModels.Models.Dtos.Items.Bases;
 
-namespace DMToolkit.Shared.Models.Dtos.Items.Definitions;
+namespace SharedModels.Models.Dtos.Items.Definitions;
 
 public class WeaponDefinitionDto : ItemDefinitionBaseDto
 {

@@ -1,4 +1,4 @@
-namespace DMToolkit.Shared.Models.Dtos;
+namespace SharedModels.Models.Dtos;
 
 public class WorthDto
 {
