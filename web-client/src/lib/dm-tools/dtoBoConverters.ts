@@ -270,7 +270,7 @@ export const spellToBo = (spellDto: SpellDto, schools: School[], characterClassD
         materialRequirements: [],
         duration: spellDto.duration,
         description: spellDto.description,
-        spellEffects: effect.filter(e => spellDto.spellEffectIds.includes(e.id))
+        effects: effect.filter(e => spellDto.effectIds.includes(e.id))
     }
 }
 
@@ -426,6 +426,6 @@ export const startupDataToBo = (data: StartupDataDto): StartupData => {
         effects: data.effects,
         itemDefinitionBases,
         schools: data.schools,
-        spells: data.spells.map(s => spellToBo(s, data.schools, characterClassDefinitions, data.spellEffects)),
+        spells: data.spells.map(s => spellToBo(s, data.schools, characterClassDefinitions, data.effects)),
     }
 }

@@ -1,7 +1,7 @@
 import type { CharacterClassDefinition } from "../definitions/characterClassDefinition";
 import type { SpellItem, SpellItemDto } from "../relationships/spellItem";
+import type { Effect } from "./effect";
 import type { School } from "./school";
-import type { SpellEffect } from "./spellEffect";
 
 export interface Spell {
     id: string;
@@ -17,7 +17,7 @@ export interface Spell {
     materialRequirements: SpellItem[];
     duration: string;
     description: string;
-    spellEffects: SpellEffect[];
+    effects: Effect[];
 }
 
 export interface SpellDto {
@@ -34,5 +34,5 @@ export interface SpellDto {
     materialRequirements: SpellItemDto[];
     duration: string;
     description: string;
-    spellEffectIds: string[];
+    effectIds: string[];
 }

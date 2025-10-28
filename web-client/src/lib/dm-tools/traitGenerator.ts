@@ -1,4 +1,4 @@
-import type { AbilityScores } from "../types/dm-tool-types/stats";
+import type { AbilityScores } from "../types/dm-tool-types/instances/abilityScoreInstance";
 import { customConcat } from "./stringFunctions";
 
 export type TraitDescription = {
@@ -56,10 +56,10 @@ export type GeneratedTraits = {
 }
 
 export default function(scores: AbilityScores, bonuses: [string, string]): GeneratedTraits {
-    var physicalTraits: string[] = [];
-    var personalityTraits: string[] = [];
+    const physicalTraits: string[] = [];
+    const personalityTraits: string[] = [];
     Object.keys(scores).forEach((key) => {
-        const scoreTotal = scores[key].amount + (bonuses.includes(key) ?  2 - bonuses.indexOf(key) : 0);
+        const scoreTotal = scores[key].score + (bonuses.includes(key) ?  2 - bonuses.indexOf(key) : 0);
 
         if (scoreTotal >= 12) {
             const newTrait = allScoreTraits[key].high[getRandomIndex(allScoreTraits[key].high.length)];

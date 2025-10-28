@@ -1,36 +1,36 @@
-import type { Piece } from "../types/dm-tool-types/items";
+import type { Piece } from "../types/dm-tool-types/items/bases/worth";
 
 export const Copper: Piece = {
     name: "Copper",
-    shortName: "CP",
+    abbreviation: "CP",
     nextStep: 10,
     amount: 0
 };
 
 export const Silver: Piece = {
     name: "Silver",
-    shortName: "SP",
+    abbreviation: "SP",
     nextStep: 5,
     amount: 0
 };
 
 export const Electum: Piece = {
     name: "Electum",
-    shortName: "EP",
+    abbreviation: "EP",
     nextStep: 2,
     amount: 0
 };
 
 export const Gold: Piece = {
     name: "Gold",
-    shortName: "GP",
+    abbreviation: "GP",
     nextStep: 10,
     amount: 0
 };
 
 export const Platinum: Piece = {
     name: "Platinum",
-    shortName: "PP",
+    abbreviation: "PP",
     nextStep: 0,
     amount: 0
 };

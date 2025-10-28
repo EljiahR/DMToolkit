@@ -1,4 +1,4 @@
-import type { AbilityScores } from "../types/dm-tool-types/stats";
+import type { AbilityScores } from "../types/dm-tool-types/instances/abilityScoreInstance";
 
 interface ScoreCosts {
     [key: number]: number
@@ -17,9 +17,9 @@ export const scoreCosts: ScoreCosts = {
 
 export const scoreCalculator = (scores: AbilityScores) => {
     // Rules as written: 8 is min, 15 is max        
-    var total = 0;
+    let total = 0;
     Object.keys(scores).forEach(key => {
-        total += scoreCosts[scores[key].amount];
+        total += scoreCosts[scores[key].score];
     });
 
     return total;

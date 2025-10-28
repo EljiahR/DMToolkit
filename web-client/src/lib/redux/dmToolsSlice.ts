@@ -7,11 +7,11 @@ const initialState: StartupData = {
     backgroundDefinitions: [],
     characterClassDefinitions: [],
     featDefinitions: [],
+    itemDefinitionBases: [],
     speciesDefinitions: [],
-    featEffects: [],
+    effects: [],
     schools: [],
     spells: [],
-    spellEffects: []
 };
 
 export const dmToolsSlice = createSlice({
