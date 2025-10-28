@@ -160,6 +160,16 @@ export const selectedCharacterSlice = createSlice({
     }
 });
 
+export const selectAllBackgroundFeats = (state: RootState) => state.selectedCharacter.backgroundInstance?.featInstance ?? null;
+
+export const selectAllCharacterClasses = (state: RootState) => state.selectedCharacter.characterClassInstances;
+
+export const selectAllCharacterClassFeats = createSelector();
+
+export const selectAll
+
+export const selectAllSubclassFeats = (state: RootState) => state.selectedCharacter.
+
 export const selectAllFeats = (state: RootState) => {
     
     const allFeats: FeatInstance[] = [];
