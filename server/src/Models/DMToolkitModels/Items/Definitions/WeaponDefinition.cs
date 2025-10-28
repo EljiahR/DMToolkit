@@ -11,4 +11,9 @@ public class WeaponDefinition : ItemDefinitionBase, IItemDefinition
     public ICollection<Effect> WeaponProperties { get; set; } = new List<Effect>();
     public string? WeaponMasteryId { get; set; } = null; 
     public Effect? WeaponMastery { get; set; } = null;
+
+    public WeaponDefinition()
+    {
+        ItemType = "Weapon";
+    }
 }
