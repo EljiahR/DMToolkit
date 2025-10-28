@@ -4,7 +4,7 @@ import { setScore, setScoresToMinimum } from "../../../lib/redux/selectedCharact
 import type { AbilityScoreAbbreviations } from "../../../lib/redux/types";
 import type { AbilityScoreInstance } from "../../../lib/types/dm-tool-types/instances/abilityScoreInstance";
 
-export default function() {
+const ManualEntry = () => {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
     const plusTwoBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusTwo);
     const plusOneBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusOne);
@@ -52,3 +52,5 @@ const ScoreComponent = ({ score, updateScore, bonus}: ScoreComponentProps) => {
         </div>
     )
 }
+
+export default ManualEntry;

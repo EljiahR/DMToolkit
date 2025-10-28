@@ -7,10 +7,10 @@ import { setScoresToStandard, swapScores } from "../../../lib/redux/selectedChar
 import type { AbilityScoreAbbreviations } from "../../../lib/redux/types";
 import type { AbilityScoreInstance } from "../../../lib/types/dm-tool-types/instances/abilityScoreInstance";
 
-export default function() {
+const StandardArray = () => {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
-    const plusTwoBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusTwo);
-    const plusOneBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusOne);
+    const plusTwoBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusTwo ?? null);
+    const plusOneBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusOne ?? null);
     const dispatch = useAppDispatch();
 
     const [items, setItems] = useState<AbilityScoreAbbreviations[]>(["str", "dex", "con", "int", "wis", "cha"]);
@@ -23,6 +23,7 @@ export default function() {
 
     useLayoutEffect(() => {
         dispatch(setScoresToStandard());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleScoreSwap = (valueA: string, valueB: string) => {
@@ -75,3 +76,5 @@ const SortableScore = ({ score, bonus }: SortableScoreProps) => {
         <div ref={setNodeRef} style={style} {...attributes} {...listeners}>{`${score.definition.name}: ${bonus > 0 ? `${score.score} +${bonus}` : score.score}`}</div>
     )
 }
+
+export default StandardArray;

@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
 import { addOneToScore, setScoresToBase, subtractOneFromScore } from "../../../lib/redux/selectedCharacterSlice";
 import type { AbilityScoreInstance } from "../../../lib/types/dm-tool-types/instances/abilityScoreInstance";
 
-export default function() {
+const PointBuy = () => {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
     const plusTwoBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusTwo);
     const plusOneBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusOne);
@@ -58,3 +58,5 @@ const ScoreDisplay = ({ score, handleScoreChange, bonus }: ScoreDisplayProps) =>
         </div>
     )
 }
+
+export default PointBuy;

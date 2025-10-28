@@ -4,7 +4,7 @@ import { setBackgroundDefinition, setBackgroundScores } from "../../../lib/redux
 import type { ZeroOrOne } from "../../../lib/types/miscTypes";
 import type { AbilityScoreAbbreviations } from "../../../lib/redux/types";
 
-export default function() {
+const BonusAbilityScore = () => {
     const dispatch = useAppDispatch();
     const allBackgrounds = useAppSelector((state) => state.dmTools.backgroundDefinitions);
     const backgroundDefinition = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.definition ?? null);
@@ -16,11 +16,12 @@ export default function() {
         if (backgroundDefinition == null) {
             dispatch(setBackgroundDefinition(allBackgrounds[0]));
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleBonusChange = (value: string, index: ZeroOrOne) => {
         const scoreAbbreviation = value as AbilityScoreAbbreviations | ""; 
-        if (plusTwoBonus && plusTwoBonus.abbreviation != scoreAbbreviation && plusOneBonus && plusOneBonus.abbreviation != scoreAbbreviation) {
+        if ((!plusTwoBonus || plusTwoBonus.abbreviation != scoreAbbreviation) && (!plusOneBonus || plusOneBonus.abbreviation != scoreAbbreviation)) {
             dispatch(setBackgroundScores({scoreAbbreviation, index}));
         }
     }
@@ -48,3 +49,5 @@ export default function() {
         </div>
     )
 }
+
+export default BonusAbilityScore;

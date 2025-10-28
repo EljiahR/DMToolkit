@@ -9,7 +9,7 @@ import { backgroundDefinitionReset, classDefinitionReset } from "../../../../src
 
 describe("ClassDefault", () => {
     beforeEach(() => {
-        renderWithStore(<ClassDefault />, { preloadedState: { selectedCharacter: { characterClass: classDefinitionReset(characterClasses[0], "0"), scores: standardScores, background: backgroundDefinitionReset(characterBackgrounds[0], "0") }, dmTools: { characterClassDefinitions: characterClasses } } });
+        renderWithStore(<ClassDefault />, { preloadedState: { selectedCharacter: { characterClassInstances: [classDefinitionReset(characterClasses[0], "0")], scores: standardScores, backgroundInstance: backgroundDefinitionReset(characterBackgrounds[0], "0") }, dmTools: { characterClassDefinitions: characterClasses } } });
     });
 
     it("renders with the selected classes correct default", () => {

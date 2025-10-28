@@ -2,12 +2,12 @@ import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
 import { setCharacterClassDefinition, setScoresToClassDefault } from "../../../lib/redux/selectedCharacterSlice";
 
-export default function() {
+const ClassDefault = () => {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
     const defaultClass = useAppSelector((state) => state.dmTools.characterClassDefinitions[0]);
     const characterClassBase = useAppSelector((state) => state.selectedCharacter.characterClassInstances[0].definition);
-    const plusTwoBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusTwo);
-    const plusOneBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusOne);
+    const plusTwoBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusTwo ?? null);
+    const plusOneBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusOne ?? null);
     const dispatch = useAppDispatch();
 
     if (!characterClassBase || !scores) {
@@ -17,6 +17,7 @@ export default function() {
     
     useLayoutEffect(() => {
         dispatch(setScoresToClassDefault());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     return (
@@ -34,3 +35,5 @@ export default function() {
         </div>
     )
 }
+
+export default ClassDefault;

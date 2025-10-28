@@ -4,7 +4,7 @@ import { setScoresToRandom, setScoreToRandom } from "../../../lib/redux/selected
 import type { AbilityScoreAbbreviations } from "../../../lib/redux/types";
 import type { AbilityScoreInstance } from "../../../lib/types/dm-tool-types/instances/abilityScoreInstance";
 
-export default function() {
+const RandomRoll = () => {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
     const plusTwoBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusTwo);
     const plusOneBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusOne);
@@ -50,3 +50,5 @@ const ScoreDisplay = ({ score, handleScoreReroll, bonus }: ScoreDisplayProps) =>
         </div>
     )
 }
+
+export default RandomRoll
