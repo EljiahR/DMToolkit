@@ -341,6 +341,7 @@ public static class DtoConverters
             HpRolls = joinTable.HpRolls,
             FeatInstances = joinTable.CharacterClassInstance.FeatInstances.Select(ConvertFeatInstance).ToList(),
             SubclassInstance = ConvertSubclassInstance(joinTable.CharacterClassInstance.SubclassInstance),
+            SelectedItemSet = joinTable.CharacterClassInstance.SelectedItemSet,
             DefinitionId = joinTable.CharacterClassInstance.DefinitionId
         };
     }
@@ -353,6 +354,7 @@ public static class DtoConverters
             AbilityScoreDefinitionPlusTwoId = background.AbilityScoreDefinitionPlusTwoId,
             AbilityScoreDefinitionPlusOneId = background.AbilityScoreDefinitionPlusOneId,
             FeatInstance = background.FeatInstance != null ? ConvertFeatInstance(background.FeatInstance) : null,
+            SelectedItemSet = background.SelectedItemSet,
             DefinitionId = background.DefinitionId
         };
     }

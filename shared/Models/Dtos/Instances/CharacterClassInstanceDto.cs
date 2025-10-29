@@ -7,5 +7,6 @@ public class CharacterClassInstanceDto
     public List<int> HpRolls { get; set; } = new();
     public ICollection<FeatInstanceDto> FeatInstances { get; set; } = new List<FeatInstanceDto>();
     public SubclassInstanceDto? SubclassInstance { get; set; } = null;
+    public bool SelectedItemSet { get; set; } = false;
     public string DefinitionId { get; set; } = string.Empty;
 }

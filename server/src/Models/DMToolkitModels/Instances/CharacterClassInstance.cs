@@ -8,6 +8,7 @@ public class CharacterClassInstance : IDefinitionInstance<CharacterClassDefiniti
     public ICollection<FeatInstance> FeatInstances { get; set; } = new List<FeatInstance>();
     public string SubclassInstanceId { get; set; } = string.Empty; 
     public SubclassInstance? SubclassInstance { get; set; } = null;
+    public bool SelectedItemSet { get; set; } = false;
     public string DefinitionId { get; set; } = string.Empty;
     public CharacterClassDefinition? Definition { get; set; } = null;
 }
