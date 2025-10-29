@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../lib/redux/hooks"
 
-export default function() {
+const Overview = () => {
     const selectedCharacter = useAppSelector((state) => state.selectedCharacter);    
     
     return (
@@ -32,3 +32,5 @@ export default function() {
         
     )
 }
+
+export default Overview;

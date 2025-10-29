@@ -2,7 +2,7 @@ import { useAppSelector } from "../../lib/redux/hooks"
 import { selectAllSpells } from "../../lib/redux/selectedCharacterSlice";
 import type { Spell } from "../../lib/types/dm-tool-types/entities/spell";
 
-export default function() {
+const Spells = () => {
     const knownSpells = useAppSelector(selectAllSpells);
     
     return (
@@ -28,3 +28,5 @@ const SpellDisplay = ({spell}: SpellDisplayProps) => {
         </div>
     )
 }
+
+export default Spells;

@@ -2,7 +2,7 @@ import { useAppSelector } from "../../lib/redux/hooks"
 import { selectAC, selectAllEquippedWeapons, selectHp, selectHpMax } from "../../lib/redux/selectedCharacterSlice"
 import type { WeaponInstance } from "../../lib/types/dm-tool-types/items/instances/weaponInstance";
 
-export default function() {
+const Combat = () => {
     const hp = useAppSelector(selectHp);
     const hpMax = useAppSelector(selectHpMax);
     const ac = useAppSelector(selectAC);
@@ -36,7 +36,9 @@ const WeaponDisplay = ({ weapon }: WeaponDisplayProps) => {
         <div className="weapon-display">
             <p>{weapon.definition.name}</p>
             <p></p>
-            <p>{`${weapon.definition.dice.toString()} ${weapon.definition.damageType}`}</p>
+            <p>{`${weapon.definition.numberOfDice}d${weapon.definition.numberOfSides} ${weapon.definition.damageType}`}</p>
         </div>
     )
 }
+
+export default Combat;

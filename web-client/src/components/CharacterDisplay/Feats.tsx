@@ -3,7 +3,7 @@ import { useAppSelector } from "../../lib/redux/hooks"
 import { selectAllFeats } from "../../lib/redux/selectedCharacterSlice";
 import type { FeatInstance } from "../../lib/types/dm-tool-types/instances/featInstance";
 
-export default function() {
+const Feats = () => {
     const allFeats = useAppSelector(selectAllFeats);
 
 
@@ -36,3 +36,5 @@ const FeatDisplay = ({ feat }: FeatDisplayProps) => {
         </div>
     )
 }
+
+export default Feats;

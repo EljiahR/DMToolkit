@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
 import type { CharacterDisplayNavigationOptions } from "../../lib/redux/types";
 import { selectCharacterDisplay, setCharacterDisplay } from "../../lib/redux/uiSlice";
 
-export default function() {
+const Navigation = () => {
     const dispatch = useAppDispatch();
     const display = useAppSelector(selectCharacterDisplay);
 
@@ -21,3 +21,5 @@ export default function() {
         </nav>
     )
 }
+
+export default Navigation;

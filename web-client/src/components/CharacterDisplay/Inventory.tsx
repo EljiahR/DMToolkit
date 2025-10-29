@@ -2,7 +2,7 @@ import { useAppSelector } from "../../lib/redux/hooks"
 import { selectAllEquippedItems, selectAllNonEquippedItems } from "../../lib/redux/selectedCharacterSlice"
 import type { ItemInstanceBase } from "../../lib/types/dm-tool-types/items/bases/itemInstanceBase";
 
-export default function() {
+const Inventory = () => {
     const equipment = useAppSelector(selectAllEquippedItems);
     const inventory = useAppSelector(selectAllNonEquippedItems);
     
@@ -37,3 +37,5 @@ const ItemDisplay = ({item}: ItemDisplayProps) => {
         </div>
     )
 }
+
+export default Inventory;
