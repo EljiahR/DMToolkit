@@ -21,6 +21,7 @@ import type { WeaponInstance } from "../types/dm-tool-types/items/instances/weap
 import type { ArmorInstance } from "../types/dm-tool-types/items/instances/armorInstance";
 import type { Spell } from "../types/dm-tool-types/entities/spell";
 import { ArmorCategory } from "../types/dm-tool-types/enums/armorCategory";
+import type { SubclassInstance } from "../types/dm-tool-types/instances/subclassInstance";
 
 const initialState: Character = generateEmptyCharacter();
 
@@ -160,28 +161,51 @@ export const selectedCharacterSlice = createSlice({
     }
 });
 
-export const selectAllBackgroundFeats = (state: RootState) => state.selectedCharacter.backgroundInstance?.featInstance ?? null;
+export const selectBackgroundFeat = (state: RootState) => state.selectedCharacter.backgroundInstance?.featInstance ?? null;
 
 export const selectAllCharacterClasses = (state: RootState) => state.selectedCharacter.characterClassInstances;
 
-export const selectAllCharacterClassFeats = createSelector();
+export const selectAllCharacterClassFeats = createSelector(
+    [selectAllCharacterClasses],
+    (allCharacterClasses) => {
+        return allCharacterClasses.reduce((feats: FeatInstance[], c) => {
+            feats.push(...c.featInstances);
 
-export const selectAll
+            return feats;
+        }, []);
+    }
+);
 
-export const selectAllSubclassFeats = (state: RootState) => state.selectedCharacter.
+export const selectAllSubclasses = createSelector(
+    [selectAllCharacterClasses],
+    (allCharacterClassses) => allCharacterClassses.reduce((subclasses: SubclassInstance[], c) => {
+        if (c.subclassInstance) subclasses.push(c.subclassInstance);
 
-export const selectAllFeats = (state: RootState) => {
-    
-    const allFeats: FeatInstance[] = [];
-    if (state.selectedCharacter.backgroundInstance && state.selectedCharacter.backgroundInstance.featInstance) allFeats.concat([state.selectedCharacter.backgroundInstance.featInstance]);
-    state.selectedCharacter.characterClassInstances.forEach((characterClass) => {
-        allFeats.concat(characterClass.featInstances);
-        if (characterClass.subclassInstance) {
-            allFeats.concat(characterClass.subclassInstance.featInstances);
-        }
-    });
-    return allFeats;
-}
+        return subclasses;
+    }, [])
+)
+
+export const selectAllSubclassFeats = createSelector(
+    [selectAllSubclasses],
+    (subclasses) => subclasses.reduce((feats: FeatInstance[], subclass) => {
+        feats.push(...subclass.featInstances)
+
+        return feats;
+    }, [])
+)
+
+export const selectAllFeats = createSelector(
+    [selectBackgroundFeat, selectAllCharacterClassFeats, selectAllSubclassFeats],
+    (backgroundFeat, characterClassFeats, subclassFeats) => {
+        const feats = [];
+        if (backgroundFeat) feats.push(backgroundFeat);
+
+        feats.push(...characterClassFeats);
+        feats.push(...subclassFeats);
+
+        return feats;
+    }
+)
 
 export const selectAllAbilityScores = (state: RootState) => {
     return state.selectedCharacter.scores;
@@ -266,11 +290,10 @@ export const selectInitiative = createSelector(
     }
 );
 
-export const selectTotalLevel = (state: RootState) => {
-    return state.selectedCharacter.characterClassInstances.reduce((currentLevel, characterClass) => {
-        return currentLevel + characterClass.level;
-    }, 0);
-}
+export const selectTotalLevel = createSelector(
+    [selectAllCharacterClasses],
+    (characterClasses) => characterClasses.reduce((level, c) => level + c.level, 0)
+);
 
 export const selectProficiencyBonus = createSelector(
     [selectTotalLevel],
@@ -301,17 +324,16 @@ export const selectPassivePerception = createSelector(
     }
 );
 
-export const selectHp = (state: RootState) => {
-    return state.selectedCharacter.hp;
-};
+export const selectHp = (state: RootState) => state.selectedCharacter.hp;
 
-export const selectHpRolls = (state: RootState) => {
-    return state.selectedCharacter.characterClassInstances.reduce((rolls: number[], characterClass) => {
-        rolls.push(...characterClass.hpRolls);
-        
-        return rolls;
-    }, []);
-};
+export const selectHpRolls = createSelector(
+    [selectAllCharacterClasses],
+    (allCharacterClasses) => allCharacterClasses.reduce((hpRolls: number[], c) => {
+        hpRolls.push(...c.hpRolls);
+
+        return hpRolls;
+    }, [])
+);
 
 export const selectHpMax = createSelector(
     [selectHpRolls, selectAllAbilityScoreModifiers],
@@ -325,13 +347,15 @@ export const selectInventory = (state: RootState) => {
     return state.selectedCharacter.inventory;
 };
 
-export const selectAllEquippedItems = (state: RootState) => {
-    return state.selectedCharacter.inventory.filter((item) => item.isEquipped);
-};
+export const selectAllEquippedItems = createSelector(
+    [selectInventory],
+    (inventory) => inventory.filter(i => i.isEquipped)
+);
 
-export const selectAllNonEquippedItems = (state: RootState) => {
-    return state.selectedCharacter.inventory.filter((item) => !item.isEquipped);
-};
+export const selectAllNonEquippedItems = createSelector(
+    [selectInventory],
+    (inventory) => inventory.filter(i => !i.isEquipped)
+);
 
 export const selectAllEquippedWeapons = createSelector(
     [selectAllEquippedItems],
@@ -368,29 +392,30 @@ export const selectAC = createSelector(
     }
 );
 
-export const selectAllSpells = (state: RootState) => {
-    return state.selectedCharacter.characterSpells.map((characterSpell) => characterSpell.spell);
-}
+export const selectAllCharacterSpells = (state: RootState) => state.selectedCharacter.characterSpells;
 
-export const selectUnpreparedSpells = (state: RootState) => {
-    return state.selectedCharacter.characterSpells.reduce((spells: Spell[], characterSpell) => {
-        if (!characterSpell.isPrepared) {
-            spells.push(characterSpell.spell);
-        }
+export const selectAllSpells = createSelector(
+    [selectAllCharacterSpells],
+    (characterSpells) => characterSpells.map(cs => cs.spell)
+);
 
-        return spells
-    }, []);
-}
+export const selectUnpreparedSpells = createSelector(
+    [selectAllCharacterSpells],
+    (characterSpells) => characterSpells.reduce((spells: Spell[], cs) => {
+        if (!cs.isPrepared) spells.push(cs.spell);
+        
+        return spells;
+    }, [])
+);
 
-export const selectPreparedSpells = (state: RootState) => {
-    return state.selectedCharacter.characterSpells.reduce((spells: Spell[], characterSpell) => {
-        if (characterSpell.isPrepared) {
-            spells.push(characterSpell.spell);
-        }
-
-        return spells
-    }, []);
-}
+export const selectPreparedSpells = createSelector(
+    [selectAllCharacterSpells],
+    (characterSpells) => characterSpells.reduce((spells: Spell[], cs) => {
+        if (cs.isPrepared) spells.push(cs.spell);
+        
+        return spells;
+    }, [])
+);
 
 export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setBackgroundDefinition, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;
