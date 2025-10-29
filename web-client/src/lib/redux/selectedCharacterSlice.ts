@@ -22,6 +22,7 @@ import type { ArmorInstance } from "../types/dm-tool-types/items/instances/armor
 import type { Spell } from "../types/dm-tool-types/entities/spell";
 import { ArmorCategory } from "../types/dm-tool-types/enums/armorCategory";
 import type { SubclassInstance } from "../types/dm-tool-types/instances/subclassInstance";
+import { itemDefinitionTableToInstance } from "../dm-tools/instanceGenerators";
 
 const initialState: Character = generateEmptyCharacter();
 
@@ -57,6 +58,11 @@ export const selectedCharacterSlice = createSlice({
         setCharacterClassDefinition: (state, action: PayloadAction<CharacterClassDefinition>) => {
             state.characterClassInstances = [classDefinitionReset(action.payload, state.characterClassInstances[0].id)];
         },
+        setCharacterClassItemSet: (state, action: PayloadAction<boolean>) => {
+            if (state.characterClassInstances[0]) {
+                state.characterClassInstances[0].selectedItemSet = action.payload;
+            }
+        },
         setBackgroundDefinition: (state, action: PayloadAction<BackgroundDefinition>) => {
             state.backgroundInstance = backgroundDefinitionReset(action.payload, state.backgroundInstance?.id ?? "");
         },
@@ -67,7 +73,7 @@ export const selectedCharacterSlice = createSlice({
                 state.backgroundInstance.abilityScoreDefinitionPlusOne = action.payload.scoreAbbreviation == "" ? null : state.scores[action.payload.scoreAbbreviation].definition;
             }
         },
-        setBackgrounItemSet: (state, action: PayloadAction<boolean>) => {
+        setBackgroundItemSet: (state, action: PayloadAction<boolean>) => {
             if (state.backgroundInstance) {
                 state.backgroundInstance.selectedItemSet = action.payload;
             }
@@ -162,6 +168,19 @@ export const selectedCharacterSlice = createSlice({
         },
         setFlaws: (state, action: PayloadAction<string>) => {
             state.flaws = action.payload;
+        },
+        setNewCharacterInventory: (state) => {
+            if (state.backgroundInstance && state.backgroundInstance.selectedItemSet) {
+                state.inventory.push(...state.backgroundInstance.definition.itemDefinitionBaseQuantities.map(itemBase => {
+                    return itemDefinitionTableToInstance(itemBase);
+                }))
+            }
+
+            if (state.characterClassInstances[0] && state.characterClassInstances[0].selectedItemSet) {
+                state.inventory.push(...state.characterClassInstances[0].definition.itemDefinitionBaseQuantities.map(itemBase => {
+                    return itemDefinitionTableToInstance(itemBase);
+                }))
+            }
         }
     }
 });
@@ -422,5 +441,5 @@ export const selectPreparedSpells = createSelector(
     }, [])
 );
 
-export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setBackgroundDefinition, setBackgroundScores, setBackgrounItemSet, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
+export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setCharacterClassItemSet, setBackgroundDefinition, setBackgroundScores, setBackgroundItemSet, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws, setNewCharacterInventory } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

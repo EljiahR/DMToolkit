@@ -1,25 +1,27 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
-import { setCharacterClassDefinition } from "../../lib/redux/selectedCharacterSlice";
+import { setCharacterClassDefinition, setCharacterClassItemSet } from "../../lib/redux/selectedCharacterSlice";
+import { printItemSet } from "../../lib/dm-tools/stringFunctions";
 
 
-export default function({className = ""}: {className?: string}) {
-    const availableClasses = useAppSelector((state) => state.dmTools.characterClassDefinitions);
-    const selectedClassBase = useAppSelector((state) => state.selectedCharacter.characterClassInstances[0].definition);
+const CharacterClass = ({className = ""}: {className?: string}) => {
+    const availableCharacterClasses = useAppSelector((state) => state.dmTools.characterClassDefinitions);
+    const selectedCharacterClassDefinition = useAppSelector((state) => state.selectedCharacter.characterClassInstances[0].definition);
+    const selectedItemSet = useAppSelector((state) => state.selectedCharacter.characterClassInstances[0].selectedItemSet ?? true);
     const dispatch = useAppDispatch();
     
     useLayoutEffect(() => {
-        if (availableClasses.length < 1) {
+        if (availableCharacterClasses.length < 1) {
             // throw error or return to homepage not sure yet :)
         }
         
-        if ((selectedClassBase == null || selectedClassBase.id == "default") && availableClasses.length > 0) {
-            dispatch(setCharacterClassDefinition(availableClasses[0]));
+        if ((selectedCharacterClassDefinition == null || selectedCharacterClassDefinition.id == "default") && availableCharacterClasses.length > 0) {
+            dispatch(setCharacterClassDefinition(availableCharacterClasses[0]));
         }
     });
 
     const handleClassSelection = (classId: string) => {
-        const newClass = availableClasses.find((characterClass) => characterClass.id === classId);
+        const newClass = availableCharacterClasses.find((characterClass) => characterClass.id === classId);
 
         if (newClass == undefined) {
             // MORE ERROR HANDLING
@@ -28,23 +30,39 @@ export default function({className = ""}: {className?: string}) {
         dispatch(setCharacterClassDefinition(newClass!));
     }
 
+    const handleItemSetSelection = (selectedItemSet: boolean) => {
+        dispatch(setCharacterClassItemSet(selectedItemSet));
+    }
+
     return (
         <div className={className}>
             <h2>Class</h2>
             <label htmlFor="class-selector">Select a class</label>
-            <select id="class-selector" value={selectedClassBase ? selectedClassBase.id : ""} onChange={(e) => handleClassSelection(e.target.value)} className="selector">
-                {availableClasses.map((characterClass) => {
+            <select id="class-selector" value={selectedCharacterClassDefinition ? selectedCharacterClassDefinition.id : ""} onChange={(e) => handleClassSelection(e.target.value)} className="selector">
+                {availableCharacterClasses.map((characterClass) => {
                     return (
                         <option key={`class-${characterClass.id}`} value={characterClass.id}>{characterClass.name}</option>
                     )
                 })}
             </select>
-            {selectedClassBase &&
+            {selectedCharacterClassDefinition &&
             <div id="class-display">
-                <h3>{selectedClassBase.name}</h3>
-                <p>{selectedClassBase.description}</p>
+                <h3>{selectedCharacterClassDefinition.name}</h3>
+                <p>{selectedCharacterClassDefinition.description}</p>
+                <div>
+                    <p>Item set:</p>
+                    <p>&lpar;A&rpar; {printItemSet(selectedCharacterClassDefinition.itemDefinitionBaseQuantities)}, or &lpar;B&rpar; {selectedCharacterClassDefinition.startingGp}GP</p>
+                    <div>
+                        <label htmlFor="item-set-a">A</label>
+                        <input type="radio" name="item-set" id="item-set-a" checked={selectedItemSet} onChange={() => handleItemSetSelection(true)} />
+                        <label htmlFor="item-set-b">B</label>
+                        <input type="radio" name="item-set" id="item-set-b" checked={!selectedItemSet} onChange={() => handleItemSetSelection(false)} />
+                    </div>
+                </div>
             </div>
             }
         </div>
     )
 }
+
+export default CharacterClass;

@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks";
-import { setBackgroundDefinition, setBackgrounItemSet } from "../../lib/redux/selectedCharacterSlice";
+import { setBackgroundDefinition, setBackgroundItemSet } from "../../lib/redux/selectedCharacterSlice";
 import { printItemSet } from "../../lib/dm-tools/stringFunctions";
 
 const CharacterBackground = ({className = ""}: {className?: string}) => {
@@ -32,7 +32,7 @@ const CharacterBackground = ({className = ""}: {className?: string}) => {
     }
 
     const handleItemSetSelection = (itemSetSelected: boolean) => {
-        dispatch(setBackgrounItemSet(itemSetSelected));
+        dispatch(setBackgroundItemSet(itemSetSelected));
     }
 
     return (
