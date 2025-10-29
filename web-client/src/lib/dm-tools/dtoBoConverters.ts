@@ -71,14 +71,16 @@ export const featDefinitionToBo = (featDto: FeatDefinitionDto, effects: EffectDt
     }
 }
 
-export const backgroundDefinitionToBo = (backgroundDto: BackgroundDefinitionDto, featDefinitions: FeatDefinition[], abilityScoreDefinitions: AbilityScoreDefinition[], skillDefinitions: SkillDefinition[]): BackgroundDefinition => {
+export const backgroundDefinitionToBo = (backgroundDto: BackgroundDefinitionDto, featDefinitions: FeatDefinition[], abilityScoreDefinitions: AbilityScoreDefinition[], skillDefinitions: SkillDefinition[], itemDefinitionBases: ItemDefinitionBase[]): BackgroundDefinition => {
     return {
         id: backgroundDto.id,
         name: backgroundDto.name,
         description: backgroundDto.description,
         abilityScoreDefinitions: abilityScoreDefinitions.filter(s => backgroundDto.abilityScoreDefinitionIds.includes(s.id)),
         featDefinition: featDefinitions.find((feat) => backgroundDto.featDefinitionId == feat.id)!,
-        skillProficiencies: skillDefinitions.filter(s => backgroundDto.skillDefinitionIds.includes(s.id))
+        skillProficiencies: skillDefinitions.filter(s => backgroundDto.skillDefinitionIds.includes(s.id)),
+        startingGp: backgroundDto.startingGp,
+        itemDefinitionBaseQuantities: itemDefinitionBaseQuantitiesToBo(backgroundDto.itemDefinitionBaseQuantities, itemDefinitionBases)
     }
 }
 
@@ -104,7 +106,6 @@ export const subclassDefinitionToBo = (subclassDto: SubclassDefinitionDto, featD
 export const itemDefinitionBaseQuantitiesToBo = (itemDefinitionBaseQuantities: ItemDefinitionBaseQuantityDto[], itemDefinitionBases: ItemDefinitionBase[]): ItemDefinitionBaseQuantity[] => {
     return itemDefinitionBaseQuantities.reduce((currentList: ItemDefinitionBaseQuantity[], itemDefinitionBaseQuantity) => {
         const item = itemDefinitionBases.find(itemDefinitionBase => itemDefinitionBase.id == itemDefinitionBaseQuantity.itemDefinitionBaseId);
-        
         if (item) {
             currentList.push({
                 quantity: itemDefinitionBaseQuantity.quantity,
@@ -185,6 +186,7 @@ export const classInstancesToBo = (classDtos: CharacterClassInstanceDto[], chara
             hpRolls: classDto.hpRolls,
             subclassInstance: classDto.subclassInstance == null ? null : subclassInstanceToBo(classDto.subclassInstance, subclasses, effects, featDefinitions),
             featInstances: featInstancesToBo(classDto.featInstances, effects, featDefinitions),
+            selectedItemSet: classDto.selectedItemSet,
             definition: characterClasses.find((classDefinition) => classDefinition.id == classDto.definitionId)!
         }
     })
@@ -196,6 +198,7 @@ export const backgroundInstanceToBo = (backgroundDto: BackgroundInstanceDto, bac
         abilityScoreDefinitionPlusTwo: abilityScoreDefinitions.find(scoreDef => scoreDef.id == backgroundDto.abilityScoreDefinitionPlusTwoId) ?? null,
         abilityScoreDefinitionPlusOne: abilityScoreDefinitions.find(scoreDef => scoreDef.id == backgroundDto.abilityScoreDefinitionPlusOneId) ?? null,
         featInstance: featInstancesToBo([backgroundDto.featInstance], effects, featDefinitions)[0],
+        selectedItemSet: backgroundDto.selectedItemSet,
         definition: backgroundDefinitions.find((background) => background.id == backgroundDto.definitionId)!
     }
 }
@@ -419,7 +422,7 @@ export const startupDataToBo = (data: StartupDataDto): StartupData => {
 
     return {
         abilityScoreDefinitions,
-        backgroundDefinitions: data.backgroundDefinitions.map(b => backgroundDefinitionToBo(b, featDefinitions, abilityScoreDefinitions, allSkillDefinitions)),
+        backgroundDefinitions: data.backgroundDefinitions.map(b => backgroundDefinitionToBo(b, featDefinitions, abilityScoreDefinitions, allSkillDefinitions, itemDefinitionBases)),
         characterClassDefinitions,
         featDefinitions,
         speciesDefinitions: data.speciesDefinitions.map(s => speciesDefinitionToBo(s, featDefinitions)),

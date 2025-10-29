@@ -27,11 +27,10 @@ export const itemDefinitionTableToInstance = (itemTable: ItemDefinitionBaseQuant
             item = {
                 definition: itemTable.itemDefinitionBase
             } as ItemInstance;
-            break;
     }
 
     
-    item.id = "";
+    item.id = itemTable.itemDefinitionBase.name + itemTable.quantity;
     item.itemType = itemTable.itemDefinitionBase.itemType;
     item.quantity = itemTable.quantity;
     item.isEquipped = false;    

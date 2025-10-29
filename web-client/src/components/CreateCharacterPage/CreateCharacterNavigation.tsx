@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
 import { CharacterCreationNavigationOptions } from "../../lib/redux/types";
 import { decreaseCharacterCreationIndex, increaseCharacterCreationIndex, selectCharacterCreationIndex } from "../../lib/redux/uiSlice"
+import { setNewCharacterInventory } from "../../lib/redux/selectedCharacterSlice";
 
 const CreateCharacterNavigation = ({ className}: {className?: string}) => {
     const sectionIndex = useAppSelector(selectCharacterCreationIndex);
@@ -12,7 +13,7 @@ const CreateCharacterNavigation = ({ className}: {className?: string}) => {
         if (sectionIndex < 6) {
             dispatch(increaseCharacterCreationIndex());
         } else {
-            
+            dispatch(setNewCharacterInventory());
             navigate("/character-display");
         }
     }

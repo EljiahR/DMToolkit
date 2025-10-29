@@ -171,15 +171,19 @@ export const selectedCharacterSlice = createSlice({
         },
         setNewCharacterInventory: (state) => {
             if (state.backgroundInstance && state.backgroundInstance.selectedItemSet) {
-                state.inventory.push(...state.backgroundInstance.definition.itemDefinitionBaseQuantities.map(itemBase => {
-                    return itemDefinitionTableToInstance(itemBase);
-                }))
+                state.inventory = [
+                    ...state.inventory,
+                    ...state.backgroundInstance.definition.itemDefinitionBaseQuantities.map(itemBase => {
+                        return itemDefinitionTableToInstance(itemBase);
+                })]
             }
 
             if (state.characterClassInstances[0] && state.characterClassInstances[0].selectedItemSet) {
-                state.inventory.push(...state.characterClassInstances[0].definition.itemDefinitionBaseQuantities.map(itemBase => {
-                    return itemDefinitionTableToInstance(itemBase);
-                }))
+                state.inventory = [
+                    ...state.inventory,
+                    ...state.characterClassInstances[0].definition.itemDefinitionBaseQuantities.map(itemBase => {
+                        return itemDefinitionTableToInstance(itemBase);
+                })]
             }
         }
     }

@@ -3,7 +3,6 @@ import type { RegisterErrors, Token } from "./types/apiResponses";
 import type { StartupDataDto } from "./types/dm-tool-types/collections/startupData";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-console.log("BACKEND_URL = ", BACKEND_URL)
 
 export const api = axios.create({
     baseURL: BACKEND_URL != "" && BACKEND_URL != null && BACKEND_URL != undefined ? BACKEND_URL : "https://localhost:7179"

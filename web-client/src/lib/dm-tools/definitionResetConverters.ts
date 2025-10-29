@@ -15,6 +15,7 @@ export const classDefinitionReset = (definition: CharacterClassDefinition, id: s
         subclassInstance: null,
         featInstances: [],
         definition,
+        selectedItemSet: true,
         hpRolls: []
     }
 }
@@ -25,6 +26,7 @@ export const backgroundDefinitionReset = (definition: BackgroundDefinition, id: 
         abilityScoreDefinitionPlusTwo: null,
         abilityScoreDefinitionPlusOne: null,
         featInstance: null,
+        selectedItemSet: true,
         definition
     };
 }

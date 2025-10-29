@@ -51,7 +51,7 @@ const CharacterClass = ({className = ""}: {className?: string}) => {
                 <p>{selectedCharacterClassDefinition.description}</p>
                 <div>
                     <p>Item set:</p>
-                    <p>&lpar;A&rpar; {printItemSet(selectedCharacterClassDefinition.itemDefinitionBaseQuantities)}, or &lpar;B&rpar; {selectedCharacterClassDefinition.startingGp}GP</p>
+                    <p>{"(A)"} {printItemSet(selectedCharacterClassDefinition.itemDefinitionBaseQuantities)}, or {"(B)"} {selectedCharacterClassDefinition.startingGp}GP</p>
                     <div>
                         <label htmlFor="item-set-a">A</label>
                         <input type="radio" name="item-set" id="item-set-a" checked={selectedItemSet} onChange={() => handleItemSetSelection(true)} />

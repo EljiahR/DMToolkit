@@ -12,25 +12,22 @@ export const customConcat = (strings: string[], conjunction: string = "and") => 
         return strings[0] + " " + conjunction + " " + strings[1];
     }
 
-    return strings.slice(-1).join(", ") + " " + conjunction + " " + strings[-1]; 
+
+    return strings.slice(0, -1).join(", ") + " " + conjunction + " " + strings[strings.length - 1]; 
 }
 
 export const printItemSet = (itemTables: ItemDefinitionBaseQuantity[]): string => {
-    const itemStrings: string[] = [];
+    if (!itemTables) return "";
 
-    itemTables.forEach((itemTable) => {
-        switch (itemTable.itemDefinitionBase.itemType) {
-            default:
-                if (itemTable.quantity < 2) {
-                    itemStrings.push(itemTable.itemDefinitionBase.name);
-                } else {
-                    itemStrings.push(`${itemTable.quantity} ${itemTable.itemDefinitionBase.name}s`);
-                }
-                break;
+    return customConcat(itemTables.reduce((itemStrings: string[], itemTable) => {
+        if (itemTable.quantity > 1) {
+            itemStrings.push(`${itemTable.quantity} ${itemTable.itemDefinitionBase.name}s`);
+        } else {
+            itemStrings.push(itemTable.itemDefinitionBase.name);
         }
-    })
 
-    return customConcat(itemStrings);
+        return itemStrings;
+    }, []));
 }
 
 export const printWorth = (worthObject: Worth) => {

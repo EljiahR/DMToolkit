@@ -5,11 +5,9 @@ import { printItemSet } from "../../lib/dm-tools/stringFunctions";
 
 const CharacterBackground = ({className = ""}: {className?: string}) => {
     const backgrounds = useAppSelector((state) => state.dmTools.backgroundDefinitions);
-    const selectedBackgroundDefinition = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.definition);
+    const selectedBackgroundDefinition = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.definition ?? null);
     const selectedItemSet = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.selectedItemSet ?? false);
     const dispatch = useAppDispatch();
-
-    console.log(backgrounds)
 
     useLayoutEffect(() => {
         if (backgrounds.length < 1) {
@@ -19,7 +17,8 @@ const CharacterBackground = ({className = ""}: {className?: string}) => {
         if ((selectedBackgroundDefinition == null || selectedBackgroundDefinition.id == "default") && backgrounds.length > 0) {
             dispatch(setBackgroundDefinition(backgrounds[0]));
         }
-    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleBackgroundChange = (backgroundId: string) => {
         const newBackground = backgrounds.find((background) => background.id === backgroundId);
@@ -52,7 +51,7 @@ const CharacterBackground = ({className = ""}: {className?: string}) => {
                 <p>{selectedBackgroundDefinition.description}</p>
                 <div>
                     <p>Item set:</p>
-                    <p>&lpar;A&rpar; {printItemSet(selectedBackgroundDefinition.itemDefinitionBaseQuantities)}, or &lpar;B&rpar; {selectedBackgroundDefinition.startingGp}GP</p>
+                    <p>{"(A)"} {printItemSet(selectedBackgroundDefinition.itemDefinitionBaseQuantities)}, or {"(B)"} {selectedBackgroundDefinition.startingGp}GP</p>
                     <div>
                         <label htmlFor="item-set-a">A</label>
                         <input type="radio" name="item-set" id="item-set-a" checked={selectedItemSet} onChange={() => handleItemSetSelection(true)} />
