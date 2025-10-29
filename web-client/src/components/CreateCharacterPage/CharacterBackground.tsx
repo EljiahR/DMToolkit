@@ -51,7 +51,7 @@ const CharacterBackground = ({className = ""}: {className?: string}) => {
                 <p>{selectedBackgroundDefinition.description}</p>
                 <div>
                     <p>Item set:</p>
-                    <p>{"(A)"} {printItemSet(selectedBackgroundDefinition.itemDefinitionBaseQuantities)}, or {"(B)"} {selectedBackgroundDefinition.startingGp}GP</p>
+                    <p>{"(A)"} {printItemSet(selectedBackgroundDefinition.itemDefinitionBaseQuantities)}, or {"(B)"} {selectedBackgroundDefinition.startingGp} GP</p>
                     <div>
                         <label htmlFor="item-set-a">A</label>
                         <input type="radio" name="item-set" id="item-set-a" checked={selectedItemSet} onChange={() => handleItemSetSelection(true)} />

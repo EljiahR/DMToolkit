@@ -14,35 +14,31 @@
   .btn {
     @apply shadow text-white font-bold py-2 px-4 rounded
   }
-  .btn-purple {
-    @apply bg-purple-500;
+  .btn-secondary {
+    background-color: #BFDBF7;
+    color: black;
   }
-  .btn-blue {
-    @apply bg-blue-500;
+  .btn-primary {
+    background-color: #1F7A8C;
   }
-  .btn-blue-reverse {
-    @apply bg-white text-blue-500;
-  }
-  .btn-white {
-    @apply bg-white text-black duration-0;
-  }
-  .btn:hover {
-    @apply border-inherit
+  .btn-tertiary {
+    background-color: #E1E5F2;
+    color: black;
   }
   .btn:focus {
     @apply ring outline-none
   }
-  .btn-purple:hover {
-    @apply bg-purple-400;
+  .btn-secondary:hover {
+    background-color: #cfe3f8;
+    border-color: black;
   }
-  .btn-blue:hover {
-    @apply bg-blue-400;
+  .btn-primary:hover {
+    background-color: #348fa1;
+    border-color: black;
   }
-  .btn-blue-reverse:hover {
-    @apply bg-gray-100;
-  }
-  .btn-white:hover {
-    @apply bg-gray-100;
+  .btn-tertiary:hover {
+    background-color: #f1f2f7;
+    border-color: black;
   }
 
   .link-fix {
@@ -73,19 +69,25 @@
   }
 }
 
+/* Pallette in case I forget: https://coolors.co/022b3a-1f7a8c-bfdbf7-e1e5f2-ffffff */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #DFE0E2;
+  background-color: #022B3A;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
 }
 
 a {
@@ -100,14 +102,24 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  height: 100%;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+h2 {
+  font-size: 2.75rem;
+  line-height: 3rem;
+}
+
+h3 {
+  font-size: 2.50rem;
+  line-height: 2.75rem;
 }
 
 button {
@@ -129,6 +141,15 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.selected-item-set {
+  color: #F38851;
+}
+
+@supports (font-variation-settings: normal) {
+  :root { font-family: InterVariable, sans-serif; }
+}
+
+/*
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -141,3 +162,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+*/

@@ -12,6 +12,7 @@ const StartSection = ({className = ""}: {className?: string}) => {
     return (
         <div className={className}>
             <h2>Create a new Player Character</h2>
+            <p>This is filler text until I decide on what to actually put here.</p>
         </div>
     )
 }
@@ -28,16 +29,17 @@ const components = [
     CharacterDescription,
 ]
 
-export default function() {
+const CreatePlayerCharacterPage = () => {
     // Available sections: class, background, species, scores, alignment, description
     const sectionIndex = useAppSelector(selectCharacterCreationIndex)
     const ActiveSection = sectionIndex < 7 ? components[sectionIndex] : EmptySection;
 
     return (
-        <div>
-            {<ActiveSection className="flex flex-col text-center" />}
-            <CreateCharacterNavigation className="fixed bottom-0 w-screen" />
+        <div id="create-player-character-page" className="h-full flex flex-col">
+            {<ActiveSection className="flex flex-col text-center align-middle justify-between flex-grow" />}
+            <CreateCharacterNavigation className="w-full row-start-2 " />
         </div>
     )
 };
 
+export default CreatePlayerCharacterPage;

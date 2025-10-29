@@ -24,20 +24,20 @@ const AuthForm = () => {
         <div id="auth-section" className="flex flex-col w-screen p-2 gap-1">
             <form id="sign-in-form" onSubmit={(e) => handleFormSubmit(e)} className="flex flex-col gap-2">
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="sign-in-email">Username</label>
+                    <label htmlFor="sign-in-email" className="text-xl">Username</label>
                     <input className="text-input" id="sign-in-email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Username" />
                 </div>
                 
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="sign-in-password">Password</label>
+                    <label htmlFor="sign-in-password" className="text-xl">Password</label>
                     <input className="text-input" id="sign-in-password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="**********" />
                 </div>
-                <button className="btn btn-blue" type="submit">Sign In</button>
+                <button className="btn btn-primary" type="submit">Sign In</button>
             </form>
             <Link to="/auth/register">
-                <button className="link-fix btn btn-purple">Register</button>
+                <button className="link-fix btn btn-secondary">Register</button>
             </Link>
-            <button className="btn btn-white" onClick={handleAnonymous}>Continue without account</button>
+            <button className="btn btn-tertiary" onClick={handleAnonymous}>Continue without account</button>
         </div>
         
     )

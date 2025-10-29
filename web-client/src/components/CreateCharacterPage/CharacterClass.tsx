@@ -36,23 +36,31 @@ const CharacterClass = ({className = ""}: {className?: string}) => {
 
     return (
         <div className={className}>
-            <h2>Class</h2>
-            <label htmlFor="class-selector">Select a class</label>
-            <select id="class-selector" value={selectedCharacterClassDefinition ? selectedCharacterClassDefinition.id : ""} onChange={(e) => handleClassSelection(e.target.value)} className="selector">
-                {availableCharacterClasses.map((characterClass) => {
-                    return (
-                        <option key={`class-${characterClass.id}`} value={characterClass.id}>{characterClass.name}</option>
-                    )
-                })}
-            </select>
+            <div id="section-header" className="flex flex-col gap-3 py-10">
+                <h2>Class</h2>
+                <p>Small description describing what exactly a class represents.</p>
+                <div id="class-selection" className="flex justify-center gap-3">
+                    <label htmlFor="class-selector" className="self-center">Select a class</label>
+                    <select id="class-selector" value={selectedCharacterClassDefinition ? selectedCharacterClassDefinition.id : ""} onChange={(e) => handleClassSelection(e.target.value)} className="selector">
+                        {availableCharacterClasses.map((characterClass) => {
+                            return (
+                                <option key={`class-${characterClass.id}`} value={characterClass.id}>{characterClass.name}</option>
+                            )
+                        })}
+                    </select>
+                </div>
+            </div>
+            
+            
+            
             {selectedCharacterClassDefinition &&
-            <div id="class-display">
+            <div id="class-display" className="flex-grow flex flex-col gap-3">
                 <h3>{selectedCharacterClassDefinition.name}</h3>
                 <p>{selectedCharacterClassDefinition.description}</p>
-                <div>
-                    <p>Item set:</p>
-                    <p>{"(A)"} {printItemSet(selectedCharacterClassDefinition.itemDefinitionBaseQuantities)}, or {"(B)"} {selectedCharacterClassDefinition.startingGp}GP</p>
-                    <div>
+                <div id="item-sets">
+                    <p>Item sets:</p>
+                    <p><span className={selectedItemSet ? "selected-item-set" : ""}>{"(A)"} {printItemSet(selectedCharacterClassDefinition.itemDefinitionBaseQuantities)}</span>, or <span className={!selectedItemSet ? "selected-item-set" : ""}>{"(B)"} {selectedCharacterClassDefinition.startingGp} GP</span></p>
+                    <div id="item-set-radios" className="flex gap-1 justify-center">
                         <label htmlFor="item-set-a">A</label>
                         <input type="radio" name="item-set" id="item-set-a" checked={selectedItemSet} onChange={() => handleItemSetSelection(true)} />
                         <label htmlFor="item-set-b">B</label>

@@ -17,7 +17,7 @@ const view = {
     "Inventory": <Inventory />
 }
 
-export default function() {
+const CharacterDisplay = () => {
     const displayedPage = useAppSelector(selectCharacterDisplay);
     
     return (
@@ -29,3 +29,5 @@ export default function() {
         </div>
     )
 }
+
+export default CharacterDisplay;
