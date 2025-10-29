@@ -7,6 +7,7 @@ export interface BackgroundInstance {
     abilityScoreDefinitionPlusTwo: AbilityScoreDefinition | null;
     abilityScoreDefinitionPlusOne: AbilityScoreDefinition | null;
     featInstance: FeatInstance | null;
+    selectedItemSet: boolean;
     definition: BackgroundDefinition;
 }
 
@@ -15,5 +16,6 @@ export interface BackgroundInstanceDto {
     abilityScoreDefinitionPlusTwoId: string;
     abilityScoreDefinitionPlusOneId: string;
     featInstance: FeatInstanceDto;
+    selectedItemSet: boolean;
     definitionId: string;
 }

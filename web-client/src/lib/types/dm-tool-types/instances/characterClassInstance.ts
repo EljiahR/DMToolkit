@@ -8,6 +8,7 @@ export interface CharacterClassInstance {
     hpRolls: number[];
     featInstances: FeatInstance[];
     subclassInstance: SubclassInstance | null;
+    selectedItemSet: boolean;
     definition: CharacterClassDefinition;
 }
 
@@ -17,5 +18,6 @@ export interface CharacterClassInstanceDto {
     hpRolls: number[];
     featInstances: FeatInstanceDto[];
     subclassInstance: SubclassInstanceDto | null;
+    selectedItemSet: boolean;
     definitionId: string;
 }
