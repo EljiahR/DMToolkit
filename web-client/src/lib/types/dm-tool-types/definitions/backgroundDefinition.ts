@@ -1,4 +1,4 @@
-import type { ItemDefinitionBaseQuantityDto } from "../relationships/itemDefinitionBaseQuantity";
+import type { ItemDefinitionBaseQuantity, ItemDefinitionBaseQuantityDto } from "../relationships/itemDefinitionBaseQuantity";
 import type { AbilityScoreDefinition } from "./abilityScoreDefinition";
 import type { FeatDefinition } from "./featDefinition";
 import type { SkillDefinition } from "./skillDefinition";
@@ -10,6 +10,8 @@ export interface BackgroundDefinition {
     abilityScoreDefinitions: AbilityScoreDefinition[];
     featDefinition: FeatDefinition | null;
     skillProficiencies: SkillDefinition[];
+    startingGp: number;
+    itemDefinitionBaseQuantities: ItemDefinitionBaseQuantity[];
 }
 
 export interface BackgroundDefinitionDto {

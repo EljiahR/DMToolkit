@@ -67,6 +67,11 @@ export const selectedCharacterSlice = createSlice({
                 state.backgroundInstance.abilityScoreDefinitionPlusOne = action.payload.scoreAbbreviation == "" ? null : state.scores[action.payload.scoreAbbreviation].definition;
             }
         },
+        setBackgrounItemSet: (state, action: PayloadAction<boolean>) => {
+            if (state.backgroundInstance) {
+                state.backgroundInstance.selectedItemSet = action.payload;
+            }
+        },
         setSpeciesBase: (state, action: PayloadAction<SpeciesDefinition>) => {
             state.speciesInstance = speciesDefinitionReset(action.payload, action.payload.size, state.speciesInstance?.id ?? "", state.speciesInstance?.lineageInstance?.id ?? "");
         },
@@ -417,5 +422,5 @@ export const selectPreparedSpells = createSelector(
     }, [])
 );
 
-export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setBackgroundDefinition, setBackgroundScores, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
+export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setBackgroundDefinition, setBackgroundScores, setBackgrounItemSet, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

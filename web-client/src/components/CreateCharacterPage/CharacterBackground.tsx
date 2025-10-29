@@ -1,10 +1,12 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks";
-import { setBackgroundDefinition } from "../../lib/redux/selectedCharacterSlice";
+import { setBackgroundDefinition, setBackgrounItemSet } from "../../lib/redux/selectedCharacterSlice";
+import { printItemSet } from "../../lib/dm-tools/stringFunctions";
 
-export default function({className = ""}: {className?: string}) {
+const CharacterBackground = ({className = ""}: {className?: string}) => {
     const backgrounds = useAppSelector((state) => state.dmTools.backgroundDefinitions);
     const selectedBackgroundDefinition = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.definition);
+    const selectedItemSet = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.selectedItemSet ?? false);
     const dispatch = useAppDispatch();
 
     console.log(backgrounds)
@@ -29,6 +31,10 @@ export default function({className = ""}: {className?: string}) {
         dispatch(setBackgroundDefinition(newBackground!));
     }
 
+    const handleItemSetSelection = (itemSetSelected: boolean) => {
+        dispatch(setBackgrounItemSet(itemSetSelected));
+    }
+
     return (
         <div className={className}>
             <h2>Background</h2>
@@ -44,8 +50,20 @@ export default function({className = ""}: {className?: string}) {
             <div>
                 <h3>{selectedBackgroundDefinition.name}</h3>
                 <p>{selectedBackgroundDefinition.description}</p>
+                <div>
+                    <p>Item set:</p>
+                    <p>&lpar;A&rpar; {printItemSet(selectedBackgroundDefinition.itemDefinitionBaseQuantities)}, or &lpar;B&rpar; {selectedBackgroundDefinition.startingGp}GP</p>
+                    <div>
+                        <label htmlFor="item-set-a">A</label>
+                        <input type="radio" name="item-set" id="item-set-a" checked={selectedItemSet} onChange={() => handleItemSetSelection(true)} />
+                        <label htmlFor="item-set-b">B</label>
+                        <input type="radio" name="item-set" id="item-set-b" checked={!selectedItemSet} onChange={() => handleItemSetSelection(false)} />
+                    </div>
+                </div>
             </div>
             }
         </div>
     )
 }
+
+export default CharacterBackground;
