@@ -67,6 +67,10 @@
   .alignment-radio > input[type="radio"] {
     @apply hidden
   }
+
+  .section-header {
+    @apply flex flex-col gap-3 py-10
+  }
 }
 
 /* Pallette in case I forget: https://coolors.co/022b3a-1f7a8c-bfdbf7-e1e5f2-ffffff */

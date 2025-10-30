@@ -10,9 +10,11 @@ import { selectCharacterCreationIndex } from "../lib/redux/uiSlice";
 
 const StartSection = ({className = ""}: {className?: string}) => {
     return (
-        <div className={className}>
-            <h2>Create a new Player Character</h2>
-            <p>This is filler text until I decide on what to actually put here.</p>
+        <div id="start-section" className={className}>
+            <div className="section-header">
+                <h2>Create a new Player Character</h2>
+                <p>This is filler text until I decide on what to actually put here.</p>
+            </div> 
         </div>
     )
 }

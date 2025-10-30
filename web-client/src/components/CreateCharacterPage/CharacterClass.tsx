@@ -36,7 +36,7 @@ const CharacterClass = ({className = ""}: {className?: string}) => {
 
     return (
         <div className={className}>
-            <div id="section-header" className="flex flex-col gap-3 py-10">
+            <div className="section-header">
                 <h2>Class</h2>
                 <p>Small description describing what exactly a class represents.</p>
                 <div id="class-selection" className="flex justify-center gap-3">
