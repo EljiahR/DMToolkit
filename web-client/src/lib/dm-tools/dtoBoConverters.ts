@@ -1,3 +1,4 @@
+import type { AbilityScoreAbbreviations } from "../redux/types";
 import type { StartupData, StartupDataDto } from "../types/dm-tool-types/collections/startupData";
 import type { AbilityScoreDefinition, AbilityScoreDefinitionDto } from "../types/dm-tool-types/definitions/abilityScoreDefinition";
 import type { BackgroundDefinition, BackgroundDefinitionDto } from "../types/dm-tool-types/definitions/backgroundDefinition";
@@ -47,7 +48,7 @@ const abilityScoreDefinitionToBo = (score: AbilityScoreDefinitionDto): AbilitySc
     return {
         id: score.id,
         name: score.name,
-        abbreviation: score.abbreviation,
+        abbreviation: score.abbreviation as AbilityScoreAbbreviations,
         description: score.description,
         skillDefinitions: score.skillDefinitions.map(s => skillDefinitionToBo(s))
     }
@@ -153,7 +154,7 @@ export const speciesDefinitionToBo = (speciesDto: SpeciesDefinitionDto, featDefi
         description: speciesDto.description,
         type: speciesDto.type,
         speed: speciesDto.speed,
-        size: speciesDto.size,
+        sizes: speciesDto.sizes,
         featDefinitions: featDefinitions.filter((feat) => speciesDto.featDefinitionIds.includes(feat.id)),
         lineageDefinitions: speciesDto.lineageDefinitions.map(l => lineageDefinitionToBo(l, featDefinitions))
     }

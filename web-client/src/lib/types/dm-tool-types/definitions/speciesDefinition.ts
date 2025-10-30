@@ -7,7 +7,7 @@ export interface SpeciesDefinition {
     description: string;
     type: string;
     speed: number;
-    size: string;
+    sizes: string[];
     featDefinitions: FeatDefinition[];
     lineageDefinitions: LineageDefinition[];
 }
@@ -18,7 +18,7 @@ export interface SpeciesDefinitionDto {
     description: string;
     type: string;
     speed: number;
-    size: string;
+    sizes: string[];
     featDefinitionIds: string[];
     lineageDefinitions: LineageDefinitionDto[];
 }

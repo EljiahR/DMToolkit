@@ -12,7 +12,7 @@ export interface AbilityScoreDefinition{
 export interface AbilityScoreDefinitionDto {
     id: string;
     name: string;
-    abbreviation: AbilityScoreAbbreviations;
+    abbreviation: string;
     description: string;
     skillDefinitions: SkillDefinitionDto[];
 }

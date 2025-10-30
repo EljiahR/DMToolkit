@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { apiGetStartupData } from "./lib/api";
 import { setAllFromDto } from "./lib/redux/dmToolsSlice";
+import seedData from "./assets/dm_seed_data.json"
 
 const App = () => {
     const dispatch = useDispatch();
@@ -23,6 +24,8 @@ const App = () => {
                 dispatch(setAllFromDto(data));
             } catch (e) {
                 console.log("Failed to fetch startup data.", e);
+                console.log("Importing data from dm_seed_data.json");
+                dispatch(setAllFromDto(seedData))
             }
 
         };
