@@ -81,7 +81,7 @@ public static class DtoConverters
                         })
                         .ToList();
     }
-    private static SubclassDefinitionDto ConvertSubclassDefintion(SubclassDefinition subclass)
+    private static SubclassDefinitionDto ConvertSubclassDefinition(SubclassDefinition subclass)
     {
         return new()
         {
@@ -100,7 +100,7 @@ public static class DtoConverters
             Description = characterClass.Description,
             HitDie = characterClass.HitDie,
             FixedHp = characterClass.FixedHp,
-            SubclassDefinitions = characterClass.SubclassDefinitions.Select(ConvertSubclassDefintion).ToList(),
+            SubclassDefinitions = characterClass.SubclassDefinitions.Select(ConvertSubclassDefinition).ToList(),
             FeatTables = ConvertFeatTables(characterClass.CharacterClassDefinitionFeatDefinitions),
             ItemDefinitionBaseQuantities = characterClass.CharacterClassDefinitionItemDefinitionBases.Select(a => new ItemDefinitionBaseQuantity {ItemDefinitionBaseId = a.ItemDefinitionBaseId, Quantity = a.Quantity }).ToList(),
             StartingGp = characterClass.StartingGp,
