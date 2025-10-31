@@ -35,7 +35,7 @@ const CharacterClass = ({className = ""}: {className?: string}) => {
     }
 
     return (
-        <div className={className}>
+        <div id="character-class-page" className={className}>
             <div className="section-header">
                 <h2>Class</h2>
                 <p>Small description describing what exactly a class represents.</p>
@@ -54,12 +54,12 @@ const CharacterClass = ({className = ""}: {className?: string}) => {
             
             
             {selectedCharacterClassDefinition &&
-            <div id="class-display" className="flex-grow flex flex-col gap-3">
+            <div id="class-display" className="section-display">
                 <h3>{selectedCharacterClassDefinition.name}</h3>
                 <p>{selectedCharacterClassDefinition.description}</p>
                 <div id="item-sets">
                     <p>Item sets:</p>
-                    <p><span className={selectedItemSet ? "selected-item-set" : ""}>{"(A)"} {printItemSet(selectedCharacterClassDefinition.itemDefinitionBaseQuantities)}</span>, or <span className={!selectedItemSet ? "selected-item-set" : ""}>{"(B)"} {selectedCharacterClassDefinition.startingGp} GP</span></p>
+                    <p><span className={selectedItemSet ? "selected-item-set" : ""} onClick={() => handleItemSetSelection(true)}>{"(A)"} {printItemSet(selectedCharacterClassDefinition.itemDefinitionBaseQuantities)}</span>, or <span className={!selectedItemSet ? "selected-item-set" : ""} onClick={() => handleItemSetSelection(false)}>{"(B)"} {selectedCharacterClassDefinition.startingGp} GP</span></p>
                     <div id="item-set-radios" className="flex gap-1 justify-center">
                         <label htmlFor="item-set-a">A</label>
                         <input type="radio" name="item-set" id="item-set-a" checked={selectedItemSet} onChange={() => handleItemSetSelection(true)} />

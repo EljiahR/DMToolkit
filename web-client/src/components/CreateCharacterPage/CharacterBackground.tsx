@@ -35,24 +35,27 @@ const CharacterBackground = ({className = ""}: {className?: string}) => {
     }
 
     return (
-        <div className={className}>
-            <h2>Background</h2>
-            <label htmlFor="background-selection">Choose a background</label>
-            <select id="background-selection" value={selectedBackgroundDefinition ? selectedBackgroundDefinition.id : ""} onChange={(e) => handleBackgroundChange(e.target.value)}>
-                {backgrounds.map((background) => {
-                    return (
-                        <option key={`background=${background.id}`} value={background.id}>{background.name}</option>
-                    )
-                })}
-            </select>
+        <div id="background-page" className={className}>
+            <div className="section-header">
+                <h2>Background</h2>
+                <label htmlFor="background-selection">Choose a background</label>
+                <select id="background-selection" value={selectedBackgroundDefinition ? selectedBackgroundDefinition.id : ""} onChange={(e) => handleBackgroundChange(e.target.value)}>
+                    {backgrounds.map((background) => {
+                        return (
+                            <option key={`background=${background.id}`} value={background.id}>{background.name}</option>
+                        )
+                    })}
+                </select>
+            </div>
+            
             {selectedBackgroundDefinition &&
-            <div>
+            <div id="selected-background-display" className="section-display">
                 <h3>{selectedBackgroundDefinition.name}</h3>
                 <p>{selectedBackgroundDefinition.description}</p>
-                <div>
-                    <p>Item set:</p>
-                    <p>{"(A)"} {printItemSet(selectedBackgroundDefinition.itemDefinitionBaseQuantities)}, or {"(B)"} {selectedBackgroundDefinition.startingGp} GP</p>
-                    <div>
+                <div id="item-sets">
+                    <p>Item sets:</p>
+                    <p><span className={selectedItemSet ? "selected-item-set" : ""} onClick={() => handleItemSetSelection(true)}>{"(A)"} {printItemSet(selectedBackgroundDefinition.itemDefinitionBaseQuantities)}</span>, or <span className={!selectedItemSet ? "selected-item-set" : ""} onClick={() => handleItemSetSelection(false)}>{"(B)"} {selectedBackgroundDefinition.startingGp} GP</span></p>
+                    <div id="item-set-radios" className="flex gap-1 justify-center">
                         <label htmlFor="item-set-a">A</label>
                         <input type="radio" name="item-set" id="item-set-a" checked={selectedItemSet} onChange={() => handleItemSetSelection(true)} />
                         <label htmlFor="item-set-b">B</label>

@@ -68,6 +68,10 @@
     @apply flex flex-col gap-3 py-10
   }
 
+  .section-display {
+    @apply flex-grow flex flex-col gap-3
+  }
+
   .nav-link-fix {
     @apply text-center
   }

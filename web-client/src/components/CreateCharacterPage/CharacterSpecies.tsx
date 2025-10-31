@@ -2,7 +2,7 @@ import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
 import { setSpeciesBase } from "../../lib/redux/selectedCharacterSlice";
 
-export default function({className = ""}: {className?: string}) {
+const CharacterSpecies = ({className = ""}: {className?: string}) => {
     const allSpecies = useAppSelector((state) => state.dmTools.speciesDefinitions);
     const selectedSpeciesDefinition = useAppSelector((state) => state.selectedCharacter.speciesInstance?.definition);
     const selectedLineageDefinition = useAppSelector((state) => state.selectedCharacter.speciesInstance?.lineageInstance?.definition);
@@ -29,26 +29,29 @@ export default function({className = ""}: {className?: string}) {
     }  
 
     return (
-        <div className={className}>
-            <h2>Species</h2>    
-            <label htmlFor="species-selector">Select a species</label>
-            <select id="species-selector" value={selectedSpeciesDefinition ? selectedSpeciesDefinition.id : ""} onChange={(e) => handleSpeciesChange(e.target.value)}>
-                {allSpecies.map((species) => {
-                    return (
-                        <option key={`species-${species.id}`} value={species.id}>{species.name}</option>
-                    )
-                })}
-            </select>
-            <label htmlFor="lineage-selector">Select a lineage</label>
-            <select id="lineage-selector">
-                {selectedSpeciesDefinition?.lineageDefinitions.map((lineage) => {
-                    return (
-                        <option key={`lineage-${lineage.id}`} value={lineage.id}>{lineage.name}</option>
-                    )
-                })}
-            </select>
+        <div id="species-page" className={className}>
+            <div className="section-header">
+                <h2>Species</h2>    
+                <label htmlFor="species-selector">Select a species</label>
+                <select id="species-selector" value={selectedSpeciesDefinition ? selectedSpeciesDefinition.id : ""} onChange={(e) => handleSpeciesChange(e.target.value)}>
+                    {allSpecies.map((species) => {
+                        return (
+                            <option key={`species-${species.id}`} value={species.id}>{species.name}</option>
+                        )
+                    })}
+                </select>
+                <label htmlFor="lineage-selector">Select a lineage</label>
+                <select id="lineage-selector">
+                    {selectedSpeciesDefinition?.lineageDefinitions.map((lineage) => {
+                        return (
+                            <option key={`lineage-${lineage.id}`} value={lineage.id}>{lineage.name}</option>
+                        )
+                    })}
+                </select>
+            </div>
+            
             {(selectedSpeciesDefinition && selectedLineageDefinition) &&
-                <div id="species-display">
+                <div id="species-display" className="section-display">
                     <h3>{selectedSpeciesDefinition.name}</h3>
                     <h4>{selectedLineageDefinition.name}</h4>
                     <p>{selectedSpeciesDefinition.description}</p>
@@ -58,3 +61,5 @@ export default function({className = ""}: {className?: string}) {
         </div>
     )
 }
+
+export default CharacterSpecies;
