@@ -11,38 +11,42 @@
     @apply outline-none ring;
   }
 
-  .btn {
+  .btn:not(.nav-link-fix),
+  .nav-link-fix > p {
     @apply shadow text-white font-bold py-2 px-4 rounded
   }
-  .btn-secondary {
+  .btn-secondary:not(.nav-link-fix),
+  .nav-link-fix.btn-secondary > p {
     background-color: #BFDBF7;
     color: black;
   }
-  .btn-primary {
+  .btn-primary:not(.nav-link-fix),
+  .nav-link-fix.btn-primary > p {
     background-color: #1F7A8C;
   }
-  .btn-tertiary {
+  .btn-tertiary:not(.nav-link-fix),
+  .nav-link-fix.btn-tertiary > p {
     background-color: #E1E5F2;
     color: black;
   }
-  .btn:focus {
+  .btn:not(.nav-link-fix):focus,
+  .nav-link-fix > p:focus {
     @apply ring outline-none
   }
-  .btn-secondary:hover {
+  .btn-secondary:not(.nav-link-fix):hover,
+  .nav-link-fix.btn-secondary:hover > p {
     background-color: #cfe3f8;
     border-color: black;
   }
-  .btn-primary:hover {
+  .btn-primary:not(.nav-link-fix):hover,
+  .nav-link-fix.btn-primary:hover > p {
     background-color: #348fa1;
     border-color: black;
   }
-  .btn-tertiary:hover {
+  .btn-tertiary:not(.nav-link-fix):hover,
+  .nav-link-fix.btn-tertiary:hover > p {
     background-color: #f1f2f7;
     border-color: black;
-  }
-
-  .link-fix {
-    @apply w-full
   }
 
   select {
@@ -71,6 +75,8 @@
   .section-header {
     @apply flex flex-col gap-3 py-10
   }
+
+
 }
 
 /* Pallette in case I forget: https://coolors.co/022b3a-1f7a8c-bfdbf7-e1e5f2-ffffff */
@@ -126,7 +132,13 @@ h3 {
   line-height: 2.75rem;
 }
 
-button {
+h4 {
+  font-size: 2rem;
+  line-height: 2.25rem;
+}
+
+button,
+.nav-link-fix > p {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -137,17 +149,25 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
+button:hover,
+.nav-link-fix > p:hover {
   border-color: #646cff;
 }
 button:focus,
-button:focus-visible {
+button:focus-visible,
+.nav-link-fix > p:focus,
+.nav-link-fix > p:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
 .selected-item-set {
   color: #F38851;
 }
+
+#mobile-nav-btn {
+  background-color: #FFFFFF;
+}
+
 
 @supports (font-variation-settings: normal) {
   :root { font-family: InterVariable, sans-serif; }

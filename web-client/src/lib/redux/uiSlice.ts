@@ -4,7 +4,8 @@ import type { RootState } from "./store";
 
 const initialState: UISlice = {
     characterDisplayNavigation: "Overview",
-    characterCreationNavigationIndex: 0
+    characterCreationNavigationIndex: 0,
+    mobileMenuIsVisible: false
 };
 
 export const uiSlice = createSlice({
@@ -30,6 +31,9 @@ export const uiSlice = createSlice({
            if (state.characterCreationNavigationIndex > 0) {
                 state.characterCreationNavigationIndex -= 1;
            }
+        },
+        setMobileMenuVisibility: (state, action: PayloadAction<boolean>) => {
+            state.mobileMenuIsVisible = action.payload;
         }
     }
 });
@@ -42,5 +46,5 @@ export const selectCharacterCreationIndex = (state: RootState) => {
     return state.ui.characterCreationNavigationIndex;
 }
 
-export const { setCharacterDisplay, setCharacterCreationIndex, increaseCharacterCreationIndex, decreaseCharacterCreationIndex } = uiSlice.actions;
+export const { setCharacterDisplay, setCharacterCreationIndex, increaseCharacterCreationIndex, decreaseCharacterCreationIndex, setMobileMenuVisibility } = uiSlice.actions;
 export default uiSlice.reducer;

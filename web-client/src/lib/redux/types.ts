@@ -13,6 +13,7 @@ export const CharacterCreationNavigationOptions = ["Start", "Classes", "Backgrou
 export interface UISlice {
     characterDisplayNavigation: CharacterDisplayNavigationOptions;
     characterCreationNavigationIndex: CharacterCreationNavigationIndexes;
+    mobileMenuIsVisible: boolean;
 }
 
 export type AbilityScoreAbbreviations = "str" | "dex" | "con" | "int" | "wis" | "cha";
