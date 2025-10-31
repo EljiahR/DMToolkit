@@ -1,4 +1,4 @@
-import { Link, useNavigate, useSearchParams } from "react-router";
+import { NavLink, useNavigate, useSearchParams } from "react-router";
 import { useAuth } from "./AuthProvider";
 import { useState } from "react";
 
@@ -34,9 +34,9 @@ const AuthForm = () => {
                 </div>
                 <button className="btn btn-primary" type="submit">Sign In</button>
             </form>
-            <Link to="/auth/register">
-                <button className="link-fix btn btn-secondary">Register</button>
-            </Link>
+            <NavLink to="/auth/register" className="btn btn-secondary">
+                <p>Register</p>
+            </NavLink>
             <button className="btn btn-tertiary" onClick={handleAnonymous}>Continue without account</button>
         </div>
         
