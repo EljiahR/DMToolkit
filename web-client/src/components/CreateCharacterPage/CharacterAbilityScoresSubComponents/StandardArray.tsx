@@ -50,22 +50,27 @@ const StandardArray = () => {
         <div id="standard-array-display">
             <h3>Standard Array</h3>
             <div id="standard-array">
-                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                    <SortableContext items={items}>
-                        {items.map(item => <SortableScore key={item} score={scores[item]} bonus={plusTwoBonus?.abbreviation == item ? 2 : plusOneBonus?.abbreviation == item ? 1 : 0} />)}
-                    </SortableContext>
-                </DndContext>
+                {/* <BrowserView> */}
+                    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                        <SortableContext items={items}>
+                            {items.map(item => <SortableScore key={item} score={scores[item]} bonus={plusTwoBonus?.abbreviation == item ? 2 : plusOneBonus?.abbreviation == item ? 1 : 0} />)}
+                        </SortableContext>
+                    </DndContext>
+                {/* </BrowserView> */}
+                {/* <MobileView>
+                    {orderedItems.map(item => <TappableScore key={item} score={scores[item]} bonus={plusTwoBonus?.abbreviation == item ? 2 : plusOneBonus?.abbreviation == item ? 1 : 0} handleOnClick={handleOnClick} />)}
+                </MobileView> */}
             </div>
         </div>
     )
 }
 
-interface SortableScoreProps {
+interface ScoreProps {
     score: AbilityScoreInstance;
     bonus: number;
 }
 
-const SortableScore = ({ score, bonus }: SortableScoreProps) => {
+const SortableScore = ({ score, bonus }: ScoreProps) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: score.id});
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -73,7 +78,9 @@ const SortableScore = ({ score, bonus }: SortableScoreProps) => {
     };
 
     return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>{`${score.definition.name}: ${bonus > 0 ? `${score.score} +${bonus}` : score.score}`}</div>
+        <div id={`sortable-${score.definition.name}`} ref={setNodeRef} style={style} {...attributes} {...listeners} className="touch-none">
+            {`${score.definition.name}: ${bonus > 0 ? `${score.score} +${bonus}` : score.score}`}
+        </div>
     )
 }
 

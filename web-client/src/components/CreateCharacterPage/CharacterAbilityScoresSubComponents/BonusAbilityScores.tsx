@@ -27,7 +27,7 @@ const BonusAbilityScore = () => {
     }
     
     return (
-        <div>
+        <div id="bonus-ability-scores" className="pb-1">
             <label htmlFor="plusTwo">+2</label>
             <select id="plusTwo" value={plusTwoBonus?.abbreviation ?? ""} onChange={(e) => handleBonusChange(e.target.value, 0)}>
                 <option value=""></option>
