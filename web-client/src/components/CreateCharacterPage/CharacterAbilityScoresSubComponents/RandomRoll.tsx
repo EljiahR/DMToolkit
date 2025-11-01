@@ -25,7 +25,7 @@ const RandomRoll = () => {
     
     return (
         <div id="random-roll-display">
-            <h3>Random Roll</h3>
+            <h4>Random Roll</h4>
             <button onClick={handleAllReroll}>Reroll All</button>
             <div id="random-roll">
                 {Object.keys(scores).map((key) => {
@@ -45,7 +45,12 @@ interface ScoreDisplayProps {
 const ScoreDisplay = ({ score, handleScoreReroll, bonus }: ScoreDisplayProps) => {
     return (
         <div id={`${score.id}-score`}>
-            <p>{`${score.definition.name}: ${bonus > 0 ? `${score.score} +${bonus}` : score.score}`}</p>
+            <p>
+                {`${score.definition.name}: ${score.score}`}
+                {bonus > 0 &&
+                    <span className="font-bold">{` +${bonus}`}</span>
+                }
+            </p>            
             <button onClick={() => handleScoreReroll(score.id)}>Roll</button>
         </div>
     )

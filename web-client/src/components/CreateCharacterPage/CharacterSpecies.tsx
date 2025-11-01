@@ -32,22 +32,28 @@ const CharacterSpecies = ({className = ""}: {className?: string}) => {
         <div id="species-page" className={className}>
             <div className="section-header">
                 <h2>Species</h2>    
-                <label htmlFor="species-selector">Select a species</label>
-                <select id="species-selector" value={selectedSpeciesDefinition ? selectedSpeciesDefinition.id : ""} onChange={(e) => handleSpeciesChange(e.target.value)}>
-                    {allSpecies.map((species) => {
-                        return (
-                            <option key={`species-${species.id}`} value={species.id}>{species.name}</option>
-                        )
-                    })}
-                </select>
-                <label htmlFor="lineage-selector">Select a lineage</label>
-                <select id="lineage-selector">
-                    {selectedSpeciesDefinition?.lineageDefinitions.map((lineage) => {
-                        return (
-                            <option key={`lineage-${lineage.id}`} value={lineage.id}>{lineage.name}</option>
-                        )
-                    })}
-                </select>
+                <div id="species-selection" className="section-selection">
+                    <label htmlFor="species-selector">Select a species</label>
+                    <select id="species-selector" value={selectedSpeciesDefinition ? selectedSpeciesDefinition.id : ""} onChange={(e) => handleSpeciesChange(e.target.value)}>
+                        {allSpecies.map((species) => {
+                            return (
+                                <option key={`species-${species.id}`} value={species.id}>{species.name}</option>
+                            )
+                        })}
+                    </select>
+                </div>
+                <div id="lineage-seelction" className="section-selection">
+                    <label htmlFor="lineage-selector">Select a lineage</label>
+                    <select id="lineage-selector">
+                        {selectedSpeciesDefinition?.lineageDefinitions.map((lineage) => {
+                            return (
+                                <option key={`lineage-${lineage.id}`} value={lineage.id}>{lineage.name}</option>
+                            )
+                        })}
+                    </select>
+                </div>
+                
+                
             </div>
             
             {(selectedSpeciesDefinition && selectedLineageDefinition) &&

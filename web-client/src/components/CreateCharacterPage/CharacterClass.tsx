@@ -39,7 +39,7 @@ const CharacterClass = ({className = ""}: {className?: string}) => {
             <div className="section-header">
                 <h2>Class</h2>
                 <p>Small description describing what exactly a class represents.</p>
-                <div id="class-selection" className="flex justify-center gap-3">
+                <div id="class-selection" className="section-selection">
                     <label htmlFor="class-selector" className="self-center">Select a class</label>
                     <select id="class-selector" value={selectedCharacterClassDefinition ? selectedCharacterClassDefinition.id : ""} onChange={(e) => handleClassSelection(e.target.value)} className="selector">
                         {availableCharacterClasses.map((characterClass) => {

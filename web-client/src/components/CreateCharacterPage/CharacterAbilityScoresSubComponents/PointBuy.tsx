@@ -28,7 +28,7 @@ const PointBuy = () => {
 
     return (
         <div id="point-buy-display">
-            <h3>Point Buy</h3>
+            <h4>Point Buy</h4>
             <div id="point-buy">
                 <div id="scores">
                     {Object.keys(scores).map((key) => {
@@ -50,7 +50,12 @@ interface ScoreDisplayProps {
 const ScoreDisplay = ({ score, handleScoreChange, bonus }: ScoreDisplayProps) => {
     return (
         <div id={`${score.id}-display`}>
-            <p>{`${score.definition.name}: ${bonus > 0 ? `${score.score} +${bonus}` : score.score}`}</p>
+            <p>
+                {`${score.definition.name}: ${score.score}`}
+                {bonus > 0 &&
+                    <span className="font-bold">{` +${bonus}`}</span>
+                }
+            </p>
             <div>
                 <button onClick={() => handleScoreChange(score, true)}>+</button>
                 <button onClick={() => handleScoreChange(score, false)}>-</button>

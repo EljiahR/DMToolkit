@@ -13,14 +13,17 @@ const CharacterAbilityScores = ({className = ""}: {className?: string}) => {
         <div id="ability-scores-page" className={className}>
             <div className="section-header">
                 <h2>Ability Scores</h2>
-                <label htmlFor="score-method">Select the method</label>
-                <select id="score-method" value={selectedMethod} onChange={(e) => setSelectedMethod(e.target.value)}>
-                    <option value="standard">Standard Array</option>
-                    <option value="point">Point Buy</option>
-                    <option value="random">Random Roll</option>
-                    <option value="class-default">Class Default</option>
-                    <option value="manual">Manual Entry</option>
-                </select>
+                <div id="ability-score-method-selection" className="section-selection">
+                    <label htmlFor="score-method">Select the method</label>
+                    <select id="score-method" value={selectedMethod} onChange={(e) => setSelectedMethod(e.target.value)}>
+                        <option value="standard">Standard Array</option>
+                        <option value="point">Point Buy</option>
+                        <option value="random">Random Roll</option>
+                        <option value="class-default">Class Default</option>
+                        <option value="manual">Manual Entry</option>
+                    </select>
+                </div>
+                
             </div>
             <div id="selected-score-method" className="section-display">
                     {selectedMethod == "standard" ?

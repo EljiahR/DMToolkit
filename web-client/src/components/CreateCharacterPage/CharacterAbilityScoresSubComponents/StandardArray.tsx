@@ -48,7 +48,7 @@ const StandardArray = () => {
     
     return (
         <div id="standard-array-display">
-            <h3>Standard Array</h3>
+            <h4>Standard Array</h4>
             <div id="standard-array">
                 {/* <BrowserView> */}
                     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
@@ -79,7 +79,12 @@ const SortableScore = ({ score, bonus }: ScoreProps) => {
 
     return (
         <div id={`sortable-${score.definition.name}`} ref={setNodeRef} style={style} {...attributes} {...listeners} className="touch-none">
-            {`${score.definition.name}: ${bonus > 0 ? `${score.score} +${bonus}` : score.score}`}
+            <p>
+                {`${score.definition.name}: ${score.score}`}
+                {bonus > 0 &&
+                    <span className="font-bold">{` +${bonus}`}</span>
+                }
+            </p>
         </div>
     )
 }

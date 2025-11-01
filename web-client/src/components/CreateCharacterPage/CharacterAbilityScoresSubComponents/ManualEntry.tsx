@@ -21,7 +21,7 @@ const ManualEntry = () => {
     
     return (
         <div id="manual-entry-display">
-            <h3>Manual Entry</h3>
+            <h4>Manual Entry</h4>
             <div id="manual-entry">
                 {Object.keys(scores).map((key) => {
                     return (

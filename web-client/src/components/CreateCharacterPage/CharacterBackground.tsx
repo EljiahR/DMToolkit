@@ -38,14 +38,17 @@ const CharacterBackground = ({className = ""}: {className?: string}) => {
         <div id="background-page" className={className}>
             <div className="section-header">
                 <h2>Background</h2>
-                <label htmlFor="background-selection">Choose a background</label>
-                <select id="background-selection" value={selectedBackgroundDefinition ? selectedBackgroundDefinition.id : ""} onChange={(e) => handleBackgroundChange(e.target.value)}>
-                    {backgrounds.map((background) => {
-                        return (
-                            <option key={`background=${background.id}`} value={background.id}>{background.name}</option>
-                        )
-                    })}
-                </select>
+                <div id="background-selection" className="section-selection">
+                    <label htmlFor="background-selector">Choose a background</label>
+                    <select id="background-selector" value={selectedBackgroundDefinition ? selectedBackgroundDefinition.id : ""} onChange={(e) => handleBackgroundChange(e.target.value)}>
+                        {backgrounds.map((background) => {
+                            return (
+                                <option key={`background=${background.id}`} value={background.id}>{background.name}</option>
+                            )
+                        })}
+                    </select>
+                </div>
+                
             </div>
             
             {selectedBackgroundDefinition &&

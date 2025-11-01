@@ -22,12 +22,21 @@ const ClassDefault = () => {
     
     return (
         <div id="class-default-display">
-            <h3>Class Default</h3>
+            <h4>Class Default</h4>
             <div id="class-default">
                 {Object.keys(scores).map((key) => {
                     return (
                         <div key={`$default-${key}`}>
-                            <p>{`${scores[key].definition.name}: ${scores[key].score}${plusTwoBonus?.id == scores[key].id ? '+2' : plusOneBonus?.id == scores[key].id ? '+1' : ''}`}</p>
+                            <p>
+                                {`${scores[key].definition.name}: ${scores[key].score}`}
+                                {
+                                    plusTwoBonus?.id == scores[key].definition.id ?
+                                        <span className="font-bold">{" +2"}</span>
+                                    : plusOneBonus?.id == scores[key].definition.id ?
+                                        <span className="font-bold">{" +1"}</span>
+                                        : <></>
+                                }
+                            </p>
                         </div>
                     )
                 })}
