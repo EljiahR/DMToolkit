@@ -23,6 +23,7 @@ import type { Spell } from "../types/dm-tool-types/entities/spell";
 import { ArmorCategory } from "../types/dm-tool-types/enums/armorCategory";
 import type { SubclassInstance } from "../types/dm-tool-types/instances/subclassInstance";
 import { itemDefinitionTableToInstance } from "../dm-tools/instanceGenerators";
+import { ScoreAbbreviations, StandardScoresArray } from "../dm-tools/staticElements";
 
 const initialState: Character = generateEmptyCharacter();
 
@@ -38,7 +39,7 @@ export const selectedCharacterSlice = createSlice({
             state.tempHp = 0;
             state.characterClassInstances = [classDefinitionReset(action.payload.defaultClass, "")];
             state.backgroundInstance = backgroundDefinitionReset(action.payload.defaultBackground, "");
-            state.speciesInstance = speciesDefinitionReset(action.payload.defaultSpecies, action.payload.defaultSpecies.size, "", "");
+            state.speciesInstance = speciesDefinitionReset(action.payload.defaultSpecies, action.payload.defaultSpecies.sizes, "", "");
             state.scores = getStandardScores();
             state.physicalDescription = "";
             state.personality = "";
@@ -79,7 +80,7 @@ export const selectedCharacterSlice = createSlice({
             }
         },
         setSpeciesBase: (state, action: PayloadAction<SpeciesDefinition>) => {
-            state.speciesInstance = speciesDefinitionReset(action.payload, action.payload.size, state.speciesInstance?.id ?? "", state.speciesInstance?.lineageInstance?.id ?? "");
+            state.speciesInstance = speciesDefinitionReset(action.payload, action.payload.sizes, state.speciesInstance?.id ?? "", state.speciesInstance?.lineageInstance?.id ?? "");
         },
         setLineageBase: (state, action: PayloadAction<LineageDefinition>) => {
             if (state.speciesInstance) {
@@ -98,13 +99,30 @@ export const selectedCharacterSlice = createSlice({
             const { scoreAbbreviationA, scoreAbbreviationB } = action.payload;
             [state.scores[scoreAbbreviationA].score, state.scores[scoreAbbreviationB].score] = [state.scores[scoreAbbreviationB].score, state.scores[scoreAbbreviationA].score]
         },
+        shiftStandardScores: (state, action: PayloadAction<{scoreAbbreviationA: AbilityScoreAbbreviations, scoreAbbreviationB: AbilityScoreAbbreviations}>) => {
+            const {scoreAbbreviationA, scoreAbbreviationB } = action.payload;
+            const initialIndex = StandardScoresArray.findIndex((num) => num == state.scores[scoreAbbreviationA].score);
+            const targetIndex = StandardScoresArray.findIndex((num) => num == state.scores[scoreAbbreviationB].score);
+            const wentDown = initialIndex < targetIndex;
+            ScoreAbbreviations.forEach((abbreviation) => {
+                if (abbreviation == scoreAbbreviationA) {
+                    state.scores[abbreviation].score = StandardScoresArray[targetIndex]
+                } else if (wentDown && state.scores[abbreviation].score < StandardScoresArray[initialIndex] && state.scores[abbreviation].score >= StandardScoresArray[targetIndex]) {
+                    const currentIndex = StandardScoresArray.findIndex((num) => num == state.scores[abbreviation].score);
+                    state.scores[abbreviation].score = StandardScoresArray[currentIndex - 1];
+                } else if (!wentDown && state.scores[abbreviation].score > StandardScoresArray[initialIndex] && state.scores[abbreviation].score <= StandardScoresArray[targetIndex]) {
+                    const currentIndex = StandardScoresArray.findIndex((num) => num == state.scores[abbreviation].score);
+                    state.scores[abbreviation].score = StandardScoresArray[currentIndex + 1];
+                }
+            });
+        },
         setScoresToStandard: (state) => {
-            state.scores.str.score = 15;
-            state.scores.dex.score = 14;
-            state.scores.con.score = 13;
-            state.scores.int.score = 12;
-            state.scores.wis.score = 10;
-            state.scores.cha.score = 8;
+            state.scores.str.score = StandardScoresArray[0];
+            state.scores.dex.score = StandardScoresArray[1];
+            state.scores.con.score = StandardScoresArray[2];
+            state.scores.int.score = StandardScoresArray[3];
+            state.scores.wis.score = StandardScoresArray[4];
+            state.scores.cha.score = StandardScoresArray[5];
         },
         setScoresToBase: (state) => {
             state.scores.str.score = 8;
@@ -445,5 +463,5 @@ export const selectPreparedSpells = createSelector(
     }, [])
 );
 
-export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setCharacterClassItemSet, setBackgroundDefinition, setBackgroundScores, setBackgroundItemSet, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws, setNewCharacterInventory } = selectedCharacterSlice.actions;
+export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setCharacterClassItemSet, setBackgroundDefinition, setBackgroundScores, setBackgroundItemSet, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, shiftStandardScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws, setNewCharacterInventory } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

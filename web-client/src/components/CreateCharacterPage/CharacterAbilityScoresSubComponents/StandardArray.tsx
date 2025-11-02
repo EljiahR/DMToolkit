@@ -1,9 +1,9 @@
 import { useLayoutEffect, useState } from "react";
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from "@dnd-kit/core";
-import { arraySwap, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
-import { setScoresToStandard, swapScores } from "../../../lib/redux/selectedCharacterSlice";
+import { setScoresToStandard, shiftStandardScores } from "../../../lib/redux/selectedCharacterSlice";
 import type { AbilityScoreAbbreviations } from "../../../lib/redux/types";
 import type { AbilityScoreInstance } from "../../../lib/types/dm-tool-types/instances/abilityScoreInstance";
 
@@ -26,10 +26,16 @@ const StandardArray = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleScoreSwap = (valueA: string, valueB: string) => {
+    // const handleScoreSwap = (valueA: string, valueB: string) => {
+    //     const scoreAbbreviationA = valueA as AbilityScoreAbbreviations;
+    //     const scoreAbbreviationB = valueB as AbilityScoreAbbreviations;
+    //     dispatch(swapScores({scoreAbbreviationA, scoreAbbreviationB}));
+    // }
+
+    const handleScoreChange = (valueA: string, valueB: string) => {
         const scoreAbbreviationA = valueA as AbilityScoreAbbreviations;
         const scoreAbbreviationB = valueB as AbilityScoreAbbreviations;
-        dispatch(swapScores({scoreAbbreviationA, scoreAbbreviationB}));
+        dispatch(shiftStandardScores({scoreAbbreviationA, scoreAbbreviationB}))
     }
 
     const handleDragEnd = (event: DragEndEvent) => {
@@ -39,10 +45,11 @@ const StandardArray = () => {
                 const oldIndex = items.indexOf(active.id.toString() as AbilityScoreAbbreviations);
                 const newIndex = items.indexOf(over.id.toString() as AbilityScoreAbbreviations);
                 
-                return arraySwap(items, oldIndex, newIndex);
+                return arrayMove(items, oldIndex, newIndex);
             });
 
-            handleScoreSwap(active.id.toString(), over.id.toString());
+            // handleScoreSwap(active.id.toString(), over.id.toString());
+            handleScoreChange(active.id.toString(), over.id.toString());
         }
     }
     

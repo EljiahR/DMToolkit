@@ -39,11 +39,11 @@ export const lineageDefinitionReset = (definition: LineageDefinition, id: string
     }
 } 
 
-export const speciesDefinitionReset = (definition: SpeciesDefinition, size: string, id: string, lineageId: string): SpeciesInstance => {
+export const speciesDefinitionReset = (definition: SpeciesDefinition, sizes: string[], id: string, lineageId: string): SpeciesInstance => {
     return {
         id,
         featInstances: [],
-        size,
+        size: sizes[0],
         lineageInstance: lineageDefinitionReset(definition.lineageDefinitions[0], lineageId),
         definition
     }

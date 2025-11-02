@@ -1,3 +1,4 @@
+import type { AbilityScoreAbbreviations } from "../redux/types";
 import type { Piece } from "../types/dm-tool-types/items/bases/worth";
 
 export const Copper: Piece = {
@@ -34,3 +35,7 @@ export const Platinum: Piece = {
     nextStep: 0,
     amount: 0
 };
+
+export const StandardScoresArray = [15, 14, 13, 12, 10, 8];
+
+export const ScoreAbbreviations: AbilityScoreAbbreviations[] = ["str", "dex", "con", "int", "wis", "cha"];
