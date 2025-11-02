@@ -30,7 +30,7 @@ const PointBuy = () => {
         <div id="point-buy-display">
             <h4>Point Buy</h4>
             <div id="point-buy">
-                <div id="scores">
+                <div id="scores" className="grid grid-cols-2 grid-rows-3">
                     {Object.keys(scores).map((key) => {
                         return <ScoreDisplay key={`point-buy-${key}`} score={scores[key]} handleScoreChange={handleScoreChange} bonus={plusTwoBonus?.abbreviation == key ? 2 : plusOneBonus?.abbreviation == key ? 1 : 0} />
                     })}
@@ -49,17 +49,19 @@ interface ScoreDisplayProps {
 
 const ScoreDisplay = ({ score, handleScoreChange, bonus }: ScoreDisplayProps) => {
     return (
-        <div id={`${score.id}-display`}>
+        <div id={`${score.id}-display`} className="flex gap-1 items-center p-1">
+            <div id={`${score.definition.name}-buy`} className="flex flex-col border rounded py-1 btn-tertiary">
+                <button onClick={() => handleScoreChange(score, true)} className="px-2 pb-1">+</button>
+                <hr />
+                <button onClick={() => handleScoreChange(score, false)} className="px-2 pt-1">-</button>
+            </div>
             <p>
                 {`${score.definition.name}: ${score.score}`}
                 {bonus > 0 &&
                     <span className="font-bold">{` +${bonus}`}</span>
                 }
             </p>
-            <div>
-                <button onClick={() => handleScoreChange(score, true)}>+</button>
-                <button onClick={() => handleScoreChange(score, false)}>-</button>
-            </div>
+            
         </div>
     )
 }
