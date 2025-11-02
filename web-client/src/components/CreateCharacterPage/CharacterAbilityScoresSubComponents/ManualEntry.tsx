@@ -22,7 +22,7 @@ const ManualEntry = () => {
     return (
         <div id="manual-entry-display">
             <h4>Manual Entry</h4>
-            <div id="manual-entry">
+            <div id="manual-entry" className="flex flex-col gap-1 items-center">
                 {Object.keys(scores).map((key) => {
                     return (
                         <ScoreComponent key={`manual-${key}`} score={scores[key]} updateScore={updateScore} bonus={plusTwoBonus?.abbreviation == key ? 2 : plusOneBonus?.abbreviation == key ? 1 : 0} />
@@ -41,14 +41,14 @@ interface ScoreComponentProps {
 
 const ScoreComponent = ({ score, updateScore, bonus}: ScoreComponentProps) => {
     return (
-        <div>
+        <div id={score.definition.name + "-display"} className="flex gap-1 items-center justify-">
             <label htmlFor={`${score.id}-input`}>{score.definition.name}: </label>
             <input type="number" id={`${score.id}-input`} value={score.score} onChange={(e) => updateScore(score.id, e.target.value)} />
-            <div>
+            <p className="font-bold">
                 {bonus > 0 &&
                     `+${bonus}`
                 }
-            </div>
+            </p>
         </div>
     )
 }

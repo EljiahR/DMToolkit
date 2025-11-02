@@ -171,6 +171,14 @@ h4 {
   :root { font-family: InterVariable, sans-serif; }
 }
 
+input {
+  border: 1px solid gray;
+  border-radius: 2px;
+  color: black;
+  padding: 2px;
+  width: 5rem;
+}
+
 /*
 @media (prefers-color-scheme: light) {
   :root {
