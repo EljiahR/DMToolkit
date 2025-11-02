@@ -26,12 +26,12 @@ const RandomRoll = () => {
     return (
         <div id="random-roll-display">
             <h4>Random Roll</h4>
-            <button onClick={handleAllReroll}>Reroll All</button>
-            <div id="random-roll">
+            <div id="random-roll" className="grid grid-cols-2 grid-rows-3 gap-2">
                 {Object.keys(scores).map((key) => {
                     return <ScoreDisplay key={`${key}-score`} score={scores[key]} handleScoreReroll={handleScoreReroll} bonus={plusTwoBonus?.abbreviation == key ? 2 : plusOneBonus?.abbreviation == key ? 1 : 0} />
                 })}
             </div>
+            <button onClick={handleAllReroll} className="btn btn-tertiary">Reroll All</button>
         </div>
     );
 };
@@ -51,7 +51,7 @@ const ScoreDisplay = ({ score, handleScoreReroll, bonus }: ScoreDisplayProps) =>
                     <span className="font-bold">{` +${bonus}`}</span>
                 }
             </p>            
-            <button onClick={() => handleScoreReroll(score.id)}>Roll</button>
+            <button onClick={() => handleScoreReroll(score.id)} className="btn btn-tertiary">Roll</button>
         </div>
     )
 }

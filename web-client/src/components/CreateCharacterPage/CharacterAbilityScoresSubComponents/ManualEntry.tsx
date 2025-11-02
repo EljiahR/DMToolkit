@@ -22,7 +22,7 @@ const ManualEntry = () => {
     return (
         <div id="manual-entry-display">
             <h4>Manual Entry</h4>
-            <div id="manual-entry" className="flex flex-col gap-1 items-center">
+            <div id="manual-entry" className="grid grid-cols-8 grid-rows-6 gap-x-2 items-center">
                 {Object.keys(scores).map((key) => {
                     return (
                         <ScoreComponent key={`manual-${key}`} score={scores[key]} updateScore={updateScore} bonus={plusTwoBonus?.abbreviation == key ? 2 : plusOneBonus?.abbreviation == key ? 1 : 0} />
@@ -41,15 +41,15 @@ interface ScoreComponentProps {
 
 const ScoreComponent = ({ score, updateScore, bonus}: ScoreComponentProps) => {
     return (
-        <div id={score.definition.name + "-display"} className="flex gap-1 items-center justify-">
-            <label htmlFor={`${score.id}-input`}>{score.definition.name}: </label>
-            <input type="number" id={`${score.id}-input`} value={score.score} onChange={(e) => updateScore(score.id, e.target.value)} />
-            <p className="font-bold">
+        <>
+            <label htmlFor={`${score.id}-input`} className="col-span-4 text-right">{score.definition.name}: </label>
+            <input type="number" id={`${score.id}-input`} value={score.score} onChange={(e) => updateScore(score.id, e.target.value)} className="col-span-1 w-full pl-1" />
+            <p className="font-bold col-span-2 text-left">
                 {bonus > 0 &&
                     `+${bonus}`
                 }
             </p>
-        </div>
+        </>
     )
 }
 
