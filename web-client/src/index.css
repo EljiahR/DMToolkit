@@ -171,7 +171,7 @@ h4 {
   :root { font-family: InterVariable, sans-serif; }
 }
 
-input {
+input[type="text"],input[type="number"] {
   border: 1px solid gray;
   border-radius: 2px;
   color: black;
