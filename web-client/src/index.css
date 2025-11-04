@@ -149,6 +149,7 @@ h4 {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  box-shadow: 0px 0px 5px #888888;
 }
 
 .btn > p {
@@ -164,14 +165,32 @@ h4 {
 }
 
 .selected-item-set {
-  color: #F38851;
+  color: #e06021;
+}
+
+main {
+  background-color: #E1E5F2;
+  color: black;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 1%
+}
+
+.section-display, .section-header {
+  background-color: white;
+  width: 96%;
+  padding: 1%;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #888888;
 }
 
 @supports (font-variation-settings: normal) {
   :root { font-family: InterVariable, sans-serif; }
 }
 
-input[type="text"],input[type="number"] {
+input[type="number"] {
   border: 1px solid gray;
   border-radius: 2px;
   color: black;

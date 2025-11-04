@@ -17,14 +17,14 @@ const Layout = () => {
     }, [location.pathname]);
     
     return (
-        <div id="layout" className="flex flex-col h-svh">
+        <div id="layout" className="flex flex-col h-svh items-center w-full">
             <BrowserView>
                 <Navbar />
             </BrowserView>
             <MobileView>
                 <MobileNav />
             </MobileView>
-            <main  className="flex flex-col w-full flex-grow">
+            <main>
                 <Outlet />
             </main>
         </div>

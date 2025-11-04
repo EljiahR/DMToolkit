@@ -37,8 +37,8 @@ const CreatePlayerCharacterPage = () => {
     const ActiveSection = sectionIndex < 7 ? components[sectionIndex] : EmptySection;
 
     return (
-        <div id="create-player-character-page" className="h-full flex flex-col">
-            {<ActiveSection className="flex flex-col text-center align-middle justify-between flex-grow" />}
+        <div id="create-player-character-page" className="h-full flex flex-col gap-1">
+            {<ActiveSection className="flex flex-col text-center items-center justify-between flex-grow gap-2" />}
             <CreateCharacterNavigation className="w-full row-start-2 " />
         </div>
     )

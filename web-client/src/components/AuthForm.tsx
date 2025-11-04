@@ -21,7 +21,7 @@ const AuthForm = () => {
     }
     
     return (
-        <div id="auth-section" className="flex flex-col w-screen p-2 gap-1">
+        <div id="auth-section" className="flex flex-col w-full p-2 gap-1">
             <form id="sign-in-form" onSubmit={(e) => handleFormSubmit(e)} className="flex flex-col gap-2">
                 <div className="flex flex-col gap-1">
                     <label htmlFor="sign-in-email" className="text-xl">Username</label>

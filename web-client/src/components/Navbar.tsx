@@ -6,7 +6,7 @@ const Navbar = () => {
     
     return (
         <div id="navbar" className="w-full flex items-center justify-between px-2 py-1">
-            <NavigationLinks className="flex" />
+            <NavigationLinks className="flex gap-1" />
             {username != null && username?.trim() != "" && 
             <div>Hello {username}</div>
             }
