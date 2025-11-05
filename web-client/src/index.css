@@ -15,15 +15,13 @@
     @apply shadow text-white font-bold py-2 px-4 rounded
   }
   .btn.btn-secondary, .btn-secondary{
-    background-color: #BFDBF7;
-    color: black;
+    @apply bg-secondary text-black
   }
   .btn.btn-primary, .btn-primary {
-    background-color: #1F7A8C;
+    @apply bg-primary
   }
   .btn.btn-tertiary, .btn-tertiary{
-    background-color: #E1E5F2;
-    color: black;
+    @apply bg-tertiary text-black
   }
   .btn:focus {
     @apply ring outline-none
@@ -49,11 +47,11 @@
   }
 
   .alignment-radio > label {
-    @apply block font-bold h-full w-full border rounded border-gray-300 px-2 py-5
+    @apply flex justify-center items-center font-bold h-full text-center w-full border rounded border-gray-300 px-2 py-5 bg-tertiary shadow-lg
   }
 
   .alignment-radio:has(input[type="radio"]:checked) > label {
-    @apply bg-blue-500
+    @apply bg-blue-300 border-black
   }
 
   .alignment-radio > label:hover {
@@ -181,7 +179,7 @@ main {
 .section-display, .section-header {
   background-color: white;
   width: 96%;
-  padding: 1%;
+  padding: 0.5rem;
   border-radius: 5px;
   box-shadow: 0px 0px 5px #888888;
 }
@@ -196,6 +194,22 @@ input[type="number"] {
   color: black;
   padding: 2px;
   width: 5rem;
+}
+
+.stroke-secondary {
+  stroke: #BFDBF7;
+}
+
+.bg-primary {
+  background-color: #1F7A8C;
+}
+
+.bg-secondary {
+  background-color: #BFDBF7;
+}
+
+.bg-tertiary {
+  background-color: #E1E5F2;
 }
 
 /*

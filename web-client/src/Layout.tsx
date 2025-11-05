@@ -5,7 +5,7 @@ import { useLocation } from "react-router";
 import { useAppDispatch } from "./lib/redux/hooks";
 import { setMobileMenuVisibility } from "./lib/redux/uiSlice";
 import { useEffect } from "react";
-import { BrowserView, MobileView } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 const Layout = () => {
     const dispatch = useAppDispatch();
@@ -18,12 +18,11 @@ const Layout = () => {
     
     return (
         <div id="layout" className="flex flex-col h-svh items-center w-full">
-            <BrowserView>
-                <Navbar />
-            </BrowserView>
-            <MobileView>
+            {isMobile ?
                 <MobileNav />
-            </MobileView>
+                :
+                <Navbar />
+            }
             <main>
                 <Outlet />
             </main>

@@ -14,8 +14,8 @@ const MobileNav = () => {
 
     return (
         <div id="mobile-nav" className="h-14 w-full flex items-center justify-between p-1">
-            <button id="mobile-nav-btn" className="flex p-1 items-center rounded btn-secondary" onClick={() => handleSetMenuVisibility(true)}>
-                <HamburgerIcon className="h-10 w-10 stroke-black"/>
+            <button id="mobile-nav-btn" className="flex p-1 items-center rounded" onClick={() => handleSetMenuVisibility(true)}>
+                <HamburgerIcon className="h-10 w-10 stroke-white"/>
             </button>
             <div>
                 <p>DMToolkit</p>
