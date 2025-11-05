@@ -79,10 +79,10 @@ export const selectedCharacterSlice = createSlice({
                 state.backgroundInstance.selectedItemSet = action.payload;
             }
         },
-        setSpeciesBase: (state, action: PayloadAction<SpeciesDefinition>) => {
+        setSpeciesDefinition: (state, action: PayloadAction<SpeciesDefinition>) => {
             state.speciesInstance = speciesDefinitionReset(action.payload, action.payload.sizes, state.speciesInstance?.id ?? "", state.speciesInstance?.lineageInstance?.id ?? "");
         },
-        setLineageBase: (state, action: PayloadAction<LineageDefinition>) => {
+        setLineageDefinition: (state, action: PayloadAction<LineageDefinition>) => {
             if (state.speciesInstance) {
                 state.speciesInstance.lineageInstance = lineageDefinitionReset(action.payload, state.speciesInstance.lineageInstance?.id ?? "")
             }
@@ -468,5 +468,5 @@ export const selectPreparedSpells = createSelector(
 
 export const selectCharacterId = (state: RootState) => state.selectedCharacter.id;
 
-export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setCharacterClassItemSet, setBackgroundDefinition, setBackgroundScores, setBackgroundItemSet, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, shiftStandardScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws, setNewCharacterInventory, setNewCharacterId } = selectedCharacterSlice.actions;
+export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setCharacterClassItemSet, setBackgroundDefinition, setBackgroundScores, setBackgroundItemSet, setSpeciesDefinition, setLineageDefinition, setScore, setScores, swapScores, shiftStandardScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws, setNewCharacterInventory, setNewCharacterId } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

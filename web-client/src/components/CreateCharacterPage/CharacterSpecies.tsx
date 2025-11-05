@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
-import { setSpeciesBase } from "../../lib/redux/selectedCharacterSlice";
+import { setLineageDefinition, setSpeciesDefinition } from "../../lib/redux/selectedCharacterSlice";
 
 const CharacterSpecies = ({className = ""}: {className?: string}) => {
     const allSpecies = useAppSelector((state) => state.dmTools.speciesDefinitions);
@@ -13,20 +13,30 @@ const CharacterSpecies = ({className = ""}: {className?: string}) => {
             // TODO: Error handling
         }
         if (allSpecies.length > 0 && (selectedSpeciesDefinition == null || selectedSpeciesDefinition.id == "default")) {
-            dispatch(setSpeciesBase(allSpecies[0]));
+            dispatch(setSpeciesDefinition(allSpecies[0]));
         }
     });
 
     const handleSpeciesChange = (speciesId: string) => {
         const newSpecies = allSpecies.find((speciesSingular) => speciesSingular.id === speciesId);
 
-        if (newSpecies == undefined) {
-            // TODO: Error handling ;)
+        if (newSpecies) {
+            // setSpeciesBase automatically handles the lineage
+            dispatch(setSpeciesDefinition(newSpecies));
         }
 
-        // setSpeciesBase automatically handles the lineage
-        dispatch(setSpeciesBase(newSpecies!));
+        
     }  
+
+    const handleLineageChange = (lineageId: string) => {
+        if (selectedSpeciesDefinition) {
+            const newLineage = selectedSpeciesDefinition.lineageDefinitions.find((lineage) => lineage.id == lineageId);
+
+            if (newLineage) {
+                dispatch(setLineageDefinition(newLineage))
+            }
+        }
+    }
 
     return (
         <div id="species-page" className={className}>
@@ -44,7 +54,7 @@ const CharacterSpecies = ({className = ""}: {className?: string}) => {
                 </div>
                 <div id="lineage-seelction" className="section-selection">
                     <label htmlFor="lineage-selector">Select a lineage</label>
-                    <select id="lineage-selector">
+                    <select id="lineage-selector" value={selectedLineageDefinition ? selectedLineageDefinition.id : ""} onChange={(e) => handleLineageChange(e.target.value)}>
                         {selectedSpeciesDefinition?.lineageDefinitions.map((lineage) => {
                             return (
                                 <option key={`lineage-${lineage.id}`} value={lineage.id}>{lineage.name}</option>
