@@ -218,6 +218,16 @@ input[type="number"] {
   background-color: #E1E5F2;
 }
 
+.draggable-div {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+}
+
+.dragged-div {
+  border-color: #cfe3f8;
+  border-width: 2px;
+}
+
 /*
 @media (prefers-color-scheme: light) {
   :root {

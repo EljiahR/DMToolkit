@@ -39,3 +39,12 @@ export const Platinum: Piece = {
 export const StandardScoresArray = [15, 14, 13, 12, 10, 8];
 
 export const ScoreAbbreviations: AbilityScoreAbbreviations[] = ["str", "dex", "con", "int", "wis", "cha"];
+
+export const ScoreAbbreviationsToString: Record<AbilityScoreAbbreviations, string> = {
+    "str": "Strength",
+    "dex": "Dexterity",
+    "con": "Constitution",
+    "int": "Intelligence",
+    "wis": "Wisdom",
+    "cha": "Charisma"
+}

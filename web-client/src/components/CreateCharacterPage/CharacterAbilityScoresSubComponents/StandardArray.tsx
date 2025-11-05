@@ -1,11 +1,13 @@
 import { useLayoutEffect, useState } from "react";
-import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from "@dnd-kit/core";
+import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent, type DragStartEvent } from "@dnd-kit/core";
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
 import { setScoresToStandard, shiftStandardScores } from "../../../lib/redux/selectedCharacterSlice";
+import DraggableIcon from "../../../assets/draggable-svgrepo-com.svg?react";
 import type { AbilityScoreAbbreviations } from "../../../lib/redux/types";
 import type { AbilityScoreInstance } from "../../../lib/types/dm-tool-types/instances/abilityScoreInstance";
+import { ScoreAbbreviationsToString } from "../../../lib/dm-tools/staticElements";
 
 const StandardArray = () => {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
@@ -40,6 +42,10 @@ const StandardArray = () => {
 
     const handleDragEnd = (event: DragEndEvent) => {
         const {active, over} = event;
+        const draggedDiv = document.getElementById("sortable-" + ScoreAbbreviationsToString[active.id.toString() as AbilityScoreAbbreviations]);
+        if (draggedDiv && draggedDiv.classList.contains("dragged-div")) {
+            draggedDiv.classList.remove("dragged-div");
+        }
         if (over != null && active.id !== over.id) {
             setItems((items) => {
                 const oldIndex = items.indexOf(active.id.toString() as AbilityScoreAbbreviations);
@@ -52,13 +58,19 @@ const StandardArray = () => {
             handleScoreChange(active.id.toString(), over.id.toString());
         }
     }
+
+    const handleDragStart = (event: DragStartEvent) => {
+        const { active } = event;
+        const draggedDiv = document.getElementById("sortable-" + ScoreAbbreviationsToString[active.id.toString() as AbilityScoreAbbreviations]);
+        draggedDiv?.classList.add("dragged-div");
+    }
     
     return (
-        <div id="standard-array-display">
+        <div id="standard-array-display" className="flex flex-col gap-1">
             <h4>Standard Array</h4>
-            <div id="standard-array">
+            <div id="standard-array" className="flex flex-col gap-1 px-3">
                 {/* <BrowserView> */}
-                    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
                         <SortableContext items={items}>
                             {items.map(item => <SortableScore key={item} score={scores[item]} bonus={plusTwoBonus?.abbreviation == item ? 2 : plusOneBonus?.abbreviation == item ? 1 : 0} />)}
                         </SortableContext>
@@ -85,7 +97,8 @@ const SortableScore = ({ score, bonus }: ScoreProps) => {
     };
 
     return (
-        <div id={`sortable-${score.definition.name}`} ref={setNodeRef} style={style} {...attributes} {...listeners} className="touch-none">
+        <div id={`sortable-${score.definition.name}`} ref={setNodeRef} style={style} {...attributes} {...listeners} className="touch-none p-1 flex items-center justify-center border rounded bg-white shadow-sm draggable-div">
+            <DraggableIcon className="h-5 w-5" />
             <p>
                 {`${score.definition.name}: ${score.score}`}
                 {bonus > 0 &&
