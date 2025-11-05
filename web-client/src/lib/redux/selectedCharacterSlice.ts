@@ -203,6 +203,9 @@ export const selectedCharacterSlice = createSlice({
                         return itemDefinitionTableToInstance(itemBase);
                 })]
             }
+        },
+        setNewCharacterId: (state) => {
+            state.id = "1";
         }
     }
 });
@@ -463,5 +466,7 @@ export const selectPreparedSpells = createSelector(
     }, [])
 );
 
-export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setCharacterClassItemSet, setBackgroundDefinition, setBackgroundScores, setBackgroundItemSet, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, shiftStandardScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws, setNewCharacterInventory } = selectedCharacterSlice.actions;
+export const selectCharacterId = (state: RootState) => state.selectedCharacter.id;
+
+export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setCharacterClassItemSet, setBackgroundDefinition, setBackgroundScores, setBackgroundItemSet, setSpeciesBase, setLineageBase, setScore, setScores, swapScores, shiftStandardScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws, setNewCharacterInventory, setNewCharacterId } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

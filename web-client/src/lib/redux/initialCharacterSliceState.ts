@@ -35,7 +35,8 @@ const characterClass: CharacterClassInstance = {
     subclassInstance: null,
     featInstances: [],
     definition: defaultCharacterClassDefinition,
-    hpRolls: []
+    hpRolls: [],
+    selectedItemSet: true
 }
 
 const defaultBackgroundDefinition: BackgroundDefinition = {
@@ -44,7 +45,9 @@ const defaultBackgroundDefinition: BackgroundDefinition = {
     description: "Default background used for initializng the initial state of the selectedCharacter slice",
     abilityScoreDefinitions: [],
     featDefinition: null,
-    skillProficiencies: []
+    skillProficiencies: [],
+    startingGp: 50,
+    itemDefinitionBaseQuantities: []
 }
 
 const background: BackgroundInstance = {
@@ -52,7 +55,8 @@ const background: BackgroundInstance = {
     abilityScoreDefinitionPlusTwo: null,
     abilityScoreDefinitionPlusOne: null,
     featInstance: null,
-    definition: defaultBackgroundDefinition
+    definition: defaultBackgroundDefinition,
+    selectedItemSet: true
 }
 
 const defaultLineageDefinition: LineageDefinition = {
@@ -74,7 +78,7 @@ const defaultSpeciesDefinition: SpeciesDefinition = {
     description: "Default species used for initializng the initial state of the selectedCharacter slice",
     type: "none",
     speed: 0,
-    size: "none",
+    sizes: ["none"],
     featDefinitions: [],
     lineageDefinitions: [defaultLineageDefinition]
 }
@@ -99,7 +103,7 @@ export const generateEmptyWallet = (): Worth => {
 
 export const generateEmptyCharacter = (): Character => {
     return {
-        id: "0",
+        id: "",
         name: "",
         alignment: "unaligned",
         hp: 1,

@@ -5,8 +5,10 @@ import CharacterAlignment from "../components/CreateCharacterPage/CharacterAlign
 import CharacterDescription from "../components/CreateCharacterPage/CharacterDescription";
 import CharacterAbilityScores from "../components/CreateCharacterPage/CharacterAbilityScores";
 import CreateCharacterNavigation from "../components/CreateCharacterPage/CreateCharacterNavigation";
-import { useAppSelector } from "../lib/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../lib/redux/hooks";
 import { selectCharacterCreationIndex } from "../lib/redux/uiSlice";
+import { useLayoutEffect } from "react";
+import { setNewCharacterId } from "../lib/redux/selectedCharacterSlice";
 
 const StartSection = ({className = ""}: {className?: string}) => {
     return (
@@ -35,6 +37,11 @@ const CreatePlayerCharacterPage = () => {
     // Available sections: class, background, species, scores, alignment, description
     const sectionIndex = useAppSelector(selectCharacterCreationIndex)
     const ActiveSection = sectionIndex < 7 ? components[sectionIndex] : EmptySection;
+    const dispatch = useAppDispatch();
+
+    useLayoutEffect(() => {
+        dispatch(setNewCharacterId());
+    });
 
     return (
         <div id="create-player-character-page" className="h-full flex flex-col gap-1">

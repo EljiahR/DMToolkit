@@ -4,7 +4,7 @@ const Overview = () => {
     const selectedCharacter = useAppSelector((state) => state.selectedCharacter);    
     
     return (
-        <div>
+        <div id="character-overview-page">
             <div id="basic-overview">
                 <h3>{selectedCharacter.name}</h3>
                 <p>{selectedCharacter.characterClassInstances[0].definition.name}</p>
