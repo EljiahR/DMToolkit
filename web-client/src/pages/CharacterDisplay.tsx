@@ -1,5 +1,5 @@
 import Combat from "../components/CharacterDisplay/Combat";
-import Features from "../components/CharacterDisplay/Feats";
+import Feats from "../components/CharacterDisplay/Feats";
 import Inventory from "../components/CharacterDisplay/Inventory";
 import Navigation from "../components/CharacterDisplay/Navigation";
 import Overview from "../components/CharacterDisplay/Overview";
@@ -12,7 +12,7 @@ const view = {
     "Overview": <Overview />,
     "Stats": <Stats />,
     "Combat": <Combat />,
-    "Feats": <Features />,
+    "Feats": <Feats />,
     "Spells": <Spells />,
     "Inventory": <Inventory />
 }
@@ -21,11 +21,12 @@ const CharacterDisplay = () => {
     const displayedPage = useAppSelector(selectCharacterDisplay);
     
     return (
-        <div id="character-display">
-            <div id="view-container">
+        <div id="character-display" className="flex flex-col gap-5">
+            <Navigation />
+            <div id="view-container" className="flex-grow">
                 {view[displayedPage]}
             </div>
-            <Navigation />
+            
         </div>
     )
 }
