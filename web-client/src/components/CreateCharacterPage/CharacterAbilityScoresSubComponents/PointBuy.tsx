@@ -27,8 +27,8 @@ const PointBuy = () => {
     }
 
     return (
-        <div id="point-buy-display">
-            <h4>Point Buy</h4>
+        <div id="point-buy-display" className="flex flex-col gap-3">
+            <h3>Point Buy</h3>
             <div id="point-buy">
                 <div id="scores" className="grid grid-cols-2 grid-rows-3">
                     {Object.keys(scores).map((key) => {

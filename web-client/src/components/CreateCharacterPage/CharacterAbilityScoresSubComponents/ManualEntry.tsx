@@ -20,9 +20,9 @@ const ManualEntry = () => {
     }
     
     return (
-        <div id="manual-entry-display">
-            <h4>Manual Entry</h4>
-            <div id="manual-entry" className="grid grid-cols-8 grid-rows-6 gap-x-2 items-center">
+        <div id="manual-entry-display" className="flex flex-col gap-3">
+            <h3>Manual Entry</h3>
+            <div id="manual-entry" className="grid grid-cols-8 grid-rows-6 gap-x-2 gap-y-3 items-center">
                 {Object.keys(scores).map((key) => {
                     return (
                         <ScoreComponent key={`manual-${key}`} score={scores[key]} updateScore={updateScore} bonus={plusTwoBonus?.abbreviation == key ? 2 : plusOneBonus?.abbreviation == key ? 1 : 0} />

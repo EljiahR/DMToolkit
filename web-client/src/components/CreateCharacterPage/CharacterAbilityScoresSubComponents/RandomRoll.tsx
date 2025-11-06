@@ -24,9 +24,9 @@ const RandomRoll = () => {
     }, []);
     
     return (
-        <div id="random-roll-display">
-            <h4>Random Roll</h4>
-            <div id="random-roll" className="grid grid-cols-2 grid-rows-3 gap-2">
+        <div id="random-roll-display" className="flex flex-col gap-3">
+            <h3>Random Roll</h3>
+            <div id="random-roll" className="grid grid-cols-2 grid-rows-3 gap-2 flex-grow">
                 {Object.keys(scores).map((key) => {
                     return <ScoreDisplay key={`${key}-score`} score={scores[key]} handleScoreReroll={handleScoreReroll} bonus={plusTwoBonus?.abbreviation == key ? 2 : plusOneBonus?.abbreviation == key ? 1 : 0} />
                 })}

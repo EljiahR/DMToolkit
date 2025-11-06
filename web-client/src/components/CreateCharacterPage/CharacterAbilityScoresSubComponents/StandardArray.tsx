@@ -66,8 +66,8 @@ const StandardArray = () => {
     }
     
     return (
-        <div id="standard-array-display" className="flex flex-col gap-1">
-            <h4>Standard Array</h4>
+        <div id="standard-array-display" className="flex flex-col gap-3">
+            <h3>Standard Array</h3>
             <div id="standard-array" className="flex flex-col gap-1 px-3">
                 {/* <BrowserView> */}
                     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragStart={handleDragStart}>

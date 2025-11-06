@@ -21,8 +21,8 @@ const ClassDefault = () => {
     }, []);
     
     return (
-        <div id="class-default-display">
-            <h4>Class Default</h4>
+        <div id="class-default-display" className="flex flex-col gap-3">
+            <h3>Class Default</h3>
             <div id="class-default">
                 {Object.keys(scores).map((key) => {
                     return (

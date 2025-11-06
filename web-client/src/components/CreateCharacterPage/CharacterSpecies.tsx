@@ -68,8 +68,8 @@ const CharacterSpecies = ({className = ""}: {className?: string}) => {
             
             {(selectedSpeciesDefinition && selectedLineageDefinition) &&
                 <div id="species-display" className="section-display">
-                    <h3>{selectedSpeciesDefinition.name}</h3>
-                    <h4>{selectedLineageDefinition.name}</h4>
+                    <h2>{selectedSpeciesDefinition.name}</h2>
+                    <h3>{selectedLineageDefinition.name}</h3>
                     <p>{selectedSpeciesDefinition.description}</p>
                 </div>
             }

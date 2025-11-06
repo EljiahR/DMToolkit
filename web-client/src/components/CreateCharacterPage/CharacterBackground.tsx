@@ -53,7 +53,7 @@ const CharacterBackground = ({className = ""}: {className?: string}) => {
             
             {selectedBackgroundDefinition &&
             <div id="selected-background-display" className="section-display">
-                <h3>{selectedBackgroundDefinition.name}</h3>
+                <h2>{selectedBackgroundDefinition.name}</h2>
                 <p>{selectedBackgroundDefinition.description}</p>
                 <div id="item-sets">
                     <p>Item sets:</p>

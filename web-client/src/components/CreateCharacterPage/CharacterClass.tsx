@@ -55,7 +55,7 @@ const CharacterClass = ({className = ""}: {className?: string}) => {
             
             {selectedCharacterClassDefinition &&
             <div id="class-display" className="section-display">
-                <h3>{selectedCharacterClassDefinition.name}</h3>
+                <h2>{selectedCharacterClassDefinition.name}</h2>
                 <p>{selectedCharacterClassDefinition.description}</p>
                 <div id="item-sets">
                     <p>Item sets:</p>
