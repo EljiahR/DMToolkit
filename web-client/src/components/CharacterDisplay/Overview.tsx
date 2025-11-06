@@ -4,9 +4,9 @@ const Overview = () => {
     const selectedCharacter = useAppSelector((state) => state.selectedCharacter);    
     
     return (
-        <div id="character-overview-page">
+        <div id="character-overview-page" className="flex flex-col">
             <div id="basic-overview">
-                <h3>{selectedCharacter.name}</h3>
+                <h2>{selectedCharacter.name}</h2>
                 <p>{selectedCharacter.characterClassInstances[0].definition.name}</p>
             </div>
             <div id="origin">

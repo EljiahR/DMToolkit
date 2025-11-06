@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
 import { CharacterCreationNavigationOptions } from "../../lib/redux/types";
-import { decreaseCharacterCreationIndex, increaseCharacterCreationIndex, selectCharacterCreationIndex } from "../../lib/redux/uiSlice"
+import { decreaseCharacterCreationIndex, increaseCharacterCreationIndex, resetCharacterCreationIndex, selectCharacterCreationIndex } from "../../lib/redux/uiSlice"
 import { setNewCharacterInventory } from "../../lib/redux/selectedCharacterSlice";
 
 const CreateCharacterNavigation = ({ className}: {className?: string}) => {
@@ -15,8 +15,10 @@ const CreateCharacterNavigation = ({ className}: {className?: string}) => {
         } else {
             dispatch(setNewCharacterInventory());
             navigate("/character-display");
+            dispatch(resetCharacterCreationIndex());
         }
     }
+    
     const handleIndexDecrease = () => dispatch(decreaseCharacterCreationIndex());
 
     return (

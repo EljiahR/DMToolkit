@@ -32,6 +32,9 @@ export const uiSlice = createSlice({
                 state.characterCreationNavigationIndex -= 1;
            }
         },
+        resetCharacterCreationIndex: (state) => {
+            state.characterCreationNavigationIndex = 0;
+        },
         setMobileMenuVisibility: (state, action: PayloadAction<boolean>) => {
             state.mobileMenuIsVisible = action.payload;
         }
@@ -46,5 +49,5 @@ export const selectCharacterCreationIndex = (state: RootState) => {
     return state.ui.characterCreationNavigationIndex;
 }
 
-export const { setCharacterDisplay, setCharacterCreationIndex, increaseCharacterCreationIndex, decreaseCharacterCreationIndex, setMobileMenuVisibility } = uiSlice.actions;
+export const { setCharacterDisplay, setCharacterCreationIndex, increaseCharacterCreationIndex, decreaseCharacterCreationIndex, resetCharacterCreationIndex, setMobileMenuVisibility } = uiSlice.actions;
 export default uiSlice.reducer;
