@@ -63,11 +63,11 @@
   }
 
   .section-header {
-    @apply flex flex-col gap-3 py-10 px-1
+    @apply card flex flex-col gap-3 py-10 px-1
   }
 
   .section-display {
-    @apply flex-grow flex flex-col gap-3 px-1
+    @apply card flex-grow flex flex-col gap-3 px-1
   }
 
   .section-selection {
@@ -182,7 +182,7 @@ main {
   padding: 1%
 }
 
-.section-display, .section-header {
+.card {
   background-color: white;
   width: 96%;
   padding: 0.5rem;
