@@ -24,6 +24,7 @@ import { ArmorCategory } from "../types/dm-tool-types/enums/armorCategory";
 import type { SubclassInstance } from "../types/dm-tool-types/instances/subclassInstance";
 import { itemDefinitionTableToInstance } from "../dm-tools/instanceGenerators";
 import { ScoreAbbreviations, StandardScoresArray } from "../dm-tools/staticElements";
+import type { AbilityScoreDefinition } from "../types/dm-tool-types/definitions/abilityScoreDefinition";
 
 const initialState: Character = generateEmptyCharacter();
 
@@ -31,7 +32,7 @@ export const selectedCharacterSlice = createSlice({
     name: "selectedCharacter",
     initialState,
     reducers: {
-        setNewCharacter: (state, action: PayloadAction<{defaultClass: CharacterClassDefinition, defaultBackground: BackgroundDefinition, defaultSpecies: SpeciesDefinition }>) => {
+        setNewCharacter: (state, action: PayloadAction<{defaultScores: AbilityScoreDefinition[], defaultClass: CharacterClassDefinition, defaultBackground: BackgroundDefinition, defaultSpecies: SpeciesDefinition }>) => {
             state.id = "";
             state.name = "";
             state.alignment = "";
@@ -40,7 +41,7 @@ export const selectedCharacterSlice = createSlice({
             state.characterClassInstances = [classDefinitionReset(action.payload.defaultClass, "")];
             state.backgroundInstance = backgroundDefinitionReset(action.payload.defaultBackground, "");
             state.speciesInstance = speciesDefinitionReset(action.payload.defaultSpecies, action.payload.defaultSpecies.sizes, "", "");
-            state.scores = getStandardScores();
+            state.scores = getStandardScores(action.payload.defaultScores);
             state.physicalDescription = "";
             state.personality = "";
             state.ideals = "";

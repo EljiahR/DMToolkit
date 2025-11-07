@@ -8,7 +8,8 @@ import CreateCharacterNavigation from "../components/CreateCharacterPage/CreateC
 import { useAppDispatch, useAppSelector } from "../lib/redux/hooks";
 import { selectCharacterCreationIndex } from "../lib/redux/uiSlice";
 import { useLayoutEffect } from "react";
-import { setNewCharacterId } from "../lib/redux/selectedCharacterSlice";
+import { setNewCharacter, setNewCharacterId } from "../lib/redux/selectedCharacterSlice";
+import { selectAllBackgroundDefinitions, selectAllCharacterClassDefinitions, selectAllScoreDefinitions, selectAllSpeciesDefinitions } from "../lib/redux/dmToolsSlice";
 
 const StartSection = ({className = ""}: {className?: string}) => {
     return (
@@ -37,10 +38,14 @@ const CreatePlayerCharacterPage = () => {
     // Available sections: class, background, species, scores, alignment, description
     const sectionIndex = useAppSelector(selectCharacterCreationIndex)
     const ActiveSection = sectionIndex < 7 ? components[sectionIndex] : EmptySection;
+    const scoreDefinitions = useAppSelector(selectAllScoreDefinitions);
+    const backgroundDefinitions = useAppSelector(selectAllBackgroundDefinitions);
+    const characterClassDefinitions = useAppSelector(selectAllCharacterClassDefinitions)
+    const speciesDefinitions = useAppSelector(selectAllSpeciesDefinitions);
     const dispatch = useAppDispatch();
 
     useLayoutEffect(() => {
-        dispatch(setNewCharacterId());
+        dispatch(setNewCharacter({defaultScores: scoreDefinitions, defaultBackground: backgroundDefinitions[0], defaultClass: characterClassDefinitions[0], defaultSpecies: speciesDefinitions[0]}));
     });
 
     return (

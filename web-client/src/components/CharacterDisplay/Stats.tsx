@@ -73,17 +73,17 @@ const AbilityScoreDisplay = ({score, bonus, modifier, proficiencyBonus}: Ability
                     <p>Saving Throw</p>
                 </div>
                 <div className="skill-checks">
-
+                    {score.skillInstances.map((skill) => {
+                        return (
+                            <div className="saving-throw" key={skill.definition.name}>
+                                <div className={`proficiency-check ${skill.isProficient ? "checked" : ""}`}></div>
+                                <p>{skill.isProficient ? modifier + proficiencyBonus : modifier}</p>
+                                <p>{skill.definition.name}</p>
+                            </div>
+                        )
+                    })}
                 </div>
-                {score.skillInstances.map((skill) => {
-                    return (
-                        <div className="saving-throw" key={skill.definition.name}>
-                            <div className={`proficiency-check ${skill.isProficient ? "checked" : ""}`}></div>
-                            <p>{skill.isProficient ? modifier + proficiencyBonus : modifier}</p>
-                            <p>{skill.definition.name}</p>
-                        </div>
-                    )
-                })}
+                
             </div>
         </div>
     )
