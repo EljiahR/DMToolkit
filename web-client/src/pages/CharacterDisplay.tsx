@@ -21,9 +21,9 @@ const CharacterDisplay = () => {
     const displayedPage = useAppSelector(selectCharacterDisplay);
     
     return (
-        <div id="character-display" className="flex flex-col gap-5">
+        <div id="character-display" className="w-full flex flex-col gap-5 items-center">
             <Navigation />
-            <div id="view-container" className="flex-grow justify-center">
+            <div id="view-container" className="w-full flex-grow items-center">
                 {view[displayedPage]}
             </div>
             

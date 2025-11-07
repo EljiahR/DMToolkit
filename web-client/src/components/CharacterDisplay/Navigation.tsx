@@ -18,7 +18,7 @@ const Navigation = () => {
     };
     
     return (
-        <nav id="character-display-nav" className="flex w-full justify-between">
+        <nav id="character-display-nav" className="flex w-full justify-between px-2">
             <button id="character-overview-btn" className={`character-nav btn btn-secondary ${display == "Overview" ? "selected-nav" : ""}`} onClick={() => setNav("Overview")}>
                 {isMobile ? 
                     <OverviewIcon className="h-5 w-5" />
