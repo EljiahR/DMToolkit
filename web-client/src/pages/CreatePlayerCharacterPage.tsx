@@ -8,7 +8,7 @@ import CreateCharacterNavigation from "../components/CreateCharacterPage/CreateC
 import { useAppDispatch, useAppSelector } from "../lib/redux/hooks";
 import { selectCharacterCreationIndex } from "../lib/redux/uiSlice";
 import { useLayoutEffect } from "react";
-import { setNewCharacter, setNewCharacterId } from "../lib/redux/selectedCharacterSlice";
+import { setNewCharacter } from "../lib/redux/selectedCharacterSlice";
 import { selectAllBackgroundDefinitions, selectAllCharacterClassDefinitions, selectAllScoreDefinitions, selectAllSpeciesDefinitions } from "../lib/redux/dmToolsSlice";
 
 const StartSection = ({className = ""}: {className?: string}) => {
@@ -45,8 +45,8 @@ const CreatePlayerCharacterPage = () => {
     const dispatch = useAppDispatch();
 
     useLayoutEffect(() => {
-        dispatch(setNewCharacter({defaultScores: scoreDefinitions, defaultBackground: backgroundDefinitions[0], defaultClass: characterClassDefinitions[0], defaultSpecies: speciesDefinitions[0]}));
-    });
+        dispatch(setNewCharacter({ defaultScores: scoreDefinitions, defaultBackground: backgroundDefinitions[0], defaultClass: characterClassDefinitions[0], defaultSpecies: speciesDefinitions[0] }));
+    }, []);
 
     return (
         <div id="create-player-character-page" className="h-full flex flex-col gap-1">
