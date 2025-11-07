@@ -23,7 +23,7 @@ const CharacterDisplay = () => {
     return (
         <div id="character-display" className="flex flex-col gap-5">
             <Navigation />
-            <div id="view-container" className="flex-grow">
+            <div id="view-container" className="flex-grow justify-center">
                 {view[displayedPage]}
             </div>
             

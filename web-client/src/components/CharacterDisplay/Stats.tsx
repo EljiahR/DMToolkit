@@ -1,6 +1,8 @@
 import { useAppSelector } from "../../lib/redux/hooks"
 import { selectAllAbilityScoreFeatEffectBonuses, selectAllAbilityScoreModifiers, selectAllAbilityScores, selectInitiative, selectPassivePerception, selectProficiencyBonus, selectSize, selectSpeed } from "../../lib/redux/selectedCharacterSlice";
 import type { AbilityScoreInstance } from "../../lib/types/dm-tool-types/instances/abilityScoreInstance";
+import RadioIcon from "../../assets/radio-button-unchecked-svgrepo-com.svg?react";
+import RadioCheckedIcon from "../../assets/radio-button-checked-svgrepo-com.svg?react";
 
 const Stats = () => {
     const proficiencyBonus = useAppSelector(selectProficiencyBonus);
@@ -13,8 +15,8 @@ const Stats = () => {
     const passivePerception = useAppSelector(selectPassivePerception);
     
     return (
-        <div>
-            <div id="ability-section" className="grid grid-cols-2 grid-rows-3 gap-3">
+        <div id="ability-page" className="flex flex-col items-center">
+            <div id="ability-section" className="w-full grid grid-cols-2 grid-rows-3 gap-y-3">
                 {Object.keys(scores).map((key) => {
                     return (
                         <AbilityScoreDisplay key={key} score={scores[key]} bonus={abilityScoreBonuses[key]} modifier={abilityScoreModifiers[key] ?? 0} proficiencyBonus={proficiencyBonus} />
@@ -82,7 +84,10 @@ const AbilityScoreDisplay = ({score, bonus, modifier, proficiencyBonus}: Ability
                         const check = skill.isProficient ? modifier + proficiencyBonus : modifier;
                         return (
                             <div className="saving-throw" key={skill.definition.name}>
-                                <div className={`proficiency-check ${skill.isProficient ? "checked" : ""}`}></div>
+                                {skill.isProficient ? 
+                                    <RadioCheckedIcon className="h-3 w-3" /> :
+                                    <RadioIcon />
+                                }
                                 <p>{check > 0 ? "+" : ""}{check}</p>
                                 <p>{skill.definition.name}</p>
                             </div>
