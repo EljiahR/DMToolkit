@@ -207,6 +207,13 @@ export const selectedCharacterSlice = createSlice({
         },
         setNewCharacterId: (state) => {
             state.id = "1";
+        },
+        setItemEquipped: (state, action: PayloadAction<string>) => {
+            const item = state.inventory.find(i => i.id == action.payload);
+
+            if (item) {
+                item.isEquipped = !item.isEquipped;
+            }
         }
     }
 });
@@ -469,5 +476,5 @@ export const selectPreparedSpells = createSelector(
 
 export const selectCharacterId = (state: RootState) => state.selectedCharacter.id;
 
-export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setCharacterClassItemSet, setBackgroundDefinition, setBackgroundScores, setBackgroundItemSet, setSpeciesDefinition, setLineageDefinition, setScore, setScores, swapScores, shiftStandardScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws, setNewCharacterInventory, setNewCharacterId } = selectedCharacterSlice.actions;
+export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setCharacterClassItemSet, setBackgroundDefinition, setBackgroundScores, setBackgroundItemSet, setSpeciesDefinition, setLineageDefinition, setScore, setScores, swapScores, shiftStandardScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws, setNewCharacterInventory, setNewCharacterId, setItemEquipped } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

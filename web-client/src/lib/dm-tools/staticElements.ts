@@ -48,3 +48,5 @@ export const ScoreAbbreviationsToString: Record<AbilityScoreAbbreviations, strin
     "wis": "Wisdom",
     "cha": "Charisma"
 }
+
+export const EquippableItemTypes = ["Armor", "Weapon"];
