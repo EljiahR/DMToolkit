@@ -8,19 +8,28 @@ const Inventory = () => {
     
     return (
         <div id="inventory-section">
-            <div id="equipped">
-                {equipment.map((item) => {
-                    return (
-                        <ItemDisplay item={item} />
-                    )
-                })}
+            <div id="equipped" className="card">
+                <h3>Equipped</h3>
+                <hr />
+                <div id="equipped-display">
+                    {equipment.map((item) => {
+                        return (
+                            <ItemDisplay item={item} />
+                        )
+                    })}
+                </div>
             </div>
-            <div id="inventory">
-                {inventory.map((item) => {
-                    return (
-                        <ItemDisplay item={item} />
-                    )
-                })}     
+            <div id="inventory" className="card">
+                <h3>Inventory</h3>
+                <hr />
+                <div id="inventory-display">
+                    {inventory.map((item) => {
+                        return (
+                            <ItemDisplay item={item} />
+                        )
+                    })}  
+                </div>
+                   
             </div>
         </div>
     )
