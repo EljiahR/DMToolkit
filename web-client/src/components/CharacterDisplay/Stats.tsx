@@ -7,30 +7,27 @@ import type { AbilityScoreAbbreviations, AbilityScoreDisplay } from "../../lib/r
 const Stats = () => {
     const proficiencyBonus = useAppSelector(selectProficiencyBonus);
     const scores = useAppSelector(selectAllAbilityScores);
-    const speed = useAppSelector(selectSpeed);
     const size = useAppSelector(selectSize);
     const abilityScoreDisplays = useAppSelector(selectAllAbilityScoreDisplays);
-    const initiative = useAppSelector(selectInitiative);
     const passivePerception = useAppSelector(selectPassivePerception);
     
     return (
         <div id="ability-page" className="w-full flex flex-col items-center gap-3">
             <div id="combat-section" className="card flex justify-around">
-                <div id="initiative-section" className="text-center border border-black border-solid rounded-lg p-1 shadow-md">
-                    <p className="font-bold">{initiative > 0 ? "+" : ""}{initiative}</p>
-                    <hr />
-                    <p>Initiative</p>
-                </div>
-                <div id="speed-section" className="text-center border border-black border-solid rounded-lg p-1 shadow-md">
-                    <p className="font-bold">{speed}</p>
-                    <hr />
-                    <p>Speed</p>
-                </div>
-                
-                <div id="passive-perception" className="text-center border border-black border-solid rounded-lg p-1 shadow-md">
+                <div id="passive-perception" className="mini-card">
                     <p className="font-bold">{passivePerception}</p>
                     <hr />
                     <p>Passive Perception</p>
+                </div>
+                <div id="proficiency-section" className="mini-card">
+                    <p className="font-bold">+{proficiencyBonus}</p>
+                    <hr />
+                    <p>Proficiency</p>
+                </div>
+                <div id="size-section" className="mini-card">
+                    <p className="font-bold">{size}</p>
+                    <hr />
+                    <p>Size</p>
                 </div>
             </div>
             <div id="ability-section" className="w-full grid grid-cols-2 grid-rows-3 gap-y-3">
@@ -39,18 +36,6 @@ const Stats = () => {
                         <AbilityScoreDisplay key={key} scoreDisplay={abilityScoreDisplays[key as AbilityScoreAbbreviations]} proficiencyBonus={proficiencyBonus} />
                     )
                 })}
-            </div>
-            <div id="etc-section" className="card flex justify-around">
-                <div id="proficiency-section" className="text-center border border-black border-solid rounded-lg p-1 shadow-md">
-                    <p className="font-bold">+{proficiencyBonus}</p>
-                    <hr />
-                    <p>Proficiency Bonus</p>
-                </div>
-                <div id="size-section" className="text-center border border-black border-solid rounded-lg p-1 shadow-md">
-                    <p className="font-bold">{size}</p>
-                    <hr />
-                    <p>Size</p>
-                </div>
             </div>
         </div>
     )
@@ -68,12 +53,12 @@ const AbilityScoreDisplay = ({ scoreDisplay, proficiencyBonus}: AbilityScoreDisp
         <div className="ability-score card flex flex-col gap-2 justify-self-center">
             <h3 className="text-center">{scoreDisplay.instance.definition.name}</h3>
             <div id={scoreDisplay.instance.definition.name + "-scores"} className="flex justify-around items-center">
-                <div className="modifier text-center border border-black border-solid rounded-lg p-1 shadow-md">
+                <div className="modifier mini-card">
                     <h3 className="font-bold">{scoreDisplay.modifier > 0 ? "+" : ""}{scoreDisplay.modifier}</h3>
                     <hr />
                     <p>Modifier</p>
                 </div>
-                <div className="score-total text-center border border-black border-solid rounded-lg p-1 shadow-md">
+                <div className="score-total mini-card">
                     <p className="font-bold">{scoreDisplay.totalScore}</p>
                     <hr />
                     <p>Score</p>

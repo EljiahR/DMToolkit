@@ -77,6 +77,14 @@
   .nav-link-fix {
     @apply text-center
   }
+
+  .mini-card {
+    @apply text-center flex flex-col justify-around items-center border border-black border-solid rounded-lg p-1 shadow-md
+  }
+
+  .mini-card > hr {
+    @apply w-full
+  }
 }
 
 /* Pallette in case I forget: https://coolors.co/022b3a-1f7a8c-bfdbf7-e1e5f2-ffffff */

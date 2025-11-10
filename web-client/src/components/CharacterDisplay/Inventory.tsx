@@ -13,7 +13,7 @@ const Inventory = () => {
     }
 
     return (
-        <div id="inventory-section" className="flex flex-col gap-3">
+        <div id="inventory-section" className="flex flex-col gap-3 items-center">
             <div id="equipped" className="card flex flex-col gap-1">
                 <h3>Equipped</h3>
                 <hr />
