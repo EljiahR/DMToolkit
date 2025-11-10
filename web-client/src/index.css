@@ -241,6 +241,22 @@ input[type="number"] {
   border-width: 2px;
 }
 
+.wac-display {
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr 1fr;
+  gap: 1;
+  text-align: center;
+}
+
+.wac-display > *:first-child {
+  text-align: start;
+}
+
+
+.wac-display:first-child {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
 /*
 @media (prefers-color-scheme: light) {
   :root {

@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../lib/redux/hooks"
-import { selectAllAbilityScoreDisplays, selectAllAbilityScores, selectInitiative, selectPassivePerception, selectProficiencyBonus, selectSize, selectSpeed } from "../../lib/redux/selectedCharacterSlice";
+import { selectAllAbilityScoreDisplays, selectAllAbilityScores, selectPassivePerception, selectProficiencyBonus, selectSize } from "../../lib/redux/selectedCharacterSlice";
 import RadioIcon from "../../assets/radio-button-unchecked-svgrepo-com.svg?react";
 import RadioCheckedIcon from "../../assets/radio-button-checked-svgrepo-com.svg?react";
 import type { AbilityScoreAbbreviations, AbilityScoreDisplay } from "../../lib/redux/types";
@@ -30,7 +30,7 @@ const Stats = () => {
                     <p>Size</p>
                 </div>
             </div>
-            <div id="ability-section" className="w-full grid grid-cols-2 grid-rows-3 gap-y-3">
+            <div id="ability-section" className="w-full grid grid-cols-2 grid-rows-3 gap-y-3 pb-3">
                 {Object.keys(scores).map((key) => {
                     return (
                         <AbilityScoreDisplay key={key} scoreDisplay={abilityScoreDisplays[key as AbilityScoreAbbreviations]} proficiencyBonus={proficiencyBonus} />

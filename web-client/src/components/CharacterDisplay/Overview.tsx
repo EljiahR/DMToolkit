@@ -1,7 +1,9 @@
+import { printProperCase } from "../../lib/dm-tools/stringFunctions";
 import { useAppSelector } from "../../lib/redux/hooks"
 
 const Overview = () => {
-    const selectedCharacter = useAppSelector((state) => state.selectedCharacter);    
+    const selectedCharacter = useAppSelector((state) => state.selectedCharacter); 
+    const alignment = printProperCase(selectedCharacter.alignment);
     
     return (
         <div id="character-overview-page" className="flex flex-col gap-3 items-center">
@@ -15,7 +17,7 @@ const Overview = () => {
                     <p>{selectedCharacter.backgroundInstance?.definition.name ?? ""}</p>
                 </div>
                 <div id="alignment">
-                    <p>{selectedCharacter.alignment}</p>
+                    <p>{alignment}</p>
                 </div>
             </div>
            

@@ -41,7 +41,13 @@ const Combat = () => {
                 </div>
             </div>
             
-            <div id="weapons-and-attacks" className="card">
+            <div id="weapons-and-damage-cantrips" className="card flex flex-col gap-1">
+                <div id="wac-labels" className="wac-display">
+                    <p className="text-xs">Name</p>
+                    <p className="text-xs">Atk/DC</p>
+                    <p className="text-xs">Dmg</p>
+                    <p className="text-xs">Details</p>
+                </div>
                 {weapons.map((weapon) => {
                     return (
                         <WeaponDisplay weapon={weapon} />
@@ -82,10 +88,11 @@ interface WeaponDisplayProps {
 
 const WeaponDisplay = ({ weapon }: WeaponDisplayProps) => {
     return (
-        <div className="weapon-display">
+        <div className="wac-display mini-card">
             <p>{weapon.definition.name}</p>
-            <p></p>
-            <p>{`${weapon.definition.numberOfDice}d${weapon.definition.numberOfSides} ${weapon.definition.damageType}`}</p>
+            <p>+5</p>
+            <p>{`${weapon.definition.numberOfDice}d${weapon.definition.numberOfSides}`}</p>
+            <button className="bg-green-200 rounded">View</button>
         </div>
     )
 }

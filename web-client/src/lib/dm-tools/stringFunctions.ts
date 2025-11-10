@@ -41,3 +41,12 @@ export const printWorth = (worthObject: Worth) => {
 
     return customConcat(worthStrings);
 }
+
+export const printProperCase = (s: string) => {
+    const words = s.split(" ").reduce((arr: string[], w) => {
+        arr.push(w.length > 1 ? w[0].toUpperCase() + w.slice(1) : w.toUpperCase());
+        return arr;
+    }, []);
+
+    return words.join(" ");
+}
