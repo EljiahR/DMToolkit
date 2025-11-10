@@ -16,7 +16,7 @@ import { DataType } from "../types/dm-tool-types/enums/dataType";
 import type { AbilityScoreBonus, SimpleBonus } from "../types/dm-tool-types/entities/effectDataTypes";
 import { backgroundDefinitionReset, classDefinitionReset, lineageDefinitionReset, speciesDefinitionReset } from "../dm-tools/definitionResetConverters";
 import type { Character } from "../types/dm-tool-types/instances/character";
-import type { AbilityScoreAbbreviations, AbilityScoreDisplay, AllAbilityScoreDisplay } from "./types";
+import type { AbilityScoreAbbreviations, AllAbilityScoreDisplay } from "./types";
 import type { WeaponInstance } from "../types/dm-tool-types/items/instances/weaponInstance";
 import type { ArmorInstance } from "../types/dm-tool-types/items/instances/armorInstance";
 import type { Spell } from "../types/dm-tool-types/entities/spell";

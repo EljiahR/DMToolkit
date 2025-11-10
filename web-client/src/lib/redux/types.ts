@@ -1,4 +1,3 @@
-import type { AbilityScoreDefinition } from "../types/dm-tool-types/definitions/abilityScoreDefinition";
 import type { AbilityScoreInstance } from "../types/dm-tool-types/instances/abilityScoreInstance";
 import type { FeatInstance } from "../types/dm-tool-types/instances/featInstance";
 
