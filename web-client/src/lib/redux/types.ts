@@ -1,3 +1,7 @@
+import type { AbilityScoreDefinition } from "../types/dm-tool-types/definitions/abilityScoreDefinition";
+import type { AbilityScoreInstance } from "../types/dm-tool-types/instances/abilityScoreInstance";
+import type { FeatInstance } from "../types/dm-tool-types/instances/featInstance";
+
 export interface AuthSlice {
     accessToken: string | null;
 }
@@ -17,3 +21,25 @@ export interface UISlice {
 }
 
 export type AbilityScoreAbbreviations = "str" | "dex" | "con" | "int" | "wis" | "cha";
+
+export interface AllAbilityScoreDisplay {
+    str: AbilityScoreDisplay;
+    dex: AbilityScoreDisplay;
+    con: AbilityScoreDisplay;
+    int: AbilityScoreDisplay;
+    wis: AbilityScoreDisplay;
+    cha: AbilityScoreDisplay;
+}
+
+export interface AbilityScoreDisplay {
+    instance: AbilityScoreInstance;
+    totalScore: number;
+    bonusFromBackground: number;
+    bonusesFromFeats: BonusFromFeat[];
+    modifier: number;
+}
+
+export interface BonusFromFeat {
+    amount: number;
+    featInstance: FeatInstance | null;
+}

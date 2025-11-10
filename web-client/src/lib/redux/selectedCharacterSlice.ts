@@ -16,7 +16,7 @@ import { DataType } from "../types/dm-tool-types/enums/dataType";
 import type { AbilityScoreBonus, SimpleBonus } from "../types/dm-tool-types/entities/effectDataTypes";
 import { backgroundDefinitionReset, classDefinitionReset, lineageDefinitionReset, speciesDefinitionReset } from "../dm-tools/definitionResetConverters";
 import type { Character } from "../types/dm-tool-types/instances/character";
-import type { AbilityScoreAbbreviations } from "./types";
+import type { AbilityScoreAbbreviations, AbilityScoreDisplay, AllAbilityScoreDisplay } from "./types";
 import type { WeaponInstance } from "../types/dm-tool-types/items/instances/weaponInstance";
 import type { ArmorInstance } from "../types/dm-tool-types/items/instances/armorInstance";
 import type { Spell } from "../types/dm-tool-types/entities/spell";
@@ -319,26 +319,86 @@ export const selectAllAbilityScoreFeatEffectBonuses = createSelector(
     }
 );
 
-export const selectAllAbilityScoreModifiers = createSelector(
-    [selectAllAbilityScores, selectAllAbilityScoreFeatEffectBonuses],
-    (abilityScores, abilityScoreBonuses) => {
-        const modifiers: StringAndNumber = {
-            "str": getModifier(abilityScores["str"].score + abilityScoreBonuses["str"]),
-            "dex": getModifier(abilityScores["dex"].score + abilityScoreBonuses["dex"]),
-            "con": getModifier(abilityScores["con"].score + abilityScoreBonuses["con"]),
-            "int": getModifier(abilityScores["int"].score + abilityScoreBonuses["int"]),
-            "wis": getModifier(abilityScores["wis"].score + abilityScoreBonuses["wis"]),
-            "cha": getModifier(abilityScores["cha"].score + abilityScoreBonuses["cha"])
-        };
+export const selectAbilityScoreBonusPlusTwoAbbreviation = (state: RootState) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusTwo?.abbreviation ?? "";
+export const selectAbilityScoreBonusPlusOneAbbreviation = (state: RootState) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusOne?.abbreviation ?? "";
 
-        return modifiers
+export const selectAbilityScoreBackgroundBonuses = createSelector(
+    [selectAbilityScoreBonusPlusTwoAbbreviation, selectAbilityScoreBonusPlusOneAbbreviation],
+    (plusTwoScoreAbr, plusOneScoreAbr) => {
+        return {
+            "str": plusTwoScoreAbr == "str" ? 2 : plusOneScoreAbr == "str" ? 1 : 0,
+            "dex": plusTwoScoreAbr == "dex" ? 2 : plusOneScoreAbr == "dex" ? 1 : 0,
+            "con": plusTwoScoreAbr == "con" ? 2 : plusOneScoreAbr == "con" ? 1 : 0,
+            "int": plusTwoScoreAbr == "int" ? 2 : plusOneScoreAbr == "int" ? 1 : 0,
+            "wis": plusTwoScoreAbr == "wis" ? 2 : plusOneScoreAbr == "wis" ? 1 : 0,
+            "cha": plusTwoScoreAbr == "cha" ? 2 : plusOneScoreAbr == "cha" ? 1 : 0
+        } as StringAndNumber
+    }
+)
+
+export const selectAllAbilityScoreDisplays = createSelector(
+    [selectAllAbilityScores, selectAllAbilityScoreFeatEffectBonuses, selectAbilityScoreBackgroundBonuses],
+    (abilityScores, abilityScoreBonuses, backgroundBonuses) => {
+        const strScore = abilityScores.str.score + abilityScoreBonuses["str"] + backgroundBonuses["str"];
+        const dexScore = abilityScores.dex.score + abilityScoreBonuses["dex"] + backgroundBonuses["dex"];
+        const conScore = abilityScores.con.score + abilityScoreBonuses["con"] + backgroundBonuses["con"];
+        const intScore = abilityScores.int.score + abilityScoreBonuses["int"] + backgroundBonuses["int"];
+        const wisScore = abilityScores.wis.score + abilityScoreBonuses["wis"] + backgroundBonuses["wis"];
+        const chaScore = abilityScores.cha.score + abilityScoreBonuses["cha"] + backgroundBonuses["cha"];
+
+        const displays: AllAbilityScoreDisplay = {
+            str: {
+                instance: abilityScores.str,
+                totalScore: strScore,
+                modifier : getModifier(strScore),
+                bonusFromBackground: backgroundBonuses["str"],
+                bonusesFromFeats: [{amount: abilityScoreBonuses["str"], featInstance: null}],
+            },
+            dex: {
+                instance: abilityScores.dex,
+                totalScore: dexScore,
+                modifier : getModifier(dexScore),
+                bonusFromBackground: backgroundBonuses["dex"],
+                bonusesFromFeats: [{amount: abilityScoreBonuses["dex"], featInstance: null}],
+            },
+            con: {
+                instance: abilityScores.con,
+                totalScore: conScore,
+                modifier : getModifier(conScore),
+                bonusFromBackground: backgroundBonuses["con"],
+                bonusesFromFeats: [{amount: abilityScoreBonuses["con"], featInstance: null}],
+            },
+            int: {
+                instance: abilityScores.int,
+                totalScore: intScore,
+                modifier : getModifier(intScore),
+                bonusFromBackground: backgroundBonuses["int"],
+                bonusesFromFeats: [{amount: abilityScoreBonuses["int"], featInstance: null}],
+            },
+            wis: {
+                instance: abilityScores.wis,
+                totalScore: wisScore,
+                modifier : getModifier(wisScore),
+                bonusFromBackground: backgroundBonuses["wis"],
+                bonusesFromFeats: [{amount: abilityScoreBonuses["wis"], featInstance: null}],
+            },
+            cha: {
+                instance: abilityScores.cha,
+                totalScore: chaScore,
+                modifier : getModifier(chaScore),
+                bonusFromBackground: backgroundBonuses["cha"],
+                bonusesFromFeats: [{amount: abilityScoreBonuses["cha"], featInstance: null}],
+            }
+        }
+
+        return displays;
     }
 );
 
 export const selectInitiative = createSelector(
-    [selectAllInitiativeBonuseFeatEffects, selectAllAbilityScoreModifiers],
-    (initiativeFeatEffects, modifiers) => {
-        let initiative = modifiers["dex"];
+    [selectAllInitiativeBonuseFeatEffects, selectAllAbilityScoreDisplays],
+    (initiativeFeatEffects, scoreDisplays) => {
+        let initiative = scoreDisplays["dex"].modifier;
         initiativeFeatEffects.forEach((initiativeFeatEffect) => {
             const data = initiativeFeatEffect.data as SimpleBonus;
             initiative += data.bonusAmount;
@@ -368,10 +428,10 @@ export const selectSize = (state: RootState) => {
 }
 
 export const selectPassivePerception = createSelector(
-    [selectAllPassPerceptionBonusFeatEffects, selectAllAbilityScoreModifiers, selectAllAbilityScores, selectProficiencyBonus],
-    (passivePerceptionEffects, modifiers, scores, proficiencyBonus) => {
+    [selectAllPassPerceptionBonusFeatEffects, selectAllAbilityScoreDisplays, selectAllAbilityScores, selectProficiencyBonus],
+    (passivePerceptionEffects, scoreDisplays, scores, proficiencyBonus) => {
         const perceptionSkill = scores["wis"].skillInstances.find((skill) => skill.definition.name == "Perception");
-        let passivePerception = 10 + modifiers["wis"] + (perceptionSkill && perceptionSkill.isProficient ? proficiencyBonus : 0);
+        let passivePerception = 10 + scoreDisplays["wis"].modifier + (perceptionSkill && perceptionSkill.isProficient ? proficiencyBonus : 0);
         passivePerceptionEffects.forEach((effect) => {
             const data = effect.data as SimpleBonus;
             passivePerception += data.bonusAmount;
@@ -393,9 +453,9 @@ export const selectHpRolls = createSelector(
 );
 
 export const selectHpMax = createSelector(
-    [selectHpRolls, selectAllAbilityScoreModifiers],
-    (hpRolls, modifiers) => {
-        const hpMax = hpRolls.reduce((total, roll) => total + roll + modifiers["con"], 0);
+    [selectHpRolls, selectAllAbilityScoreDisplays],
+    (hpRolls, scoreDisplays) => {
+        const hpMax = hpRolls.reduce((total, roll) => total + roll + scoreDisplays["con"].modifier, 0);
         return hpMax > 0 ? hpMax : 1;
     }
 );
@@ -429,15 +489,15 @@ export const selectAllEquippedArmor = createSelector(
 );
 
 export const selectAC = createSelector(
-    [selectAllEquippedArmor, selectAllAbilityScoreModifiers],
-    (armor, modifiers) => {
+    [selectAllEquippedArmor, selectAllAbilityScoreDisplays],
+    (armor, scoreDisplays) => {
         let ac = 10;
         const equippedArmor = armor.find((item) => item.definition.armorCategory != ArmorCategory.Shield);
-        if (equippedArmor) {
+        if (equippedArmor && equippedArmor.definition.baseAC > 10) {
             ac = equippedArmor.definition.baseAC;
-            ac += equippedArmor.definition.hasDexterityCap ? Math.min(equippedArmor.definition.dexterityCap, modifiers["dex"]) : modifiers["dex"];
+            ac += equippedArmor.definition.hasDexterityCap ? Math.min(equippedArmor.definition.dexterityCap, scoreDisplays["dex"].modifier) : scoreDisplays["dex"].modifier;
         } else {
-            ac += modifiers["dex"];
+            ac += scoreDisplays["dex"].modifier;
         };
 
         const shield = armor.find((item) => item.definition.armorCategory == ArmorCategory.Shield);

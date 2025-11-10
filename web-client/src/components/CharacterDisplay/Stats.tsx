@@ -1,16 +1,15 @@
 import { useAppSelector } from "../../lib/redux/hooks"
-import { selectAllAbilityScoreFeatEffectBonuses, selectAllAbilityScoreModifiers, selectAllAbilityScores, selectInitiative, selectPassivePerception, selectProficiencyBonus, selectSize, selectSpeed } from "../../lib/redux/selectedCharacterSlice";
-import type { AbilityScoreInstance } from "../../lib/types/dm-tool-types/instances/abilityScoreInstance";
+import { selectAllAbilityScoreDisplays, selectAllAbilityScores, selectInitiative, selectPassivePerception, selectProficiencyBonus, selectSize, selectSpeed } from "../../lib/redux/selectedCharacterSlice";
 import RadioIcon from "../../assets/radio-button-unchecked-svgrepo-com.svg?react";
 import RadioCheckedIcon from "../../assets/radio-button-checked-svgrepo-com.svg?react";
+import type { AbilityScoreAbbreviations, AbilityScoreDisplay } from "../../lib/redux/types";
 
 const Stats = () => {
     const proficiencyBonus = useAppSelector(selectProficiencyBonus);
     const scores = useAppSelector(selectAllAbilityScores);
     const speed = useAppSelector(selectSpeed);
     const size = useAppSelector(selectSize);
-    const abilityScoreBonuses = useAppSelector(selectAllAbilityScoreFeatEffectBonuses);
-    const abilityScoreModifiers = useAppSelector(selectAllAbilityScoreModifiers);
+    const abilityScoreDisplays = useAppSelector(selectAllAbilityScoreDisplays);
     const initiative = useAppSelector(selectInitiative);
     const passivePerception = useAppSelector(selectPassivePerception);
     
@@ -37,7 +36,7 @@ const Stats = () => {
             <div id="ability-section" className="w-full grid grid-cols-2 grid-rows-3 gap-y-3">
                 {Object.keys(scores).map((key) => {
                     return (
-                        <AbilityScoreDisplay key={key} score={scores[key]} bonus={abilityScoreBonuses[key]} modifier={abilityScoreModifiers[key] ?? 0} proficiencyBonus={proficiencyBonus} />
+                        <AbilityScoreDisplay key={key} scoreDisplay={abilityScoreDisplays[key as AbilityScoreAbbreviations]} proficiencyBonus={proficiencyBonus} />
                     )
                 })}
             </div>
@@ -58,26 +57,24 @@ const Stats = () => {
 }
 
 interface AbilityScoreDisplayProps {
-    score: AbilityScoreInstance;
-    bonus: number;
-    modifier: number;
+    scoreDisplay: AbilityScoreDisplay;
     proficiencyBonus: number;
 }
 
-const AbilityScoreDisplay = ({score, bonus, modifier, proficiencyBonus}: AbilityScoreDisplayProps) => {    
-    const savingThrow = score.isProficient ? modifier + proficiencyBonus : modifier;
+const AbilityScoreDisplay = ({ scoreDisplay, proficiencyBonus}: AbilityScoreDisplayProps) => {    
+    const savingThrow = scoreDisplay.instance.isProficient ? scoreDisplay.modifier + proficiencyBonus : scoreDisplay.modifier;
 
     return (
         <div className="ability-score card flex flex-col gap-2 justify-self-center">
-            <h3 className="text-center">{score.definition.name}</h3>
-            <div id={score.definition.name + "-scores"} className="flex justify-around items-center">
+            <h3 className="text-center">{scoreDisplay.instance.definition.name}</h3>
+            <div id={scoreDisplay.instance.definition.name + "-scores"} className="flex justify-around items-center">
                 <div className="modifier text-center border border-black border-solid rounded-lg p-1 shadow-md">
-                    <h3 className="font-bold">{modifier > 0 ? "+" : ""}{modifier}</h3>
+                    <h3 className="font-bold">{scoreDisplay.modifier > 0 ? "+" : ""}{scoreDisplay.modifier}</h3>
                     <hr />
                     <p>Modifier</p>
                 </div>
                 <div className="score-total text-center border border-black border-solid rounded-lg p-1 shadow-md">
-                    <p className="font-bold">{score.score + bonus}</p>
+                    <p className="font-bold">{scoreDisplay.totalScore}</p>
                     <hr />
                     <p>Score</p>
                 </div>
@@ -85,19 +82,19 @@ const AbilityScoreDisplay = ({score, bonus, modifier, proficiencyBonus}: Ability
             
             <div className="throws">
                 <div className="saving-throw flex gap-1 items-center">
-                    {score.isProficient ? 
+                    {scoreDisplay.instance.isProficient ? 
                         <RadioCheckedIcon className="h-3 w-3" /> :
                         <RadioIcon className="h-3 w-3" />
                     }
                     <p className="font-bold">{savingThrow > 0 ? "+" : ""}{savingThrow}</p>
                     <p>Saving Throw</p>
                 </div>
-                {score.skillInstances.length > 0 &&
+                {scoreDisplay.instance.skillInstances.length > 0 &&
                     <hr />
                 }
                 <div className="skill-checks">
-                    {score.skillInstances.map((skill) => {
-                        const check = skill.isProficient ? modifier + proficiencyBonus : modifier;
+                    {scoreDisplay.instance.skillInstances.map((skill) => {
+                        const check = skill.isProficient ? scoreDisplay.modifier + proficiencyBonus : scoreDisplay.modifier;
                         return (
                             <div className="saving-throw flex items-center gap-1" key={skill.definition.name}>
                                 {skill.isProficient ? 

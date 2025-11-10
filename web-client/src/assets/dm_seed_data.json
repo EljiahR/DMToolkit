@@ -704,7 +704,7 @@
     {
       "$type": "Armor",
       "armorCategory": 1,
-      "baseAC": 0,
+      "baseAC": 13,
       "dexterityCap": 2,
       "hasDexterityCap": true,
       "strengthRequirement": 0,
@@ -773,11 +773,11 @@
     {
       "$type": "Armor",
       "armorCategory": 0,
-      "baseAC": 0,
+      "baseAC": 11,
       "dexterityCap": 2,
       "hasDexterityCap": true,
       "strengthRequirement": 0,
-      "hasStealthDisadvantage": false,
+      "hasStealthDisadvantage": true,
       "don": "",
       "doff": "",
       "id": "b0bce525-b98a-4e06-ba65-517893cb09de",
@@ -795,7 +795,7 @@
     },
     {
       "$type": "Armor",
-      "armorCategory": 0,
+      "armorCategory": 11,
       "baseAC": 0,
       "dexterityCap": 0,
       "hasDexterityCap": false,
