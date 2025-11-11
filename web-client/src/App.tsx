@@ -11,8 +11,10 @@ import { useEffect } from "react";
 import { apiGetStartupData } from "./lib/api";
 import { setAllFromDto } from "./lib/redux/dmToolsSlice";
 import seedData from "./assets/dm_seed_data.json"
+import { useAppSelector } from "./lib/redux/hooks";
 
 const App = () => {
+    const abilityScoreDefinitions = useAppSelector((state) => state.dmTools.abilityScoreDefinitions);
     const dispatch = useDispatch();
     
     useEffect(() => {
@@ -24,8 +26,14 @@ const App = () => {
                 dispatch(setAllFromDto(data));
             } catch (e) {
                 console.log("Failed to fetch startup data.", e);
-                console.log("Importing data from dm_seed_data.json");
-                dispatch(setAllFromDto(seedData))
+                console.log("Checking for existing data in localStorage...")
+                if (abilityScoreDefinitions.length > 0) {
+                    console.log("Data found.")
+                } else {
+                    console.log("No existing data found.")
+                    console.log("Importing data from dm_seed_data.json");
+                    dispatch(setAllFromDto(seedData));
+                }
             }
 
         };
