@@ -2,6 +2,7 @@ import type React from "react";
 import XIcon from "../../assets/x-symbol-svgrepo-com.svg?react";
 import type { Spell } from "../../lib/types/dm-tool-types/entities/spell";
 import type { WeaponInstance } from "../../lib/types/dm-tool-types/items/instances/weaponInstance";
+import { useState } from "react";
 
 interface AttackDisplayProps {
     attack: WeaponInstance | Spell | null;
@@ -33,6 +34,7 @@ const AttackDisplay = ({ attack, removeSelectedAttack }: AttackDisplayProps) => 
                         <XIcon className="h-5 w-5" />
                     </button>
                 </div>
+                <hr className="my-1" />
                 {
                     attack && 'school' in attack ? 
                         <SpellDisplay spell={attack} /> 
@@ -50,8 +52,16 @@ interface WeaponDisplayProps {
 }
 
 const WeaponDisplay = ({ weapon }: WeaponDisplayProps) => {
+    const [attackRoll, setAttackRoll] = useState(0);
+    
     return (
         <div id="weapon-display" className="flex-grow flex flex-col">
+            <div id="attack-roll">
+                
+            </div>
+            <div id="damage-roll">
+                {`${weapon.definition.numberOfDice}d${weapon.definition.numberOfSides} ${weapon.definition.damageType}`}
+            </div>
         </div>
     )
 }
