@@ -2,6 +2,9 @@ import { useAppSelector } from "../../lib/redux/hooks"
 import { selectAC, selectAllEquippedWeapons, selectHp, selectHpMax, selectInitiative, selectSpeed } from "../../lib/redux/selectedCharacterSlice"
 import type { WeaponInstance } from "../../lib/types/dm-tool-types/items/instances/weaponInstance";
 import RadioIcon from "../../assets/radio-button-unchecked-svgrepo-com.svg?react";
+import { useState } from "react";
+import type { Spell } from "../../lib/types/dm-tool-types/entities/spell";
+import AttackDisplay from "./AttackDisplay";
 
 const Combat = () => {
     const hp = useAppSelector(selectHp);
@@ -10,7 +13,20 @@ const Combat = () => {
     const weapons = useAppSelector(selectAllEquippedWeapons);
     const initiative = useAppSelector(selectInitiative);
     const speed = useAppSelector(selectSpeed);
+    const [selectedAttack, setSelectedAttack] = useState<WeaponInstance | Spell | null>(null);
     
+    const removeSelectedAttack = () => {
+        setSelectedAttack(null);
+    }
+
+    const handleAttackView = (attack: WeaponInstance | Spell) => {
+        if (!selectedAttack) {
+            setSelectedAttack(attack);
+        } else {
+            setSelectedAttack(null);
+        }
+    }
+
     return (
         <div id="combat-tab" className="flex flex-col gap-3">
             <div id="combat-stats-1" className="card flex gap-2 justify-center">
@@ -50,7 +66,7 @@ const Combat = () => {
                 </div>
                 {weapons.map((weapon) => {
                     return (
-                        <WeaponDisplay weapon={weapon} />
+                        <EquippedDisplay weapon={weapon} handleAttackView={handleAttackView} />
                     )
                 })}
             </div>
@@ -78,21 +94,23 @@ const Combat = () => {
                     <p>Death Throws</p>
                 </div>
             </div>
+            <AttackDisplay attack={selectedAttack} removeSelectedAttack={removeSelectedAttack} />
         </div>
     )
 }
 
-interface WeaponDisplayProps {
+interface EquippedDisplayProps {
     weapon: WeaponInstance;
+    handleAttackView: (attack: WeaponInstance | Spell) => void;
 }
 
-const WeaponDisplay = ({ weapon }: WeaponDisplayProps) => {
+const EquippedDisplay = ({ weapon, handleAttackView }: EquippedDisplayProps) => {
     return (
         <div className="wac-display mini-card">
             <p>{weapon.definition.name}</p>
             <p>+5</p>
             <p>{`${weapon.definition.numberOfDice}d${weapon.definition.numberOfSides}`}</p>
-            <button className="bg-green-200 rounded">View</button>
+            <button className="bg-green-200 rounded" onClick={() => handleAttackView(weapon)}>View</button>
         </div>
     )
 }
