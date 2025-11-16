@@ -218,6 +218,7 @@ public static class DtoConverters
                     DamageType = weapon.DamageType,
                     NumberOfDice = weapon.NumberOfDice,
                     NumberOfSides = weapon.NumberOfSides,
+                    IsMartial = weapon.IsMartial,
                     WeaponMasteryId = weapon.WeaponMasteryId,
                     WeaponPropertyIds = weapon.WeaponProperties.Select(e => e.Id).ToList()
                 };

@@ -42,6 +42,7 @@ public static class ItemDefinitionBaseSeedData
         NumberOfDice = 1,
         NumberOfSides = 6,
         DamageType = "Slashing",
+        IsMartial = true,
         Gp = 10
     };
 
