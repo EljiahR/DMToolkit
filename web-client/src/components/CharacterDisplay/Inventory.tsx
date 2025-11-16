@@ -64,7 +64,7 @@ const ItemDisplay = ({item, handleItemEquipped}: ItemDisplayProps) => {
         <div className="item-display p-1 flex justify-between border border-gray rounded items-center shadow-sm">
             <p>{item.definition.name}</p>
             {EquippableItemTypes.includes(item.definition.itemType) &&
-                <button className={`border rounded p-1 ${item.isEquipped ? 'bg-red-500' : 'bg-blue-300'}`} onClick={() => handleItemEquipped(item.id)}>{item.isEquipped ? "Unequip" : "Equip"}</button>
+                <button className={`font-semibold border rounded p-1 ${item.isEquipped ? 'bg-red-400' : 'bg-blue-300'}`} onClick={() => handleItemEquipped(item.id)}>{item.isEquipped ? "Unequip" : "Equip"}</button>
             }
         </div>
     )
