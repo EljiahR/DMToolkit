@@ -12,9 +12,11 @@ const Feats = () => {
     }, [allFeats]);
 
     return (
-        <div id="feats">
-            <div id="feat-filters"></div>
-            <div id="feature-list">
+        <div id="feats-page" className="flex flex-col">
+            <div id="feat-filters" className="card">
+                <input type="text" placeholder="Search by feat name..." disabled />
+            </div>
+            <div id="feature-list" className="card flex flex-col">
                 {filteredFeats.map((feat) => {
                     return (
                         <FeatDisplay feat={feat} />

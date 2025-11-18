@@ -2,6 +2,7 @@ import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks";
 import { setBackgroundDefinition, setBackgroundItemSet } from "../../lib/redux/selectedCharacterSlice";
 import { printItemSet } from "../../lib/dm-tools/stringFunctions";
+import type { FeatDefinition } from "../../lib/types/dm-tool-types/definitions/featDefinition";
 
 const CharacterBackground = ({className = ""}: {className?: string}) => {
     const backgrounds = useAppSelector((state) => state.dmTools.backgroundDefinitions);
@@ -55,18 +56,46 @@ const CharacterBackground = ({className = ""}: {className?: string}) => {
             <div id="selected-background-display" className="section-display">
                 <h2>{selectedBackgroundDefinition.name}</h2>
                 <p>{selectedBackgroundDefinition.description}</p>
+                <hr />
+                <div id="background-feat">
+                    {selectedBackgroundDefinition.featDefinition &&
+                        <FeatDisplay feat={selectedBackgroundDefinition.featDefinition} />
+                    }
+                </div>
+                <hr />
                 <div id="item-sets">
-                    <p>Item sets:</p>
-                    <p><span className={selectedItemSet ? "selected-item-set" : ""} onClick={() => handleItemSetSelection(true)}>{"(A)"} {printItemSet(selectedBackgroundDefinition.itemDefinitionBaseQuantities)}</span>, or <span className={!selectedItemSet ? "selected-item-set" : ""} onClick={() => handleItemSetSelection(false)}>{"(B)"} {selectedBackgroundDefinition.startingGp} GP</span></p>
-                    <div id="item-set-radios" className="flex gap-1 justify-center">
-                        <label htmlFor="item-set-a">A</label>
-                        <input type="radio" name="item-set" id="item-set-a" checked={selectedItemSet} onChange={() => handleItemSetSelection(true)} />
-                        <label htmlFor="item-set-b">B</label>
-                        <input type="radio" name="item-set" id="item-set-b" checked={!selectedItemSet} onChange={() => handleItemSetSelection(false)} />
+                    <p className="font-bold">Item sets</p>
+                    <div id="item-set-radios" className="flex flex-col gap-3 justify-center">
+                        <div id="item-set-a-div" className="item-set-div">
+                            <input type="radio" name="item-set" id="item-set-a" checked={selectedItemSet} onChange={() => handleItemSetSelection(true)} />
+                            <label htmlFor="item-set-a" className={selectedItemSet ? "selected-item-set" : ""}>{printItemSet(selectedBackgroundDefinition.itemDefinitionBaseQuantities)}</label>
+                        </div>
+                        <div id="item-set-b-div" className="item-set-div">
+                            <input type="radio" name="item-set" id="item-set-b" checked={!selectedItemSet} onChange={() => handleItemSetSelection(false)} />
+                            <label htmlFor="item-set-b" className={`${!selectedItemSet ? "selected-item-set" : ""}`}>{selectedBackgroundDefinition.startingGp} GP</label>
+                        </div>
                     </div>
                 </div>
             </div>
             }
+        </div>
+    )
+}
+
+interface FeatDisplayProps {
+    feat: FeatDefinition;
+}
+
+const FeatDisplay = ({feat}: FeatDisplayProps) => {
+    return (
+        <div id="background-feat">
+            <p className="font-bold">{feat.name}</p>
+            <p>{feat.description}</p>
+            {feat.availableEffectTables.map((table) => {
+                return (
+                    <p><span className="font-semibold">{table.effects[0].title}:</span> {table.effects[0].description}</p> 
+                )
+            })}
         </div>
     )
 }

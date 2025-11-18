@@ -57,14 +57,18 @@ const CharacterClass = ({className = ""}: {className?: string}) => {
             <div id="class-display" className="section-display">
                 <h2>{selectedCharacterClassDefinition.name}</h2>
                 <p>{selectedCharacterClassDefinition.description}</p>
+                <hr />
                 <div id="item-sets">
-                    <p>Item sets:</p>
-                    <p><span className={selectedItemSet ? "selected-item-set" : ""} onClick={() => handleItemSetSelection(true)}>{"(A)"} {printItemSet(selectedCharacterClassDefinition.itemDefinitionBaseQuantities)}</span>, or <span className={!selectedItemSet ? "selected-item-set" : ""} onClick={() => handleItemSetSelection(false)}>{"(B)"} {selectedCharacterClassDefinition.startingGp} GP</span></p>
-                    <div id="item-set-radios" className="flex gap-1 justify-center">
-                        <label htmlFor="item-set-a">A</label>
-                        <input type="radio" name="item-set" id="item-set-a" checked={selectedItemSet} onChange={() => handleItemSetSelection(true)} />
-                        <label htmlFor="item-set-b">B</label>
-                        <input type="radio" name="item-set" id="item-set-b" checked={!selectedItemSet} onChange={() => handleItemSetSelection(false)} />
+                    <p className="font-bold">Item sets</p>
+                    <div id="item-set-radios" className="flex flex-col gap-3 justify-center">
+                        <div className="item-set-div">
+                            <input type="radio" name="item-set" id="item-set-a" checked={selectedItemSet} onChange={() => handleItemSetSelection(true)} />
+                            <label className={selectedItemSet ? "selected-item-set" : ""} htmlFor="item-set-a">{printItemSet(selectedCharacterClassDefinition.itemDefinitionBaseQuantities)}</label>
+                        </div>
+                        <div className="item-set-div">
+                            <input type="radio" name="item-set" id="item-set-b" checked={!selectedItemSet} onChange={() => handleItemSetSelection(false)} />
+                            <label className={!selectedItemSet ? "selected-item-set" : ""} htmlFor="item-set-b">{selectedCharacterClassDefinition.startingGp} GP</label>
+                        </div>
                     </div>
                 </div>
             </div>

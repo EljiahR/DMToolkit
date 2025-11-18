@@ -257,6 +257,14 @@ input[type="number"] {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
 }
+
+.item-set-div {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  align-items: center;
+}
+
 /*
 @media (prefers-color-scheme: light) {
   :root {
