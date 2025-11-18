@@ -2,6 +2,7 @@ import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
 import { setCharacterClassDefinition, setCharacterClassItemSet } from "../../lib/redux/selectedCharacterSlice";
 import { printItemSet } from "../../lib/dm-tools/stringFunctions";
+import CreateCharacterFeatDisplay from "./CreateCharacterFeatDisplay";
 
 
 const CharacterClass = ({className = ""}: {className?: string}) => {
@@ -57,6 +58,14 @@ const CharacterClass = ({className = ""}: {className?: string}) => {
             <div id="class-display" className="section-display">
                 <h2>{selectedCharacterClassDefinition.name}</h2>
                 <p>{selectedCharacterClassDefinition.description}</p>
+                <hr />
+                <div id="class-feats">
+                    {selectedCharacterClassDefinition.featTables.map((table) => {
+                        return (
+                            <CreateCharacterFeatDisplay feat={table.featDefinitions[0]} />
+                        )
+                    })}
+                </div>
                 <hr />
                 <div id="item-sets">
                     <p className="font-bold">Item sets</p>

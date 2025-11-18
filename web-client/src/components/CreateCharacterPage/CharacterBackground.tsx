@@ -2,7 +2,7 @@ import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks";
 import { setBackgroundDefinition, setBackgroundItemSet } from "../../lib/redux/selectedCharacterSlice";
 import { printItemSet } from "../../lib/dm-tools/stringFunctions";
-import type { FeatDefinition } from "../../lib/types/dm-tool-types/definitions/featDefinition";
+import CreateCharacterFeatDisplay from "./CreateCharacterFeatDisplay";
 
 const CharacterBackground = ({className = ""}: {className?: string}) => {
     const backgrounds = useAppSelector((state) => state.dmTools.backgroundDefinitions);
@@ -59,7 +59,7 @@ const CharacterBackground = ({className = ""}: {className?: string}) => {
                 <hr />
                 <div id="background-feat">
                     {selectedBackgroundDefinition.featDefinition &&
-                        <FeatDisplay feat={selectedBackgroundDefinition.featDefinition} />
+                        <CreateCharacterFeatDisplay feat={selectedBackgroundDefinition.featDefinition} />
                     }
                 </div>
                 <hr />
@@ -78,24 +78,6 @@ const CharacterBackground = ({className = ""}: {className?: string}) => {
                 </div>
             </div>
             }
-        </div>
-    )
-}
-
-interface FeatDisplayProps {
-    feat: FeatDefinition;
-}
-
-const FeatDisplay = ({feat}: FeatDisplayProps) => {
-    return (
-        <div id="background-feat">
-            <p className="font-bold">{feat.name}</p>
-            <p>{feat.description}</p>
-            {feat.availableEffectTables.map((table) => {
-                return (
-                    <p><span className="font-semibold">{table.effects[0].title}:</span> {table.effects[0].description}</p> 
-                )
-            })}
         </div>
     )
 }
