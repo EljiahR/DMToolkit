@@ -39,40 +39,49 @@ const CharacterSpecies = ({className = ""}: {className?: string}) => {
     }
 
     return (
-        <div id="species-page" className={className}>
-            <div className="section-header">
-                <h2>Species</h2>    
-                <div id="species-selection" className="section-selection">
-                    <label htmlFor="species-selector">Select a species</label>
-                    <select id="species-selector" value={selectedSpeciesDefinition ? selectedSpeciesDefinition.id : ""} onChange={(e) => handleSpeciesChange(e.target.value)}>
-                        {allSpecies.map((species) => {
-                            return (
-                                <option key={`species-${species.id}`} value={species.id}>{species.name}</option>
-                            )
-                        })}
-                    </select>
+        <div id="species-page" className="w-full text-center flex flex-col gap-3 justify-center">
+            <div id="species-div" className="flex flex-col gap-2">
+                <div className="section-header">
+                    <h2>Species</h2>    
+                    <div id="species-selection" className="section-selection">
+                        <label htmlFor="species-selector">Select a species</label>
+                        <select id="species-selector" value={selectedSpeciesDefinition ? selectedSpeciesDefinition.id : ""} onChange={(e) => handleSpeciesChange(e.target.value)}>
+                            {allSpecies.map((species) => {
+                                return (
+                                    <option key={`species-${species.id}`} value={species.id}>{species.name}</option>
+                                )
+                            })}
+                        </select>
+                    </div>
                 </div>
-                <div id="lineage-seelction" className="section-selection">
-                    <label htmlFor="lineage-selector">Select a lineage</label>
-                    <select id="lineage-selector" value={selectedLineageDefinition ? selectedLineageDefinition.id : ""} onChange={(e) => handleLineageChange(e.target.value)}>
-                        {selectedSpeciesDefinition?.lineageDefinitions.map((lineage) => {
-                            return (
-                                <option key={`lineage-${lineage.id}`} value={lineage.id}>{lineage.name}</option>
-                            )
-                        })}
-                    </select>
-                </div>
-                
-                
+                {(selectedSpeciesDefinition && selectedLineageDefinition) &&
+                    <div id="species-display" className="section-display">
+                        <h2>{selectedSpeciesDefinition.name}</h2>
+                        <p>{selectedSpeciesDefinition.description}</p>
+                    </div>
+                }
             </div>
-            
-            {(selectedSpeciesDefinition && selectedLineageDefinition) &&
-                <div id="species-display" className="section-display">
-                    <h2>{selectedSpeciesDefinition.name}</h2>
-                    <h3>{selectedLineageDefinition.name}</h3>
-                    <p>{selectedSpeciesDefinition.description}</p>
+            <div id="lineage-div">
+                <div className="section-header">
+                    <h2>Lineage</h2>
+                    <div id="lineage-selection" className="section-selection">
+                        <label htmlFor="lineage-selector">Select a lineage</label>
+                        <select id="lineage-selector" value={selectedLineageDefinition ? selectedLineageDefinition.id : ""} onChange={(e) => handleLineageChange(e.target.value)}>
+                            {selectedSpeciesDefinition?.lineageDefinitions.map((lineage) => {
+                                return (
+                                    <option key={`lineage-${lineage.id}`} value={lineage.id}>{lineage.name}</option>
+                                )
+                            })}
+                        </select>
+                    </div>
                 </div>
-            }
+                {(selectedSpeciesDefinition && selectedLineageDefinition) &&
+                    <div id="lineage-display" className="section-display">
+                        <h2>{selectedLineageDefinition.name}</h2>
+                        <p>{selectedLineageDefinition.description}</p>
+                    </div>
+                }
+            </div>
             
         </div>
     )
