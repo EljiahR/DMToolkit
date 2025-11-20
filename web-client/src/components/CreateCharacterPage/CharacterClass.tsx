@@ -62,7 +62,7 @@ const CharacterClass = ({className = ""}: {className?: string}) => {
                 <div id="class-feats">
                     {selectedCharacterClassDefinition.featTables.map((table) => {
                         return (
-                            <CreateCharacterFeatDisplay feat={table.featDefinitions[0]} />
+                            <CreateCharacterFeatDisplay key={table.group + "-feat-group"} feat={table.featDefinitions[0]} />
                         )
                     })}
                 </div>
