@@ -46,11 +46,12 @@ const CreatePlayerCharacterPage = () => {
 
     useLayoutEffect(() => {
         dispatch(setNewCharacter({ defaultScores: scoreDefinitions, defaultBackground: backgroundDefinitions[0], defaultClass: characterClassDefinitions[0], defaultSpecies: speciesDefinitions[0] }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <div id="create-player-character-page" className="h-full flex flex-col gap-1">
-            {<ActiveSection className="flex flex-col text-center items-center justify-between flex-grow gap-2" />}
+            {<ActiveSection className="flex flex-col text-center items-center justify-start flex-grow gap-2" />}
             <CreateCharacterNavigation className="w-full row-start-2 " />
         </div>
     )

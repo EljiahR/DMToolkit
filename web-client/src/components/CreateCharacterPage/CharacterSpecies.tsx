@@ -1,6 +1,7 @@
 import { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/redux/hooks"
 import { setLineageDefinition, setSpeciesDefinition } from "../../lib/redux/selectedCharacterSlice";
+import CreateCharacterFeatDisplay from "./CreateCharacterFeatDisplay";
 
 const CharacterSpecies = ({className = ""}: {className?: string}) => {
     const allSpecies = useAppSelector((state) => state.dmTools.speciesDefinitions);
@@ -39,8 +40,8 @@ const CharacterSpecies = ({className = ""}: {className?: string}) => {
     }
 
     return (
-        <div id="species-page" className="w-full text-center flex flex-col gap-3 justify-center">
-            <div id="species-div" className="flex flex-col gap-2">
+        <div id="species-page" className={className + " gap-1"}>
+            <div id="species-div" className="flex flex-col gap-2 items-center">
                 <div className="section-header">
                     <h2>Species</h2>    
                     <div id="species-selection" className="section-selection">
@@ -54,34 +55,45 @@ const CharacterSpecies = ({className = ""}: {className?: string}) => {
                         </select>
                     </div>
                 </div>
-                {(selectedSpeciesDefinition && selectedLineageDefinition) &&
+                {selectedSpeciesDefinition &&
                     <div id="species-display" className="section-display">
                         <h2>{selectedSpeciesDefinition.name}</h2>
                         <p>{selectedSpeciesDefinition.description}</p>
-                    </div>
-                }
-            </div>
-            <div id="lineage-div">
-                <div className="section-header">
-                    <h2>Lineage</h2>
-                    <div id="lineage-selection" className="section-selection">
-                        <label htmlFor="lineage-selector">Select a lineage</label>
-                        <select id="lineage-selector" value={selectedLineageDefinition ? selectedLineageDefinition.id : ""} onChange={(e) => handleLineageChange(e.target.value)}>
-                            {selectedSpeciesDefinition?.lineageDefinitions.map((lineage) => {
-                                return (
-                                    <option key={`lineage-${lineage.id}`} value={lineage.id}>{lineage.name}</option>
-                                )
+                        <hr />
+                        <div id="species-feats">
+                            {selectedSpeciesDefinition.featDefinitions.map((feat) => {
+                                return <CreateCharacterFeatDisplay feat={feat} />
                             })}
-                        </select>
-                    </div>
-                </div>
-                {(selectedSpeciesDefinition && selectedLineageDefinition) &&
-                    <div id="lineage-display" className="section-display">
-                        <h2>{selectedLineageDefinition.name}</h2>
-                        <p>{selectedLineageDefinition.description}</p>
+                        </div>
+                        <hr />
+                        <div id="lineage-div" className="flex flex-col gap-2 items-center">
+                            <div id="lineage-selection" className="section-selection">
+                                <label htmlFor="lineage-selector">Select a lineage</label>
+                                <select id="lineage-selector" value={selectedLineageDefinition ? selectedLineageDefinition.id : ""} onChange={(e) => handleLineageChange(e.target.value)}>
+                                    {selectedSpeciesDefinition?.lineageDefinitions.map((lineage) => {
+                                        return (
+                                            <option key={`lineage-${lineage.id}`} value={lineage.id}>{lineage.name}</option>
+                                        )
+                                    })}
+                                </select>
+                            </div>
+                            {selectedLineageDefinition &&
+                                <div id="lineage-display" className="flex flex-col gap-3">
+                                    <h2>{selectedLineageDefinition.name}</h2>
+                                    <p>{selectedLineageDefinition.description}</p>
+                                    <hr />
+                                    <div id="lineage-feats">
+                                        {selectedLineageDefinition.featDefinitions.map((feat) => {
+                                            return <CreateCharacterFeatDisplay feat={feat} />
+                                        })}
+                                    </div>
+                                </div>
+                            }
+                        </div>
                     </div>
                 }
             </div>
+            
             
         </div>
     )
