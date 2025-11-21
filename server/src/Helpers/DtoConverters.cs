@@ -109,7 +109,16 @@ public static class DtoConverters
             DefaultCon = characterClass.DefaultCon,
             DefaultInt = characterClass.DefaultInt,
             DefaultWis = characterClass.DefaultWis,
-            DefaultCha = characterClass.DefaultCha
+            DefaultCha = characterClass.DefaultCha,
+            LevelOneSlots = characterClass.LevelOneSlots,
+            LevelTwoSlots = characterClass.LevelTwoSlots,
+            LevelThreeSlots = characterClass.LevelThreeSlots,
+            LevelFourSlots = characterClass.LevelFourSlots,
+            LevelFiveSlots = characterClass.LevelFiveSlots,
+            LevelSixSlots = characterClass.LevelSixSlots,
+            LevelSevenSlots = characterClass.LevelSevenSlots,
+            LevelEightSlots = characterClass.LevelEightSlots,
+            LevelNineSlots = characterClass.LevelNineSlots
         };
     }
     private static List<FeatDefinitionEffectGroupingDto> ConvertFeatDefinitionFeatEffectJoinTable(IEnumerable<FeatDefinitionEffect> joinTables)

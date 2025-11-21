@@ -18,6 +18,15 @@ export interface CharacterClassDefinition {
     defaultInt: number;
     defaultWis: number;
     defaultCha: number;
+    levelOneSlots: number[] | null;
+    levelTwoSlots: number[] | null;
+    levelThreeSlots: number[] | null;
+    levelFourSlots: number[] | null;
+    levelFiveSlots: number[] | null;
+    levelSixSlots: number[] | null;
+    levelSevenSlots: number[] | null;
+    levelEightSlots: number[] | null;
+    levelNineSlots: number[] | null;
 }
 
 export interface CharacterClassDefinitionDto {
@@ -36,4 +45,13 @@ export interface CharacterClassDefinitionDto {
     defaultInt: number;
     defaultWis: number;
     defaultCha: number;
+    levelOneSlots: number[] | null;
+    levelTwoSlots: number[] | null;
+    levelThreeSlots: number[] | null;
+    levelFourSlots: number[] | null;
+    levelFiveSlots: number[] | null;
+    levelSixSlots: number[] | null;
+    levelSevenSlots: number[] | null;
+    levelEightSlots: number[] | null;
+    levelNineSlots: number[] | null;
 }

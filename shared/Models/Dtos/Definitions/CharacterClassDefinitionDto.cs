@@ -19,4 +19,13 @@ public class CharacterClassDefinitionDto
     public int DefaultInt { get; set; } = 0;
     public int DefaultWis { get; set; } = 0;
     public int DefaultCha { get; set; } = 0;
+    public int[]? LevelOneSlots { get; set; } = null;
+    public int[]? LevelTwoSlots { get; set; } = null;
+    public int[]? LevelThreeSlots { get; set; } = null;
+    public int[]? LevelFourSlots { get; set; } = null;
+    public int[]? LevelFiveSlots { get; set; } = null;
+    public int[]? LevelSixSlots { get; set; } = null;
+    public int[]? LevelSevenSlots { get; set; } = null;
+    public int[]? LevelEightSlots { get; set; } = null;
+    public int[]? LevelNineSlots { get; set; } = null;
 }
