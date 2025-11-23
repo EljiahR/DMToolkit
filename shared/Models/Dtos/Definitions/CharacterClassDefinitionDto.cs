@@ -10,7 +10,9 @@ public class CharacterClassDefinitionDto
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     // Core Traits
-    public string PrimaryAbilityId { get; set; } = string.Empty;
+    public string PrimaryAbilityScoreDefinitionId { get; set; } = string.Empty;
+    public string AlternativePrimaryAbilityScoreDefinitionId { get; set; } = string.Empty;
+    public bool PrimaryScoreIsExclusive { get; set; } = true;
     public int HitDie { get; set; } = 0;
     public ICollection<string> SavingThrowProficiencyIds { get; set; } = new List<string>();
     public ICollection<string> SkillProficiencyIds { get; set; } = new List<string>();
@@ -27,26 +29,26 @@ public class CharacterClassDefinitionDto
     public ICollection<FeatGroupLevelDto> FeatTables { get; set; } = new List<FeatGroupLevelDto>();
     public ICollection<SubclassDefinitionDto> SubclassDefinitions { get; set; } = new List<SubclassDefinitionDto>();
     // Spellcasting
-    public int[]? NumberOfPreparedSpells { get; set; } = null;
-    public int[]? NumberOfCantrips { get; set; } = null;
-    public int[]? LevelOneSlots { get; set; } = null;
-    public int[]? LevelTwoSlots { get; set; } = null;
-    public int[]? LevelThreeSlots { get; set; } = null;
-    public int[]? LevelFourSlots { get; set; } = null;
-    public int[]? LevelFiveSlots { get; set; } = null;
-    public int[]? LevelSixSlots { get; set; } = null;
-    public int[]? LevelSevenSlots { get; set; } = null;
-    public int[]? LevelEightSlots { get; set; } = null;
-    public int[]? LevelNineSlots { get; set; } = null;
+    public List<int> NumberOfPreparedSpells { get; set; } = new();
+    public List<int> NumberOfCantrips { get; set; } = new();
+    public List<int> LevelOneSlots { get; set; } = new();
+    public List<int> LevelTwoSlots { get; set; } = new();
+    public List<int> LevelThreeSlots { get; set; } = new();
+    public List<int> LevelFourSlots { get; set; } = new();
+    public List<int> LevelFiveSlots { get; set; } = new();
+    public List<int> LevelSixSlots { get; set; } = new();
+    public List<int> LevelSevenSlots { get; set; } = new();
+    public List<int> LevelEightSlots { get; set; } = new();
+    public List<int> LevelNineSlots { get; set; } = new();
     public string SpellcastingAbilityId { get; set; } = string.Empty;
     public string SpellcastingFocusId { get; set; } = string.Empty;
     public bool HasSpellbook { get; set; } = false;
     // Class Extras
-    public int[]? ClassPoints { get; set;} = null; 
-    public int[]? ClassDieNumber { get; set; } = null; 
-    public int[]? ClassDieSides { get; set; } = null;
-    public int[]? WeaponMasteries { get; set; } = null; 
-    public int[]? ClassBonus { get; set; } = null;
+    public List<int> ClassPoints { get; set;} = new(); 
+    public List<int> ClassDieNumber { get; set; } = new(); 
+    public List<int> ClassDieSides { get; set; } = new();
+    public List<int> WeaponMasteries { get; set; } = new();
+    public List<int> ClassBonus { get; set; } = new();
     // Defaults
     public int DefaultStr { get; set; } = 0;
     public int DefaultDex { get; set; } = 0;

@@ -13,16 +13,5 @@ public class SpeciesDefinitionConfiguration : IEntityTypeConfiguration<SpeciesDe
         builder.HasMany(sd => sd.LineageDefinitions)
             .WithOne(ld => ld.SpeciesDefinition)
             .HasForeignKey(ld => ld.SpeciesDefinitionId);
-
-        builder.Property(s => s.Sizes)
-            .HasConversion(
-                v => string.Join(',', v),
-                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList(),
-                new ValueComparer<List<string>>(
-                    (c1, c2) => c1.SequenceEqual(c2),
-                    c => c.Aggregate(0, (hash, value) => HashCode.Combine(hash, value.GetHashCode())),
-                    c => c.ToList()
-                )
-            );
     }
 }

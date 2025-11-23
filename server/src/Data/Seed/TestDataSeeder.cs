@@ -89,7 +89,7 @@ public class TestDataSeeder
                 {
                     saveFlag = true;
                     _logger.LogInformation("Adding character class definitions...");
-                    _context.AddRange(CharacterClassDefinitionSeedData.AllCharacterClasses);
+                   _context.AddRange(CharacterClassDefinitionSeedData.AllCharacterClasses);
                 }
 
                 if (!_context.BackgroundDefinitions.Any())
@@ -132,13 +132,6 @@ public class TestDataSeeder
                     saveFlag = true;
                     _logger.LogInformation("Adding character class to item definition base join tables...");
                     _context.AddRange(CharacterClassDefinitionItemDefinitionBaseSeedData.AllTables);
-                }
-
-                if (!_context.CharacterClassPrimaryAbilities.Any())
-                {
-                    saveFlag = true;
-                    _logger.LogInformation("Adding characterclass primary score join tables...");
-                    _context.AddRange(CharacterClassPrimaryAbilitySeedData.AllTables);
                 }
                 
                 if (saveFlag)

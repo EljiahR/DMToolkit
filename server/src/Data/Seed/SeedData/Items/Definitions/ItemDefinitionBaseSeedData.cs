@@ -42,7 +42,7 @@ public static class ItemDefinitionBaseSeedData
         NumberOfDice = 1,
         NumberOfSides = 6,
         DamageType = "Slashing",
-        IsMartial = true,
+        WeaponCategory = WeaponCategory.Simple,
         Gp = 10
     };
 
@@ -106,6 +106,7 @@ public static class ItemDefinitionBaseSeedData
         NumberOfDice = 1,
         NumberOfSides = 8,
         DamageType = "Slashing",
+        WeaponCategory = WeaponCategory.Martial,
         Gp = 25
     };
 

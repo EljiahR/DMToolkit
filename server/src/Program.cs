@@ -23,7 +23,7 @@ if (!string.IsNullOrWhiteSpace(dbConnection))
 else
 {
     builder.Services.AddDbContext<DMDbContext>(options =>
-        options.UseSqlite("Data Source=chat.db"));
+        options.UseSqlite("Data Source=dm.db"));
 
     builder.Services.AddScoped<TestDataSeeder>();
 }

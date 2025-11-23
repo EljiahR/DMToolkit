@@ -52,8 +52,6 @@ public class DMDbContext : IdentityDbContext<DMUser>
     public DbSet<CharacterClassDefinitionFeatDefinition> CharacterClassDefinitionFeatDefinitions { get; set; }
     public DbSet<BackgroundDefinitionItemDefinitionBase> BackgroundDefinitionItemDefinitionBases { get; set; }
     public DbSet<CharacterClassDefinitionItemDefinitionBase> CharacterClassDefinitionItemDefinitionBases { get; set; }
-    public DbSet<CharacterClassPrimaryAbility> CharacterClassPrimaryAbilities { get; set; }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         var isSqlite = Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite";
@@ -108,7 +106,6 @@ public class DMDbContext : IdentityDbContext<DMUser>
         builder.ApplyConfiguration(new CharacterCharacterClassInstanceConfiguration());
         builder.ApplyConfiguration(new CharacterClassDefinitionFeatDefinitionConfiguration());
         builder.ApplyConfiguration(new CharacterClassDefinitionItemDefinitionBaseConfiguration());
-        builder.ApplyConfiguration(new CharacterClassPrimaryAbilityConfiguration());
         builder.ApplyConfiguration(new CharacterSpellConfiguration());
         builder.ApplyConfiguration(new FeatDefinitionFeatEffectConfiguration());
         builder.ApplyConfiguration(new SpellItemConfiguration());
