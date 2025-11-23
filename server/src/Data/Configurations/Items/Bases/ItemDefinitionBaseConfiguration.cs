@@ -12,6 +12,7 @@ public class ItemDefinitionBaseConfiguration : IEntityTypeConfiguration<ItemDefi
         builder.HasDiscriminator<string>("ItemType")
             .HasValue<ItemDefinition>("Item")
             .HasValue<WeaponDefinition>("Weapon")
-            .HasValue<ArmorDefinition>("Armor");
+            .HasValue<ArmorDefinition>("Armor")
+            .HasValue<ToolDefinition>("Tool");
     }
 }

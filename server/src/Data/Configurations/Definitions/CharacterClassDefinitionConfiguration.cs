@@ -12,5 +12,22 @@ public class CharacterClassDefinitionConfiguration : IEntityTypeConfiguration<Ch
         builder.HasMany(ccd => ccd.SubclassDefinitions)
             .WithOne(sd => sd.CharacterClassDefinition)
             .HasForeignKey(sd => sd.CharacterClassDefinitionId);
+
+        builder.HasMany(c => c.SavingThrowProficiencies)
+            .WithMany();
+
+        builder.HasMany(c => c.SkillProficiencies)
+            .WithMany();
+
+        builder.HasOne(c => c.ToolProficiency)
+            .WithMany();
+
+        builder.HasOne(c => c.SpellcastingAbility)
+            .WithMany()
+            .HasForeignKey(c => c.SpellcastingAbilityId);
+
+        builder.HasOne(c => c.SpellcastingFocus)
+            .WithMany()
+            .HasForeignKey(c => c.SpellcastingFocusId);
     }
 }

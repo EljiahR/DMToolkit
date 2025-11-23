@@ -109,7 +109,7 @@ public static class DtoConverters
             ToolProficiencyCategories = characterClass.ToolProficiencyCategories,
             NumberOfToolProficiencies = characterClass.NumberOfToolProficiencies,
             ArmorProficiencies = characterClass.ArmorProficiencies,
-            ItemDefinitionBaseQuantities = characterClass.CharacterClassDefinitionItemDefinitionBases.Select(a => new ItemDefinitionBaseQuantity {ItemDefinitionBaseId = a.ItemDefinitionBaseId, Quantity = a.Quantity }).ToList(),
+            StartingEquipmentQuantityTables = characterClass.StartingEquipmentQuantityTables.Select(a => new ItemDefinitionBaseQuantity {ItemDefinitionBaseId = a.ItemDefinitionBaseId, Quantity = a.Quantity }).ToList(),
             StartingGp = characterClass.StartingGp,
             FeatTables = ConvertFeatTables(characterClass.CharacterClassDefinitionFeatDefinitions),
             SubclassDefinitions = characterClass.SubclassDefinitions.Select(ConvertSubclassDefinition).ToList(),

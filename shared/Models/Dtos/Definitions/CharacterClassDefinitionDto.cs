@@ -21,7 +21,7 @@ public class CharacterClassDefinitionDto
     public ICollection<ToolCategory>? ToolProficiencyCategories { get; set; } = null;
     public int NumberOfToolProficiencies { get; set; } = 0;
     public ICollection<ArmorCategory>? ArmorProficiencies { get; set; } = null;
-    public ICollection<ItemDefinitionBaseQuantity> ItemDefinitionBaseQuantities { get; set; } = new List<ItemDefinitionBaseQuantity>();
+    public ICollection<ItemDefinitionBaseQuantity> StartingEquipmentQuantityTables { get; set; } = new List<ItemDefinitionBaseQuantity>();
     public int StartingGp { get; set; } = 0;
     // Features
     public ICollection<FeatGroupLevelDto> FeatTables { get; set; } = new List<FeatGroupLevelDto>();
