@@ -52,6 +52,7 @@ public class DMDbContext : IdentityDbContext<DMUser>
     public DbSet<CharacterClassDefinitionFeatDefinition> CharacterClassDefinitionFeatDefinitions { get; set; }
     public DbSet<BackgroundDefinitionItemDefinitionBase> BackgroundDefinitionItemDefinitionBases { get; set; }
     public DbSet<CharacterClassDefinitionItemDefinitionBase> CharacterClassDefinitionItemDefinitionBases { get; set; }
+    public DbSet<CharacterClassPrimaryAbility> CharacterClassPrimaryAbilities { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

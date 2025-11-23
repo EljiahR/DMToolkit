@@ -71,13 +71,6 @@ public class TestDataSeeder
                     _context.AddRange(SkillDefinitionSeedData.AllSkillDefinitions);
                 }
 
-                if (!_context.CharacterClassDefinitions.Any())
-                {
-                    saveFlag = true;
-                    _logger.LogInformation("Adding character class definitions...");
-                    _context.AddRange(CharacterClassDefinitionSeedData.AllCharacterClasses);
-                }
-
                 if (!_context.SpeciesDefinitions.Any())
                 {
                     saveFlag = true;
@@ -90,6 +83,13 @@ public class TestDataSeeder
                     saveFlag = false;
                     _logger.LogInformation("Saving changes...");
                     _context.SaveChanges();
+                }
+
+                if (!_context.CharacterClassDefinitions.Any())
+                {
+                    saveFlag = true;
+                    _logger.LogInformation("Adding character class definitions...");
+                    _context.AddRange(CharacterClassDefinitionSeedData.AllCharacterClasses);
                 }
 
                 if (!_context.BackgroundDefinitions.Any())
@@ -106,6 +106,20 @@ public class TestDataSeeder
                     _context.AddRange(LineageDefinitionSeedData.AllLineages);
                 }
 
+
+                if (saveFlag)
+                {
+                    _logger.LogInformation("Saving changes...");
+                    _context.SaveChanges();
+                }
+
+                if (!_context.BackgroundDefinitionItemDefinitionBases.Any())
+                {
+                    saveFlag = true;
+                    _logger.LogInformation("Adding background definition to item definition base join tables...");
+                    _context.AddRange(BackgroundDefinitionItemDefinitionBaseSeedData.AllTables);
+                }
+
                 if (!_context.CharacterClassDefinitionFeatDefinitions.Any())
                 {
                     saveFlag = true;
@@ -120,17 +134,11 @@ public class TestDataSeeder
                     _context.AddRange(CharacterClassDefinitionItemDefinitionBaseSeedData.AllTables);
                 }
 
-                if (saveFlag)
-                {
-                    _logger.LogInformation("Saving changes...");
-                    _context.SaveChanges();
-                }
-
-                if (!_context.BackgroundDefinitionItemDefinitionBases.Any())
+                if (!_context.CharacterClassPrimaryAbilities.Any())
                 {
                     saveFlag = true;
-                    _logger.LogInformation("Adding background definition to item definition base join tables...");
-                    _context.AddRange(BackgroundDefinitionItemDefinitionBaseSeedData.AllTables);
+                    _logger.LogInformation("Adding characterclass primary score join tables...");
+                    _context.AddRange(CharacterClassPrimaryAbilitySeedData.AllTables);
                 }
                 
                 if (saveFlag)
