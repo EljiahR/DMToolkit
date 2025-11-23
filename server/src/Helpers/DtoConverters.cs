@@ -98,18 +98,23 @@ public static class DtoConverters
             Id = characterClass.Id,
             Name = characterClass.Name,
             Description = characterClass.Description,
+            PrimaryAbilityId = characterClass.PrimaryAbilityId,
             HitDie = characterClass.HitDie,
-            FixedHp = characterClass.FixedHp,
-            SubclassDefinitions = characterClass.SubclassDefinitions.Select(ConvertSubclassDefinition).ToList(),
-            FeatTables = ConvertFeatTables(characterClass.CharacterClassDefinitionFeatDefinitions),
+            SavingThrowProficiencyIds = characterClass.SavingThrowProficiencies.Select((p) => p.Id).ToList(),
+            SkillProficiencyIds = characterClass.SkillProficiencies.Select((p) => p.Id).ToList(),
+            NumberOfSkillProficiencies = characterClass.NumberOfSkillProficiencies,
+            WeaponProficiencies = characterClass.WeaponProficiencies,
+            ExtraWeaponProficiencies = characterClass.ExtraWeaponProficiencies,
+            ToolProficiencyId = characterClass.ToolProficiencyId,
+            ToolProficiencyCategories = characterClass.ToolProficiencyCategories,
+            NumberOfToolProficiencies = characterClass.NumberOfToolProficiencies,
+            ArmorProficiencies = characterClass.ArmorProficiencies,
             ItemDefinitionBaseQuantities = characterClass.CharacterClassDefinitionItemDefinitionBases.Select(a => new ItemDefinitionBaseQuantity {ItemDefinitionBaseId = a.ItemDefinitionBaseId, Quantity = a.Quantity }).ToList(),
             StartingGp = characterClass.StartingGp,
-            DefaultStr = characterClass.DefaultStr,
-            DefaultDex = characterClass.DefaultDex,
-            DefaultCon = characterClass.DefaultCon,
-            DefaultInt = characterClass.DefaultInt,
-            DefaultWis = characterClass.DefaultWis,
-            DefaultCha = characterClass.DefaultCha,
+            FeatTables = ConvertFeatTables(characterClass.CharacterClassDefinitionFeatDefinitions),
+            SubclassDefinitions = characterClass.SubclassDefinitions.Select(ConvertSubclassDefinition).ToList(),
+            NumberOfPreparedSpells = characterClass.NumberOfPreparedSpells,
+            NumberOfCantrips = characterClass.NumberOfCantrips,
             LevelOneSlots = characterClass.LevelOneSlots,
             LevelTwoSlots = characterClass.LevelTwoSlots,
             LevelThreeSlots = characterClass.LevelThreeSlots,
@@ -118,7 +123,22 @@ public static class DtoConverters
             LevelSixSlots = characterClass.LevelSixSlots,
             LevelSevenSlots = characterClass.LevelSevenSlots,
             LevelEightSlots = characterClass.LevelEightSlots,
-            LevelNineSlots = characterClass.LevelNineSlots
+            LevelNineSlots = characterClass.LevelNineSlots,
+            SpellcastingAbilityId = characterClass.SpellcastingAbilityId,
+            SpellcastingFocusId = characterClass.SpellcastingFocusId,
+            HasSpellbook = characterClass.HasSpellbook,
+            ClassPoints = characterClass.ClassPoints,
+            ClassDieNumber = characterClass.ClassDieNumber,
+            ClassDieSides = characterClass.ClassDieSides,
+            WeaponMasteries = characterClass.WeaponMasteries,
+            ClassBonus = characterClass.ClassBonus,
+            DefaultStr = characterClass.DefaultStr,
+            DefaultDex = characterClass.DefaultDex,
+            DefaultCon = characterClass.DefaultCon,
+            DefaultInt = characterClass.DefaultInt,
+            DefaultWis = characterClass.DefaultWis,
+            DefaultCha = characterClass.DefaultCha,
+            FixedHp = characterClass.FixedHp,
         };
     }
     private static List<FeatDefinitionEffectGroupingDto> ConvertFeatDefinitionFeatEffectJoinTable(IEnumerable<FeatDefinitionEffect> joinTables)
@@ -224,10 +244,10 @@ public static class DtoConverters
                 var weapon = (itemBase as WeaponDefinition)!;
                 itemDto = new WeaponDefinitionDto()
                 {
+                    WeaponCategory = weapon.WeaponCategory,
                     DamageType = weapon.DamageType,
                     NumberOfDice = weapon.NumberOfDice,
                     NumberOfSides = weapon.NumberOfSides,
-                    IsMartial = weapon.IsMartial,
                     WeaponMasteryId = weapon.WeaponMasteryId,
                     WeaponPropertyIds = weapon.WeaponProperties.Select(e => e.Id).ToList()
                 };
@@ -243,6 +263,13 @@ public static class DtoConverters
                     Don = armor.Don,
                     Doff = armor.Doff,
                     ArmorCategory = armor.ArmorCategory
+                };
+                break;
+            case "Tool":
+                var tool = (itemBase as ToolDefinition)!;
+                itemDto = new ToolDefinitionDto()
+                {
+                    ToolCategory = tool.ToolCategory
                 };
                 break;
             default:

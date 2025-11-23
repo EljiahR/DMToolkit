@@ -7,6 +7,7 @@ namespace SharedModels.Models.Dtos.Items.Bases;
 [JsonDerivedType(typeof(ItemDefinitionDto), "Item")]
 [JsonDerivedType(typeof(WeaponDefinitionDto), "Weapon")] 
 [JsonDerivedType(typeof(ArmorDefinitionDto), "Armor")]
+[JsonDerivedType(typeof(ToolDefinitionDto), "Tool")]
 public abstract class ItemDefinitionBaseDto
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();

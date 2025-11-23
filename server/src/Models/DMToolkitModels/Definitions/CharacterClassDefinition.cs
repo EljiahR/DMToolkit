@@ -17,7 +17,7 @@ public class CharacterClassDefinition : IDefinition
     public int HitDie { get; set; } = 0;
     public ICollection<AbilityScoreDefinition> SavingThrowProficiencies { get; set; } = new List<AbilityScoreDefinition>();
     public ICollection<SkillDefinition> SkillProficiencies { get; set; } = new List<SkillDefinition>();
-    public int NumberOfSkillProficiencies { get; set; } = 2;
+    public int NumberOfSkillProficiencies { get; set; } = 0;
     public ICollection<WeaponCategory> WeaponProficiencies { get; set; } = new List<WeaponCategory>();
     public ICollection<string>? ExtraWeaponProficiencies { get; set; } = null;
     public string ToolProficiencyId { get; set; } = string.Empty;
@@ -42,6 +42,7 @@ public class CharacterClassDefinition : IDefinition
     public int[]? LevelSevenSlots { get; set; } = null;
     public int[]? LevelEightSlots { get; set; } = null;
     public int[]? LevelNineSlots { get; set; } = null;
+    public string SpellcastingAbilityId { get; set; } = string.Empty;
     public AbilityScoreDefinition? SpellcastingAbility { get; set; } = null;
     public string SpellcastingFocusId { get; set; } = string.Empty;
     public ItemDefinitionBase? SpellcastingFocus { get; set; } = null;
