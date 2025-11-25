@@ -17,5 +17,8 @@ public class SpellConfiguration : IEntityTypeConfiguration<Spell>
         builder.HasOne(s => s.School)
             .WithMany(c => c.Spells)
             .HasForeignKey(s => s.SchoolId);
+
+        builder.HasMany(s => s.CharacterClassDefinitions)
+            .WithMany();
     }
 }

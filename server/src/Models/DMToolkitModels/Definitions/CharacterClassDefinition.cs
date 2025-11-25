@@ -12,20 +12,20 @@ public class CharacterClassDefinition : IDefinition
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     // Core Traits
-    public string PrimaryAbilityScoreDefinitionId { get; set; } = string.Empty;
+    public string? PrimaryAbilityScoreDefinitionId { get; set; } = null;
     public AbilityScoreDefinition? PrimaryAbilityScoreDefinition { get; set; } = null;
-    public string AlternativePrimaryAbilityScoreDefinitionId { get; set; } = string.Empty;
+    public string? AlternativePrimaryAbilityScoreDefinitionId { get; set; } = null;
     public AbilityScoreDefinition? AlternativePrimaryAbilityScoreDefinition { get; set; } = null;
     public bool PrimaryScoreIsExclusive { get; set; } = true;
     public int HitDie { get; set; } = 0;
     public ICollection<AbilityScoreDefinition> SavingThrowProficiencies { get; set; } = new List<AbilityScoreDefinition>();
     public ICollection<SkillDefinition> SkillProficiencies { get; set; } = new List<SkillDefinition>();
     public int NumberOfSkillProficiencies { get; set; } = 0;
-    public ICollection<WeaponCategory> WeaponProficiencies { get; set; } = new List<WeaponCategory>();
-    public ICollection<string> ExtraWeaponProficiencies { get; set; } = new List<string>();
-    public string ToolProficiencyId { get; set; } = string.Empty;
+    public List<WeaponCategory> WeaponProficiencies { get; set; } = new List<WeaponCategory>();
+    public List<string> ExtraWeaponProficiencies { get; set; } = new List<string>();
+    public string? ToolProficiencyId { get; set; } = null;
     public ToolDefinition? ToolProficiency { get; set; } = null;
-    public ICollection<ToolCategory> ToolProficiencyCategories { get; set; } = new List<ToolCategory>();
+    public List<ToolCategory> ToolProficiencyCategories { get; set; } = new List<ToolCategory>();
     public int NumberOfToolProficiencies { get; set; } = 0;
     public ICollection<ArmorCategory> ArmorProficiencies { get; set; } = new List<ArmorCategory>();
     public ICollection<CharacterClassDefinitionItemDefinitionBase> StartingEquipmentQuantityTables { get; set; } = new List<CharacterClassDefinitionItemDefinitionBase>();
@@ -45,9 +45,9 @@ public class CharacterClassDefinition : IDefinition
     public List<int> LevelSevenSlots { get; set; } = new();
     public List<int> LevelEightSlots { get; set; } = new();
     public List<int> LevelNineSlots { get; set; } = new();
-    public string SpellcastingAbilityId { get; set; } = string.Empty;
+    public string? SpellcastingAbilityId { get; set; } = null;
     public AbilityScoreDefinition? SpellcastingAbility { get; set; } = null;
-    public string SpellcastingFocusId { get; set; } = string.Empty;
+    public string? SpellcastingFocusId { get; set; } = null;
     public ItemDefinitionBase? SpellcastingFocus { get; set; } = null;
     public bool HasSpellbook { get; set; } = false;
     // Class Extras

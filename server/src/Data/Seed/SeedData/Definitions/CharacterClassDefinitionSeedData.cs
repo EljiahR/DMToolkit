@@ -9,7 +9,7 @@ public static class CharacterClassDefinitionSeedData
     {
         Name = "Vanguard",
         Description = "A disciplined warrior who leads from the front, anchoring the line and shielding allies from harm.",
-        PrimaryAbilityScoreDefinitionId = AbilityScoreDefinitionSeedData.StrDefinition.Id,
+        PrimaryAbilityScoreDefinition = AbilityScoreDefinitionSeedData.StrDefinition,
         HitDie = 10,
         SavingThrowProficiencies = new List<AbilityScoreDefinition> { AbilityScoreDefinitionSeedData.StrDefinition, AbilityScoreDefinitionSeedData.ConDefinition },
         SkillProficiencies = new List<SkillDefinition> { SkillDefinitionSeedData.AthleticsDefinition, SkillDefinitionSeedData.SurvivalDefinition },
@@ -17,7 +17,7 @@ public static class CharacterClassDefinitionSeedData
         WeaponProficiencies = new List<WeaponCategory> { WeaponCategory.Simple, WeaponCategory.Martial },
         ToolProficiency = null,
         NumberOfToolProficiencies = 0,
-        ArmorProficiencies = new List<ArmorCategory> { ArmorCategory.Medium, ArmorCategory.Heavy, ArmorCategory.Shield},
+        ArmorProficiencies = new List<ArmorCategory> { ArmorCategory.Medium, ArmorCategory.Heavy, ArmorCategory.Shield },
         StartingGp = 75,
         ClassPoints = new() { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3 },
         ClassDieNumber = new() { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
@@ -31,7 +31,7 @@ public static class CharacterClassDefinitionSeedData
     {
         Name = "Arcanist",
         Description = "A scholar of the unknown who studies the nature of magic itself, bending it to their will through intellect and willpower rather than instinct.",
-        PrimaryAbilityScoreDefinitionId = AbilityScoreDefinitionSeedData.IntDefinition.Id, // Intelligence is the primary ability for an Arcanist.
+        PrimaryAbilityScoreDefinition = AbilityScoreDefinitionSeedData.IntDefinition, // Intelligence is the primary ability for an Arcanist.
         HitDie = 6, 
         SavingThrowProficiencies = new List<AbilityScoreDefinition> { AbilityScoreDefinitionSeedData.IntDefinition, AbilityScoreDefinitionSeedData.DexDefinition },
         SkillProficiencies = new List<SkillDefinition>(),
@@ -41,7 +41,7 @@ public static class CharacterClassDefinitionSeedData
         NumberOfPreparedSpells = new() { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 }, 
         NumberOfCantrips = new () { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 }, // Cantrips are learned at level 1, and increase at certain levels.
         LevelOneSlots = new() { 2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 }, // Example spell slots for level 1.
-        SpellcastingAbilityId = AbilityScoreDefinitionSeedData.IntDefinition.Id,
+        SpellcastingAbility = AbilityScoreDefinitionSeedData.IntDefinition,
         HasSpellbook = true,
         DefaultStr = 8, DefaultDex = 12, DefaultCon = 10, DefaultInt = 15, DefaultWis = 13, DefaultCha = 10, 
         FixedHp = 6

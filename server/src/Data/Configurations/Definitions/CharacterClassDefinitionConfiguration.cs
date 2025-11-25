@@ -57,5 +57,14 @@ public class CharacterClassDefinitionConfiguration : IEntityTypeConfiguration<Ch
                     .Cast<WeaponCategory>()
                     .ToList()
             );
+
+        builder.Property(c => c.ToolProficiencyCategories)
+            .HasConversion(
+                v => string.Join(",", v.Select(e => e.ToString("D")).ToArray()),
+                v => v.Split(new[] { ',' })
+                    .Select(e => Enum.Parse(typeof(ToolCategory), e))
+                    .Cast<ToolCategory>()
+                    .ToList()
+            );
     }
 }
