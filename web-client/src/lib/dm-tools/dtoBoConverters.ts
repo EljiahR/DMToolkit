@@ -118,23 +118,54 @@ export const itemDefinitionBaseQuantitiesToBo = (itemDefinitionBaseQuantities: I
     }, [])
 }
 
-export const characterClassDefinitionToBo = (classDto: CharacterClassDefinitionDto, featDefinitions: FeatDefinition[], itemDefinitionBases: ItemDefinitionBase[]): CharacterClassDefinition => {
+export const characterClassDefinitionToBo = (classDto: CharacterClassDefinitionDto, featDefinitions: FeatDefinition[], itemDefinitionBases: ItemDefinitionBase[], abilityScoreDefinitions: AbilityScoreDefinition[], skillDefinitions: SkillDefinition[]): CharacterClassDefinition => {
     return {
         id: classDto.id,
         name: classDto.name,
         description: classDto.description,
-        subclassDefinitions: classDto.subclassDefinitions.map(s => subclassDefinitionToBo(s, featDefinitions)),
-        featTables: featGroupLevelToBo(classDto.featTables, featDefinitions),
+        primaryAbilityScoreDefinition: abilityScoreDefinitions.find(a => a.id == classDto.primaryAbilityScoreDefinitionId) ?? null,
+        alternativePrimaryAbilityScoreDefinition: abilityScoreDefinitions.find(a => a.id == classDto.alternativePrimaryAbilityScoreDefinitionId) ?? null,
+        primaryScoreIsExclusive: classDto.primaryScoreIsExclusive,
         hitDie: classDto.hitDie,
-        fixedHp: classDto.fixedHp,
+        savingThrowProficiencies: abilityScoreDefinitions.filter(a => classDto.savingThrowProficiencyIds.includes(a.id)),
+        skillProficiencies: skillDefinitions.filter(s => classDto.skillProficiencyIds.includes(s.id)),
+        numberOfSkillProficiencies: classDto.numberOfSkillProficiencies,
+        weaponProficiencies: classDto.weaponProficiencies,
+        extraWeaponProficiencies: classDto.extraWeaponProficiencies,
+        toolProficiency: itemDefinitionBases.find(i => i.id == classDto.toolProficiencyId) ?? null,
+        toolProficiencyCategories: classDto.toolProficiencyCategories,
+        numberOfToolProficiencies: classDto.numberOfToolProficiencies,
+        armorProficiencies: classDto.armorProficiencies,
+        startingEquipmentQuantityTables: itemDefinitionBaseQuantitiesToBo(classDto.startingEquipmentQuantityTables, itemDefinitionBases),
+        startingGp: classDto.startingGp,
+        featTables: featGroupLevelToBo(classDto.featTables, featDefinitions),
+        subclassDefinitions: classDto.subclassDefinitions.map(s => subclassDefinitionToBo(s, featDefinitions)),
+        numberOfPreparedSpells: classDto.numberOfPreparedSpells,
+        numberOfCantrips: classDto.numberOfCantrips,
+        levelOneSlots: classDto.levelOneSlots,
+        levelTwoSlots: classDto.levelTwoSlots,
+        levelThreeSlots: classDto.levelThreeSlots,
+        levelFourSlots: classDto.levelFourSlots,
+        levelFiveSlots: classDto.levelFiveSlots,
+        levelSixSlots: classDto.levelSixSlots,
+        levelSevenSlots: classDto.levelSevenSlots,
+        levelEightSlots: classDto.levelEightSlots,
+        levelNineSlots: classDto.levelNineSlots,
+        spellcastingAbility: abilityScoreDefinitions.find(a => a.id == classDto.spellcastingAbilityId) ?? null,
+        spellcastingFocus: itemDefinitionBases.find(i => i.id == classDto.spellcastingFocusId) ?? null,
+        hasSpellbook: classDto.hasSpellbook,
+        classPoints: classDto.classPoints,
+        classDieNumber: classDto.classDieNumber,
+        classDieSides: classDto.classDieSides,
+        weaponMasteries: classDto.weaponMasteries,
+        classBonus: classDto.classBonus,
         defaultStr: classDto.defaultStr,
         defaultDex: classDto.defaultDex,
         defaultCon: classDto.defaultCon,
         defaultInt: classDto.defaultInt,
         defaultWis: classDto.defaultWis,
         defaultCha: classDto.defaultCha,
-        itemDefinitionBaseQuantities: itemDefinitionBaseQuantitiesToBo(classDto.itemDefinitionBaseQuantities, itemDefinitionBases),
-        startingGp: classDto.startingGp
+        fixedHp: classDto.fixedHp
     }
 }
 
@@ -418,7 +449,7 @@ export const startupDataToBo = (data: StartupDataDto): StartupData => {
         ]
     }, [] as SkillDefinition[]);
     const itemDefinitionBases = itemDefinitionBaseToBo(data.itemDefinitionBases, data.effects);
-    const characterClassDefinitions = data.characterClassDefinitions.map(c => characterClassDefinitionToBo(c, featDefinitions, itemDefinitionBases));
+    const characterClassDefinitions = data.characterClassDefinitions.map(c => characterClassDefinitionToBo(c, featDefinitions, itemDefinitionBases, abilityScoreDefinitions, allSkillDefinitions));
 
 
     return {

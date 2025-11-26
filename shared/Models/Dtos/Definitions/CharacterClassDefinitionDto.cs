@@ -10,19 +10,19 @@ public class CharacterClassDefinitionDto
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     // Core Traits
-    public string PrimaryAbilityScoreDefinitionId { get; set; } = string.Empty;
-    public string AlternativePrimaryAbilityScoreDefinitionId { get; set; } = string.Empty;
+    public string? PrimaryAbilityScoreDefinitionId { get; set; } = null;
+    public string? AlternativePrimaryAbilityScoreDefinitionId { get; set; } = null;
     public bool PrimaryScoreIsExclusive { get; set; } = true;
     public int HitDie { get; set; } = 0;
     public ICollection<string> SavingThrowProficiencyIds { get; set; } = new List<string>();
     public ICollection<string> SkillProficiencyIds { get; set; } = new List<string>();
     public int NumberOfSkillProficiencies { get; set; } = 0;
     public ICollection<WeaponCategory> WeaponProficiencies { get; set; } = new List<WeaponCategory>();
-    public ICollection<string>? ExtraWeaponProficiencies { get; set; } = null;
-    public string ToolProficiencyId { get; set; } = string.Empty;
-    public ICollection<ToolCategory>? ToolProficiencyCategories { get; set; } = null;
+    public ICollection<string> ExtraWeaponProficiencies { get; set; } = new List<string>();
+    public string? ToolProficiencyId { get; set; } = null;
+    public ICollection<ToolCategory> ToolProficiencyCategories { get; set; } = new List<ToolCategory>();
     public int NumberOfToolProficiencies { get; set; } = 0;
-    public ICollection<ArmorCategory>? ArmorProficiencies { get; set; } = null;
+    public ICollection<ArmorCategory> ArmorProficiencies { get; set; } = new List<ArmorCategory>();
     public ICollection<ItemDefinitionBaseQuantity> StartingEquipmentQuantityTables { get; set; } = new List<ItemDefinitionBaseQuantity>();
     public int StartingGp { get; set; } = 0;
     // Features
@@ -40,11 +40,11 @@ public class CharacterClassDefinitionDto
     public List<int> LevelSevenSlots { get; set; } = new();
     public List<int> LevelEightSlots { get; set; } = new();
     public List<int> LevelNineSlots { get; set; } = new();
-    public string SpellcastingAbilityId { get; set; } = string.Empty;
-    public string SpellcastingFocusId { get; set; } = string.Empty;
+    public string? SpellcastingAbilityId { get; set; } = null;
+    public string? SpellcastingFocusId { get; set; } = null;
     public bool HasSpellbook { get; set; } = false;
     // Class Extras
-    public List<int> ClassPoints { get; set;} = new(); 
+    public List<int> c { get; set;} = new(); 
     public List<int> ClassDieNumber { get; set; } = new(); 
     public List<int> ClassDieSides { get; set; } = new();
     public List<int> WeaponMasteries { get; set; } = new();
