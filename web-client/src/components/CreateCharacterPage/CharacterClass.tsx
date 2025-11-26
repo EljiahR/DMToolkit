@@ -72,7 +72,7 @@ const CharacterClass = ({className = ""}: {className?: string}) => {
                     <div id="item-set-radios" className="flex flex-col gap-3 justify-center">
                         <div className="item-set-div">
                             <input type="radio" name="item-set" id="item-set-a" checked={selectedItemSet} onChange={() => handleItemSetSelection(true)} />
-                            <label className={selectedItemSet ? "selected-item-set" : ""} htmlFor="item-set-a">{printItemSet(selectedCharacterClassDefinition.itemDefinitionBaseQuantities)}</label>
+                            <label className={selectedItemSet ? "selected-item-set" : ""} htmlFor="item-set-a">{printItemSet(selectedCharacterClassDefinition.startingEquipmentQuantityTables)}</label>
                         </div>
                         <div className="item-set-div">
                             <input type="radio" name="item-set" id="item-set-b" checked={!selectedItemSet} onChange={() => handleItemSetSelection(false)} />
