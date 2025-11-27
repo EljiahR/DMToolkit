@@ -103,7 +103,6 @@ public class DMDbContext : IdentityDbContext<DMUser>
         // Join Table Configurations
         _logger.LogInformation("Applying join table configurations...");
         builder.ApplyConfiguration(new BackgroundDefinitionItemDefinitionBaseConfiguration());
-        builder.ApplyConfiguration(new CharacterCharacterClassInstanceConfiguration());
         builder.ApplyConfiguration(new CharacterClassDefinitionFeatDefinitionConfiguration());
         builder.ApplyConfiguration(new CharacterClassDefinitionItemDefinitionBaseConfiguration());
         builder.ApplyConfiguration(new CharacterSpellConfiguration());

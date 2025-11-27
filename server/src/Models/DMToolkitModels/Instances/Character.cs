@@ -10,7 +10,12 @@ public class Character : WorthBase
     public string Alignment { get; set; } = string.Empty;
     public int Hp { get; set; } = 0;
     public int TempHp { get; set; } = 0;
-    public List<CharacterCharacterClassInstance> CharacterCharacterClassInstances { get; set; } = new();
+    public string? PrimaryCharacterClassInstanceId { get; set; } = null;
+    public CharacterClassInstance? PrimaryCharacterClassInstance { get; set; } = null;
+    public string? SecondaryCharacterClassInstanceId { get; set; } = null;
+    public CharacterClassInstance? SecondaryCharacterClassInstance { get; set; } = null;
+    public string? TertiaryCharacterClassInstanceId { get; set; } = null;
+    public CharacterClassInstance? TertiaryCharacterClassInstance { get; set; } = null;
     public string BackgroundInstanceId { get; set; } = string.Empty;
     public BackgroundInstance? BackgroundInstance { get; set; } = null;
     public string SpeciesInstanceId { get; set; } = string.Empty;
