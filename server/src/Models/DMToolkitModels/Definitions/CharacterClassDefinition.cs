@@ -64,4 +64,11 @@ public class CharacterClassDefinition : IDefinition
     public int DefaultWis { get; set; } = 0;
     public int DefaultCha { get; set; } = 0;
     public int FixedHp { get; set; } = 0;
+    // Multiclass Info
+    public bool MultiGetsMartialProficiency { get; set; } = false;
+    public List<ArmorCategory> MultiGetsArmorProficiency { get; set; } = new();
+    public bool MultiGetsSkillProficiency { get; set; } = false;
+    public bool MultiGetsAToolProficiency { get; set; } = false;
+    public ToolCategory MultiToolProficiencyCategory { get; set; } = ToolCategory.Other;
+    public int MultiSpellSlotDenominator { get; set; } = 0;
 }
