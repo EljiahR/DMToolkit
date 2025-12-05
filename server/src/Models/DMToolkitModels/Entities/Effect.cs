@@ -1,3 +1,4 @@
+using DMToolkit.API.Models.DMToolkitModels.Definitions;
 using DMToolkit.API.Models.DMToolkitModels.Items.Definitions;
 using DMToolkit.API.Models.DMToolkitModels.JoinTables;
 using SharedModels.Enums;
@@ -14,6 +15,7 @@ public class Effect
     public Dictionary<string, object> Data { get; set; } = new();
     public ICollection<FeatDefinitionEffect> FeatDefinitionEffects { get; set; } = new List<FeatDefinitionEffect>();
     public ICollection<Spell> Spells { get; set; } = new List<Spell>();
+    public ICollection<StatusDefinition> StatusDefinitions { get; set; } = new List<StatusDefinition>();
     public ICollection<WeaponDefinition> WeaponDefinitionProperties { get; set; } = new List<WeaponDefinition>();
     public ICollection<WeaponDefinition> WeaponDefinitionMasteries { get; set; } = new List<WeaponDefinition>();
 }
