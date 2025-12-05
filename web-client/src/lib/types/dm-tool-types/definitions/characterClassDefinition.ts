@@ -55,6 +55,12 @@ export interface CharacterClassDefinition {
     defaultWis: number;
     defaultCha: number;
     fixedHp: number;
+    multiGetsMartialProficiency: boolean;
+    multiGetsArmorProficiency: ArmorCategory[];
+    multiGetsSkillProficiency: boolean;
+    multiGetsAToolProficiency: boolean;
+    multiToolProficiencyCategory: ToolCategory;
+    multiSpellSlotDenominator: number;
 }
 
 export interface CharacterClassDefinitionDto {
@@ -104,4 +110,10 @@ export interface CharacterClassDefinitionDto {
     defaultWis: number;
     defaultCha: number;
     fixedHp: number;
+    multiGetsMartialProficiency: boolean;
+    multiGetsArmorProficiency: ArmorCategory[];
+    multiGetsSkillProficiency: boolean;
+    multiGetsAToolProficiency: boolean;
+    multiToolProficiencyCategory: ToolCategory;
+    multiSpellSlotDenominator: number;
 }

@@ -12,7 +12,9 @@ export interface Character {
     alignment: string;
     hp: number;
     tempHp: number;
-    characterClassInstances: CharacterClassInstance[];
+    primaryCharacterClassInstance: CharacterClassInstance | null;
+    secondaryCharacterClassInstance: CharacterClassInstance | null;
+    tertiaryCharacterClassInstance: CharacterClassInstance | null;
     backgroundInstance: BackgroundInstance | null;
     speciesInstance: SpeciesInstance | null;
     scores: AbilityScores;
@@ -32,7 +34,9 @@ export interface CharacterDto {
     alignment: string;
     hp: number;
     tempHp: number;
-    characterClassInstances: CharacterClassInstanceDto[];
+    primaryCharacterClassInstanceDto: CharacterClassInstanceDto | null;
+    secondaryCharacterClassInstanceDto: CharacterClassInstanceDto | null;
+    tertiaryCharacterClassInstanceDto: CharacterClassInstanceDto | null;
     backgroundInstance: BackgroundInstanceDto | null;
     speciesInstance: SpeciesInstanceDto | null;
     scoreInstances: AbilityScoreInstanceDto[];

@@ -165,7 +165,13 @@ export const characterClassDefinitionToBo = (classDto: CharacterClassDefinitionD
         defaultInt: classDto.defaultInt,
         defaultWis: classDto.defaultWis,
         defaultCha: classDto.defaultCha,
-        fixedHp: classDto.fixedHp
+        fixedHp: classDto.fixedHp,
+        multiGetsMartialProficiency: classDto.multiGetsMartialProficiency,
+        multiGetsArmorProficiency: classDto.multiGetsArmorProficiency,
+        multiGetsSkillProficiency: classDto.multiGetsSkillProficiency,
+        multiGetsAToolProficiency: classDto.multiGetsAToolProficiency,
+        multiToolProficiencyCategory: classDto.multiToolProficiencyCategory,
+        multiSpellSlotDenominator: classDto.multiSpellSlotDenominator
     }
 }
 
@@ -210,18 +216,17 @@ export const subclassInstanceToBo = (subclassDto: SubclassInstanceDto, subclasse
     }
 }
 
-export const classInstancesToBo = (classDtos: CharacterClassInstanceDto[], characterClasses: CharacterClassDefinition[], subclasses: SubclassDefinition[], effects: Effect[], featDefinitions: FeatDefinition[]): CharacterClassInstance[] => {
-    return classDtos.map((classDto) => {
-        return {
-            id: classDto.id,
-            level: classDto.level,
-            hpRolls: classDto.hpRolls,
-            subclassInstance: classDto.subclassInstance == null ? null : subclassInstanceToBo(classDto.subclassInstance, subclasses, effects, featDefinitions),
-            featInstances: featInstancesToBo(classDto.featInstances, effects, featDefinitions),
-            selectedItemSet: classDto.selectedItemSet,
-            definition: characterClasses.find((classDefinition) => classDefinition.id == classDto.definitionId)!
-        }
-    })
+export const classInstanceToBo = (classDto: CharacterClassInstanceDto, characterClasses: CharacterClassDefinition[], subclasses: SubclassDefinition[], effects: Effect[], featDefinitions: FeatDefinition[]): CharacterClassInstance => {
+    return {
+        id: classDto.id,
+        level: classDto.level,
+        hpRolls: classDto.hpRolls,
+        subclassInstance: classDto.subclassInstance == null ? null : subclassInstanceToBo(classDto.subclassInstance, subclasses, effects, featDefinitions),
+        featInstances: featInstancesToBo(classDto.featInstances, effects, featDefinitions),
+        selectedItemSet: classDto.selectedItemSet,
+        definition: characterClasses.find((classDefinition) => classDefinition.id == classDto.definitionId)!
+    }
+    
 }
 
 export const backgroundInstanceToBo = (backgroundDto: BackgroundInstanceDto, backgroundDefinitions: BackgroundDefinition[], effects: Effect[], featDefinitions: FeatDefinition[], abilityScoreDefinitions: AbilityScoreDefinition[]): BackgroundInstance => {
@@ -422,7 +427,9 @@ export const characterToBo = (abilityScoreDefinitions: AbilityScoreDefinition[],
         id: characterDto.id,
         name: characterDto.name,
         alignment: characterDto.alignment,
-        characterClassInstances: classInstancesToBo(characterDto.characterClassInstances, classDefinitions, subclasses, effects, featDefinitions),
+        primaryCharacterClassInstance: !characterDto.primaryCharacterClassInstanceDto ? null : classInstanceToBo(characterDto.primaryCharacterClassInstanceDto, classDefinitions, subclasses, effects, featDefinitions),
+        secondaryCharacterClassInstance: !characterDto.secondaryCharacterClassInstanceDto ? null : classInstanceToBo(characterDto.secondaryCharacterClassInstanceDto, classDefinitions, subclasses, effects, featDefinitions),
+        tertiaryCharacterClassInstance: !characterDto.tertiaryCharacterClassInstanceDto ? null : classInstanceToBo(characterDto.tertiaryCharacterClassInstanceDto, classDefinitions, subclasses, effects, featDefinitions),
         backgroundInstance: characterDto.backgroundInstance != null ? backgroundInstanceToBo(characterDto.backgroundInstance, backgroundDefinitions, effects, featDefinitions, abilityScoreDefinitions) : null,
         speciesInstance: characterDto.speciesInstance != null ? speciesInstanceToBo(characterDto.speciesInstance, speciesDefinitions, effects, featDefinitions) : null,
         scores: scoresToBo(characterDto.scoreInstances, abilityScoreDefinitions),
