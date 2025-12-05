@@ -44,7 +44,7 @@ public class CharacterClassDefinitionDto
     public string? SpellcastingFocusId { get; set; } = null;
     public bool HasSpellbook { get; set; } = false;
     // Class Extras
-    public List<int> c { get; set;} = new(); 
+    public List<int> ClassPoints { get; set;} = new(); 
     public List<int> ClassDieNumber { get; set; } = new(); 
     public List<int> ClassDieSides { get; set; } = new();
     public List<int> WeaponMasteries { get; set; } = new();
@@ -57,4 +57,11 @@ public class CharacterClassDefinitionDto
     public int DefaultWis { get; set; } = 0;
     public int DefaultCha { get; set; } = 0;
     public int FixedHp { get; set; } = 0;
+    // Multiclass Info
+    public bool MultiGetsMartialProficiency { get; set; } = false;
+    public List<ArmorCategory> MultiGetsArmorProficiency { get; set; } = new();
+    public bool MultiGetsSkillProficiency { get; set; } = false;
+    public bool MultiGetsAToolProficiency { get; set; } = false;
+    public ToolCategory MultiToolProficiencyCategory { get; set; } = ToolCategory.Other;
+    public int MultiSpellSlotDenominator { get; set; } = 0;
 }

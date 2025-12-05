@@ -8,9 +8,11 @@ public class CharacterDto
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;
     public string Alignment { get; set; } = string.Empty;
-    public int Hp { get; set; } = 1;
+    public int Hp { get; set; } = 0;
     public int TempHp { get; set; } = 0;
-    public List<CharacterClassInstanceDto> CharacterClassInstances { get; set; } = new();
+    public CharacterClassInstanceDto? PrimaryCharacterClassInstanceDto { get; set; } = new();
+    public CharacterClassInstanceDto? SecondaryCharacterClassInstanceDto { get; set; } = new();
+    public CharacterClassInstanceDto? TertiaryCharacterClassInstanceDto { get; set; } = new();
     public BackgroundInstanceDto? BackgroundInstance { get; set; } = new();
     public SpeciesInstanceDto? SpeciesInstance { get; set; } = new();
     public List<AbilityScoreInstanceDto> ScoreInstances { get; set; } = new();

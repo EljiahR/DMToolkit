@@ -141,6 +141,12 @@ public static class DtoConverters
             DefaultWis = characterClass.DefaultWis,
             DefaultCha = characterClass.DefaultCha,
             FixedHp = characterClass.FixedHp,
+            MultiGetsMartialProficiency = characterClass.MultiGetsMartialProficiency,
+            MultiGetsArmorProficiency = characterClass.MultiGetsArmorProficiency,
+            MultiGetsSkillProficiency = characterClass.MultiGetsSkillProficiency,
+            MultiGetsAToolProficiency = characterClass.MultiGetsAToolProficiency,
+            MultiToolProficiencyCategory = characterClass.MultiToolProficiencyCategory,
+            MultiSpellSlotDenominator = characterClass.MultiSpellSlotDenominator
         };
     }
     private static List<FeatDefinitionEffectGroupingDto> ConvertFeatDefinitionFeatEffectJoinTable(IEnumerable<FeatDefinitionEffect> joinTables)
@@ -307,7 +313,9 @@ public static class DtoConverters
             Alignment = character.Alignment,
             Hp = character.Hp,
             TempHp = character.TempHp,
-            CharacterClassInstances = character.CharacterCharacterClassInstances.Select(ConvertCharacterCharacterClassInstance).ToList(),
+            PrimaryCharacterClassInstanceDto = ConvertCharacterClassInstance(character.PrimaryCharacterClassInstance), 
+            SecondaryCharacterClassInstanceDto = ConvertCharacterClassInstance(character.SecondaryCharacterClassInstance),
+            TertiaryCharacterClassInstanceDto = ConvertCharacterClassInstance(character.TertiaryCharacterClassInstance),
             BackgroundInstance = character.BackgroundInstance != null ? ConvertBackgroundInstance(character.BackgroundInstance) : null,
             SpeciesInstance = null,
             ScoreInstances = character.AbilityScoreInstances.Select(ConvertAbilityScoreInstance).ToList(),
@@ -371,17 +379,19 @@ public static class DtoConverters
         };
     }
 
-    private static CharacterClassInstanceDto ConvertCharacterCharacterClassInstance(CharacterCharacterClassInstance joinTable)
+    private static CharacterClassInstanceDto? ConvertCharacterClassInstance(CharacterClassInstance? classInstance)
     {
+        if (classInstance == null) return null;
+        
         return new()
         {
-            Id = joinTable.CharacterClassInstance.Id,
-            Level = joinTable.Level,
-            HpRolls = joinTable.HpRolls,
-            FeatInstances = joinTable.CharacterClassInstance.FeatInstances.Select(ConvertFeatInstance).ToList(),
-            SubclassInstance = ConvertSubclassInstance(joinTable.CharacterClassInstance.SubclassInstance),
-            SelectedItemSet = joinTable.CharacterClassInstance.SelectedItemSet,
-            DefinitionId = joinTable.CharacterClassInstance.DefinitionId
+            Id = classInstance.Id,
+            Level = classInstance.Level,
+            HpRolls = classInstance.HpRolls,
+            FeatInstances = classInstance.FeatInstances.Select(ConvertFeatInstance).ToList(),
+            SubclassInstance = ConvertSubclassInstance(classInstance.SubclassInstance),
+            SelectedItemSet = classInstance.SelectedItemSet,
+            DefinitionId = classInstance.DefinitionId
         };
     }
 
