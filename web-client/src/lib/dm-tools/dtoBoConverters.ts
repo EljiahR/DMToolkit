@@ -38,18 +38,14 @@ import type { ItemDefinitionBaseQuantity, ItemDefinitionBaseQuantityDto } from "
 
 const skillDefinitionToBo = (skill: SkillDefinitionDto): SkillDefinition => {
     return {
-        id: skill.id,
-        name: skill.name,
-        description: skill.description
+        ...skill
     }
 }
 
 const abilityScoreDefinitionToBo = (score: AbilityScoreDefinitionDto): AbilityScoreDefinition => {
     return {
-        id: score.id,
-        name: score.name,
+        ...score,
         abbreviation: score.abbreviation as AbilityScoreAbbreviations,
-        description: score.description,
         skillDefinitions: score.skillDefinitions.map(s => skillDefinitionToBo(s))
     }
 }
@@ -65,22 +61,17 @@ const featDefinitionEffectGroupingToBo = (tables: FeatDefinitionEffectGroupingDt
 
 export const featDefinitionToBo = (featDto: FeatDefinitionDto, effects: EffectDto[]): FeatDefinition => {
     return {
-        id: featDto.id,
-        name: featDto.name,
-        description: featDto.description,
+        ...featDto,
         availableEffectTables: featDefinitionEffectGroupingToBo(featDto.availableEffectTables, effects)
     }
 }
 
 export const backgroundDefinitionToBo = (backgroundDto: BackgroundDefinitionDto, featDefinitions: FeatDefinition[], abilityScoreDefinitions: AbilityScoreDefinition[], skillDefinitions: SkillDefinition[], itemDefinitionBases: ItemDefinitionBase[]): BackgroundDefinition => {
     return {
-        id: backgroundDto.id,
-        name: backgroundDto.name,
-        description: backgroundDto.description,
+        ...backgroundDto,
         abilityScoreDefinitions: abilityScoreDefinitions.filter(s => backgroundDto.abilityScoreDefinitionIds.includes(s.id)),
         featDefinition: featDefinitions.find((feat) => backgroundDto.featDefinitionId == feat.id)!,
         skillProficiencies: skillDefinitions.filter(s => backgroundDto.skillDefinitionIds.includes(s.id)),
-        startingGp: backgroundDto.startingGp,
         itemDefinitionBaseQuantities: itemDefinitionBaseQuantitiesToBo(backgroundDto.itemDefinitionBaseQuantities, itemDefinitionBases)
     }
 }
@@ -88,8 +79,7 @@ export const backgroundDefinitionToBo = (backgroundDto: BackgroundDefinitionDto,
 export const featGroupLevelToBo = (groups: FeatGroupLevelDto[], feats: FeatDefinition[]): FeatGroupLevel[] => {
     return groups.map(g => {
         return {
-            level: g.level,
-            group: g.group,
+            ...g,
             featDefinitions: feats.filter(f => g.featDefinitionIds.includes(f.id))
         }
     })
@@ -97,9 +87,7 @@ export const featGroupLevelToBo = (groups: FeatGroupLevelDto[], feats: FeatDefin
 
 export const subclassDefinitionToBo = (subclassDto: SubclassDefinitionDto, featDefinitions: FeatDefinition[]): SubclassDefinition => {
     return {
-        id: subclassDto.id,
-        name: subclassDto.name,
-        description: subclassDto.description,
+        ...subclassDto,
         featTables: featGroupLevelToBo(subclassDto.featTables, featDefinitions)
     }
 }
@@ -120,58 +108,17 @@ export const itemDefinitionBaseQuantitiesToBo = (itemDefinitionBaseQuantities: I
 
 export const characterClassDefinitionToBo = (classDto: CharacterClassDefinitionDto, featDefinitions: FeatDefinition[], itemDefinitionBases: ItemDefinitionBase[], abilityScoreDefinitions: AbilityScoreDefinition[], skillDefinitions: SkillDefinition[]): CharacterClassDefinition => {
     return {
-        id: classDto.id,
-        name: classDto.name,
-        description: classDto.description,
+        ...classDto,
         primaryAbilityScoreDefinition: abilityScoreDefinitions.find(a => a.id == classDto.primaryAbilityScoreDefinitionId) ?? null,
         alternativePrimaryAbilityScoreDefinition: abilityScoreDefinitions.find(a => a.id == classDto.alternativePrimaryAbilityScoreDefinitionId) ?? null,
-        primaryScoreIsExclusive: classDto.primaryScoreIsExclusive,
-        hitDie: classDto.hitDie,
         savingThrowProficiencies: abilityScoreDefinitions.filter(a => classDto.savingThrowProficiencyIds.includes(a.id)),
         skillProficiencies: skillDefinitions.filter(s => classDto.skillProficiencyIds.includes(s.id)),
-        numberOfSkillProficiencies: classDto.numberOfSkillProficiencies,
-        weaponProficiencies: classDto.weaponProficiencies,
-        extraWeaponProficiencies: classDto.extraWeaponProficiencies,
         toolProficiency: itemDefinitionBases.find(i => i.id == classDto.toolProficiencyId) ?? null,
-        toolProficiencyCategories: classDto.toolProficiencyCategories,
-        numberOfToolProficiencies: classDto.numberOfToolProficiencies,
-        armorProficiencies: classDto.armorProficiencies,
         startingEquipmentQuantityTables: itemDefinitionBaseQuantitiesToBo(classDto.startingEquipmentQuantityTables, itemDefinitionBases),
-        startingGp: classDto.startingGp,
         featTables: featGroupLevelToBo(classDto.featTables, featDefinitions),
         subclassDefinitions: classDto.subclassDefinitions.map(s => subclassDefinitionToBo(s, featDefinitions)),
-        numberOfPreparedSpells: classDto.numberOfPreparedSpells,
-        numberOfCantrips: classDto.numberOfCantrips,
-        levelOneSlots: classDto.levelOneSlots,
-        levelTwoSlots: classDto.levelTwoSlots,
-        levelThreeSlots: classDto.levelThreeSlots,
-        levelFourSlots: classDto.levelFourSlots,
-        levelFiveSlots: classDto.levelFiveSlots,
-        levelSixSlots: classDto.levelSixSlots,
-        levelSevenSlots: classDto.levelSevenSlots,
-        levelEightSlots: classDto.levelEightSlots,
-        levelNineSlots: classDto.levelNineSlots,
         spellcastingAbility: abilityScoreDefinitions.find(a => a.id == classDto.spellcastingAbilityId) ?? null,
-        spellcastingFocus: itemDefinitionBases.find(i => i.id == classDto.spellcastingFocusId) ?? null,
-        hasSpellbook: classDto.hasSpellbook,
-        classPoints: classDto.classPoints,
-        classDieNumber: classDto.classDieNumber,
-        classDieSides: classDto.classDieSides,
-        weaponMasteries: classDto.weaponMasteries,
-        classBonus: classDto.classBonus,
-        defaultStr: classDto.defaultStr,
-        defaultDex: classDto.defaultDex,
-        defaultCon: classDto.defaultCon,
-        defaultInt: classDto.defaultInt,
-        defaultWis: classDto.defaultWis,
-        defaultCha: classDto.defaultCha,
-        fixedHp: classDto.fixedHp,
-        multiGetsMartialProficiency: classDto.multiGetsMartialProficiency,
-        multiGetsArmorProficiency: classDto.multiGetsArmorProficiency,
-        multiGetsSkillProficiency: classDto.multiGetsSkillProficiency,
-        multiGetsAToolProficiency: classDto.multiGetsAToolProficiency,
-        multiToolProficiencyCategory: classDto.multiToolProficiencyCategory,
-        multiSpellSlotDenominator: classDto.multiSpellSlotDenominator
+        spellcastingFocus: itemDefinitionBases.find(i => i.id == classDto.spellcastingFocusId) ?? null
     }
 }
 
@@ -424,22 +371,13 @@ export const characterSpellsToBo = (characterSpells: CharacterSpellDto[], allSpe
 
 export const characterToBo = (abilityScoreDefinitions: AbilityScoreDefinition[], characterDto: CharacterDto, classDefinitions: CharacterClassDefinition[], backgroundDefinitions: BackgroundDefinition[], subclasses: SubclassDefinition[], speciesDefinitions: SpeciesDefinition[], effects: Effect[], featDefinitions: FeatDefinition[], allItems: ItemDefinitionBase[], allSpells: Spell[]): Character => {
     return {
-        id: characterDto.id,
-        name: characterDto.name,
-        alignment: characterDto.alignment,
+        ...characterDto,
         primaryCharacterClassInstance: !characterDto.primaryCharacterClassInstanceDto ? null : classInstanceToBo(characterDto.primaryCharacterClassInstanceDto, classDefinitions, subclasses, effects, featDefinitions),
         secondaryCharacterClassInstance: !characterDto.secondaryCharacterClassInstanceDto ? null : classInstanceToBo(characterDto.secondaryCharacterClassInstanceDto, classDefinitions, subclasses, effects, featDefinitions),
         tertiaryCharacterClassInstance: !characterDto.tertiaryCharacterClassInstanceDto ? null : classInstanceToBo(characterDto.tertiaryCharacterClassInstanceDto, classDefinitions, subclasses, effects, featDefinitions),
         backgroundInstance: characterDto.backgroundInstance != null ? backgroundInstanceToBo(characterDto.backgroundInstance, backgroundDefinitions, effects, featDefinitions, abilityScoreDefinitions) : null,
         speciesInstance: characterDto.speciesInstance != null ? speciesInstanceToBo(characterDto.speciesInstance, speciesDefinitions, effects, featDefinitions) : null,
         scores: scoresToBo(characterDto.scoreInstances, abilityScoreDefinitions),
-        physicalDescription: characterDto.physicalDescription,
-        personality: characterDto.personality,
-        ideals: characterDto.ideals,
-        bonds: characterDto.bonds,
-        flaws: characterDto.flaws,
-        hp: characterDto.hp,
-        tempHp: characterDto.tempHp,
         coins: coinsToBo(characterDto.coins),
         inventory: inventoryToBo(characterDto.inventory, allItems),
         characterSpells: characterSpellsToBo(characterDto.characterSpells, allSpells)
