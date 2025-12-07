@@ -8,11 +8,6 @@ public class CharacterConfiguration : IEntityTypeConfiguration<Character>
 {
     public void Configure(EntityTypeBuilder<Character> builder)
     {
-        // Many-to-one Character <- CharacterCharacterClassInstances 
-        builder.HasMany(c => c.CharacterCharacterClassInstances)
-            .WithOne(j => j.Character)
-            .HasForeignKey(j => j.CharacterId);
-
         // One-to-one Character < - > BackgroundInstance
         builder.HasOne(c => c.BackgroundInstance)
             .WithOne()
