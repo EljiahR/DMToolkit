@@ -4,6 +4,6 @@ A full-stack tool for managing characters, NPCs, combat, encounters, and worlbui
 
 ## Structure
 
-- `web-client/` - Vite + React frontend
 - `server/` - ASP.Net Core Web API backend
-- `wpf-client` - WPF frontend
+- `shared/` - Holds resources that can be used across multiple different solutions
+- `web-client/` - Vite + React frontend
