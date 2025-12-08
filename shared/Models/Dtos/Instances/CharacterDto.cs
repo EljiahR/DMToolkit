@@ -24,4 +24,5 @@ public class CharacterDto
     public WorthDto Coins { get; set; } = new();
     public List<ItemInstanceBaseDto> Inventory { get; set; } = new();
     public List<CharacterSpellDto> CharacterSpells { get; set; } = new();
+    public List<ConditionInstanceDto> ConditionInstanceDtos { get; set; } = new();
 }

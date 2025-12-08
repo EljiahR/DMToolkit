@@ -31,6 +31,7 @@ public class DMDbContext : IdentityDbContext<DMUser>
     public DbSet<AbilityScoreDefinition> AbilityScoreDefinitions { get; set; }
     public DbSet<BackgroundDefinition> BackgroundDefinitions { get; set; }
     public DbSet<CharacterClassDefinition> CharacterClassDefinitions { get; set; }
+    public DbSet<ConditionDefinition> ConditionDefinitions { get; set; }
     public DbSet<FeatDefinition> FeatDefinitions { get; set; }
     public DbSet<LineageDefinition> LineageDefinitions { get; set; }
     public DbSet<SkillDefinition> SkillDefinitions { get; set; }

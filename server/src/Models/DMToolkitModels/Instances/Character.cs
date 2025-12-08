@@ -28,4 +28,5 @@ public class Character : WorthBase
     public string Flaws { get; set; } = string.Empty;
     public ICollection<ItemInstanceBase> ItemInstanceBases { get; set; } = new List<ItemInstanceBase>();
     public ICollection<CharacterSpell> CharacterSpells { get; set; } = new List<CharacterSpell>();
+    public ICollection<ConditionInstance> ConditionInstances { get; set; } = new List<ConditionInstance>();
 }

@@ -27,6 +27,7 @@ public static class DtoConverters
             AbilityScoreDefinitions = startupData.AbilityScoreDefinitions.Select(ConvertAbilityScoreDefinition).ToList(),
             BackgroundDefinitions = startupData.BackgroundDefinitions.Select(ConvertBackgroundDefinition).ToList(),
             CharacterClassDefinitions = startupData.CharacterClassDefinitions.Select(ConvertCharacterClassDefinition).ToList(),
+            ConditionDefinitions = startupData.ConditionDefinitions.Select(ConvertConditionDefinition).ToList(),
             FeatDefinitions = startupData.FeatDefinitions.Select(ConvertFeat).ToList(),
             SpeciesDefinitions = startupData.SpeciesDefinitions.Select(ConvertSpecies).ToList(),
             Effects = startupData.Effects.Select(ConvertFeatEffect).ToList(),
@@ -242,6 +243,19 @@ public static class DtoConverters
         };
     }
 
+    private static ConditionDefinitionDto ConvertConditionDefinition(ConditionDefinition condition)
+    {
+        return new() 
+        {
+            Id = condition.Id,
+            Name = condition.Name,
+            Description = condition.Description,
+            IsDebuff = condition.IsDebuff,
+            Duration = condition.Duration,
+            EffectIds = condition.Effects.Select(e => e.Id).ToList()
+        };
+    }
+
     private static ItemDefinitionBaseDto ConvertItemDefinitionBase(ItemDefinitionBase itemBase)
     {
         ItemDefinitionBaseDto itemDto;
@@ -332,7 +346,9 @@ public static class DtoConverters
                 Gp = character.Gp,
                 Pp = character.Pp
             },
-            Inventory = character.ItemInstanceBases.Select(ConvertItemInstanceBase).ToList()
+            Inventory = character.ItemInstanceBases.Select(ConvertItemInstanceBase).ToList(),
+            CharacterSpells = character.CharacterSpells.Select(CharacterSpellConverter).ToList(),
+            ConditionInstanceDtos = character.ConditionInstances.Select(ConvertConditionInstance).ToList()
         };
     }
 
@@ -408,6 +424,16 @@ public static class DtoConverters
         };
     }
 
+    private static ConditionInstanceDto ConvertConditionInstance(ConditionInstance condition)
+    {
+        return new()
+        {
+            Id = condition.Id,
+            RemainingDuration = condition.RemainingDuration,
+            DefinitionId = condition.DefinitionId
+        };
+    }
+
     // ItemInstanceBase Converters
     private static ItemInstanceBaseDto ConvertItemInstanceBase(ItemInstanceBase item)
     {
@@ -437,5 +463,14 @@ public static class DtoConverters
         }
 
         return itemDto;
+    }
+
+    private static CharacterSpellDto CharacterSpellConverter(CharacterSpell characterSpell)
+    {
+        return new()
+        {
+            SpellId = characterSpell.SpellId,
+            IsPrepared = characterSpell.IsPrepared
+        };
     }
 }

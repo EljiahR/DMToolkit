@@ -46,6 +46,8 @@ public class StartupDataService : IStartupDataService
                                         .Include(c => c.PrimaryAbilityScoreDefinition)
                                         .Include(c => c.AlternativePrimaryAbilityScoreDefinition)
                                         .AsNoTracking().ToListAsync();
+        var conditionsTask = _context.ConditionDefinitions
+                                    .AsNoTracking().ToListAsync();
         var featsTask = _context.FeatDefinitions
                                 .Include(f => f.FeatDefinitionEffects)
                                 .AsNoTracking().ToListAsync();
@@ -71,6 +73,7 @@ public class StartupDataService : IStartupDataService
             AbilityScoreDefinitions = abilityScoresTask.Result,
             BackgroundDefinitions = backgroundsTask.Result,
             CharacterClassDefinitions = characterClassesTask.Result,
+            ConditionDefinitions = conditionsTask.Result,
             FeatDefinitions = featsTask.Result,
             ItemDefinitionBases = itemsTask.Result,
             SpeciesDefinitions = speciesTask.Result,

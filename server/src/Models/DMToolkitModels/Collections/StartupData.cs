@@ -9,6 +9,7 @@ public class StartupData
     public List<AbilityScoreDefinition> AbilityScoreDefinitions { get; set; } = new();
     public List<BackgroundDefinition> BackgroundDefinitions { get; set; } = new();
     public List<CharacterClassDefinition> CharacterClassDefinitions { get; set; } = new();
+    public List<ConditionDefinition> ConditionDefinitions { get; set; } = new();
     public List<Effect> Effects { get; set; } = new();
     public List<FeatDefinition> FeatDefinitions { get; set; } = new();
     public List<ItemDefinitionBase> ItemDefinitionBases { get; set; } = new();
