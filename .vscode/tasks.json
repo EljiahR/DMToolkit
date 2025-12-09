@@ -58,6 +58,14 @@
             "options": {
                 "cwd": "${workspaceFolder}/web-client"
             }
+        },
+        {
+            "label": "Run Flutter Client (Linux)",
+            "type": "shell",
+            "command": "flutter run -d linux",
+            "options": {
+                "cwd": "${workspaceFolder}/flutter-client/dm_toolkit"
+            }
         }
     ]
 }
