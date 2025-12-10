@@ -9,7 +9,7 @@ class WeaponDefinition extends ItemDefinitionBase {
   int numberOfSides;
   String damageType;
   List<Effect> weaponProperties;
-  Effect weaponMastery;
+  Effect? weaponMastery;
 
   WeaponDefinition({
     required super.id,
@@ -26,13 +26,16 @@ class WeaponDefinition extends ItemDefinitionBase {
     required this.weaponMastery
   });
 
-  factory WeaponDefinition(Map<String, dynamic> json, List<Effect> effects) {
+  factory WeaponDefinition.fromJson(Map<String, dynamic> json, List<Effect> effects) {
     try {
       var worth = Worth.fromJson(json['worth']);
-      var weaponPropertyIdList = json['weaponPropertyIds'] as List;
-      var weaponPropertyIds = weaponPropertyIdList
-        .map(()); 
-      var weaponProperties = effects.where((effect) => )
+      var weaponPropertyIdListJson = json['weaponPropertyIds'] as List;
+      var weaponPropertyIds = weaponPropertyIdListJson
+        .map((weaponPropertyIdJson) => weaponPropertyIdJson as String)
+        .toList(); 
+      var weaponProperties = effects.where((effect) => weaponPropertyIds.contains(effect.id)).toList();
+      var weaponMasteryId = json['weaponMasteryId'] as String;
+      var weaponMastery = effects.firstWhere((effect) => effect.id == weaponMasteryId);
       
       return WeaponDefinition(
         id: json['id'] as String, 
@@ -47,7 +50,7 @@ class WeaponDefinition extends ItemDefinitionBase {
         damageType: json['damageType'] as String, 
         weaponProperties: weaponProperties, 
         weaponMastery: weaponMastery
-      )  
+      );
     } catch (e) {
       throw FormatException('WeaponDefinition model is invalid.', e);
     }
