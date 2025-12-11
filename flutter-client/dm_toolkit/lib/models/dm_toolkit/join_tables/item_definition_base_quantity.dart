@@ -11,15 +11,9 @@ class ItemDefinitionBaseQuantity {
     required this.quantity
   });
 
-  factory ItemDefinitionBaseQuantity.fromJson(Map<String, dynamic> json) {
+  factory ItemDefinitionBaseQuantity.fromJson(Map<String, dynamic> json, List<ItemDefinitionBase> itemDefinitionBases) {
     try {
-      ItemDefinitionBase itemBase;
-      var id = json['id'] as String;
-      var name = json['name'] as String;
-      var description = json['description'] as String;
-      var weight = json['weight'] as int;
-      var itemType = json['itemType'] as String;
-      var worth = Worth.fromJson(json['worth'] as Map<String, dynamic>);
+      var itemDefinitionBaseId = json['itemDefinitionBaseId'] as String;
       
       switch (json['itemType'] as String) {
         case 'Weapon':

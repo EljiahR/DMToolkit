@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:dm_toolkit/enums/weapon_category.dart';
 import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.dart';
@@ -35,7 +36,7 @@ class WeaponDefinition extends ItemDefinitionBase {
         .toList(); 
       var weaponProperties = effects.where((effect) => weaponPropertyIds.contains(effect.id)).toList();
       var weaponMasteryId = json['weaponMasteryId'] as String;
-      var weaponMastery = effects.firstWhere((effect) => effect.id == weaponMasteryId);
+      var weaponMastery = effects.firstWhereOrNull((effect) => effect.id == weaponMasteryId);
       
       return WeaponDefinition(
         id: json['id'] as String, 
