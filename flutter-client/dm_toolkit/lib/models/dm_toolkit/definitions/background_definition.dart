@@ -49,7 +49,19 @@ class BackgroundDefinition {
 
       var itemDefinitionBaseQuantityListJson = json['itemDefinitionBaseQuantities'] as List;
       var itemDefinitionBaseQuantities = itemDefinitionBaseQuantityListJson
-        .map((itemDefinitionBaseQuantityJson) => ItemDefinitionBaseQuantity.fromJson(json))
+        .map((itemDefinitionBaseQuantityJson) => ItemDefinitionBaseQuantity.fromJson(json, itemDefinitionBases))
+        .toList();
+
+      return BackgroundDefinition(
+        id: json['id'] as String, 
+        name: json['name'] as String, 
+        description: json['description'] as String, 
+        abilityScoreDefinitions: selectedAbilityScoreDefinitions, 
+        featDefinition: featDefinition, 
+        skillDefinitions: selectedSkillDefinitions, 
+        startingGp: json['startingGp'] as int, 
+        itemDefinitionBaseQuantities: itemDefinitionBaseQuantities
+      );
     } catch (e) {
       throw FormatException('BackgroundDefinition model is invalid.', e);
     }
