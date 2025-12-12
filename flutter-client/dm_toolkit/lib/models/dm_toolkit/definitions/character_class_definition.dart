@@ -44,8 +44,8 @@ class CharacterClassDefinition {
   List<int> levelSevenSlots;
   List<int> levelEightSlots;
   List<int> levelNineSlots;
-  AbilityScoreDefinition spellcastingAbility;
-  ItemDefinition spellcastingFocus;
+  AbilityScoreDefinition? spellcastingAbility;
+  ItemDefinitionBase? spellcastingFocus;
   bool hasSpellbook;
   List<int> classPoints;
   List<int> classDieNumber;
@@ -127,7 +127,7 @@ class CharacterClassDefinition {
       var primaryAbilityScoreDefinition = abilityScoreDefinitions.firstWhere((abilityScoreDefinition) => abilityScoreDefinition.id == primaryAbilityScoreDefinitionId);
 
       var alternativePrimaryAbilityScoreDefinitionId = json['alternativePrimaryAbilityScoreDefinitionId'] as String?;
-      var alternativePrimaryAbilityScoreDefinition = alternativePrimaryAbilityScoreDefinitionId != null ? abilityScoreDefinitions.firstWhere((abilityScore) => abilityScore.id == alternativePrimaryAbilityScoreDefinitionId);
+      var alternativePrimaryAbilityScoreDefinition = alternativePrimaryAbilityScoreDefinitionId != null ? abilityScoreDefinitions.firstWhere((abilityScore) => abilityScore.id == alternativePrimaryAbilityScoreDefinitionId) : null;
       
       var savingThrowProficiencyIdListJson = json['savingThrowProficiencyIds'] as List;
       var savingThrowProficiencies = savingThrowProficiencyIdListJson
@@ -169,6 +169,31 @@ class CharacterClassDefinition {
         .map((subclassDefinitionJson) => SubclassDefinition.fromJson(subclassDefinitionJson, featDefinitions))
         .toList();
 
+      var numberOfPreparedSpells = jsonListToPrimitive<int>(json['numberOfPreparedSpells']);
+      var numberOfCantrips = jsonListToPrimitive<int>(json['numberOfCantrips']);
+      var levelOneSlots = jsonListToPrimitive<int>(json['levelOneSlots']);
+      var levelTwoSlots = jsonListToPrimitive<int>(json['levelTwoSlots']);
+      var levelThreeSlots = jsonListToPrimitive<int>(json['levelThreeSlots']);
+      var levelFourSlots = jsonListToPrimitive<int>(json['levelFourSlots']);
+      var levelFiveSlots = jsonListToPrimitive<int>(json['levelFiveSlots']);
+      var levelSixSlots = jsonListToPrimitive<int>(json['levelSixSlots']);
+      var levelSevenSlots = jsonListToPrimitive<int>(json['levelSevenSlots']);
+      var levelEightSlots = jsonListToPrimitive<int>(json['levelEightSlots']);
+      var levelNineSlots = jsonListToPrimitive<int>(json['levelNineSlots']);
+      
+      var spellcastingAbilityId = json['spellcastingAbilityId'] as String?;
+      var spellcastingAbility = spellcastingAbilityId != null ? abilityScoreDefinitions.firstWhere((abilityScore) => abilityScore.id == spellcastingAbilityId) : null;
+
+      var spellcastingFocusId = json['spellcastingFocusId'] as String?;
+      var spellcastingFocus = spellcastingFocusId != null ? itemDefinitionBases.firstWhere((item) => item.id == spellcastingFocusId) : null;
+
+      var classPoints = jsonListToPrimitive<int>(json['classPoints']);
+      var classDieNumber = jsonListToPrimitive<int>(json['classDieNumber']);
+      var classDieSides = jsonListToPrimitive<int>(json['classDieSides']);
+      var weaponMasteries = jsonListToPrimitive<int>(json['weaponMasteries']);
+      var classBonus = jsonListToPrimitive<int>(json['classBonus']);
+      var multiGetsArmorProficiency = jsonListToPrimitive<ArmorCategory>(json['multiGetsArmorProficiency']);
+
       return CharacterClassDefinition(
         id: json['id'] as String, 
         name: json['name'] as String, 
@@ -203,25 +228,25 @@ class CharacterClassDefinition {
         levelNineSlots: levelNineSlots,
         spellcastingAbility: spellcastingAbility,
         spellcastingFocus: spellcastingFocus,
-        hasSpellbook: hasSpellbook,
+        hasSpellbook: json['hasSpellbook'] as bool,
         classPoints: classPoints,
         classDieNumber: classDieNumber,
         classDieSides: classDieSides,
         weaponMasteries: weaponMasteries,
         classBonus: classBonus,
-        defaultStr: defaultStr,
-        defaultDex: defaultDex,
-        defaultCon: defaultCon,
-        defaultInt: defaultInt,
-        defaultWis: defaultWis,
-        defaultCha: defaultCha,
-        fixedHp: fixedHp,
-        multiGetsMartialProficiency: multiGetsMartialProficiency,
+        defaultStr: json['defaultStr'] as int,
+        defaultDex: json['defaultDex'] as int,
+        defaultCon: json['defaultCon'] as int,
+        defaultInt: json['defaultInt'] as int,
+        defaultWis: json['defaultWis'] as int,
+        defaultCha: json['defaultCha'] as int,
+        fixedHp: json['fixedHp'] as int,
+        multiGetsMartialProficiency: json['multiGetsMartialProficiency'] as bool,
         multiGetsArmorProficiency: multiGetsArmorProficiency,
-        multiGetsSkillProficiency: multiGetsSkillProficiency,
-        multiGetsAToolProficiency: multiGetsAToolProficiency,
-        multiToolProficiencyCategory: multiToolProficiencyCategory,
-        multiSpellSlotDenominator: multiSpellSlotDenominator
+        multiGetsSkillProficiency: json['multiGetsSkillProficiency'] as bool,
+        multiGetsAToolProficiency: json['multiGetsAToolProficiency'] as bool,
+        multiToolProficiencyCategory: json['multiToolProficiencyCategory'] as ToolCategory,
+        multiSpellSlotDenominator: json['multiSpellSlotDenominator'] as int
       );
     } catch (e) {
       throw FormatException('CharacterClassDefinition model is invalid.', e);
