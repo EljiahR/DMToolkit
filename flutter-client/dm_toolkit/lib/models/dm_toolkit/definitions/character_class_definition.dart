@@ -7,7 +7,6 @@ import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/skill_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/subclass_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.dart';
-import 'package:dm_toolkit/models/dm_toolkit/items/definitions/item_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/items/definitions/tool_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/feat_group_level.dart';
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/item_definition_base_quantity.dart';
