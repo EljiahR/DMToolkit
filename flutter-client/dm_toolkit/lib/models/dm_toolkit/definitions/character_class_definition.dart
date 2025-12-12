@@ -3,6 +3,7 @@ import 'package:dm_toolkit/enums/tool_category.dart';
 import 'package:dm_toolkit/enums/weapon_category.dart';
 import 'package:dm_toolkit/helpers/json_list_to_primitive.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/ability_score_definition.dart';
+import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/skill_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/subclass_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.dart';
@@ -120,7 +121,7 @@ class CharacterClassDefinition {
     required this.multiSpellSlotDenominator,
   });
 
-  factory CharacterClassDefinition.fromJson(Map<String, dynamic> json, List<AbilityScoreDefinition> abilityScoreDefinitions, List<SkillDefinition> skillDefinitions, List<ItemDefinitionBase> itemDefinitionBases) {
+  factory CharacterClassDefinition.fromJson(Map<String, dynamic> json, List<AbilityScoreDefinition> abilityScoreDefinitions, List<SkillDefinition> skillDefinitions, List<ItemDefinitionBase> itemDefinitionBases, List<FeatDefinition> featDefinitions) {
     try {
       var primaryAbilityScoreDefinitionId = json['primaryAbilityScoreDefinitionId'] as String;
       var primaryAbilityScoreDefinition = abilityScoreDefinitions.firstWhere((abilityScoreDefinition) => abilityScoreDefinition.id == primaryAbilityScoreDefinitionId);
@@ -150,7 +151,23 @@ class CharacterClassDefinition {
       var toolProficiencyId = json['toolProficiencyId'] as String?;
       var toolProficiency = toolProficiencyId != null ? itemDefinitionBases.firstWhere((item) => item.id == toolProficiencyId) : null;
 
-      var toolProficiencyCategories
+      var toolProficiencyCategories = jsonListToPrimitive<ToolCategory>(json['toolProficiencyCategories']);
+      var armorProficiencies = jsonListToPrimitive<ArmorCategory>(json['armorProficiencies']);
+
+      var startingEquipmentQuantityTableListJson = json['startingEquipmentQuantityTables'] as List;
+      var startingEquipmentQuantityTables = startingEquipmentQuantityTableListJson
+        .map((startingEquipmentQuantityTableJson) => ItemDefinitionBaseQuantity.fromJson(startingEquipmentQuantityTableJson, itemDefinitionBases))
+        .toList();
+
+      var featTableListJson = json['featTables'] as List;
+      var featTables = featTableListJson
+        .map((featTableJson) => FeatGroupLevel.fromJson(featTableJson, featDefinitions))
+        .toList();
+
+      var subclassDefinitionListJson = json['subclassDefinitions'] as List;
+      var subclassDefinitions = subclassDefinitionListJson
+        .map((subclassDefinitionJson) => SubclassDefinition.fromJson(subclassDefinitionJson, featDefinitions))
+        .toList();
 
       return CharacterClassDefinition(
         id: json['id'] as String, 
@@ -167,7 +184,7 @@ class CharacterClassDefinition {
         extraWeaponProficiencies: extraWeaponProficiencies,
         toolProficiency: toolProficiency as ToolDefinition,
         toolProficiencyCategories: toolProficiencyCategories,
-        numberOfToolProficiencies: numberOfToolProficiencies,
+        numberOfToolProficiencies: json['numberOfToolProficiencies'] as int,
         armorProficiencies: armorProficiencies,
         startingEquipmentQuantityTables: startingEquipmentQuantityTables,
         startingGp: json['startingGp'] as int,
