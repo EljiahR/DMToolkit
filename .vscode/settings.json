@@ -1,3 +1,5 @@
 {
-    "dotnet.defaultSolution": "none"
+    "dotnet.defaultSolution": "none",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "chat.disableAIFeatures": true,
 }
