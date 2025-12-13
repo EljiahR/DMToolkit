@@ -26,20 +26,31 @@ class StartupData {
   List<SpeciesDefinition> speciesDefinitions;
   List<Spell> spells;
 
+  static const List<AbilityScoreDefinition> defaultAbilityScoreDefinitions = [];
+  static const List<BackgroundDefinition> defaultBackgroundDefinitions = [];
+  static const List<CharacterClassDefinition> defaultCharacterClassDefinitions = [];
+  static const List<ConditionDefinition> defaultConditionDefinitions = [];
+  static const List<Effect> defaultEffects = [];
+  static const List<FeatDefinition> defaultFeatDefinitions = [];
+  static const List<ItemDefinitionBase> defaultItemDefinitionBases = [];
+  static const List<School> defaultSchools = [];
+  static const List<SpeciesDefinition> defaultSpeciesDefinitions = [];
+  static const List<Spell> defaultSpells = [];
+
   StartupData({
-    required this.abilityScoreDefinitions,
-    required this.backgroundDefinitions,
-    required this.characterClassDefinitions,
-    required this.conditionDefinitions,
-    required this.effects,
-    required this.featDefinitions,
-    required this.itemDefinitionBases,
-    required this.schools,
-    required this.speciesDefinitions,
-    required this.spells
+    this.abilityScoreDefinitions = defaultAbilityScoreDefinitions,
+    this.backgroundDefinitions = defaultBackgroundDefinitions,
+    this.characterClassDefinitions = defaultCharacterClassDefinitions,
+    this.conditionDefinitions = defaultConditionDefinitions,
+    this.effects = defaultEffects,
+    this.featDefinitions = defaultFeatDefinitions,
+    this.itemDefinitionBases = defaultItemDefinitionBases,
+    this.schools = defaultSchools,
+    this.speciesDefinitions = defaultSpeciesDefinitions,
+    this.spells = defaultSpells
   });
 
-  factory StartupData.fromJson(Map<String, dynamic> json) {
+  void importFromJson(Map<String, dynamic> json) {
     try {
       var abilityScoreDefinitionListJson = json['abilityScoreDefinitions'] as List;
       var abilityScoreDefinitions = abilityScoreDefinitionListJson
@@ -104,20 +115,20 @@ class StartupData {
         .map((spellJson) => Spell.fromJson(spellJson, schools, characterClassDefinitions, itemDefinitionBases, effects))
         .toList();
       
-      return StartupData(
-        abilityScoreDefinitions: abilityScoreDefinitions, 
-        backgroundDefinitions: backgroundDefinitions, 
-        characterClassDefinitions: characterClassDefinitions, 
-        conditionDefinitions: conditionDefinitions, 
-        effects: effects, 
-        featDefinitions: featDefinitions, 
-        itemDefinitionBases: itemDefinitionBases, 
-        schools: schools, 
-        speciesDefinitions: speciesDefinitions, 
-        spells: spells
-      );
+      
+      this.abilityScoreDefinitions = abilityScoreDefinitions;
+      this.backgroundDefinitions = backgroundDefinitions; 
+      this.characterClassDefinitions = characterClassDefinitions; 
+      this.conditionDefinitions = conditionDefinitions; 
+      this.effects = effects; 
+      this.featDefinitions = featDefinitions; 
+      this.itemDefinitionBases = itemDefinitionBases; 
+      this.schools = schools; 
+      this.speciesDefinitions = speciesDefinitions; 
+      this.spells = spells;
+      
     } catch (e) {
-      throw FormatException('StartupData model is invalid.', e);
+      throw FormatException('JSON for StartupData model is invalid.', e);
     }
   }
 }
