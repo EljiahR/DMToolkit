@@ -1,7 +1,7 @@
 import 'package:dm_toolkit/models/dm_toolkit/collections/startup_data.dart';
 import 'package:flutter/foundation.dart';
 
-class DMToolkitViewModel  extends ChangeNotifier{
+class DMToolkitViewModel extends ChangeNotifier{
   final StartupData data = StartupData();
   String? errorMessage;
 
