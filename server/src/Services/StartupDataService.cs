@@ -34,8 +34,6 @@ public class StartupDataService : IStartupDataService
                                         .Include(a => a.SkillDefinitions)
                                         .AsNoTracking().ToListAsync();
         var backgroundsTask = _context.BackgroundDefinitions
-                                        .Include(b => b.AbilityScoreDefinitions)
-                                        .Include(b => b.SkillDefinitions)
                                         .Include(b => b.BackgroundDefinitionItemDefinitionBases)
                                         .AsNoTracking().ToListAsync();
         var characterClassesTask = _context.CharacterClassDefinitions
@@ -43,8 +41,6 @@ public class StartupDataService : IStartupDataService
                                             .ThenInclude(s => s.SubclassDefinitionFeatDefinitions)
                                         .Include(c => c.CharacterClassDefinitionFeatDefinitions)
                                         .Include(c => c.StartingEquipmentQuantityTables)
-                                        .Include(c => c.PrimaryAbilityScoreDefinition)
-                                        .Include(c => c.AlternativePrimaryAbilityScoreDefinition)
                                         .AsNoTracking().ToListAsync();
         var conditionsTask = _context.ConditionDefinitions
                                     .AsNoTracking().ToListAsync();
@@ -60,7 +56,6 @@ public class StartupDataService : IStartupDataService
         var effectsTask = _context.Effects.AsNoTracking().ToListAsync();
         var schoolsTask = _context.Schools.AsNoTracking().ToListAsync();
         var spellsTask = _context.Spells
-                                    .Include(s => s.School)
                                     .Include(s => s.CharacterClassDefinitions)
                                     .Include(s => s.SpellItems)
                                     .Include(s => s.Effects)

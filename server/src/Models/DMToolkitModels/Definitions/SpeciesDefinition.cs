@@ -9,5 +9,5 @@ public class SpeciesDefinition : IDefinition
     public int Speed { get; set; } = 0;
     public List<string> Sizes { get; set; } = new();
     public ICollection<FeatDefinition> FeatDefinitions { get; set; } = new List<FeatDefinition>();
-    public ICollection<LineageDefinition> LineageDefinitions = new List<LineageDefinition>();
+    public ICollection<LineageDefinition> LineageDefinitions { get; set; } = new List<LineageDefinition>();
 }

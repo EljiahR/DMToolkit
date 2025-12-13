@@ -66,5 +66,117 @@ public class CharacterClassDefinitionConfiguration : IEntityTypeConfiguration<Ch
                     .Cast<ToolCategory>()
                     .ToList()
             );
+
+        builder.Property(c => c.NumberOfPreparedSpells)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.NumberOfCantrips)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.LevelOneSlots)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.LevelTwoSlots)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.LevelThreeSlots)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.LevelFourSlots)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.LevelFiveSlots)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.LevelSixSlots)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.LevelSevenSlots)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+        
+        builder.Property(c => c.LevelEightSlots)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.LevelNineSlots)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.ClassPoints)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.ClassDieNumber)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.ClassDieSides)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
     }
 }
