@@ -27,7 +27,7 @@ public class CharacterClassDefinition : IDefinition
     public ToolDefinition? ToolProficiency { get; set; } = null;
     public List<ToolCategory> ToolProficiencyCategories { get; set; } = new List<ToolCategory>();
     public int NumberOfToolProficiencies { get; set; } = 0;
-    public ICollection<ArmorCategory> ArmorProficiencies { get; set; } = new List<ArmorCategory>();
+    public List<ArmorCategory> ArmorProficiencies { get; set; } = new List<ArmorCategory>();
     public ICollection<CharacterClassDefinitionItemDefinitionBase> StartingEquipmentQuantityTables { get; set; } = new List<CharacterClassDefinitionItemDefinitionBase>();
     public int StartingGp { get; set; } = 0;
     // Features

@@ -41,155 +41,78 @@ public class CharacterClassDefinitionConfiguration : IEntityTypeConfiguration<Ch
             .HasForeignKey(c => c.SpellcastingFocusId);
 
         builder.Property(c => c.ArmorProficiencies)
-            .HasConversion(
-                v => string.Join(",", v.Select(e => e.ToString())),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => (ArmorCategory)Enum.Parse(typeof(ArmorCategory), s))
-                    .ToList()
+            .HasConversion(ValueConverters.ArmorCategoryListConverter, ValueComparers.ArmorCategoryListComparer
             );
 
         builder.Property(c => c.WeaponProficiencies)
-            .HasConversion(
-                v => string.Join(",", v.Select(e => e.ToString())),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => (WeaponCategory)Enum.Parse(typeof(WeaponCategory), s))
-                    .ToList()
+            .HasConversion(ValueConverters.WeaponCategoryListConverter, ValueComparers.WeaponCategoryListComparer
             );
 
         builder.Property(c => c.ToolProficiencyCategories)
-            .HasConversion(
-                v => string.Join(",", v.Select(e => e.ToString())),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => (ToolCategory)Enum.Parse(typeof(ToolCategory), s))
-                    .ToList()
+            .HasConversion(ValueConverters.ToolCategoryListConverter, ValueComparers.ToolCategoryListComparer
             );
 
         builder.Property(c => c.NumberOfPreparedSpells)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.NumberOfCantrips)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.LevelOneSlots)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.LevelTwoSlots)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.LevelThreeSlots)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.LevelFourSlots)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.LevelFiveSlots)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.LevelSixSlots)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.LevelSevenSlots)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
         
         builder.Property(c => c.LevelEightSlots)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.LevelNineSlots)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.ClassPoints)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.ClassDieNumber)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.ClassDieSides)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.WeaponMasteries)
-            .HasConversion(
-                v => string.Join(",", v),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => int.Parse(s))
-                    .ToList()
+            .HasConversion(ValueConverters.IntListConverter, ValueComparers.IntListComparer
             );
 
         builder.Property(c => c.MultiGetsArmorProficiency)
-            .HasConversion(
-                v => string.Join(",", v.Select(e => e.ToString())),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => (ArmorCategory)Enum.Parse(typeof(ArmorCategory), s))
-                    .ToList()
-            );
+            .HasConversion(ValueConverters.ArmorCategoryListConverter, ValueComparers.ArmorCategoryListComparer);
     }
 }
