@@ -42,28 +42,25 @@ public class CharacterClassDefinitionConfiguration : IEntityTypeConfiguration<Ch
 
         builder.Property(c => c.ArmorProficiencies)
             .HasConversion(
-                v => string.Join(",", v.Select(e => e.ToString("D")).ToArray()),
-                v => v.Split(new[] { ',' })
-                    .Select(e =>  Enum.Parse(typeof(ArmorCategory), e))
-                    .Cast<ArmorCategory>()
+                v => string.Join(",", v.Select(e => e.ToString())),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => (ArmorCategory)Enum.Parse(typeof(ArmorCategory), s))
                     .ToList()
             );
 
         builder.Property(c => c.WeaponProficiencies)
             .HasConversion(
-                v => string.Join(",", v.Select(e => e.ToString("D")).ToArray()),
-                v => v.Split(new[] { ',' })
-                    .Select(e =>  Enum.Parse(typeof(WeaponCategory), e))
-                    .Cast<WeaponCategory>()
+                v => string.Join(",", v.Select(e => e.ToString())),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => (WeaponCategory)Enum.Parse(typeof(WeaponCategory), s))
                     .ToList()
             );
 
         builder.Property(c => c.ToolProficiencyCategories)
             .HasConversion(
-                v => string.Join(",", v.Select(e => e.ToString("D")).ToArray()),
-                v => v.Split(new[] { ',' })
-                    .Select(e => Enum.Parse(typeof(ToolCategory), e))
-                    .Cast<ToolCategory>()
+                v => string.Join(",", v.Select(e => e.ToString())),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => (ToolCategory)Enum.Parse(typeof(ToolCategory), s))
                     .ToList()
             );
 
@@ -176,6 +173,22 @@ public class CharacterClassDefinitionConfiguration : IEntityTypeConfiguration<Ch
                 v => string.Join(",", v),
                 v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
                     .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.WeaponMasteries)
+            .HasConversion(
+                v => string.Join(",", v),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => int.Parse(s))
+                    .ToList()
+            );
+
+        builder.Property(c => c.MultiGetsArmorProficiency)
+            .HasConversion(
+                v => string.Join(",", v.Select(e => e.ToString())),
+                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => (ArmorCategory)Enum.Parse(typeof(ArmorCategory), s))
                     .ToList()
             );
     }
