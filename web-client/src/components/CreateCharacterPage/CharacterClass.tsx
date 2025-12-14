@@ -7,8 +7,8 @@ import CreateCharacterFeatDisplay from "./CreateCharacterFeatDisplay";
 
 const CharacterClass = ({className = ""}: {className?: string}) => {
     const availableCharacterClasses = useAppSelector((state) => state.dmTools.characterClassDefinitions);
-    const selectedCharacterClassDefinition = useAppSelector((state) => state.selectedCharacter.characterClassInstances[0].definition);
-    const selectedItemSet = useAppSelector((state) => state.selectedCharacter.characterClassInstances[0].selectedItemSet ?? true);
+    const selectedCharacterClassDefinition = useAppSelector((state) => state.selectedCharacter.primaryCharacterClassInstance?.definition);
+    const selectedItemSet = useAppSelector((state) => state.selectedCharacter.primaryCharacterClassInstance?.selectedItemSet ?? true);
     const dispatch = useAppDispatch();
     
     useLayoutEffect(() => {

@@ -24,7 +24,7 @@ export const characterSpecies: SpeciesDefinition[] = [
         description: humanDescription,
         type: "Humanoid",
         speed: 30,
-        size: "Medium",
+        sizes: ["Small", "Medium"],
         featDefinitions: [],
         lineageDefinitions: [lineages[0]]
     },
@@ -34,7 +34,7 @@ export const characterSpecies: SpeciesDefinition[] = [
         description: elfDescription,
         type: "Humanoid",
         speed: 30,
-        size: "Medium",
+        sizes: ["Medium"],
         featDefinitions: [],
         lineageDefinitions: [lineages[1]]
     }

@@ -10,7 +10,7 @@ const Overview = () => {
             <div id="mechanical-description" className="card">
                 <div id="basic-overview">
                     <h2>{selectedCharacter.name}</h2>
-                    <p>{selectedCharacter.characterClassInstances[0].definition.name}</p>
+                    <p>{selectedCharacter.primaryCharacterClassInstance?.definition.name}</p>
                 </div>
                 <div id="origin">
                     <p>{selectedCharacter.speciesInstance?.definition.name ?? ""}</p>

@@ -38,7 +38,7 @@ export const selectedCharacterSlice = createSlice({
             state.alignment = "";
             state.hp = 1;
             state.tempHp = 0;
-            state.characterClassInstances = [classDefinitionReset(action.payload.defaultClass, "")];
+            state.primaryCharacterClassInstance = classDefinitionReset(action.payload.defaultClass, "");
             state.backgroundInstance = backgroundDefinitionReset(action.payload.defaultBackground, "");
             state.speciesInstance = speciesDefinitionReset(action.payload.defaultSpecies, action.payload.defaultSpecies.sizes, "", "");
             state.scores = getStandardScores(action.payload.defaultScores);
@@ -58,11 +58,11 @@ export const selectedCharacterSlice = createSlice({
             state.alignment = action.payload;
         },
         setCharacterClassDefinition: (state, action: PayloadAction<CharacterClassDefinition>) => {
-            state.characterClassInstances = [classDefinitionReset(action.payload, state.characterClassInstances[0].id)];
+            state.primaryCharacterClassInstance = classDefinitionReset(action.payload, state.primaryCharacterClassInstance?.id ?? "");
         },
         setCharacterClassItemSet: (state, action: PayloadAction<boolean>) => {
-            if (state.characterClassInstances[0]) {
-                state.characterClassInstances[0].selectedItemSet = action.payload;
+            if (state.primaryCharacterClassInstance) {
+                state.primaryCharacterClassInstance.selectedItemSet = action.payload;
             }
         },
         setBackgroundDefinition: (state, action: PayloadAction<BackgroundDefinition>) => {
@@ -162,12 +162,12 @@ export const selectedCharacterSlice = createSlice({
             if (state.scores == null) {
                 state.scores = getStandardScores();
             }
-            state.scores.str.score = action.payload ? action.payload[0] : state.characterClassInstances[0].definition.defaultStr ?? 8;
-            state.scores.dex.score = action.payload ? action.payload[1] : state.characterClassInstances[0].definition.defaultDex ?? 8;
-            state.scores.con.score = action.payload ? action.payload[2] : state.characterClassInstances[0].definition.defaultCon ?? 8;
-            state.scores.int.score = action.payload ? action.payload[3] : state.characterClassInstances[0].definition.defaultInt ?? 8;
-            state.scores.wis.score = action.payload ? action.payload[4] : state.characterClassInstances[0].definition.defaultWis ?? 8;
-            state.scores.cha.score = action.payload ? action.payload[5] : state.characterClassInstances[0].definition.defaultCha ?? 8;
+            state.scores.str.score = action.payload ? action.payload[0] : state.primaryCharacterClassInstance?.definition.defaultStr ?? 8;
+            state.scores.dex.score = action.payload ? action.payload[1] : state.primaryCharacterClassInstance?.definition.defaultDex ?? 8;
+            state.scores.con.score = action.payload ? action.payload[2] : state.primaryCharacterClassInstance?.definition.defaultCon ?? 8;
+            state.scores.int.score = action.payload ? action.payload[3] : state.primaryCharacterClassInstance?.definition.defaultInt ?? 8;
+            state.scores.wis.score = action.payload ? action.payload[4] : state.primaryCharacterClassInstance?.definition.defaultWis ?? 8;
+            state.scores.cha.score = action.payload ? action.payload[5] : state.primaryCharacterClassInstance?.definition.defaultCha ?? 8;
         },
         setPhysicalDescription: (state, action: PayloadAction<string>) => {
             state.physicalDescription = action.payload;
@@ -197,10 +197,10 @@ export const selectedCharacterSlice = createSlice({
                 })]
             }
 
-            if (state.characterClassInstances[0] && state.characterClassInstances[0].selectedItemSet) {
+            if (state.primaryCharacterClassInstance && state.primaryCharacterClassInstance.selectedItemSet) {
                 state.inventory = [
                     ...state.inventory,
-                    ...state.characterClassInstances[0].definition.itemDefinitionBaseQuantities.map(itemBase => {
+                    ...state.primaryCharacterClassInstance.definition.startingEquipmentQuantityTables.map(itemBase => {
                         return itemDefinitionTableToInstance(itemBase);
                 })]
             }
@@ -220,13 +220,25 @@ export const selectedCharacterSlice = createSlice({
 
 export const selectBackgroundFeat = (state: RootState) => state.selectedCharacter.backgroundInstance?.featInstance ?? null;
 
-export const selectAllCharacterClasses = (state: RootState) => state.selectedCharacter.characterClassInstances;
+export const selectAllCharacterClasses = (state: RootState) => {
+    const allClasses = [state.selectedCharacter.primaryCharacterClassInstance];
+    if (state.selectedCharacter.secondaryCharacterClassInstance) {
+        allClasses.push(state.selectedCharacter.secondaryCharacterClassInstance);
+    }
+    if (state.selectedCharacter.tertiaryCharacterClassInstance) {
+        allClasses.push(state.selectedCharacter.tertiaryCharacterClassInstance);
+    }
+    
+    return allClasses;
+};
 
 export const selectAllCharacterClassFeats = createSelector(
     [selectAllCharacterClasses],
     (allCharacterClasses) => {
         return allCharacterClasses.reduce((feats: FeatInstance[], c) => {
-            feats.push(...c.featInstances);
+            if (c) {
+                feats.push(...c.featInstances);
+            }
 
             return feats;
         }, []);
@@ -236,7 +248,7 @@ export const selectAllCharacterClassFeats = createSelector(
 export const selectAllSubclasses = createSelector(
     [selectAllCharacterClasses],
     (allCharacterClassses) => allCharacterClassses.reduce((subclasses: SubclassInstance[], c) => {
-        if (c.subclassInstance) subclasses.push(c.subclassInstance);
+        if (c?.subclassInstance) subclasses.push(c.subclassInstance);
 
         return subclasses;
     }, [])
@@ -409,7 +421,7 @@ export const selectInitiative = createSelector(
 
 export const selectTotalLevel = createSelector(
     [selectAllCharacterClasses],
-    (characterClasses) => characterClasses.reduce((level, c) => level + c.level, 0)
+    (characterClasses) => characterClasses.reduce((level, c) => level + (c?.level ?? 0), 0)
 );
 
 export const selectProficiencyBonus = createSelector(
@@ -446,7 +458,9 @@ export const selectHp = (state: RootState) => state.selectedCharacter.hp;
 export const selectHpRolls = createSelector(
     [selectAllCharacterClasses],
     (allCharacterClasses) => allCharacterClasses.reduce((hpRolls: number[], c) => {
-        hpRolls.push(...c.hpRolls);
+        if (c) {
+            hpRolls.push(...c.hpRolls);
+        }
 
         return hpRolls;
     }, [])

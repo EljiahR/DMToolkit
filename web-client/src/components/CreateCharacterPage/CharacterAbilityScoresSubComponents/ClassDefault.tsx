@@ -5,7 +5,7 @@ import { setCharacterClassDefinition, setScoresToClassDefault } from "../../../l
 const ClassDefault = () => {
     const scores = useAppSelector((state) => state.selectedCharacter.scores);
     const defaultClass = useAppSelector((state) => state.dmTools.characterClassDefinitions[0]);
-    const characterClassBase = useAppSelector((state) => state.selectedCharacter.characterClassInstances[0].definition);
+    const characterClassBase = useAppSelector((state) => state.selectedCharacter.primaryCharacterClassInstance?.definition);
     const plusTwoBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusTwo ?? null);
     const plusOneBonus = useAppSelector((state) => state.selectedCharacter.backgroundInstance?.abilityScoreDefinitionPlusOne ?? null);
     const dispatch = useAppDispatch();

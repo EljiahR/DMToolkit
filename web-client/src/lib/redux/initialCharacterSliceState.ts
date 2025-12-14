@@ -4,6 +4,7 @@ import type { BackgroundDefinition } from "../types/dm-tool-types/definitions/ba
 import type { CharacterClassDefinition } from "../types/dm-tool-types/definitions/characterClassDefinition";
 import type { LineageDefinition } from "../types/dm-tool-types/definitions/lineageDefinition";
 import type { SpeciesDefinition } from "../types/dm-tool-types/definitions/speciesDefinition";
+import { ToolCategory } from "../types/dm-tool-types/enums/toolCategory";
 import type { BackgroundInstance } from "../types/dm-tool-types/instances/backgroundInstance";
 import type { Character } from "../types/dm-tool-types/instances/character";
 import type { CharacterClassInstance } from "../types/dm-tool-types/instances/characterClassInstance";
@@ -25,8 +26,45 @@ const defaultCharacterClassDefinition: CharacterClassDefinition = {
     defaultInt: 8,
     defaultWis: 8,
     defaultCha: 8,
-    itemDefinitionBaseQuantities: [],
-    startingGp: 0
+    startingEquipmentQuantityTables: [],
+    startingGp: 50,
+    primaryAbilityScoreDefinition: null,
+    alternativePrimaryAbilityScoreDefinition: null,
+    primaryScoreIsExclusive: false,
+    savingThrowProficiencies: [],
+    skillProficiencies: [],
+    numberOfCantrips: [],
+    numberOfPreparedSpells: [],
+    numberOfSkillProficiencies: 0,
+    numberOfToolProficiencies: 0,
+    spellcastingAbility: null,
+    spellcastingFocus: null,
+    levelSixSlots: [],
+    levelEightSlots: [],
+    levelFiveSlots: [],
+    levelFourSlots: [],
+    levelNineSlots: [],
+    levelOneSlots: [],
+    levelSevenSlots: [],
+    levelThreeSlots: [],
+    levelTwoSlots: [],
+    hasSpellbook: false,
+    extraWeaponProficiencies: [],
+    multiGetsArmorProficiency: [],
+    multiGetsAToolProficiency: false,
+    multiGetsMartialProficiency: false,
+    weaponMasteries: [],
+    weaponProficiencies: [],
+    toolProficiency: null,
+    toolProficiencyCategories: [],
+    classBonus: [],
+    classDieNumber: [],
+    classDieSides: [],
+    classPoints: [],
+    multiToolProficiencyCategory: ToolCategory.Other,
+    multiGetsSkillProficiency: false,
+    multiSpellSlotDenominator: 1,
+    armorProficiencies: []
 }
 
 const characterClass: CharacterClassInstance = {
@@ -108,7 +146,9 @@ export const generateEmptyCharacter = (): Character => {
         alignment: "unaligned",
         hp: 1,
         tempHp: 0, 
-        characterClassInstances: [characterClass],
+        primaryCharacterClassInstance: characterClass,
+        secondaryCharacterClassInstance: null,
+        tertiaryCharacterClassInstance: null,
         backgroundInstance: background,
         speciesInstance: species,
         scores: getStandardScores(),

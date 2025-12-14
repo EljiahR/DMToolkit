@@ -10,7 +10,9 @@ export const characterBackgrounds: BackgroundDefinition[] = [
         description: evangalistDescription,
         abilityScoreDefinitions: [intDef, wisDef, chaDef],
         featDefinition: emptyFeat,
-        skillProficiencies: []
+        skillProficiencies: [],
+        startingGp: 50,
+        itemDefinitionBaseQuantities: []
     },
     {
         id: "ahcrap",
@@ -18,6 +20,8 @@ export const characterBackgrounds: BackgroundDefinition[] = [
         description: thugDescription,
         abilityScoreDefinitions: [dexDef, conDef, intDef],
         featDefinition: emptyFeat,
-        skillProficiencies: []
+        skillProficiencies: [],
+        startingGp: 50,
+        itemDefinitionBaseQuantities: []
     }
 ];
