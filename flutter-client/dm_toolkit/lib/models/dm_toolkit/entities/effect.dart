@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dm_toolkit/enums/data_type.dart';
 import 'package:dm_toolkit/enums/origin_type.dart';
 
@@ -11,8 +13,8 @@ class Effect {
 
   Effect({
     required this.id,
-    this.title,
-    this.description,
+    required this.title,
+    required this.description,
     required this.originType,
     required this.dataType,
     required this.data
@@ -20,8 +22,11 @@ class Effect {
 
   factory Effect.fromJson(Map<String, dynamic> json) {
     try {
+      log('Data');
       return Effect(
         id: json['id'] as String, 
+        title: json['title'] as String?,
+        description: json['desscription'] as String?,
         originType: json['originType'] as OriginType, 
         dataType: json['dataType'] as DataType, 
         data: json['data'] as Map<String, dynamic>

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dm_toolkit/models/dm_toolkit/collections/startup_data.dart';
 import 'package:flutter/foundation.dart';
@@ -9,20 +10,24 @@ class DMToolkitViewModel extends ChangeNotifier{
   final StartupData data = StartupData();
   String? errorMessage;
 
-  Future<void> init() async {
+  Future<void> fetchStartupData() async {
     
     final url = dotenv.env['SERVER_URL'];
     if (url == null) {
       errorMessage = '.env SERVER_URL was null.';
+      log('url was null.');
       return;
     } 
     
-    final response = await http.get(Uri.parse(url));
+    log('Fetching data from $url');
+    final response = await http.get(Uri.parse('$url/DMToolkit'));
     
     if (response.statusCode == 200) {
       data.importFromJson(jsonDecode(response.body) as Map<String, dynamic>);
+      log('Data successfully retrieved');
     } else {
       errorMessage = 'Error: Data was unable to be retrieved';
+      log('Data unable to be retrieved');
     }
 
     notifyListeners();

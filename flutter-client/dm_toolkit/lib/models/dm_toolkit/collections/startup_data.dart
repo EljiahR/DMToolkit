@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dm_toolkit/models/dm_toolkit/definitions/ability_score_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/background_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/character_class_definition.dart';
@@ -59,9 +61,9 @@ class StartupData {
       
       var skillDefinitions = abilityScoreDefinitions.fold(<SkillDefinition>[], (skillList, abilityScoreDefinition) => [...skillList, ...abilityScoreDefinition.skillDefinitions]);
 
-      var effectListJson = json['effects'];
+      var effectListJson = json['effects'] as List;
       var effects = effectListJson
-        .map((effect) => Effect.fromJson(effect))
+        .map((effectJson) => Effect.fromJson(effectJson))
         .toList();
 
       var featDefinitionListJson = json['featDefinitions'] as List;
@@ -127,7 +129,11 @@ class StartupData {
       this.speciesDefinitions = speciesDefinitions; 
       this.spells = spells;
       
-    } catch (e) {
+    } on FormatException catch (e) {
+      log('Error occured during StartupData json parse.', error: e);
+      rethrow;
+    }
+     catch (e) {
       throw FormatException('JSON for StartupData model is invalid.', e);
     }
   }
