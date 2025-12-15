@@ -34,14 +34,14 @@ class DMToolkitViewModel extends ChangeNotifier{
     notifyListeners();
   }
 
-  Future<void> loadStartupDataFromJson() async {
+  Future<void> loadStartupDataFromSeedDataJson() async {
     try {
       final String response = await rootBundle.loadString("assets/dm_seed_data.json");
       data.importFromJson(jsonDecode(response));
     } on FlutterError catch (e) {
       log('Error loading .json:', error: e);
     } on FormatException catch (e) {
-      log('Error occured during json import.');
+      log('Error occured during json import.', error: e);
       rethrow;
     } catch (e) {
       log('Unexpected error has occured:', error: e);
