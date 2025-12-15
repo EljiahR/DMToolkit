@@ -1,0 +1,1262 @@
+{
+  "abilityScoreDefinitions": [
+    {
+      "id": "5ba4db7b-b82a-4c3d-b66a-799ce95b62a4",
+      "name": "Strength",
+      "abbreviation": "str",
+      "description": "Lift BIG",
+      "skillDefinitions": [
+        {
+          "id": "8100442e-7475-498a-a255-d55497d28b15",
+          "name": "Athletics",
+          "description": "Ability to do athletic stuff, idk"
+        }
+      ]
+    },
+    {
+      "id": "7027c929-d3c6-4cd6-8b0d-21e544bc656b",
+      "name": "Constitution",
+      "abbreviation": "con",
+      "description": "Take BIG damage",
+      "skillDefinitions": []
+    },
+    {
+      "id": "94e05ca5-d2ae-4bd3-b64c-182f5da62959",
+      "name": "Intelligence",
+      "abbreviation": "int",
+      "description": "Read BIG",
+      "skillDefinitions": [
+        {
+          "id": "95da2fcf-82a9-4814-85d2-697dba6061e5",
+          "name": "Arcana",
+          "description": "Read runes and stuff"
+        }
+      ]
+    },
+    {
+      "id": "be37c4a4-16b6-4f98-b7ce-151bba800115",
+      "name": "Charisma",
+      "abbreviation": "cha",
+      "description": "Talk BIG",
+      "skillDefinitions": [
+        {
+          "id": "408e5afc-beaa-49bc-a859-c62894519768",
+          "name": "Deception",
+          "description": "Ability to more than meets the eye"
+        }
+      ]
+    },
+    {
+      "id": "d2d1b11c-2313-4872-a643-fd1c7d38ab78",
+      "name": "Wisdom",
+      "abbreviation": "wis",
+      "description": "Think BIG",
+      "skillDefinitions": [
+        {
+          "id": "82635207-f191-4c18-bb4a-7479daf5f188",
+          "name": "Perception",
+          "description": "Ability to see"
+        },
+        {
+          "id": "c1239aa2-1904-4aa3-a7af-99f8a79afe66",
+          "name": "Insight",
+          "description": "Ability to hindsight in real time"
+        },
+        {
+          "id": "ed536520-bd57-4c6b-9157-ccba1601b887",
+          "name": "Survival",
+          "description": "Ability to LIVE"
+        }
+      ]
+    },
+    {
+      "id": "e374579c-f092-413b-82cd-c06dcb728e49",
+      "name": "Dexterity",
+      "abbreviation": "dex",
+      "description": "Dodge BIG",
+      "skillDefinitions": [
+        {
+          "id": "11a43fd6-5961-47d2-9971-26f1ce60fa6b",
+          "name": "Acrobatics",
+          "description": "Ability to like flip and stuff"
+        }
+      ]
+    }
+  ],
+  "backgroundDefinitions": [
+    {
+      "id": "33587bb7-18f3-4e14-80bf-d0e24d08c00d",
+      "name": "Wayfarer",
+      "description": "You are a seasoned traveler who has crossed strange lands, survived in the wilderness, and adapted to the hardships of life on the road.",
+      "abilityScoreDefinitionIds": [],
+      "featDefinitionId": "7d4f6976-82bb-4034-8f4e-338529cc1567",
+      "skillDefinitionIds": [],
+      "startingGp": 50,
+      "itemDefinitionBaseQuantities": [
+        {
+          "itemDefinitionBaseId": "68fde9b9-8960-452e-88db-3354e8d6340e",
+          "quantity": 1
+        },
+        {
+          "itemDefinitionBaseId": "c890a252-f022-4afe-9aa0-e60dea4fe3c6",
+          "quantity": 1
+        },
+        {
+          "itemDefinitionBaseId": "d7e16a33-7940-465e-ac03-2585704358de",
+          "quantity": 1
+        },
+        {
+          "itemDefinitionBaseId": "e988b7c1-df29-4da6-9b0e-f7e4b103e8b6",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "c75e6478-3cca-4e03-9775-35f7e10dff04",
+      "name": "Philosopher",
+      "description": "Thinks and stuff",
+      "abilityScoreDefinitionIds": [],
+      "featDefinitionId": "1f7a2f90-feae-4ec6-b7f2-eb1571a4c6ad",
+      "skillDefinitionIds": [],
+      "startingGp": 50,
+      "itemDefinitionBaseQuantities": [
+        {
+          "itemDefinitionBaseId": "2acb6ffe-d82d-46a8-8730-5372690ffb61",
+          "quantity": 1
+        },
+        {
+          "itemDefinitionBaseId": "43f149ef-7822-45bb-b6d9-aac4a48b34aa",
+          "quantity": 1
+        },
+        {
+          "itemDefinitionBaseId": "81fc299d-55c7-42e2-9e5e-6d85282c82cc",
+          "quantity": 1
+        },
+        {
+          "itemDefinitionBaseId": "88e48fff-2dae-48b1-a504-b0d7ab49647a",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "characterClassDefinitions": [
+    {
+      "id": "2fc86fcc-7dbc-4199-a62e-c3e3a1aec7cb",
+      "name": "Vanguard",
+      "description": "A disciplined warrior who leads from the front, anchoring the line and shielding allies from harm.",
+      "primaryAbilityScoreDefinitionId": "5ba4db7b-b82a-4c3d-b66a-799ce95b62a4",
+      "alternativePrimaryAbilityScoreDefinitionId": null,
+      "primaryScoreIsExclusive": true,
+      "hitDie": 10,
+      "savingThrowProficiencyIds": [],
+      "skillProficiencyIds": [],
+      "numberOfSkillProficiencies": 2,
+      "weaponProficiencies": [
+        0,
+        1
+      ],
+      "extraWeaponProficiencies": [],
+      "toolProficiencyId": null,
+      "toolProficiencyCategories": [],
+      "numberOfToolProficiencies": 0,
+      "armorProficiencies": [
+        1,
+        2,
+        3
+      ],
+      "startingEquipmentQuantityTables": [
+        {
+          "itemDefinitionBaseId": "ace51e62-ea84-4ee3-92ed-f6893e9f1d58",
+          "quantity": 1
+        },
+        {
+          "itemDefinitionBaseId": "ce354ba9-3e38-4e87-9a55-661e140a03ab",
+          "quantity": 1
+        },
+        {
+          "itemDefinitionBaseId": "e9d07629-988a-4cf4-a223-04f61f96a3fb",
+          "quantity": 1
+        }
+      ],
+      "startingGp": 75,
+      "featTables": [
+        {
+          "level": 1,
+          "group": 0,
+          "featDefinitionIds": [
+            "449ce177-9e3e-47c9-ae2e-2b3697e20877",
+            "f556df2d-2c46-452f-9a82-721082bdf76c"
+          ]
+        }
+      ],
+      "subclassDefinitions": [],
+      "numberOfPreparedSpells": [],
+      "numberOfCantrips": [],
+      "levelOneSlots": [],
+      "levelTwoSlots": [],
+      "levelThreeSlots": [],
+      "levelFourSlots": [],
+      "levelFiveSlots": [],
+      "levelSixSlots": [],
+      "levelSevenSlots": [],
+      "levelEightSlots": [],
+      "levelNineSlots": [],
+      "spellcastingAbilityId": null,
+      "spellcastingFocusId": null,
+      "hasSpellbook": false,
+      "classPoints": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3
+      ],
+      "classDieNumber": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "classDieSides": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "weaponMasteries": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        4
+      ],
+      "classBonus": [],
+      "defaultStr": 16,
+      "defaultDex": 10,
+      "defaultCon": 14,
+      "defaultInt": 8,
+      "defaultWis": 10,
+      "defaultCha": 8,
+      "fixedHp": 10,
+      "multiGetsMartialProficiency": false,
+      "multiGetsArmorProficiency": [],
+      "multiGetsSkillProficiency": false,
+      "multiGetsAToolProficiency": false,
+      "multiToolProficiencyCategory": 0,
+      "multiSpellSlotDenominator": 0
+    },
+    {
+      "id": "eec522aa-b10c-466c-8b08-944d44f94425",
+      "name": "Arcanist",
+      "description": "A scholar of the unknown who studies the nature of magic itself, bending it to their will through intellect and willpower rather than instinct.",
+      "primaryAbilityScoreDefinitionId": "94e05ca5-d2ae-4bd3-b64c-182f5da62959",
+      "alternativePrimaryAbilityScoreDefinitionId": null,
+      "primaryScoreIsExclusive": true,
+      "hitDie": 6,
+      "savingThrowProficiencyIds": [],
+      "skillProficiencyIds": [],
+      "numberOfSkillProficiencies": 3,
+      "weaponProficiencies": [
+        0
+      ],
+      "extraWeaponProficiencies": [],
+      "toolProficiencyId": null,
+      "toolProficiencyCategories": [],
+      "numberOfToolProficiencies": 0,
+      "armorProficiencies": [],
+      "startingEquipmentQuantityTables": [
+        {
+          "itemDefinitionBaseId": "16b86cd4-3945-47ef-8f88-f6c6e62b5ed0",
+          "quantity": 1
+        },
+        {
+          "itemDefinitionBaseId": "1ea0a90e-a346-4451-9b09-a01a87478165",
+          "quantity": 1
+        },
+        {
+          "itemDefinitionBaseId": "2953e053-f01c-483a-8339-a0b2244e3221",
+          "quantity": 1
+        }
+      ],
+      "startingGp": 60,
+      "featTables": [
+        {
+          "level": 1,
+          "group": 0,
+          "featDefinitionIds": [
+            "40db7751-b3e3-4090-8783-ba01f4472f7c",
+            "690aef9a-97a1-4c06-ab5a-ea4d4e2b2194"
+          ]
+        }
+      ],
+      "subclassDefinitions": [],
+      "numberOfPreparedSpells": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "numberOfCantrips": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "levelOneSlots": [
+        2,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "levelTwoSlots": [],
+      "levelThreeSlots": [],
+      "levelFourSlots": [],
+      "levelFiveSlots": [],
+      "levelSixSlots": [],
+      "levelSevenSlots": [],
+      "levelEightSlots": [],
+      "levelNineSlots": [],
+      "spellcastingAbilityId": "94e05ca5-d2ae-4bd3-b64c-182f5da62959",
+      "spellcastingFocusId": null,
+      "hasSpellbook": true,
+      "classPoints": [],
+      "classDieNumber": [],
+      "classDieSides": [],
+      "weaponMasteries": [],
+      "classBonus": [],
+      "defaultStr": 8,
+      "defaultDex": 12,
+      "defaultCon": 10,
+      "defaultInt": 15,
+      "defaultWis": 13,
+      "defaultCha": 10,
+      "fixedHp": 6,
+      "multiGetsMartialProficiency": false,
+      "multiGetsArmorProficiency": [],
+      "multiGetsSkillProficiency": false,
+      "multiGetsAToolProficiency": false,
+      "multiToolProficiencyCategory": 0,
+      "multiSpellSlotDenominator": 0
+    }
+  ],
+  "conditionDefinitions": [],
+  "effects": [
+    {
+      "id": "0a37c19f-f9bc-4d99-a585-67faa0419f77",
+      "title": "Radiant Pulse",
+      "description": "Emit a burst of radiant light that heals allies or burns enemies within 10 feet.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "Radius": 10,
+        "HealAmount": 4,
+        "DamageAmount": 4,
+        "DamageType": "Radiant"
+      }
+    },
+    {
+      "id": "0b6e197b-f084-485e-8acb-4839b82c7f1c",
+      "title": "Molten Empowerment",
+      "description": "When reduced below half health, gain +2 Strength until the end of your next turn.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "Trigger": "BelowHalfHP",
+        "Stat": "Strength",
+        "Bonus": 2,
+        "Duration": "1Turn"
+      }
+    },
+    {
+      "id": "147a01b0-5352-475d-8181-2353284d12e2",
+      "title": "Ignore Cover",
+      "description": "Your ranged attacks ignore up to three-quarters cover.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "IgnoreCoverLevels": 2
+      }
+    },
+    {
+      "id": "2d860f1a-636d-44cc-8a13-6aad632fd461",
+      "title": "Resist Exhaustion",
+      "description": "You gain advantage on saving throws made to resist exhaustion from travel, hunger, or harsh environments.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "Condition": "Exhaustion",
+        "Advantage": true
+      }
+    },
+    {
+      "id": "4a9b54c0-d0d4-44f4-ab9f-56ab8419e94c",
+      "title": "Disciplined Focus",
+      "description": "Gain advantage on concentration checks to maintain magical effects.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "CheckType": "Concentration",
+        "Advantage": true
+      }
+    },
+    {
+      "id": "53518e36-232d-4b34-a436-bd0a8593f187",
+      "title": "Resist Fatigue",
+      "description": "Gain advantage on saving throws against exhaustion or effects that cause fatigue.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "Condition": "Exhaustion",
+        "Advantage": true
+      }
+    },
+    {
+      "id": "55a53d0d-776b-49db-8c4d-061aa28cb528",
+      "title": "Persuasive Speaker",
+      "description": "Gain a bonus to Persuasion checks from your ability to frame arguments logically.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "Skill": "Persuasion",
+        "Bonus": 2
+      }
+    },
+    {
+      "id": "5f4d1977-bea9-4b41-9b4e-09130e844fcf",
+      "title": "Sense Magic",
+      "description": "You automatically detect the presence of active magical effects within 15 feet.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "DetectionType": "Magic",
+        "Range": 15
+      }
+    },
+    {
+      "id": "67490cc9-982a-4dec-bd31-01723f8487bd",
+      "title": "Contemplative Rest",
+      "description": "When taking a short or long rest, you can spend 10 minutes in meditation to grant one ally advantage on their next saving throw within the next hour.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "RestTimeRequired": "10 minutes",
+        "Effect": "GrantAllyAdvantageSavingThrow",
+        "Duration": "1 hour"
+      }
+    },
+    {
+      "id": "69f0a4ff-40e8-4774-8c56-c159e3905000",
+      "title": "Aetheric Surge",
+      "description": "Once per rest, reroll a spell attack or damage roll and take the higher result.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "Uses": 1,
+        "Recharge": "ShortRest"
+      }
+    },
+    {
+      "id": "73a26ead-c19e-48d7-8a44-dc1a9154ecf3",
+      "title": "Guardian’s Resolve",
+      "description": "Gain a +1 bonus to AC while you are within 5 feet of at least one ally.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "Condition": "AllyNearby",
+        "ACBonus": 1
+      }
+    },
+    {
+      "id": "8ce3e65f-b0bf-4037-ad3e-143e4a13b7fc",
+      "title": "Flat Bonus",
+      "description": "Your maximum hit points increase by 2 for each level you have.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "BonusPerLevel": 2
+      }
+    },
+    {
+      "id": "a34034cb-0590-48cf-be1a-0cb21304fca1",
+      "title": "Power Shot",
+      "description": "Before making a ranged attack, you can choose to take a -5 penalty to the roll. If it hits, add +10 damage.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "AttackPenalty": -5,
+        "DamageBonus": 10
+      }
+    },
+    {
+      "id": "b3691fdd-86eb-4b9d-8476-6197cb9f4ef8",
+      "title": "Prepared Mind",
+      "description": "Gain a +1 bonus to initiative rolls.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "Bonus": 1
+      }
+    },
+    {
+      "id": "bb1f766f-c64a-4191-91bc-86aec83eecd7",
+      "title": "Long Range Accuracy",
+      "description": "You suffer no disadvantage on ranged attacks made at long range.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "IgnoreDisadvantageAtRange": true
+      }
+    },
+    {
+      "id": "bdc03aa1-f608-4bac-ba12-5c74d7871401",
+      "title": "Survival Expertise",
+      "description": "Gain a bonus to Survival checks when foraging for food or navigating difficult terrain.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "Skill": "Survival",
+        "Bonus": 2
+      }
+    },
+    {
+      "id": "cb8d3cc3-bc19-4349-b02c-8176250e9138",
+      "title": "Stop the Advance",
+      "description": "When an enemy moves within 5 feet of you, you may use your reaction to reduce their movement speed by half until the end of their turn.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "Trigger": "EnemyMovementWithinRange",
+        "Range": 5,
+        "Effect": "ReduceSpeed",
+        "Value": 0.5
+      }
+    },
+    {
+      "id": "cd2d4821-9111-428b-92bb-335f5bbe0c78",
+      "title": "Insightful Reasoning",
+      "description": "Gain a bonus to Insight checks as your study of people and ideas sharpens your perception.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "Skill": "Insight",
+        "Bonus": 2
+      }
+    },
+    {
+      "id": "d2a4c271-b33e-4dc7-8553-febeba23d76c",
+      "title": "Efficient Casting",
+      "description": "Once per long rest, you may reduce the cost of one spell or ability by 1 point (mana, focus, or equivalent).",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "ResourceType": "Mana",
+        "Reduction": 1,
+        "Uses": 1,
+        "RestType": "Long"
+      }
+    },
+    {
+      "id": "d408674b-1122-4efd-b840-73e7158f1eac",
+      "title": "Stone Skin",
+      "description": "Gain resistance to bludgeoning damage from nonmagical sources.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "DamageType": "Bludgeoning",
+        "ResistanceValue": 0.5
+      }
+    },
+    {
+      "id": "ee883dfb-4117-48dc-884e-b1e31f9ef623",
+      "title": "Earthen Focus",
+      "description": "You have advantage on Constitution saving throws made to resist exhaustion.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "Ability": "Constitution",
+        "Condition": "Exhaustion",
+        "Bonus": "Advantage"
+      }
+    },
+    {
+      "id": "f668a6bc-6a7e-46eb-92ab-3e3b2c55abd7",
+      "title": "Shadow Veil",
+      "description": "Gain advantage on Stealth checks for 1 minute and resistance to radiant damage.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "Duration": "1Minute",
+        "Bonus": "Advantage",
+        "DamageResistance": "Radiant"
+      }
+    },
+    {
+      "id": "fb089df2-c52c-4d1d-829c-28b3bdbcf6fe",
+      "title": "Enduring Fortitude",
+      "description": "Increase your maximum hit points by 1 per character level.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "PerLevel": 1,
+        "AppliesTo": "MaxHP"
+      }
+    },
+    {
+      "id": "fc4de101-3a6f-4331-a631-660e43df68f9",
+      "title": "Hardened Flesh",
+      "description": "Reduce incoming physical damage by 1 while not wearing heavy armor.",
+      "originType": 0,
+      "dataType": 0,
+      "data": {
+        "DamageReduction": 1,
+        "Condition": "LightOrNoArmor"
+      }
+    }
+  ],
+  "featDefinitions": [
+    {
+      "id": "1f7a2f90-feae-4ec6-b7f2-eb1571a4c6ad",
+      "name": "Philosopher's Insight",
+      "description": "Your contemplative nature and sharp reasoning grant you clarity in thought and speech.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "55a53d0d-776b-49db-8c4d-061aa28cb528",
+            "67490cc9-982a-4dec-bd31-01723f8487bd",
+            "cd2d4821-9111-428b-92bb-335f5bbe0c78"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2aaa8924-de28-4b4c-83b2-e91fc72c08af",
+      "name": "Molten Surge",
+      "description": "Your veins thrum with latent volcanic energy that erupts in moments of desperation, amplifying your physical might temporarily.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "0b6e197b-f084-485e-8acb-4839b82c7f1c"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "40db7751-b3e3-4090-8783-ba01f4472f7c",
+      "name": "Arcane Instinct",
+      "description": "Your intuition allows you to sense fluctuations in magical energy before others can perceive them.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "5f4d1977-bea9-4b41-9b4e-09130e844fcf",
+            "b3691fdd-86eb-4b9d-8476-6197cb9f4ef8"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "449ce177-9e3e-47c9-ae2e-2b3697e20877",
+      "name": "Hold the Line",
+      "description": "You excel at halting enemy advances and protecting allies who fight beside you.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "73a26ead-c19e-48d7-8a44-dc1a9154ecf3",
+            "cb8d3cc3-bc19-4349-b02c-8176250e9138"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "690aef9a-97a1-4c06-ab5a-ea4d4e2b2194",
+      "name": "Focus Channel",
+      "description": "You maintain precision over your power through intense concentration.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "4a9b54c0-d0d4-44f4-ab9f-56ab8419e94c",
+            "d2a4c271-b33e-4dc7-8553-febeba23d76c"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7d4f6976-82bb-4034-8f4e-338529cc1567",
+      "name": "Traveler's Resilience",
+      "description": "Years of wandering have hardened you against fatigue and sharpened your survival instincts.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "2d860f1a-636d-44cc-8a13-6aad632fd461",
+            "bdc03aa1-f608-4bac-ba12-5c74d7871401"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7f537547-c801-4cfc-a31c-781337900579",
+      "name": "Veil of Dusk",
+      "description": "You shroud yourself in shadow, becoming harder to detect and briefly resistant to harm.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "f668a6bc-6a7e-46eb-92ab-3e3b2c55abd7"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9e2908a8-b62e-4259-8651-7af458e0690a",
+      "name": "Essence Overflow",
+      "description": "Your unstable form leaks raw magic, allowing you to enhance your spells or abilities in unpredictable but powerful ways.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "69f0a4ff-40e8-4774-8c56-c159e3905000"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ba8252f9-3c65-4ed0-ac43-3bbd1d0ab4ed",
+      "name": "Enduring Resilience",
+      "description": "The Stoneborn’s connection to the earth grants them incredible fortitude in the face of harm.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "d408674b-1122-4efd-b840-73e7158f1eac",
+            "ee883dfb-4117-48dc-884e-b1e31f9ef623"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c3c9a1a8-86a9-4a47-8435-1cb8e1e9d7cd",
+      "name": "Radiant Pulse",
+      "description": "You can channel your inner light into a burst of healing or searing brilliance.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "0a37c19f-f9bc-4d99-a585-67faa0419f77"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c5073812-48d4-41c1-9756-10e8c09829b2",
+      "name": "Tough",
+      "description": "You are unusually hardy, gaining additional health to endure hardships.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "8ce3e65f-b0bf-4037-ad3e-143e4a13b7fc"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d9c41951-c89c-4157-a166-f42d860aab0c",
+      "name": "Sharpshooter",
+      "description": "You excel at ranged weapon attacks, ignoring cover and striking with deadly precision.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "147a01b0-5352-475d-8181-2353284d12e2",
+            "a34034cb-0590-48cf-be1a-0cb21304fca1",
+            "bb1f766f-c64a-4191-91bc-86aec83eecd7"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e10b5bb9-2e3e-4368-b67a-e677d1e797fb",
+      "name": "Unyielding Form",
+      "description": "When focused, your body becomes nearly impervious, resisting damage with supernatural toughness.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "fc4de101-3a6f-4331-a631-660e43df68f9"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f556df2d-2c46-452f-9a82-721082bdf76c",
+      "name": "Iron Stamina",
+      "description": "Your training has made you tireless and steadfast, shrugging off fatigue and pain.",
+      "availableEffectTables": [
+        {
+          "group": 0,
+          "effectIds": [
+            "53518e36-232d-4b34-a436-bd0a8593f187",
+            "fb089df2-c52c-4d1d-829c-28b3bdbcf6fe"
+          ]
+        }
+      ]
+    }
+  ],
+  "itemDefinitionBases": [
+    {
+      "$type": "Armor",
+      "armorCategory": 0,
+      "baseAC": 0,
+      "dexterityCap": 0,
+      "hasDexterityCap": false,
+      "strengthRequirement": 0,
+      "hasStealthDisadvantage": false,
+      "don": "",
+      "doff": "",
+      "id": "2953e053-f01c-483a-8339-a0b2244e3221",
+      "name": "Threaded Aetherweave Robe",
+      "description": "Silken robe reinforced with faintly luminescent thread. Offers minimal protection but aids focus.",
+      "weight": 3,
+      "itemType": "Armor",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 20,
+        "pp": 0
+      }
+    },
+    {
+      "$type": "Armor",
+      "armorCategory": 0,
+      "baseAC": 0,
+      "dexterityCap": 0,
+      "hasDexterityCap": false,
+      "strengthRequirement": 0,
+      "hasStealthDisadvantage": false,
+      "don": "",
+      "doff": "",
+      "id": "81fc299d-55c7-42e2-9e5e-6d85282c82cc",
+      "name": "Scholar's Robe",
+      "description": "Simple robe with many pockets for notes and scrolls.",
+      "weight": 3,
+      "itemType": "Armor",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 20,
+        "pp": 0
+      }
+    },
+    {
+      "$type": "Armor",
+      "armorCategory": 3,
+      "baseAC": 0,
+      "dexterityCap": 0,
+      "hasDexterityCap": false,
+      "strengthRequirement": 0,
+      "hasStealthDisadvantage": false,
+      "don": "",
+      "doff": "",
+      "id": "ace51e62-ea84-4ee3-92ed-f6893e9f1d58",
+      "name": "Iron Buckler",
+      "description": "A small round shield that can be strapped to the forearm, freeing the hand when needed.",
+      "weight": 4,
+      "itemType": "Armor",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 10,
+        "pp": 0
+      }
+    },
+    {
+      "$type": "Armor",
+      "armorCategory": 0,
+      "baseAC": 11,
+      "dexterityCap": 2,
+      "hasDexterityCap": true,
+      "strengthRequirement": 0,
+      "hasStealthDisadvantage": false,
+      "don": "",
+      "doff": "",
+      "id": "e988b7c1-df29-4da6-9b0e-f7e4b103e8b6",
+      "name": "Worn Leather Jerkin",
+      "description": "Provides basic protection while remaining light and flexible for travel.",
+      "weight": 5,
+      "itemType": "Armor",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 20,
+        "pp": 0
+      }
+    },
+    {
+      "$type": "Armor",
+      "armorCategory": 1,
+      "baseAC": 13,
+      "dexterityCap": 2,
+      "hasDexterityCap": true,
+      "strengthRequirement": 0,
+      "hasStealthDisadvantage": false,
+      "don": "1 minute",
+      "doff": "1 minute",
+      "id": "e9d07629-988a-4cf4-a223-04f61f96a3fb",
+      "name": "Reinforced Chain Vest",
+      "description": "Interlinked steel rings layered over padded leather. Reliable protection without excessive weight.",
+      "weight": 25,
+      "itemType": "Armor",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 40,
+        "pp": 0
+      }
+    },
+    {
+      "$type": "Item",
+      "id": "1ea0a90e-a346-4451-9b09-a01a87478165",
+      "name": "Researcher's Satchel",
+      "description": "Contains ink, quills, parchment, and a few notes on magical formulae.",
+      "weight": 5,
+      "itemType": "Item",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 15,
+        "pp": 0
+      }
+    },
+    {
+      "$type": "Item",
+      "id": "2acb6ffe-d82d-46a8-8730-5372690ffb61",
+      "name": "Notebook of Endless Thoughts",
+      "description": "Leather-bound notebook filled with blank pages for jotting down ideas.",
+      "weight": 2,
+      "itemType": "Item",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 15,
+        "pp": 0
+      }
+    },
+    {
+      "$type": "Item",
+      "id": "88e48fff-2dae-48b1-a504-b0d7ab49647a",
+      "name": "Quill of Insight",
+      "description": "A fine quill said to help one focus thoughts when writing or studying.",
+      "weight": 1,
+      "itemType": "Item",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 10,
+        "pp": 0
+      }
+    },
+    {
+      "$type": "Item",
+      "id": "c890a252-f022-4afe-9aa0-e60dea4fe3c6",
+      "name": "Traveler's Satchel",
+      "description": "Holds rations, maps, and other essentials for long journeys.",
+      "weight": 5,
+      "itemType": "Item",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 15,
+        "pp": 0
+      }
+    },
+    {
+      "$type": "Item",
+      "id": "d7e16a33-7940-465e-ac03-2585704358de",
+      "name": "Flint and Tinder",
+      "description": "Essential for starting fires in the wilderness.",
+      "weight": 1,
+      "itemType": "Item",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 5,
+        "pp": 0
+      }
+    },
+    {
+      "$type": "Weapon",
+      "weaponCategory": 0,
+      "numberOfDice": 1,
+      "numberOfSides": 6,
+      "damageType": "Bludgeoning",
+      "weaponPropertyIds": [],
+      "weaponMasteryId": null,
+      "id": "16b86cd4-3945-47ef-8f88-f6c6e62b5ed0",
+      "name": "Arcane Focus Staff",
+      "description": "A polished wooden staff carved with runes, used both as walking aid and conduit for magic.",
+      "weight": 4,
+      "itemType": "Weapon",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 25,
+        "pp": 0
+      }
+    },
+    {
+      "$type": "Weapon",
+      "weaponCategory": 0,
+      "numberOfDice": 1,
+      "numberOfSides": 4,
+      "damageType": "Bludgeoning",
+      "weaponPropertyIds": [],
+      "weaponMasteryId": null,
+      "id": "43f149ef-7822-45bb-b6d9-aac4a48b34aa",
+      "name": "Wooden Walking Staff",
+      "description": "A plain staff used for walking or defending oneself if needed.",
+      "weight": 4,
+      "itemType": "Weapon",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 5,
+        "pp": 0
+      }
+    },
+    {
+      "$type": "Weapon",
+      "weaponCategory": 0,
+      "numberOfDice": 1,
+      "numberOfSides": 6,
+      "damageType": "Slashing",
+      "weaponPropertyIds": [],
+      "weaponMasteryId": null,
+      "id": "68fde9b9-8960-452e-88db-3354e8d6340e",
+      "name": "Traveler's Short Sword",
+      "description": "A versatile weapon, useful for both defense and small game hunting.",
+      "weight": 2,
+      "itemType": "Weapon",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 10,
+        "pp": 0
+      }
+    },
+    {
+      "$type": "Weapon",
+      "weaponCategory": 1,
+      "numberOfDice": 1,
+      "numberOfSides": 8,
+      "damageType": "Slashing",
+      "weaponPropertyIds": [],
+      "weaponMasteryId": null,
+      "id": "ce354ba9-3e38-4e87-9a55-661e140a03ab",
+      "name": "Steel Longsword",
+      "description": "A well-balanced blade favored by disciplined soldiers.",
+      "weight": 3,
+      "itemType": "Weapon",
+      "worth": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 0,
+        "gp": 25,
+        "pp": 0
+      }
+    }
+  ],
+  "schools": [],
+  "speciesDefinitions": [
+    {
+      "id": "5cc61ce8-3466-4f06-b6bb-1b66d1a02f61",
+      "name": "Aetherborn",
+      "description": "Aetherborn are ephemeral beings formed of condensed magical energy and fading memories. Their forms shimmer with faint light, and their voices carry an otherworldly resonance.",
+      "type": "Elemental",
+      "speed": 30,
+      "sizes": [
+        "Medium"
+      ],
+      "featDefinitionIds": [
+        "9e2908a8-b62e-4259-8651-7af458e0690a"
+      ],
+      "lineageDefinitions": [
+        {
+          "id": "9dae1e06-bc61-4310-94cd-20f32ae25b67",
+          "name": "Luminar",
+          "description": "Luminar Aetherborn radiate light and warmth, their essence stable and benevolent.",
+          "featDefinitionIds": [
+            "c3c9a1a8-86a9-4a47-8435-1cb8e1e9d7cd"
+          ]
+        },
+        {
+          "id": "ef767b2d-df29-4c6d-853b-2a4093ba713a",
+          "name": "Umbral",
+          "description": "The Umbral are born from fading energy and shadow, embodying entropy and silence.",
+          "featDefinitionIds": [
+            "7f537547-c801-4cfc-a31c-781337900579"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eb9d53e7-31b7-4ff5-95d4-3cf6bc1a3aa6",
+      "name": "Stoneborn",
+      "description": "Forged by the slow patience of the mountains, Stoneborn are sturdy beings with skin like granite and hearts that beat in rhythm with the earth itself. They value endurance, tradition, and the slow but unstoppable progress of time.",
+      "type": "Humanoid",
+      "speed": 25,
+      "sizes": [
+        "Medium"
+      ],
+      "featDefinitionIds": [
+        "ba8252f9-3c65-4ed0-ac43-3bbd1d0ab4ed"
+      ],
+      "lineageDefinitions": [
+        {
+          "id": "3e0377e9-4df8-4dd4-9dfa-71a3ef1a8031",
+          "name": "Granitekin",
+          "description": "Pale, dense, and seemingly immovable, Granitekin are known for withstanding punishment that would crumble lesser beings.",
+          "featDefinitionIds": [
+            "e10b5bb9-2e3e-4368-b67a-e677d1e797fb"
+          ]
+        },
+        {
+          "id": "cfd5d348-9889-4873-9172-f90887ac1546",
+          "name": "Basaltblood",
+          "description": "Basaltbloods are darker-skinned Stoneborn who channel their inner pressure into explosive bursts of might when under duress.",
+          "featDefinitionIds": [
+            "2aaa8924-de28-4b4c-83b2-e91fc72c08af"
+          ]
+        }
+      ]
+    }
+  ],
+  "spells": []
+}

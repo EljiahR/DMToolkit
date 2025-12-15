@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:dm_toolkit/models/dm_toolkit/collections/startup_data.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
@@ -31,5 +32,20 @@ class DMToolkitViewModel extends ChangeNotifier{
     }
 
     notifyListeners();
+  }
+
+  Future<void> loadStartupDataFromJson() async {
+    try {
+      final String response = await rootBundle.loadString("assets/dm_seed_data.json");
+      data.importFromJson(jsonDecode(response));
+    } on FlutterError catch (e) {
+      log('Error loading .json:', error: e);
+    } on FormatException catch (e) {
+      log('Error occured during json import.');
+      rethrow;
+    } catch (e) {
+      log('Unexpected error has occured:', error: e);
+    }
+    
   }
 }
