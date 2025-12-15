@@ -3,6 +3,7 @@ import 'package:provider_test/provider_test.dart';
 import 'package:dm_toolkit/view_models/dm_toolkit_view_model.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   test('Test DMToolkit able to retrieve from seed data json file.', () async {
     final toolkit = DMToolkitViewModel();
 

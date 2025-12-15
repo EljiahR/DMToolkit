@@ -26,7 +26,7 @@ class Effect {
       return Effect(
         id: json['id'] as String, 
         title: json['title'] as String?,
-        description: json['desscription'] as String?,
+        description: json['description'] as String?,
         originType: json['originType'] as OriginType, 
         dataType: json['dataType'] as DataType, 
         data: json['data'] as Map<String, dynamic>

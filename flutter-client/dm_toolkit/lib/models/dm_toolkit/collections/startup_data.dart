@@ -54,7 +54,6 @@ class StartupData {
 
   void importFromJson(Map<String, dynamic> json) {
     try {
-      debugger();
       var abilityScoreDefinitionListJson = json['abilityScoreDefinitions'] as List;
       var abilityScoreDefinitions = abilityScoreDefinitionListJson
         .map((abilityScoreDefinitionJson) => AbilityScoreDefinition.fromJson(abilityScoreDefinitionJson))
