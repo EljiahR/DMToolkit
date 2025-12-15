@@ -27,12 +27,12 @@ class SpeciesDefinition {
     try {
       var sizes = jsonListToPrimitive<String>(json['sizes']);
       
-      var featDefinitionIds = jsonListToPrimitive(json['FeatDefinitionIds']);
+      var featDefinitionIds = jsonListToPrimitive<String>(json['featDefinitionIds']);
       var selectedFeatDefinitions = featDefinitions
-      .where((feat) => featDefinitionIds.contains(feat.id))
-      .toList();
+        .where((feat) => featDefinitionIds.contains(feat.id))
+        .toList();
 
-      var lineageDefinitionListJson = json['LineageDefinitions'] as List;
+      var lineageDefinitionListJson = json['lineageDefinitions'] as List;
       var lineageDefinitions = lineageDefinitionListJson
         .map((lineageDefinitionJson) => LineageDefinition.fromJson(lineageDefinitionJson, featDefinitions))
         .toList();

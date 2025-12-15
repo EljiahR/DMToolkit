@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:provider_test/provider_test.dart';
 import 'package:dm_toolkit/view_models/dm_toolkit_view_model.dart';
 
 void main() {

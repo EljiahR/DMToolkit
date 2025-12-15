@@ -87,7 +87,7 @@ class StartupData {
         })
         .toList();
 
-      var backgroundDefinitionListJson = ['backgroundDefinitions'] as List;
+      var backgroundDefinitionListJson = json['backgroundDefinitions'] as List;
       var backgroundDefinitions = backgroundDefinitionListJson
         .map((backgroundDefinitionJson) => BackgroundDefinition.fromJson(backgroundDefinitionJson, abilityScoreDefinitions, featDefinitions, skillDefinitions, itemDefinitionBases))
         .toList();

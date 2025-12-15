@@ -40,7 +40,7 @@ class ArmorDefinition extends ItemDefinitionBase {
         weight: json['weight'] as int, 
         itemType: json['itemType'] as String, 
         worth: worth, 
-        armorCategory: json['armorCategory'] as ArmorCategory, 
+        armorCategory: ArmorCategory.values[json['armorCategory'] as int], 
         baseAC: json['baseAC'] as int, 
         dexterityCap: json['dexterityCap'] as int, 
         hasDexterityCap: json['hasDexterityCap'] as bool, 

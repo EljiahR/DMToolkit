@@ -34,9 +34,13 @@ class WeaponDefinition extends ItemDefinitionBase {
       var weaponPropertyIds = weaponPropertyIdListJson
         .map((weaponPropertyIdJson) => weaponPropertyIdJson as String)
         .toList(); 
-      var weaponProperties = effects.where((effect) => weaponPropertyIds.contains(effect.id)).toList();
-      var weaponMasteryId = json['weaponMasteryId'] as String;
-      var weaponMastery = effects.firstWhereOrNull((effect) => effect.id == weaponMasteryId);
+
+      var weaponProperties = effects
+        .where((effect) => weaponPropertyIds.contains(effect.id))
+        .toList();
+        
+      var weaponMasteryId = json['weaponMasteryId'] as String?;
+      var weaponMastery =  weaponMasteryId != null ? effects.firstWhereOrNull((effect) => effect.id == weaponMasteryId) : null;
       
       return WeaponDefinition(
         id: json['id'] as String, 
@@ -45,7 +49,7 @@ class WeaponDefinition extends ItemDefinitionBase {
         weight: json['weight'] as int, 
         itemType: json['itemType'] as String, 
         worth: worth, 
-        weaponCategory: json['weaponCategory'] as WeaponCategory, 
+        weaponCategory: WeaponCategory.values[json['weaponCategory'] as int], 
         numberOfDice: json['numberOfDice'] as int, 
         numberOfSides: json['numberOfSides'] as int, 
         damageType: json['damageType'] as String, 

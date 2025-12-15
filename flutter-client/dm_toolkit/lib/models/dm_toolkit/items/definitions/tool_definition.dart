@@ -26,7 +26,7 @@ class ToolDefinition extends ItemDefinitionBase {
         weight: json['weight'] as int, 
         itemType: json['itemType'] as String, 
         worth: worth, 
-        toolCategory: json['toolCategory'] as ToolCategory
+        toolCategory: ToolCategory.values[json['toolCategory'] as int]
       );
     } catch (e) {
       throw FormatException('ToolDefinition model is invalid.', e);

@@ -144,14 +144,25 @@ class CharacterClassDefinition {
         })
         .toList();
 
-      var weaponProficiencies = jsonListToPrimitive<WeaponCategory>(json['weaponProficiencies']);
-      var extraWeaponProficiencies = jsonListToPrimitive<String>(json['eextraWeaponProficiencies']);
+      var weaponProficiencyListJson = json['weaponProficiencies'] as List;
+      var weaponProficiencies = weaponProficiencyListJson
+        .map((weaponProficiencyListJson) => WeaponCategory.values[weaponProficiencyListJson as int])
+        .toList();
+
+      var extraWeaponProficiencies = jsonListToPrimitive<String>(json['extraWeaponProficiencies']);
       
       var toolProficiencyId = json['toolProficiencyId'] as String?;
       var toolProficiency = toolProficiencyId != null ? itemDefinitionBases.firstWhere((item) => item.id == toolProficiencyId) : null;
 
-      var toolProficiencyCategories = jsonListToPrimitive<ToolCategory>(json['toolProficiencyCategories']);
-      var armorProficiencies = jsonListToPrimitive<ArmorCategory>(json['armorProficiencies']);
+      var toolProficiencyCategoryListJson = json['toolProficiencyCategories'] as List;
+      var toolProficiencyCategories = toolProficiencyCategoryListJson
+        .map((toolProficiencyCategoryJson) => ToolCategory.values[toolProficiencyCategoryJson as int])
+        .toList();
+
+      var armorProficiencyListJson = json['armorProficiencies'] as List;
+      var armorProficiencies = armorProficiencyListJson
+        .map((armorProficiencyJson) => ArmorCategory.values[armorProficiencyJson as int])
+        .toList();
 
       var startingEquipmentQuantityTableListJson = json['startingEquipmentQuantityTables'] as List;
       var startingEquipmentQuantityTables = startingEquipmentQuantityTableListJson
@@ -191,7 +202,10 @@ class CharacterClassDefinition {
       var classDieSides = jsonListToPrimitive<int>(json['classDieSides']);
       var weaponMasteries = jsonListToPrimitive<int>(json['weaponMasteries']);
       var classBonus = jsonListToPrimitive<int>(json['classBonus']);
-      var multiGetsArmorProficiency = jsonListToPrimitive<ArmorCategory>(json['multiGetsArmorProficiency']);
+      var multiGetsArmorProficiencyListJson = json['multiGetsArmorProficiency'] as List;
+      var multiGetsArmorProficiency = multiGetsArmorProficiencyListJson
+        .map((multiGetsArmorProficiencyJson) => ArmorCategory.values[multiGetsArmorProficiencyJson as int])
+        .toList();
 
       return CharacterClassDefinition(
         id: json['id'] as String, 
@@ -199,14 +213,14 @@ class CharacterClassDefinition {
         description: json['description'] as String, 
         primaryAbilityScoreDefinition: primaryAbilityScoreDefinition,
         alternativePrimaryAbilityScoreDefinition: alternativePrimaryAbilityScoreDefinition,
-        primaryAbilityScoreIsExclusive: json['primaryAbilityScoreIsExclusive'] as bool,
+        primaryAbilityScoreIsExclusive: json['primaryScoreIsExclusive'] as bool,
         hitDie: json['hitDie'] as int,
         savingThrowProficiencies: savingThrowProficiencies,
         skillProficiencies: skillProficiencies,
         numberOfSkillProficiencies: json['numberOfSkillProficiencies'] as int,
         weaponProficiencies: weaponProficiencies,
         extraWeaponProficiencies: extraWeaponProficiencies,
-        toolProficiency: toolProficiency as ToolDefinition,
+        toolProficiency: toolProficiency != null ? toolProficiency as ToolDefinition : null,
         toolProficiencyCategories: toolProficiencyCategories,
         numberOfToolProficiencies: json['numberOfToolProficiencies'] as int,
         armorProficiencies: armorProficiencies,
@@ -244,7 +258,7 @@ class CharacterClassDefinition {
         multiGetsArmorProficiency: multiGetsArmorProficiency,
         multiGetsSkillProficiency: json['multiGetsSkillProficiency'] as bool,
         multiGetsAToolProficiency: json['multiGetsAToolProficiency'] as bool,
-        multiToolProficiencyCategory: json['multiToolProficiencyCategory'] as ToolCategory,
+        multiToolProficiencyCategory: ToolCategory.values[json['multiToolProficiencyCategory'] as int],
         multiSpellSlotDenominator: json['multiSpellSlotDenominator'] as int
       );
     } catch (e) {

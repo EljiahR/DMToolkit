@@ -49,7 +49,7 @@ class BackgroundDefinition {
 
       var itemDefinitionBaseQuantityListJson = json['itemDefinitionBaseQuantities'] as List;
       var itemDefinitionBaseQuantities = itemDefinitionBaseQuantityListJson
-        .map((itemDefinitionBaseQuantityJson) => ItemDefinitionBaseQuantity.fromJson(json, itemDefinitionBases))
+        .map((itemDefinitionBaseQuantityJson) => ItemDefinitionBaseQuantity.fromJson(itemDefinitionBaseQuantityJson, itemDefinitionBases))
         .toList();
 
       return BackgroundDefinition(

@@ -27,8 +27,8 @@ class Effect {
         id: json['id'] as String, 
         title: json['title'] as String?,
         description: json['description'] as String?,
-        originType: json['originType'] as OriginType, 
-        dataType: json['dataType'] as DataType, 
+        originType: OriginType.values[json['originType'] as int], 
+        dataType: DataType.values[json['dataType'] as int], 
         data: json['data'] as Map<String, dynamic>
       );
     } catch (e) {
