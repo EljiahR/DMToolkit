@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dm_toolkit/pages/character_creation.dart';
 import 'package:dm_toolkit/pages/character_display.dart';
 import 'package:dm_toolkit/view_models/dm_toolkit_view_model.dart';
