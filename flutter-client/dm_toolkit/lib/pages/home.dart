@@ -78,6 +78,8 @@ class DataRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
+      spacing: 10.0,
       children: [
         ElevatedButton(
           onPressed: () {
@@ -87,7 +89,7 @@ class DataRow extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            log('Button pressed.');
+            context.read<DMToolkitViewModel>().loadStartupDataFromSeedDataJson();
           },
           child: Text('Data from .json'),
         ), 

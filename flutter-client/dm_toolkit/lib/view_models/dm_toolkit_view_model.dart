@@ -38,6 +38,7 @@ class DMToolkitViewModel extends ChangeNotifier{
     try {
       final String response = await rootBundle.loadString("assets/dm_seed_data.json");
       data.importFromJson(jsonDecode(response));
+      log('Data imported successfully.');
     } on FlutterError catch (e) {
       log('Error loading .json:', error: e);
     } on FormatException catch (e) {
