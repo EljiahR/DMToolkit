@@ -16,8 +16,13 @@ import 'package:dm_toolkit/models/dm_toolkit/instances/background_instance.dart'
 import 'package:dm_toolkit/models/dm_toolkit/instances/character_class_instance.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/condition_instance.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/species_instance.dart';
+import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.dart';
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_instance_base.dart';
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/worth.dart';
+import 'package:dm_toolkit/models/dm_toolkit/items/instances/armor_instance.dart';
+import 'package:dm_toolkit/models/dm_toolkit/items/instances/item_instance.dart';
+import 'package:dm_toolkit/models/dm_toolkit/items/instances/tool_instance.dart';
+import 'package:dm_toolkit/models/dm_toolkit/items/instances/weapon_instance.dart';
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/character_spell.dart';
 
 class Character {
@@ -69,7 +74,7 @@ class Character {
        characterSpells = characterSpells ?? [],
        conditionInstances = conditionInstances ?? [];
 
-  factory Character.fromJson(Map<String, dynamic> json, List<FeatDefinition> featDefinitions, List<Effect> effects, List<CharacterClassDefinition> characterClassDefinitions, List<SubclassDefinition> subclassDefinitions, List<AbilityScoreDefinition> abilityScoreDefinitions, List<BackgroundDefinition> backgroundDefinitions, List<SpeciesDefinition> speciesDefinitions, List<LineageDefinition> lineageDefinitions, List<SkillDefinition> skillDefinitions, List<Spell> spells, List<ConditionDefinition> conditionDefinitions) {
+  factory Character.fromJson(Map<String, dynamic> json, List<FeatDefinition> featDefinitions, List<Effect> effects, List<CharacterClassDefinition> characterClassDefinitions, List<SubclassDefinition> subclassDefinitions, List<AbilityScoreDefinition> abilityScoreDefinitions, List<BackgroundDefinition> backgroundDefinitions, List<SpeciesDefinition> speciesDefinitions, List<LineageDefinition> lineageDefinitions, List<SkillDefinition> skillDefinitions, List<Spell> spells, List<ConditionDefinition> conditionDefinitions, List<ItemDefinitionBase> itemDefinitionBases) {
     try {
       var primaryCharacterClassInstanceJson = json['primaryCharacterClassInstance'] as Map<String, dynamic>?;
       var primaryCharacterClassInstance = primaryCharacterClassInstanceJson != null ? CharacterClassInstance.fromJson(primaryCharacterClassInstanceJson, featDefinitions, effects, subclassDefinitions, characterClassDefinitions) : null;
@@ -94,8 +99,21 @@ class Character {
       var worthJson = json['coins'] as Map<String, dynamic>;
       var coins = Worth.fromJson(worthJson);
 
-      // INVENTORY
       var inventoryListJson = json['inventory'] as List;
+      var inventory = inventoryListJson
+        .map((itemBaseJson) {
+          switch ((itemBaseJson as Map<String, dynamic>)['itemType'] as String) {
+            case 'Weapon':
+              return WeaponInstance.fromJson(itemBaseJson, itemDefinitionBases);
+            case 'Armor':
+              return ArmorInstance.fromJson(itemBaseJson, itemDefinitionBases);
+            case 'Tool':
+              return ToolInstance.fromJson(itemBaseJson, itemDefinitionBases);
+            default:
+              return ItemInstance.fromJson(itemBaseJson, itemDefinitionBases);
+          }
+        })
+        .toList();
 
       var characterSpellListJson = json['characterSpells'] as List;
       var characterSpells = characterSpellListJson
@@ -125,7 +143,7 @@ class Character {
         bonds: json['bonds'] as String,
         flaws: json['flaws'] as String,
         coins: coins,
-        inventory: ,
+        inventory: inventory,
         characterSpells: characterSpells,
         conditionInstances:  conditionInstances 
       );
