@@ -15,22 +15,27 @@ class FeatInstance {
     required this.definition
   }) : effects = effects ?? [];
 
-  factory FeatInstance.fromJson(Map<String, dynamic> json, List<Effect> effects) {
+  factory FeatInstance.fromJson(Map<String, dynamic> json, List<Effect> effects, List<FeatDefinition> featDefinitions) {
     try {
       var effectIds = jsonListToPrimitive<String>(json['effectIds']);
       var selectedEffects = effects
         .where((effect) => effectIds.contains(effect.id))
         .toList();
+
+      var definitionId = json['definitionId'] as String;
+      var definition = featDefinitions
+        .firstWhere((feat) => feat.id == definitionId);
       
       return FeatInstance(
         id: json['id'] as String,
-        effects: selectedEffects
+        effects: selectedEffects,
         definition: definition
       );
     } on StateError catch(e) {
       log('DefinitionId did not match any current FeatDefinition ids.', error: e);
       rethrow;
     } catch (e) {
-    throw FormatException('FeatInstance model is invalid.', e);
+      throw FormatException('FeatInstance model is invalid.', e);
     }
+  }
 }
