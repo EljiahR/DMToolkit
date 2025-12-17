@@ -1,8 +1,8 @@
 import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
 
 class FeatDefinitionEffectGrouping {
-  int group;
-  List<Effect> effects;
+  final int group;
+  final List<Effect> effects;
 
   FeatDefinitionEffectGrouping({
     required this.group,

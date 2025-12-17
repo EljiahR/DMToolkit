@@ -9,13 +9,13 @@ import 'package:dm_toolkit/models/dm_toolkit/instances/feat_instance.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/subclass_instance.dart';
 
 class CharacterClassInstance {
-  String id;
-  int level;
-  List<int> hpRolls;
-  List<FeatInstance> featInstances;
-  SubclassInstance? subclassInstance;
-  bool selectedItemSet;
-  CharacterClassDefinition definition;
+  final String id;
+  final int level;
+  final List<int> hpRolls;
+  final List<FeatInstance> featInstances;
+  final SubclassInstance? subclassInstance;
+  final bool selectedItemSet;
+  final CharacterClassDefinition definition;
 
   CharacterClassInstance({
     this.id = '',

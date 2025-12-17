@@ -1,8 +1,8 @@
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.dart';
 
 class SpellItem {
-  ItemDefinitionBase itemDefinitionBase;
-  int amountRequired;
+  final ItemDefinitionBase itemDefinitionBase;
+  final int amountRequired;
 
   SpellItem({
     required this.itemDefinitionBase,

@@ -5,9 +5,9 @@ import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
 
 class FeatInstance {
-  String id;
-  List<Effect> effects;
-  FeatDefinition definition;
+  final String id;
+  final List<Effect> effects;
+  final FeatDefinition definition;
 
   FeatInstance({
     this.id = '',

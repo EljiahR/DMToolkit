@@ -2,10 +2,10 @@ import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/feat_group_level.dart';
 
 class SubclassDefinition {
-  String id;
-  String name;
-  String description;
-  List<FeatGroupLevel> featTables;
+  final String id;
+  final String name;
+  final String description;
+  final List<FeatGroupLevel> featTables;
 
   SubclassDefinition({
     required this.id,

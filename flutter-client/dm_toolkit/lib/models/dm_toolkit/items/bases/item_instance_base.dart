@@ -1,11 +1,11 @@
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.dart';
 
 abstract class ItemInstanceBase {
-  String id;
-  String itemType;
-  int quantity;
-  bool isEquipped;
-  ItemDefinitionBase definition;
+  final String id;
+  final String itemType;
+  final int quantity;
+  final bool isEquipped;
+  final ItemDefinitionBase definition;
 
   ItemInstanceBase({
     this.id = '',

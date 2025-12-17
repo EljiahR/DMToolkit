@@ -3,14 +3,14 @@ import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.da
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/worth.dart';
 
 class ArmorDefinition extends ItemDefinitionBase {
-  ArmorCategory armorCategory;
-  int baseAC;
-  int dexterityCap;
-  bool hasDexterityCap;
-  int strengthRequirement;
-  bool hasStealthDisadvantage;
-  String don;
-  String doff;
+  final ArmorCategory armorCategory;
+  final int baseAC;
+  final int dexterityCap;
+  final bool hasDexterityCap;
+  final int strengthRequirement;
+  final bool hasStealthDisadvantage;
+  final String don;
+  final String doff;
 
   ArmorDefinition({
     required super.id,

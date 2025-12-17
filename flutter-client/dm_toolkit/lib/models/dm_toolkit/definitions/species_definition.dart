@@ -3,14 +3,14 @@ import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/lineage_definition.dart';
 
 class SpeciesDefinition {
-  String id;
-  String name;
-  String description;
-  String type;
-  int speed;
-  List<String> sizes;
-  List<FeatDefinition> featDefinitions;
-  List<LineageDefinition> lineageDefinitions;
+  final String id;
+  final String name;
+  final String description;
+  final String type;
+  final int speed;
+  final List<String> sizes;
+  final List<FeatDefinition> featDefinitions;
+  final List<LineageDefinition> lineageDefinitions;
 
   SpeciesDefinition({
     required this.id,

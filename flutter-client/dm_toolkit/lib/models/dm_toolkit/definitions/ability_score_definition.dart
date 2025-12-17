@@ -1,11 +1,11 @@
 import 'package:dm_toolkit/models/dm_toolkit/definitions/skill_definition.dart';
 
 class AbilityScoreDefinition {
-  String id;
-  String name;
-  String abbreviation;
-  String description;
-  List<SkillDefinition> skillDefinitions;
+  final String id;
+  final String name;
+  final String abbreviation;
+  final String description;
+  final List<SkillDefinition> skillDefinitions;
 
   AbilityScoreDefinition({
     required this.id,

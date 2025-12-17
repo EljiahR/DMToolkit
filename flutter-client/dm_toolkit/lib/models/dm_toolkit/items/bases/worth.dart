@@ -1,9 +1,9 @@
 class Worth {
-  int cp;
-  int sp;
-  int ep;
-  int gp;
-  int pp;
+  final int cp;
+  final int sp;
+  final int ep;
+  final int gp;
+  final int pp;
 
   Worth({
     this.cp = 0,

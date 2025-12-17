@@ -8,12 +8,12 @@ import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/feat_instance.dart';
 
 class BackgroundInstance {
-  String id;
-  AbilityScoreDefinition? abilityScoreDefinitionPlusTwo;
-  AbilityScoreDefinition? abililyScoreDefinitionPlusOne;
-  FeatInstance? featInstance;
-  bool selectedItemSet;
-  BackgroundDefinition definition;
+  final String id;
+  final AbilityScoreDefinition? abilityScoreDefinitionPlusTwo;
+  final AbilityScoreDefinition? abililyScoreDefinitionPlusOne;
+  final FeatInstance? featInstance;
+  final bool selectedItemSet;
+  final BackgroundDefinition definition;
 
   BackgroundInstance({
     this.id = '',

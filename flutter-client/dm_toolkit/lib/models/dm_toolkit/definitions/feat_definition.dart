@@ -2,10 +2,10 @@ import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/feat_definition_effect_grouping.dart';
 
 class FeatDefinition {
-  String id;
-  String name;
-  String description;
-  List<FeatDefinitionEffectGrouping> availableEffectTables;
+  final String id;
+  final String name;
+  final String description;
+  final List<FeatDefinitionEffectGrouping> availableEffectTables;
 
   FeatDefinition({
     required this.id,

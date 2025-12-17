@@ -4,12 +4,12 @@ import 'package:dm_toolkit/enums/data_type.dart';
 import 'package:dm_toolkit/enums/origin_type.dart';
 
 class Effect {
-  String id;
-  String? title;
-  String? description;
-  OriginType originType;
-  DataType dataType;
-  Map<String, dynamic> data;
+  final String id;
+  final String? title;
+  final String? description;
+  final OriginType originType;
+  final DataType dataType;
+  final Map<String, dynamic> data;
 
   Effect({
     required this.id,

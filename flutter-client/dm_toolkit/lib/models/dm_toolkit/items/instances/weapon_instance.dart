@@ -6,7 +6,7 @@ import 'package:dm_toolkit/models/dm_toolkit/items/definitions/weapon_definition
 
 class WeaponInstance extends ItemInstanceBase {
   @override
-  ItemDefinitionBase get definition => super.definition as WeaponDefinition;
+  WeaponDefinition get definition => super.definition as WeaponDefinition;
   
   WeaponInstance({
     super.id = '',

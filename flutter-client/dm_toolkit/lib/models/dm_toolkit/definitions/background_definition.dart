@@ -6,14 +6,14 @@ import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.da
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/item_definition_base_quantity.dart';
 
 class BackgroundDefinition {
-  String id;
-  String name;
-  String description;
-  List<AbilityScoreDefinition> abilityScoreDefinitions;
-  FeatDefinition? featDefinition;
-  List<SkillDefinition> skillDefinitions;
-  int startingGp;
-  List<ItemDefinitionBaseQuantity> itemDefinitionBaseQuantities;
+  final String id;
+  final String name;
+  final String description;
+  final List<AbilityScoreDefinition> abilityScoreDefinitions;
+  final FeatDefinition? featDefinition;
+  final List<SkillDefinition> skillDefinitions;
+  final int startingGp;
+  final List<ItemDefinitionBaseQuantity> itemDefinitionBaseQuantities;
 
   BackgroundDefinition({
     required this.id,

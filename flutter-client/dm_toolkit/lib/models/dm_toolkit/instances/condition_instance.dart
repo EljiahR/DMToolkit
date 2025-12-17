@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/condition_definition.dart';
 
 class ConditionInstance {
-  String id;
-  String remainingDuration;
-  ConditionDefinition definition;
+  final String id;
+  final String remainingDuration;
+  final ConditionDefinition definition;
 
   ConditionInstance({
     this.id = '',

@@ -5,11 +5,11 @@ import 'package:dm_toolkit/models/dm_toolkit/definitions/skill_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/skill_instance.dart';
 
 class AbilityScoreInstance {
-  String id;
-  int score;
-  bool isProficient;
-  List<SkillInstance> skillInstances;
-  AbilityScoreDefinition definition;
+  final String id;
+  final int score;
+  final bool isProficient;
+  final List<SkillInstance> skillInstances;
+  final AbilityScoreDefinition definition;
 
   AbilityScoreInstance({
     this.id = '',

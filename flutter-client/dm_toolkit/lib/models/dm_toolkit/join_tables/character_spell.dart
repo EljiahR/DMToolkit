@@ -1,8 +1,8 @@
 import 'package:dm_toolkit/models/dm_toolkit/entities/spell.dart';
 
 class CharacterSpell {
-  Spell spell;
-  bool isPrepared;
+  final Spell spell;
+  final bool isPrepared;
 
   CharacterSpell({
     required this.spell,

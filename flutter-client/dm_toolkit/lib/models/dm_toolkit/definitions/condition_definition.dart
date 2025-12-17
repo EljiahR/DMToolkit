@@ -1,12 +1,12 @@
 import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
 
 class ConditionDefinition {
-  String id;
-  String name;
-  String description;
-  bool isDebuff;
-  String duration;
-  List<Effect> effects;
+  final String id;
+  final String name;
+  final String description;
+  final bool isDebuff;
+  final String duration;
+  final List<Effect> effects;
 
   ConditionDefinition({
     required this.id,

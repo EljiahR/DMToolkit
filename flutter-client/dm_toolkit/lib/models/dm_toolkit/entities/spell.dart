@@ -6,20 +6,20 @@ import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.da
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/spell_item.dart';
 
 class Spell {
-  String id;
-  String name;
-  int level;
-  School school;
-  List<CharacterClassDefinition> characterClassDefinitions;
-  String castingTime;
-  String range;
-  bool verbalRequired;
-  bool somaticRequired;
-  bool materialsRequired;
-  List<SpellItem> materialRequirements;
-  String duration;
-  String description;
-  List<Effect> effects;
+  final String id;
+  final String name;
+  final int level;
+  final School school;
+  final List<CharacterClassDefinition> characterClassDefinitions;
+  final String castingTime;
+  final String range;
+  final bool verbalRequired;
+  final bool somaticRequired;
+  final bool materialsRequired;
+  final List<SpellItem> materialRequirements;
+  final String duration;
+  final String description;
+  final List<Effect> effects;
 
   Spell({
     required this.id,

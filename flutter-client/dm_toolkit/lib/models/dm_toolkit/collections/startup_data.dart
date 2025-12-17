@@ -17,16 +17,16 @@ import 'package:dm_toolkit/models/dm_toolkit/items/definitions/tool_definition.d
 import 'package:dm_toolkit/models/dm_toolkit/items/definitions/weapon_definition.dart';
 
 class StartupData {
-  List<AbilityScoreDefinition> abilityScoreDefinitions;
-  List<BackgroundDefinition> backgroundDefinitions;
-  List<CharacterClassDefinition> characterClassDefinitions;
-  List<ConditionDefinition> conditionDefinitions;
-  List<Effect> effects;
-  List<FeatDefinition> featDefinitions;
-  List<ItemDefinitionBase> itemDefinitionBases;
-  List<School> schools;
-  List<SpeciesDefinition> speciesDefinitions;
-  List<Spell> spells;
+  final List<AbilityScoreDefinition> abilityScoreDefinitions;
+  final List<BackgroundDefinition> backgroundDefinitions;
+  final List<CharacterClassDefinition> characterClassDefinitions;
+  final List<ConditionDefinition> conditionDefinitions;
+  final List<Effect> effects;
+  final List<FeatDefinition> featDefinitions;
+  final List<ItemDefinitionBase> itemDefinitionBases;
+  final List<School> schools;
+  final List<SpeciesDefinition> speciesDefinitions;
+  final List<Spell> spells;
 
   static const List<AbilityScoreDefinition> defaultAbilityScoreDefinitions = [];
   static const List<BackgroundDefinition> defaultBackgroundDefinitions = [];
@@ -118,16 +118,16 @@ class StartupData {
         .toList();
       
       
-      this.abilityScoreDefinitions = abilityScoreDefinitions;
-      this.backgroundDefinitions = backgroundDefinitions; 
-      this.characterClassDefinitions = characterClassDefinitions; 
-      this.conditionDefinitions = conditionDefinitions; 
-      this.effects = effects; 
-      this.featDefinitions = featDefinitions; 
-      this.itemDefinitionBases = itemDefinitionBases; 
-      this.schools = schools; 
-      this.speciesDefinitions = speciesDefinitions; 
-      this.spells = spells;
+      this.abilityScoreDefinitions.addAll(abilityScoreDefinitions);
+      this.backgroundDefinitions.addAll(backgroundDefinitions); 
+      this.characterClassDefinitions.addAll(characterClassDefinitions); 
+      this.conditionDefinitions.addAll(conditionDefinitions); 
+      this.effects.addAll(effects); 
+      this.featDefinitions.addAll(featDefinitions); 
+      this.itemDefinitionBases.addAll(itemDefinitionBases); 
+      this.schools.addAll(schools); 
+      this.speciesDefinitions.addAll(speciesDefinitions); 
+      this.spells.addAll(spells);
       
     } on FormatException catch (e) {
       log('Error occured during StartupData json parse.', error: e);

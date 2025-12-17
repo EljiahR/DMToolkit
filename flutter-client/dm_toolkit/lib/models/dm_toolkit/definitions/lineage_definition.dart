@@ -2,10 +2,10 @@ import 'package:dm_toolkit/helpers/json_list_to_primitive.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 
 class LineageDefinition {
-  String id;
-  String name;
-  String description;
-  List<FeatDefinition> featDefinitions;
+  final String id;
+  final String name;
+  final String description;
+  final List<FeatDefinition> featDefinitions;
 
   LineageDefinition({
     required this.id,

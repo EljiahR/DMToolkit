@@ -5,12 +5,12 @@ import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.da
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/worth.dart';
 
 class WeaponDefinition extends ItemDefinitionBase {
-  WeaponCategory weaponCategory;
-  int numberOfDice;
-  int numberOfSides;
-  String damageType;
-  List<Effect> weaponProperties;
-  Effect? weaponMastery;
+  final WeaponCategory weaponCategory;
+  final int numberOfDice;
+  final int numberOfSides;
+  final String damageType;
+  final List<Effect> weaponProperties;
+  final Effect? weaponMastery;
 
   WeaponDefinition({
     required super.id,

@@ -6,7 +6,7 @@ import 'package:dm_toolkit/models/dm_toolkit/items/definitions/armor_definition.
 
 class ArmorInstance extends ItemInstanceBase {
   @override
-  ItemDefinitionBase get definition => super.definition as ArmorDefinition;
+  ArmorDefinition get definition => super.definition as ArmorDefinition;
   
   ArmorInstance({
     super.id = '',

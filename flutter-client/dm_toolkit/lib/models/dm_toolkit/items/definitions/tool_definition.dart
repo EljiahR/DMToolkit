@@ -3,7 +3,7 @@ import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.da
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/worth.dart';
 
 class ToolDefinition extends ItemDefinitionBase {
-  ToolCategory toolCategory;
+  final ToolCategory toolCategory;
 
   ToolDefinition({
     required super.id,

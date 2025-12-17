@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/skill_definition.dart';
 
 class SkillInstance {
-  String id;
-  bool isProficient;
-  SkillDefinition definition;
+  final String id;
+  final bool isProficient;
+  final SkillDefinition definition;
 
   SkillInstance({
     this.id = '',

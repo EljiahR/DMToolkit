@@ -1,8 +1,8 @@
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.dart';
 
 class ItemDefinitionBaseQuantity {
-  ItemDefinitionBase itemDefinitionBase;
-  int quantity;
+  final ItemDefinitionBase itemDefinitionBase;
+  final int quantity;
 
   ItemDefinitionBaseQuantity({
     required this.itemDefinitionBase,

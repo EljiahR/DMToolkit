@@ -6,9 +6,9 @@ import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/feat_instance.dart';
 
 class SubclassInstance {
-  String id;
-  List<FeatInstance> featInstances;
-  SubclassDefinition definition;
+  final String id;
+  final List<FeatInstance> featInstances;
+  final SubclassDefinition definition;
 
   SubclassInstance({
     this.id = '',

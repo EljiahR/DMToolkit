@@ -1,9 +1,9 @@
 import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 
 class FeatGroupLevel {
-  int level;
-  int group;
-  List<FeatDefinition> featDefinitions;
+  final int level;
+  final int group;
+  final List<FeatDefinition> featDefinitions;
 
   FeatGroupLevel({
     required this.level,

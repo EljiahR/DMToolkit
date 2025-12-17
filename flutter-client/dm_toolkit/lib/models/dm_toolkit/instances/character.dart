@@ -26,26 +26,26 @@ import 'package:dm_toolkit/models/dm_toolkit/items/instances/weapon_instance.dar
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/character_spell.dart';
 
 class Character {
-  String id;
-  String name;
-  String alignment;
-  int hp;
-  int tempHp;
-  CharacterClassInstance? primaryCharacterClassInstance;
-  CharacterClassInstance? secondaryCharacterClassInstance;
-  CharacterClassInstance? tertiaryCharacterClassInstance;
-  BackgroundInstance? backgroundInstance;
-  SpeciesInstance? speciesInstance;
-  List<AbilityScoreInstance> scoreInstances;
-  String physicalDescription;
-  String personality;
-  String ideals;
-  String bonds;
-  String flaws;
-  Worth coins;
-  List<ItemInstanceBase> inventory;
-  List<CharacterSpell> characterSpells;
-  List<ConditionInstance> conditionInstances;
+  final String id;
+  final String name;
+  final String alignment;
+  final int hp;
+  final int tempHp;
+  final CharacterClassInstance? primaryCharacterClassInstance;
+  final CharacterClassInstance? secondaryCharacterClassInstance;
+  final CharacterClassInstance? tertiaryCharacterClassInstance;
+  final BackgroundInstance? backgroundInstance;
+  final SpeciesInstance? speciesInstance;
+  final List<AbilityScoreInstance> scoreInstances;
+  final String physicalDescription;
+  final String personality;
+  final String ideals;
+  final String bonds;
+  final String flaws;
+  final Worth coins;
+  final List<ItemInstanceBase> inventory;
+  final List<CharacterSpell> characterSpells;
+  final List<ConditionInstance> conditionInstances;
 
   Character({
     this.id = '',

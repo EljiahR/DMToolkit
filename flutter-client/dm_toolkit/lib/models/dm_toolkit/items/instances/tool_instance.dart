@@ -6,7 +6,7 @@ import 'package:dm_toolkit/models/dm_toolkit/items/definitions/tool_definition.d
 
 class ToolInstance extends ItemInstanceBase {
   @override
-  ItemDefinitionBase get definition => super.definition as ToolDefinition;
+  ToolDefinition get definition => super.definition as ToolDefinition;
   
   ToolInstance({
     super.id = '',

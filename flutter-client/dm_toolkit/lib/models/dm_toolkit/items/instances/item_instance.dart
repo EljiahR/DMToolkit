@@ -6,7 +6,7 @@ import 'package:dm_toolkit/models/dm_toolkit/items/definitions/item_definition.d
 
 class ItemInstance extends ItemInstanceBase {
   @override
-  ItemDefinitionBase get definition => super.definition as ItemDefinition;
+  ItemDefinition get definition => super.definition as ItemDefinition;
   
   ItemInstance({
     super.id = '',

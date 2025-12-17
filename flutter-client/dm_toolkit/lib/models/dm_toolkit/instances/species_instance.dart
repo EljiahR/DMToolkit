@@ -8,11 +8,11 @@ import 'package:dm_toolkit/models/dm_toolkit/instances/feat_instance.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/lineage_instance.dart';
 
 class SpeciesInstance {
-  String id;
-  String size;
-  LineageInstance? lineageInstance;
-  List<FeatInstance> featInstances;
-  SpeciesDefinition definition;
+  final String id;
+  final String size;
+  final LineageInstance? lineageInstance;
+  final List<FeatInstance> featInstances;
+  final SpeciesDefinition definition;
 
   SpeciesInstance({
     this.id ='',
