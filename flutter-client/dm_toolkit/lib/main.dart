@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dm_toolkit/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future main() async {
   try {
@@ -11,7 +12,9 @@ Future main() async {
   } catch (e) {
     log('.env file was not found');
   }
-  runApp(const MyApp());
+  runApp(
+    ProviderScope(child: MyApp())
+  );
 }
 
 class MyApp extends StatelessWidget {

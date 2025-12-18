@@ -7,10 +7,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'dm_toolkit_notifier.g.dart';
+part 'dm_toolkit.g.dart';
 
 @riverpod
-class DMToolkitNotifier extends _$DMToolkitNotifier {
+class DMToolkit extends _$DMToolkit {
   @override
   StartupData build() {
     return StartupData();
@@ -48,3 +48,5 @@ class DMToolkitNotifier extends _$DMToolkitNotifier {
     }
   }
 }
+
+// class DMToolKitNotifierMock extends _$DMToolkitNotifier with Mock implements DMToolkitNotifier {}

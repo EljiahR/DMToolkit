@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'dm_toolkit_notifier.dart';
+part of 'dm_toolkit.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,12 +9,12 @@ part of 'dm_toolkit_notifier.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(DMToolkitNotifier)
-const dMToolkitProvider = DMToolkitNotifierProvider._();
+@ProviderFor(DMToolkit)
+const dMToolkitProvider = DMToolkitProvider._();
 
-final class DMToolkitNotifierProvider
-    extends $NotifierProvider<DMToolkitNotifier, StartupData> {
-  const DMToolkitNotifierProvider._()
+final class DMToolkitProvider
+    extends $NotifierProvider<DMToolkit, StartupData> {
+  const DMToolkitProvider._()
     : super(
         from: null,
         argument: null,
@@ -26,11 +26,11 @@ final class DMToolkitNotifierProvider
       );
 
   @override
-  String debugGetCreateSourceHash() => _$dMToolkitNotifierHash();
+  String debugGetCreateSourceHash() => _$dMToolkitHash();
 
   @$internal
   @override
-  DMToolkitNotifier create() => DMToolkitNotifier();
+  DMToolkit create() => DMToolkit();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(StartupData value) {
@@ -41,9 +41,9 @@ final class DMToolkitNotifierProvider
   }
 }
 
-String _$dMToolkitNotifierHash() => r'4c85c649897e9c0f31b673ce1c093acdec61045c';
+String _$dMToolkitHash() => r'0b3e9310d773cd28c429609f7755817cd7624e29';
 
-abstract class _$DMToolkitNotifier extends $Notifier<StartupData> {
+abstract class _$DMToolkit extends $Notifier<StartupData> {
   StartupData build();
   @$mustCallSuper
   @override
