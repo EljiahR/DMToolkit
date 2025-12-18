@@ -1,9 +1,8 @@
+import 'package:dm_toolkit/notifiers/dm_toolkit.dart';
 import 'package:dm_toolkit/pages/character_creation.dart';
 import 'package:dm_toolkit/pages/character_display.dart';
-import 'package:dm_toolkit/view_models/dm_toolkit_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({ super.key });
@@ -73,37 +72,43 @@ class DataRow extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      spacing: 10.0,
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            ref.watch(provider);
-          }, 
-          child: Text('fetchStartupData()')
-        ),
-        ElevatedButton(
-          onPressed: () {
-            context.read<DMToolkitViewModel>().loadStartupDataFromSeedDataJson();
-          },
-          child: Text('Data from .json'),
-        ), 
-      ],
+    final asyncData = ref.watch(dMToolkitProvider);
+
+    return asyncData.when(
+      data: (data) => Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 10.0,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              ref.read(dMToolkitProvider.notifier).fetchStartupData();
+            }, 
+            child: Text('fetchStartupData()')
+          ),
+          ElevatedButton(
+            onPressed: () {
+              ref.read(dMToolkitProvider.notifier).loadStartupDataFromSeedDataJson();
+            }, 
+            child: Text('Load from json')
+          )
+        ],
+      ), 
+      error: (err, stack) => Text('Error occured.'), 
+      loading: () => CircularProgressIndicator()
     );
   }
 }
 
-class ErrorMessage extends StatelessWidget {
+class ErrorMessage extends ConsumerWidget {
   const ErrorMessage({
     super.key
   });
 
   @override
-  Widget build(BuildContext context) {
-    final errorMessage = context.watch<DMToolkitViewModel>().errorMessage;
-    final displayText = errorMessage ?? 'No problem.';
+  Widget build(BuildContext context, WidgetRef ref) {
+    final definitionCount = ref.watch(dMToolkitProvider).value?.abilityScoreDefinitions.length ?? 0;
+    final hasSome = definitionCount > 0;
 
-    return Text(displayText);
+    return Text(hasSome ? 'got data' : 'no data');
   }
 }

@@ -13,7 +13,7 @@ part of 'dm_toolkit.dart';
 const dMToolkitProvider = DMToolkitProvider._();
 
 final class DMToolkitProvider
-    extends $NotifierProvider<DMToolkit, StartupData> {
+    extends $AsyncNotifierProvider<DMToolkit, StartupData> {
   const DMToolkitProvider._()
     : super(
         from: null,
@@ -31,30 +31,22 @@ final class DMToolkitProvider
   @$internal
   @override
   DMToolkit create() => DMToolkit();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(StartupData value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<StartupData>(value),
-    );
-  }
 }
 
-String _$dMToolkitHash() => r'0b3e9310d773cd28c429609f7755817cd7624e29';
+String _$dMToolkitHash() => r'd9145453ed410759f934a234b33af3b7012285cb';
 
-abstract class _$DMToolkit extends $Notifier<StartupData> {
-  StartupData build();
+abstract class _$DMToolkit extends $AsyncNotifier<StartupData> {
+  FutureOr<StartupData> build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<StartupData, StartupData>;
+    final ref = this.ref as $Ref<AsyncValue<StartupData>, StartupData>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<StartupData, StartupData>,
-              StartupData,
+              AnyNotifier<AsyncValue<StartupData>, StartupData>,
+              AsyncValue<StartupData>,
               Object?,
               Object?
             >;
