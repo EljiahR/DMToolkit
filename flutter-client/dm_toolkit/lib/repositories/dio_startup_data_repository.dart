@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:dm_toolkit/models/dm_toolkit/collections/startup_data.dart';
 import 'package:dm_toolkit/repositories/abstracts/startup_data_repository.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DioStartupDataRepository implements StartupDataRepository {
   final Dio dio;
@@ -13,7 +14,7 @@ class DioStartupDataRepository implements StartupDataRepository {
   });
 
   @override
-  Future<StartupData?> getStartupData() async{
+  Future<StartupData?> fetchStartupData() async{
     try {
       final url = dotenv.env['SERVER_URL'];
       if (url == null) {
@@ -38,3 +39,7 @@ class DioStartupDataRepository implements StartupDataRepository {
     return null;
   }
 }
+
+final dioStartupDataRepositoryProvider = Provider<StartupDataRepository>((ref) {
+  return DioStartupDataRepository(dio: Dio());
+});

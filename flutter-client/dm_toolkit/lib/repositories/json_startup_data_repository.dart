@@ -5,10 +5,11 @@ import 'package:dm_toolkit/models/dm_toolkit/collections/startup_data.dart';
 import 'package:dm_toolkit/repositories/abstracts/startup_data_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class JsonStartupDataRepository implements StartupDataRepository {
   @override
-  Future<StartupData?> getStartupData() async {
+  Future<StartupData?> fetchStartupData() async {
     try {
       final String response = await rootBundle.loadString("assets/dm_seed_data.json");
       final data = StartupData.fromJson(jsonDecode(response) as Map<String, dynamic>);
@@ -26,3 +27,7 @@ class JsonStartupDataRepository implements StartupDataRepository {
     return null;
   }
 }
+
+final jsonStartupDataRepositoryProvider = Provider<StartupDataRepository>((ref) {
+  return JsonStartupDataRepository();
+});
