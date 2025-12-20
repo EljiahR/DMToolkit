@@ -7,9 +7,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class JsonStartupDataRepository implements StartupDataRepository {
+  @override
   Future<StartupData?> getStartupData() async {
     try {
-      
       final String response = await rootBundle.loadString("assets/dm_seed_data.json");
       final data = StartupData.fromJson(jsonDecode(response) as Map<String, dynamic>);
       log('Data imported successfully.');
@@ -22,5 +22,7 @@ class JsonStartupDataRepository implements StartupDataRepository {
     } catch (e) {
       log('Unexpected error has occured:', error: e);
     }
+
+    return null;
   }
 }
