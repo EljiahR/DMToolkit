@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dm_toolkit/models/dm_toolkit/collections/startup_data.dart';
 import 'package:dm_toolkit/repositories/dio_startup_data_repository.dart';
 import 'package:dm_toolkit/repositories/json_startup_data_repository.dart';
@@ -18,7 +16,18 @@ class StartupDataService {
     return data;
   }
 
-  Future<StartupData?> fetchStartupData() async {
+  Future<StartupData?> _fetchStartupDataJson() async {
+    return await ref.read(jsonStartupDataRepositoryProvider).fetchStartupData();
+  }
+
+  Future<StartupData?> fetchStartupData({bool forceJson = false}) async {
+    if (forceJson) {
+      return await _fetchStartupDataJson();
+    }
     return await _fetchStartupData();
   }
 }
+
+final startupDataServiceProvider = Provider<StartupDataService>((ref) {
+  return StartupDataService(ref);
+});

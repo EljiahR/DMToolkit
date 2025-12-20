@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'dm_toolkit.dart';
+part of 'startup_data_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,33 +9,34 @@ part of 'dm_toolkit.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(DMToolkit)
-const dMToolkitProvider = DMToolkitProvider._();
+@ProviderFor(StartupDataController)
+const startupDataControllerProvider = StartupDataControllerProvider._();
 
-final class DMToolkitProvider
-    extends $AsyncNotifierProvider<DMToolkit, StartupData> {
-  const DMToolkitProvider._()
+final class StartupDataControllerProvider
+    extends $AsyncNotifierProvider<StartupDataController, StartupData> {
+  const StartupDataControllerProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'dMToolkitProvider',
+        name: r'startupDataControllerProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$dMToolkitHash();
+  String debugGetCreateSourceHash() => _$startupDataControllerHash();
 
   @$internal
   @override
-  DMToolkit create() => DMToolkit();
+  StartupDataController create() => StartupDataController();
 }
 
-String _$dMToolkitHash() => r'd9145453ed410759f934a234b33af3b7012285cb';
+String _$startupDataControllerHash() =>
+    r'1a3a7fb35083e813b0231d9edef2b0006a51817c';
 
-abstract class _$DMToolkit extends $AsyncNotifier<StartupData> {
+abstract class _$StartupDataController extends $AsyncNotifier<StartupData> {
   FutureOr<StartupData> build();
   @$mustCallSuper
   @override

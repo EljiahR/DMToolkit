@@ -1,4 +1,4 @@
-import 'package:dm_toolkit/notifiers/dm_toolkit.dart';
+import 'package:dm_toolkit/controllers/startup_data_controller.dart';
 import 'package:dm_toolkit/pages/character_creation.dart';
 import 'package:dm_toolkit/pages/character_display.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +72,7 @@ class DataRow extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncData = ref.watch(dMToolkitProvider);
+    final asyncData = ref.watch(startupDataControllerProvider);
 
     return asyncData.when(
       data: (data) => Row(
@@ -81,13 +81,13 @@ class DataRow extends ConsumerWidget {
         children: [
           ElevatedButton(
             onPressed: () {
-              ref.read(dMToolkitProvider.notifier).fetchStartupData();
+              ref.read(startupDataControllerProvider.notifier).init();
             }, 
             child: Text('fetchStartupData()')
           ),
           ElevatedButton(
             onPressed: () {
-              ref.read(dMToolkitProvider.notifier).loadStartupDataFromSeedDataJson();
+              ref.read(startupDataControllerProvider.notifier).init(forceJson: true);
             }, 
             child: Text('Load from json')
           )
@@ -106,7 +106,7 @@ class ErrorMessage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final definitionCount = ref.watch(dMToolkitProvider).value?.abilityScoreDefinitions.length ?? 0;
+    final definitionCount = ref.watch(startupDataControllerProvider).requireValue.abilityScoreDefinitions.length;
     final hasSome = definitionCount > 0;
 
     return Text(hasSome ? 'got data' : 'no data');

@@ -7,11 +7,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DioStartupDataRepository implements StartupDataRepository {
-  final Dio dio;
-
   DioStartupDataRepository({
     required this.dio
   });
+  final Dio dio;
 
   @override
   Future<StartupData?> fetchStartupData() async{
