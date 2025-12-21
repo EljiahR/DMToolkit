@@ -157,4 +157,52 @@ class Character {
       throw FormatException('Character model is invalid.', e);
     }
   }
+
+  Character copyWith({
+    String? id,
+    String? name,
+    String? alignment,
+    int? hp,
+    int? tempHp,
+    CharacterClassInstance? primaryCharacterClassInstance,
+    CharacterClassInstance? secondaryCharacterClassInstance,
+    CharacterClassInstance? tertiaryCharacterClassInstance,
+    BackgroundInstance? backgroundInstance,
+    SpeciesInstance? speciesInstance,
+    List<AbilityScoreInstance>? scoreInstances,
+    String? physicalDescription,
+    String? personality,
+    String? ideals,
+    String? bonds,
+    String? flaws,
+    Worth? coins,
+    List<ItemInstanceBase>? inventory,
+    List<CharacterSpell>? characterSpells,
+    List<ConditionInstance>? conditionInstances,
+    bool deleteSecondaryClass = false,
+    bool deleteTertiaryClass = false
+  }) {
+    return Character(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      alignment: alignment ?? this.alignment,
+      hp: hp ?? this.hp,
+      tempHp: tempHp ?? this.tempHp,
+      primaryCharacterClassInstance: primaryCharacterClassInstance ?? this.primaryCharacterClassInstance,
+      secondaryCharacterClassInstance: deleteSecondaryClass ? null : secondaryCharacterClassInstance ?? this.secondaryCharacterClassInstance,
+      tertiaryCharacterClassInstance: deleteTertiaryClass ? null : tertiaryCharacterClassInstance ?? this.tertiaryCharacterClassInstance,
+      backgroundInstance: backgroundInstance ?? this.backgroundInstance,
+      speciesInstance: speciesInstance ?? this.speciesInstance,
+      scoreInstances: scoreInstances ?? this.scoreInstances,
+      physicalDescription: physicalDescription ?? this.physicalDescription,
+      personality: personality ?? this.personality,
+      ideals: ideals ?? this.ideals,
+      bonds: bonds ?? this.bonds,
+      flaws: flaws ?? this.flaws,
+      coins: coins ?? this.coins,
+      inventory: inventory ?? this.inventory,
+      characterSpells: characterSpells ?? this.characterSpells,
+      conditionInstances: conditionInstances ?? this.conditionInstances
+    );
+  }
 }
