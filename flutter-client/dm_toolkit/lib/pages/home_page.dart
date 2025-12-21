@@ -1,6 +1,6 @@
 import 'package:dm_toolkit/controllers/startup_data_controller.dart';
-import 'package:dm_toolkit/pages/character_creation.dart';
-import 'package:dm_toolkit/pages/character_display.dart';
+import 'package:dm_toolkit/pages/character_creation/character_creation_home_page.dart';
+import 'package:dm_toolkit/pages/character_display_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -44,7 +44,7 @@ class NavRow extends StatelessWidget {
           onPressed: () { 
             Navigator.of(context).push(
               MaterialPageRoute<void>(
-                builder: (context) => const CharacterCreation()
+                builder: (context) => const CharacterCreationHomePage()
               )
             );
           }, 

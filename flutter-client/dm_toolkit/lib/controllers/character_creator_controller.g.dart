@@ -14,7 +14,7 @@ const characterCreatorControllerProvider =
     CharacterCreatorControllerProvider._();
 
 final class CharacterCreatorControllerProvider
-    extends $AsyncNotifierProvider<CharacterCreatorController, Character> {
+    extends $AsyncNotifierProvider<CharacterCreatorController, Character?> {
   const CharacterCreatorControllerProvider._()
     : super(
         from: null,
@@ -35,20 +35,20 @@ final class CharacterCreatorControllerProvider
 }
 
 String _$characterCreatorControllerHash() =>
-    r'fe54be6195ad012aca0fa30dc1cb33fcf410aaec';
+    r'0221f0e553f842028d3eabc32167bc63a96b8f0d';
 
-abstract class _$CharacterCreatorController extends $AsyncNotifier<Character> {
-  FutureOr<Character> build();
+abstract class _$CharacterCreatorController extends $AsyncNotifier<Character?> {
+  FutureOr<Character?> build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<AsyncValue<Character>, Character>;
+    final ref = this.ref as $Ref<AsyncValue<Character?>, Character?>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<Character>, Character>,
-              AsyncValue<Character>,
+              AnyNotifier<AsyncValue<Character?>, Character?>,
+              AsyncValue<Character?>,
               Object?,
               Object?
             >;

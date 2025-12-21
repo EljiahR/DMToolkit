@@ -10,28 +10,28 @@ part 'character_creator_controller.g.dart';
 @riverpod
 class CharacterCreatorController extends _$CharacterCreatorController {
   @override
-  Future<Character> build() async {
-    return Character();
+  Future<Character?> build() async {
+    return null;
   }
 
   Future<void> setCharacterClass(CharacterClassDefinition definition) async {
     state = AsyncLoading();
     state = await AsyncValue.guard(() async {
-      return state.requireValue.changePrimaryCharacterClassDefinition(definition);
+      return state.requireValue?.changePrimaryCharacterClassDefinition(definition) ?? state.requireValue;
     });
   }
 
   Future<void> setCharacterBackground(BackgroundDefinition definition) async {
     state = AsyncLoading();
     state = await AsyncValue.guard(() async {
-      return state.requireValue.changeBackgroundDefinition(definition);
+      return state.requireValue?.changeBackgroundDefinition(definition) ?? state.requireValue;
     });
   }
 
   Future<void> setCharacterSpecies(SpeciesDefinition definition) async {
     state = AsyncLoading();
     state = await AsyncValue.guard(() async {
-      return state.requireValue.changeSpeciesDefinition(definition);
+      return state.requireValue?.changeSpeciesDefinition(definition) ?? state.requireValue;
     });
   }
 }
