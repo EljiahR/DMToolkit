@@ -35,13 +35,12 @@ class AbilityScoreDefinition {
     }
   }
 
-  AbilityScoreInstance generateBlankInstance({ String? id }) {
+  AbilityScoreInstance generateBlankInstance() {
     var skillInstances = skillDefinitions
       .map((skillDefinition) => skillDefinition.generateBlankInstance())
       .toList();
 
     return AbilityScoreInstance(
-      id: id ?? '',
       skillInstances: skillInstances,
       definition: this
     );

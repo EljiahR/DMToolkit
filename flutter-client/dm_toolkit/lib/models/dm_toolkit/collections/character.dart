@@ -205,7 +205,9 @@ class Character {
       conditionInstances: conditionInstances ?? this.conditionInstances
     );
   }
+}
 
+extension MutableCharacter on Character {
   Character changeBackgroundDefinition(BackgroundDefinition definition) {
     var newBackgroundInstance = definition.generateBlankInstance();
 
