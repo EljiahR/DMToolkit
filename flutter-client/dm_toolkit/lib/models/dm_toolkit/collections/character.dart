@@ -205,4 +205,22 @@ class Character {
       conditionInstances: conditionInstances ?? this.conditionInstances
     );
   }
+
+  Character changeBackgroundDefinition(BackgroundDefinition definition) {
+    var newBackgroundInstance = definition.generateBlankInstance();
+
+    return copyWith(backgroundInstance: newBackgroundInstance);
+  }
+
+  Character changePrimaryCharacterClassDefinition(CharacterClassDefinition definition) {
+    var newCharacterClassInstance = definition.generateBlankInstance();
+    
+    return copyWith(primaryCharacterClassInstance: newCharacterClassInstance);
+  }
+
+  Character changeSpeciesDefinition(SpeciesDefinition definition) {
+    var newSpeciesInstance = definition.generateBlankInstance();
+
+    return copyWith(speciesInstance: newSpeciesInstance);
+  }
 }
