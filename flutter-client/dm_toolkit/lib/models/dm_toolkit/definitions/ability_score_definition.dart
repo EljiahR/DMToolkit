@@ -1,4 +1,5 @@
 import 'package:dm_toolkit/models/dm_toolkit/definitions/skill_definition.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/ability_score_instance.dart';
 
 class AbilityScoreDefinition {
   final String id;
@@ -32,5 +33,16 @@ class AbilityScoreDefinition {
     } catch (e) {
       throw FormatException("AbilityScoreDefinition model invalid.", e);
     }
+  }
+
+  AbilityScoreInstance generateBlankInstance() {
+    var skillInstances = skillDefinitions
+      .map((skillDefinition) => skillDefinition.generateBlankInstance())
+      .toList();
+
+    return AbilityScoreInstance(
+      skillInstances: skillInstances,
+      definition: this
+    );
   }
 }

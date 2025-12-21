@@ -6,6 +6,7 @@ import 'package:dm_toolkit/models/dm_toolkit/definitions/ability_score_definitio
 import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/skill_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/subclass_definition.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/character_class_instance.dart';
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.dart';
 import 'package:dm_toolkit/models/dm_toolkit/items/definitions/tool_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/feat_group_level.dart';
@@ -264,5 +265,11 @@ class CharacterClassDefinition {
     } catch (e) {
       throw FormatException('CharacterClassDefinition model is invalid.', e);
     }
+  }
+
+  CharacterClassInstance generateBlankInstance() {
+    return CharacterClassInstance(
+      definition: this
+    );
   }
 }

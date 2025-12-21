@@ -1,4 +1,5 @@
 import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/feat_instance.dart';
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/feat_definition_effect_grouping.dart';
 
 class FeatDefinition {
@@ -30,5 +31,11 @@ class FeatDefinition {
     } catch (e) {
       throw FormatException('FeatDefinition model is invalid.', e);
     }
+  }
+
+  FeatInstance generateBlankInstance() {
+    return FeatInstance(
+      definition: this
+    );
   }
 }

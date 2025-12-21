@@ -1,5 +1,6 @@
 import 'package:dm_toolkit/helpers/json_list_to_primitive.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/lineage_instance.dart';
 
 class LineageDefinition {
   final String id;
@@ -28,5 +29,11 @@ class LineageDefinition {
     } catch (e) {
       throw FormatException('LineageDefinition model is invalid.', e);
     }
+  }
+
+  LineageInstance generateBlankInstance() {
+    return LineageInstance(
+      definition: this
+    );
   }
 }

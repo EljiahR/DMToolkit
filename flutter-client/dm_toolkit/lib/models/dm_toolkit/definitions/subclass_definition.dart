@@ -1,4 +1,5 @@
 import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/subclass_instance.dart';
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/feat_group_level.dart';
 
 class SubclassDefinition {
@@ -30,5 +31,11 @@ class SubclassDefinition {
     } catch (e) {
       throw FormatException('SubclassDefinition model is invalid.', e);
     } 
+  }
+
+  SubclassInstance generateBlankInstance() {
+    return SubclassInstance(
+      definition: this
+    );
   }
 }

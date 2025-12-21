@@ -1,4 +1,5 @@
 import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/condition_instance.dart';
 
 class ConditionDefinition {
   final String id;
@@ -33,6 +34,12 @@ class ConditionDefinition {
       isDebuff: json['isDebuff'] as bool, 
       duration: json['duration'] as String, 
       effects: effectList
+    );
+  }
+
+  ConditionInstance generateBlankInstance() {
+    return ConditionInstance(
+      definition: this
     );
   }
 }

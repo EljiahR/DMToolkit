@@ -1,3 +1,5 @@
+import 'package:dm_toolkit/models/dm_toolkit/instances/skill_instance.dart';
+
 class SkillDefinition {
   final String id;
   final String name;
@@ -19,5 +21,11 @@ class SkillDefinition {
     } catch (e) {
       throw FormatException("SkillDefinition model invalid.", e);
     }
+  }
+
+  SkillInstance generateBlankInstance() {
+    return SkillInstance(
+      definition: this
+    );
   }
 }

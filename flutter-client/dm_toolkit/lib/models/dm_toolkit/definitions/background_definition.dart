@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/ability_score_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/skill_definition.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/background_instance.dart';
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.dart';
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/item_definition_base_quantity.dart';
 
@@ -65,5 +66,11 @@ class BackgroundDefinition {
     } catch (e) {
       throw FormatException('BackgroundDefinition model is invalid.', e);
     }
+  }
+
+  BackgroundInstance generateBlankInstance() {
+    return BackgroundInstance(
+      definition: this
+    );
   }
 }

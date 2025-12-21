@@ -1,6 +1,7 @@
 import 'package:dm_toolkit/helpers/json_list_to_primitive.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/lineage_definition.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/species_instance.dart';
 
 class SpeciesDefinition {
   final String id;
@@ -50,5 +51,11 @@ class SpeciesDefinition {
     } catch (e) {
       throw FormatException('SpeciesDefinition model is invalid.', e);
     }
+  }
+
+  SpeciesInstance generateBlankInstance() {
+    return SpeciesInstance(
+      definition: this
+    );
   }
 }
