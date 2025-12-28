@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:dm_toolkit/models/dm_toolkit/collections/character.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/background_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/character_class_definition.dart';
@@ -14,10 +16,20 @@ class CharacterCreatorController extends _$CharacterCreatorController {
     return null;
   }
 
-  Future<void> setCharacterClass(CharacterClassDefinition definition) async {
+  Future<void> init() async {
+    log('Creating blank Character');
     state = AsyncLoading();
     state = await AsyncValue.guard(() async {
-      return state.requireValue?.changePrimaryCharacterClassDefinition(definition) ?? state.requireValue;
+      return Character();
+    });
+  }
+
+  Future<void> setCharacterClass(CharacterClassDefinition? definition) async {
+    state = AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      log('Setting new Character class');
+      log('State is null: ${state.requireValue == null}');
+      return definition != null ? state.requireValue?.changePrimaryCharacterClassDefinition(definition) ?? state.requireValue : null;
     });
   }
 

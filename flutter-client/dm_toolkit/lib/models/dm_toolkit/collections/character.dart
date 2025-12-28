@@ -216,6 +216,7 @@ extension MutableCharacter on Character {
 
   Character changePrimaryCharacterClassDefinition(CharacterClassDefinition definition) {
     var newCharacterClassInstance = definition.generateBlankInstance();
+    log('Character class to set to: ${newCharacterClassInstance.definition.name}');
     
     return copyWith(primaryCharacterClassInstance: newCharacterClassInstance);
   }

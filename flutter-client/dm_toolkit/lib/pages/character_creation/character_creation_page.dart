@@ -1,10 +1,15 @@
 import 'dart:developer';
 
+import 'package:dm_toolkit/controllers/character_creator_controller.dart';
 import 'package:dm_toolkit/pages/character_creation/character_creation_navigation_bar.dart';
+import 'package:dm_toolkit/pages/character_creation/create_character_class_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
+const creationPageSections = [
+  'Start',
+  'Class'
+];
 
 class CharacterCreationPage extends ConsumerStatefulWidget {
   const CharacterCreationPage({super.key});
@@ -14,6 +19,17 @@ class CharacterCreationPage extends ConsumerStatefulWidget {
 }
 
 class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    if (ref.read(characterCreatorControllerProvider).value == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(characterCreatorControllerProvider.notifier).init();
+      });
+    }
+  }
+  
   var selectedIndex = 0;
   
   void decreaseIndex() {
@@ -23,40 +39,49 @@ class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
         return;
       }
       selectedIndex -= 1;
-      log('Decrease from $selectedIndex');
+      log('Decrease to $selectedIndex');
     });
   }
 
   void increaseIndex() {
     setState(() {
       selectedIndex += 1;
-      log('Increase from $selectedIndex');
+      log('Increase to $selectedIndex');
     });
   }
-  
 
   @override
   Widget build(BuildContext context) {
+    final asyncData = ref.watch(characterCreatorControllerProvider);
     Widget page;
     switch (selectedIndex) {
       case 0:
         page = Placeholder();
       case 1: 
-        page = Placeholder();
+        page = CreateCharacterClassSection();
       default:
         throw UnimplementedError('no widget for selectedIndex $selectedIndex');
+    }
+
+    String titleText = 'Character Creation';
+    if (selectedIndex > 0) {
+      titleText += ' - ${creationPageSections[selectedIndex]}';
     }
     
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Character Creation'),),
+        title: Center(child: Text(titleText),),
       ),
-      body: page,
+      body: asyncData.when(
+        data: (data) => page, 
+        error: (error, stack) => Text(error.toString()), 
+        loading: () => const CircularProgressIndicator()
+      ),
       bottomNavigationBar: CharacterCreationNavigationBar(
         onBack: decreaseIndex, 
         onForward: increaseIndex,
-        onBackText: 'Stuff',
-        onForwardText: 'Stufff',
+        onBackText: selectedIndex > 0 ? creationPageSections[selectedIndex - 1] : 'Go Home',
+        onForwardText: selectedIndex < creationPageSections.length - 1 ? creationPageSections[selectedIndex + 1] : 'View Character',
       ),
     );
   }
