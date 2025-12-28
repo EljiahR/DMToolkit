@@ -106,8 +106,8 @@ class ErrorMessage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final definitionCount = ref.watch(startupDataControllerProvider).requireValue.abilityScoreDefinitions.length;
-    final hasSome = definitionCount > 0;
+    final definitionCount = ref.watch(startupDataControllerProvider).value?.abilityScoreDefinitions.length;
+    final hasSome = definitionCount != null && definitionCount > 0;
 
     return Text(hasSome ? 'got data' : 'no data');
   }

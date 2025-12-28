@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:dm_toolkit/pages/character_creation/character_creation_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,6 +15,24 @@ class CharacterCreationPage extends ConsumerStatefulWidget {
 
 class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
   var selectedIndex = 0;
+  
+  void decreaseIndex() {
+    setState(() {
+      if (selectedIndex == 0) {
+        Navigator.of(context).pop();
+        return;
+      }
+      selectedIndex -= 1;
+      log('Decrease from $selectedIndex');
+    });
+  }
+
+  void increaseIndex() {
+    setState(() {
+      selectedIndex += 1;
+      log('Increase from $selectedIndex');
+    });
+  }
   
 
   @override
@@ -31,24 +52,11 @@ class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
         title: Center(child: Text('Character Creation'),),
       ),
       body: page,
-      bottomNavigationBar: NavigationRail(
-        destinations: [
-          NavigationRailDestination(
-            icon: Icon(Icons.arrow_back), 
-            label: Text('Home Page')
-          ),
-          NavigationRailDestination(
-            icon: Icon(Icons.arrow_forward), 
-            label: Text('Next Page')
-          ),
-        ], 
-        selectedIndex: selectedIndex,
-        onDestinationSelected: (value) {
-          // This is gonna need changed to work right but not bad so far
-          setState(() {
-            selectedIndex = value;
-          });
-        },  
+      bottomNavigationBar: CharacterCreationNavigationBar(
+        onBack: decreaseIndex, 
+        onForward: increaseIndex,
+        onBackText: 'Stuff',
+        onForwardText: 'Stufff',
       ),
     );
   }
