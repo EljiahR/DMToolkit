@@ -26,6 +26,7 @@ export interface Character {
     coins: Worth;
     inventory: ItemInstanceBase[];
     characterSpells: CharacterSpell[];
+    conditionInstances: never[]; // FIX
 }
 
 export interface CharacterDto {
@@ -34,9 +35,9 @@ export interface CharacterDto {
     alignment: string;
     hp: number;
     tempHp: number;
-    primaryCharacterClassInstanceDto: CharacterClassInstanceDto | null;
-    secondaryCharacterClassInstanceDto: CharacterClassInstanceDto | null;
-    tertiaryCharacterClassInstanceDto: CharacterClassInstanceDto | null;
+    primaryCharacterClassInstance: CharacterClassInstanceDto | null;
+    secondaryCharacterClassInstance: CharacterClassInstanceDto | null;
+    tertiaryCharacterClassInstance: CharacterClassInstanceDto | null;
     backgroundInstance: BackgroundInstanceDto | null;
     speciesInstance: SpeciesInstanceDto | null;
     scoreInstances: AbilityScoreInstanceDto[];
@@ -48,4 +49,5 @@ export interface CharacterDto {
     coins: WorthDto;
     inventory: ItemInstanceBaseDto[];
     characterSpells: CharacterSpellDto[];
+    conditionInstances: never[]; // FIX
 }

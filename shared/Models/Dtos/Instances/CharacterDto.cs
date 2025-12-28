@@ -10,9 +10,9 @@ public class CharacterDto
     public string Alignment { get; set; } = string.Empty;
     public int Hp { get; set; } = 0;
     public int TempHp { get; set; } = 0;
-    public CharacterClassInstanceDto? PrimaryCharacterClassInstanceDto { get; set; } = new();
-    public CharacterClassInstanceDto? SecondaryCharacterClassInstanceDto { get; set; } = new();
-    public CharacterClassInstanceDto? TertiaryCharacterClassInstanceDto { get; set; } = new();
+    public CharacterClassInstanceDto? PrimaryCharacterClassInstance { get; set; } = new();
+    public CharacterClassInstanceDto? SecondaryCharacterClassInstance { get; set; } = new();
+    public CharacterClassInstanceDto? TertiaryCharacterClassInstance { get; set; } = new();
     public BackgroundInstanceDto? BackgroundInstance { get; set; } = new();
     public SpeciesInstanceDto? SpeciesInstance { get; set; } = new();
     public List<AbilityScoreInstanceDto> ScoreInstances { get; set; } = new();
@@ -24,5 +24,5 @@ public class CharacterDto
     public WorthDto Coins { get; set; } = new();
     public List<ItemInstanceBaseDto> Inventory { get; set; } = new();
     public List<CharacterSpellDto> CharacterSpells { get; set; } = new();
-    public List<ConditionInstanceDto> ConditionInstanceDtos { get; set; } = new();
+    public List<ConditionInstanceDto> ConditionInstances{ get; set; } = new();
 }
