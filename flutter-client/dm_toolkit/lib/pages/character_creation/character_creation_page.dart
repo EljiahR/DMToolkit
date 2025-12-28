@@ -1,8 +1,9 @@
 import 'dart:developer';
 
 import 'package:dm_toolkit/controllers/character_creator_controller.dart';
+import 'package:dm_toolkit/pages/character_creation/character_creation_character_class_section.dart';
+import 'package:dm_toolkit/pages/character_creation/character_creation_home_section.dart';
 import 'package:dm_toolkit/pages/character_creation/character_creation_navigation_bar.dart';
-import 'package:dm_toolkit/pages/character_creation/create_character_class_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,11 +24,9 @@ class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
   void initState() {
     super.initState();
 
-    if (ref.read(characterCreatorControllerProvider).value == null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.read(characterCreatorControllerProvider.notifier).init();
-      });
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(characterCreatorControllerProvider.notifier).initIfNull();
+    });
   }
   
   var selectedIndex = 0;
@@ -53,13 +52,18 @@ class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
   @override
   Widget build(BuildContext context) {
     final asyncData = ref.watch(characterCreatorControllerProvider);
+    
     Widget page;
+    bool canProceed;
     switch (selectedIndex) {
       case 0:
-        page = Placeholder();
+        page = CharacterCreationHomeSection();
+        canProceed = true;
       case 1: 
-        page = CreateCharacterClassSection();
+        page = CharacterCreationCharacterClassSection();
+        canProceed = asyncData.value?.primaryCharacterClassInstance != null;
       default:
+        canProceed = false;
         throw UnimplementedError('no widget for selectedIndex $selectedIndex');
     }
 
@@ -79,7 +83,7 @@ class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
       ),
       bottomNavigationBar: CharacterCreationNavigationBar(
         onBack: decreaseIndex, 
-        onForward: increaseIndex,
+        onForward: canProceed ? increaseIndex : null,
         onBackText: selectedIndex > 0 ? creationPageSections[selectedIndex - 1] : 'Go Home',
         onForwardText: selectedIndex < creationPageSections.length - 1 ? creationPageSections[selectedIndex + 1] : 'View Character',
       ),

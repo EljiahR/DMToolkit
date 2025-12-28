@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'startup_data_controller.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class StartupDataController extends _$StartupDataController {
   @override
   Future<StartupData> build() async {

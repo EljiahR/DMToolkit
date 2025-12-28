@@ -8,8 +8,8 @@ import 'package:dm_toolkit/widgets/nullable_definition_dropdown_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CreateCharacterClassSection extends ConsumerWidget {
-  const CreateCharacterClassSection({ super.key });
+class CharacterCreationCharacterClassSection extends ConsumerWidget {
+  const CharacterCreationCharacterClassSection({ super.key });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

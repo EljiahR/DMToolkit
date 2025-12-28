@@ -21,7 +21,7 @@ final class CharacterCreatorControllerProvider
         argument: null,
         retry: null,
         name: r'characterCreatorControllerProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -35,7 +35,7 @@ final class CharacterCreatorControllerProvider
 }
 
 String _$characterCreatorControllerHash() =>
-    r'0221f0e553f842028d3eabc32167bc63a96b8f0d';
+    r'a6ef15bb457709abbe5da2c80b4e392cd42887a6';
 
 abstract class _$CharacterCreatorController extends $AsyncNotifier<Character?> {
   FutureOr<Character?> build();

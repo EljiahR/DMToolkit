@@ -20,7 +20,7 @@ final class StartupDataControllerProvider
         argument: null,
         retry: null,
         name: r'startupDataControllerProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -34,7 +34,7 @@ final class StartupDataControllerProvider
 }
 
 String _$startupDataControllerHash() =>
-    r'1a3a7fb35083e813b0231d9edef2b0006a51817c';
+    r'bd1c227ad40d729026ccd4445b44665a9b53c98f';
 
 abstract class _$StartupDataController extends $AsyncNotifier<StartupData> {
   FutureOr<StartupData> build();

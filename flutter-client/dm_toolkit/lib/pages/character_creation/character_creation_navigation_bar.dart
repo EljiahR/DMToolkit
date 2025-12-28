@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class CharacterCreationNavigationBar extends StatelessWidget {
   const CharacterCreationNavigationBar({ 
     super.key, 
-    required this.onBack, 
-    required this.onForward,
+    this.onBack, 
+    this.onForward,
     required this.onBackText,
     required this.onForwardText
   });
   
-  final VoidCallback onBack;
-  final VoidCallback onForward;
+  final VoidCallback? onBack;
+  final VoidCallback? onForward;
   final String onBackText;
   final String onForwardText;
 

@@ -29,26 +29,32 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class NavRow extends StatelessWidget {
+class NavRow extends ConsumerWidget {
   const NavRow({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final scoreDefinitions = ref.watch(startupDataControllerProvider).value?.abilityScoreDefinitions;
+    final hasData = scoreDefinitions != null && scoreDefinitions.isNotEmpty;
+    
     return Row(
       mainAxisSize: MainAxisSize.min,
       spacing: 10.0,
       children: [
-        ElevatedButton(
-          onPressed: () { 
-            Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (context) => const CharacterCreationPage()
-              )
-            );
-          }, 
-          child: Text('Create a Character')
+        Tooltip(
+          message: hasData ? 'Create a Character' : 'Data is missing.',
+          child: ElevatedButton(
+            onPressed: !hasData ? null : () { 
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (context) => const CharacterCreationPage()
+                )
+              );
+            }, 
+            child: Text('Create a Character')
+          ),
         ),
         ElevatedButton(
           onPressed: () { 

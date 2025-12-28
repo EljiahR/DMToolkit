@@ -9,14 +9,18 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'character_creator_controller.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class CharacterCreatorController extends _$CharacterCreatorController {
   @override
   Future<Character?> build() async {
     return null;
   }
 
-  Future<void> init() async {
+  Future<void> initIfNull() async {
+    if (state.value != null) {
+      return;
+    }
+
     log('Creating blank Character');
     state = AsyncLoading();
     state = await AsyncValue.guard(() async {
