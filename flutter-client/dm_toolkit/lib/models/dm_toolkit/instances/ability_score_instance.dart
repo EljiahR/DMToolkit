@@ -2,13 +2,16 @@ import 'dart:developer';
 
 import 'package:dm_toolkit/models/dm_toolkit/definitions/ability_score_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/skill_definition.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/instance_interface.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/skill_instance.dart';
 
-class AbilityScoreInstance {
+class AbilityScoreInstance implements IInstance<AbilityScoreDefinition> {
   final String id;
   final int score;
   final bool isProficient;
   final List<SkillInstance> skillInstances;
+  
+  @override
   final AbilityScoreDefinition definition;
 
   AbilityScoreInstance({

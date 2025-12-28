@@ -4,10 +4,13 @@ import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/subclass_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/feat_instance.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/instance_interface.dart';
 
-class SubclassInstance {
+class SubclassInstance implements IInstance<SubclassDefinition> {
   final String id;
   final List<FeatInstance> featInstances;
+
+  @override
   final SubclassDefinition definition;
 
   SubclassInstance({

@@ -4,6 +4,7 @@ import 'package:dm_toolkit/controllers/character_creator_controller.dart';
 import 'package:dm_toolkit/controllers/startup_data_controller.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/character_class_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/character_class_instance.dart';
+import 'package:dm_toolkit/widgets/nullable_definition_dropdown_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,40 +24,10 @@ class CreateCharacterClassSection extends ConsumerWidget {
     return Column(
       children: [
         Text('Text describing what a class is? idk...'),
-        NullableDropdownMenu(classes: classes, onSelectionChange: setCharacterClass,),
+        NullableDefinitionDropdownMenu(classes: classes, onSelectionChange: setCharacterClass,),
         NullableCreateCharacterClassDisplay(classInstance: selectedClass,)
       ],
     );
-  }
-}
-
-class NullableDropdownMenu extends StatelessWidget {
-  const NullableDropdownMenu({
-    super.key,
-    required this.classes,
-    required this.onSelectionChange
-  });
-
-  final List<CharacterClassDefinition>? classes;
-  final void Function(CharacterClassDefinition?) onSelectionChange;
-
-  @override
-  Widget build(BuildContext context) {
-    if (classes != null && classes!.isNotEmpty) {
-      return DropdownMenu(
-        dropdownMenuEntries: classes!.map((charClass) {
-          return DropdownMenuEntry(
-            value: charClass, 
-            label: charClass.name
-          );
-        }).toList(),
-        onSelected: (value) {
-          onSelectionChange(value);
-        },
-      );
-    } else {
-      return Text('No classes found');
-    }
   }
 }
 

@@ -1,8 +1,12 @@
+import 'package:dm_toolkit/models/dm_toolkit/definitions/definition_interface.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/skill_instance.dart';
 
-class SkillDefinition {
+class SkillDefinition implements IDefinition {
+  @override
   final String id;
+  @override
   final String name;
+  @override
   final String description;
 
   SkillDefinition({

@@ -1,10 +1,13 @@
 import 'dart:developer';
 
 import 'package:dm_toolkit/models/dm_toolkit/definitions/skill_definition.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/instance_interface.dart';
 
-class SkillInstance {
+class SkillInstance implements IInstance<SkillDefinition> {
   final String id;
   final bool isProficient;
+
+  @override
   final SkillDefinition definition;
 
   SkillInstance({

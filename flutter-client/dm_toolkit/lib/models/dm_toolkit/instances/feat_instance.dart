@@ -3,10 +3,13 @@ import 'dart:developer';
 import 'package:dm_toolkit/helpers/json_list_to_primitive.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/instance_interface.dart';
 
-class FeatInstance {
+class FeatInstance implements IInstance<FeatDefinition> {
   final String id;
   final List<Effect> effects;
+
+  @override
   final FeatDefinition definition;
 
   FeatInstance({

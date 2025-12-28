@@ -1,11 +1,15 @@
 import 'package:dm_toolkit/helpers/json_list_to_primitive.dart';
+import 'package:dm_toolkit/models/dm_toolkit/definitions/definition_interface.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/lineage_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/species_instance.dart';
 
-class SpeciesDefinition {
+class SpeciesDefinition implements IDefinition {
+  @override
   final String id;
+  @override
   final String name;
+  @override
   final String description;
   final String type;
   final int speed;

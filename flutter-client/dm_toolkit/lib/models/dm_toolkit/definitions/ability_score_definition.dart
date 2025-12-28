@@ -1,10 +1,14 @@
+import 'package:dm_toolkit/models/dm_toolkit/definitions/definition_interface.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/skill_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/ability_score_instance.dart';
 
-class AbilityScoreDefinition {
+class AbilityScoreDefinition implements IDefinition {
+  @override
   final String id;
+  @override
   final String name;
   final String abbreviation;
+  @override
   final String description;
   final List<SkillDefinition> skillDefinitions;
 

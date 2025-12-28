@@ -1,10 +1,14 @@
+import 'package:dm_toolkit/models/dm_toolkit/definitions/definition_interface.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/subclass_instance.dart';
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/feat_group_level.dart';
 
-class SubclassDefinition {
+class SubclassDefinition implements IDefinition {
+  @override
   final String id;
+  @override
   final String name;
+  @override
   final String description;
   final List<FeatGroupLevel> featTables;
 

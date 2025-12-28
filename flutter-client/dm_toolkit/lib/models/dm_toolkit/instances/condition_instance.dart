@@ -1,10 +1,13 @@
 import 'dart:developer';
 
 import 'package:dm_toolkit/models/dm_toolkit/definitions/condition_definition.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/instance_interface.dart';
 
-class ConditionInstance {
+class ConditionInstance implements IInstance<ConditionDefinition> {
   final String id;
   final String remainingDuration;
+
+  @override
   final ConditionDefinition definition;
 
   ConditionInstance({

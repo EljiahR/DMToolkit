@@ -3,6 +3,7 @@ import 'package:dm_toolkit/enums/tool_category.dart';
 import 'package:dm_toolkit/enums/weapon_category.dart';
 import 'package:dm_toolkit/helpers/json_list_to_primitive.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/ability_score_definition.dart';
+import 'package:dm_toolkit/models/dm_toolkit/definitions/definition_interface.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/skill_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/subclass_definition.dart';
@@ -12,9 +13,12 @@ import 'package:dm_toolkit/models/dm_toolkit/items/definitions/tool_definition.d
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/feat_group_level.dart';
 import 'package:dm_toolkit/models/dm_toolkit/join_tables/item_definition_base_quantity.dart';
 
-class CharacterClassDefinition {
+class CharacterClassDefinition implements IDefinition {
+  @override
   final String id;
+  @override
   final String name;
+  @override
   final String description;
   final AbilityScoreDefinition? primaryAbilityScoreDefinition;
   final AbilityScoreDefinition? alternativePrimaryAbilityScoreDefinition;

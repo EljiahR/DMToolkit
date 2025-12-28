@@ -4,10 +4,13 @@ import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/lineage_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/feat_instance.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/instance_interface.dart';
 
-class LineageInstance {
+class LineageInstance implements IInstance<LineageDefinition> {
   final String id;
   final List<FeatInstance> featInstances;
+
+  @override
   final LineageDefinition definition;
 
   LineageInstance({

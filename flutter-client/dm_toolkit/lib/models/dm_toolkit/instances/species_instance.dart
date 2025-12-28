@@ -5,13 +5,16 @@ import 'package:dm_toolkit/models/dm_toolkit/definitions/lineage_definition.dart
 import 'package:dm_toolkit/models/dm_toolkit/definitions/species_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/feat_instance.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/instance_interface.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/lineage_instance.dart';
 
-class SpeciesInstance {
+class SpeciesInstance implements IInstance<SpeciesDefinition> {
   final String id;
   final String size;
   final LineageInstance? lineageInstance;
   final List<FeatInstance> featInstances;
+
+  @override
   final SpeciesDefinition definition;
 
   SpeciesInstance({

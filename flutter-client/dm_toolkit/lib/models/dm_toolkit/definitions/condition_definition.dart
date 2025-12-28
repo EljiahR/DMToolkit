@@ -1,9 +1,13 @@
+import 'package:dm_toolkit/models/dm_toolkit/definitions/definition_interface.dart';
 import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/condition_instance.dart';
 
-class ConditionDefinition {
+class ConditionDefinition implements IDefinition {
+  @override
   final String id;
+  @override
   final String name;
+  @override
   final String description;
   final bool isDebuff;
   final String duration;

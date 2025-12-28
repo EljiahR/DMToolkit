@@ -6,13 +6,16 @@ import 'package:dm_toolkit/models/dm_toolkit/definitions/background_definition.d
 import 'package:dm_toolkit/models/dm_toolkit/definitions/feat_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
 import 'package:dm_toolkit/models/dm_toolkit/instances/feat_instance.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/instance_interface.dart';
 
-class BackgroundInstance {
+class BackgroundInstance implements IInstance<BackgroundDefinition> {
   final String id;
   final AbilityScoreDefinition? abilityScoreDefinitionPlusTwo;
   final AbilityScoreDefinition? abililyScoreDefinitionPlusOne;
   final FeatInstance? featInstance;
   final bool selectedItemSet;
+  
+  @override
   final BackgroundDefinition definition;
 
   BackgroundInstance({
