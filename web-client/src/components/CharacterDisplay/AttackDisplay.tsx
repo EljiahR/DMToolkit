@@ -143,7 +143,7 @@ interface SpellDisplayProps {
 const SpellDisplay = ({ spell }: SpellDisplayProps) => {
     return (
         <div id="spell-display">
-
+            {spell.name}
         </div>
     )
 }

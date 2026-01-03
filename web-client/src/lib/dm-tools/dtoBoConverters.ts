@@ -372,9 +372,9 @@ export const characterSpellsToBo = (characterSpells: CharacterSpellDto[], allSpe
 export const characterToBo = (abilityScoreDefinitions: AbilityScoreDefinition[], characterDto: CharacterDto, classDefinitions: CharacterClassDefinition[], backgroundDefinitions: BackgroundDefinition[], subclasses: SubclassDefinition[], speciesDefinitions: SpeciesDefinition[], effects: Effect[], featDefinitions: FeatDefinition[], allItems: ItemDefinitionBase[], allSpells: Spell[]): Character => {
     return {
         ...characterDto,
-        primaryCharacterClassInstance: !characterDto.primaryCharacterClassInstanceDto ? null : classInstanceToBo(characterDto.primaryCharacterClassInstanceDto, classDefinitions, subclasses, effects, featDefinitions),
-        secondaryCharacterClassInstance: !characterDto.secondaryCharacterClassInstanceDto ? null : classInstanceToBo(characterDto.secondaryCharacterClassInstanceDto, classDefinitions, subclasses, effects, featDefinitions),
-        tertiaryCharacterClassInstance: !characterDto.tertiaryCharacterClassInstanceDto ? null : classInstanceToBo(characterDto.tertiaryCharacterClassInstanceDto, classDefinitions, subclasses, effects, featDefinitions),
+        primaryCharacterClassInstance: !characterDto.primaryCharacterClassInstance ? null : classInstanceToBo(characterDto.primaryCharacterClassInstance, classDefinitions, subclasses, effects, featDefinitions),
+        secondaryCharacterClassInstance: !characterDto.secondaryCharacterClassInstance ? null : classInstanceToBo(characterDto.secondaryCharacterClassInstance, classDefinitions, subclasses, effects, featDefinitions),
+        tertiaryCharacterClassInstance: !characterDto.tertiaryCharacterClassInstance ? null : classInstanceToBo(characterDto.tertiaryCharacterClassInstance, classDefinitions, subclasses, effects, featDefinitions),
         backgroundInstance: characterDto.backgroundInstance != null ? backgroundInstanceToBo(characterDto.backgroundInstance, backgroundDefinitions, effects, featDefinitions, abilityScoreDefinitions) : null,
         speciesInstance: characterDto.speciesInstance != null ? speciesInstanceToBo(characterDto.speciesInstance, speciesDefinitions, effects, featDefinitions) : null,
         scores: scoresToBo(characterDto.scoreInstances, abilityScoreDefinitions),

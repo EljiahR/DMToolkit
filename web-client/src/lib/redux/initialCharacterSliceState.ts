@@ -159,6 +159,7 @@ export const generateEmptyCharacter = (): Character => {
         flaws: "",
         coins: generateEmptyWallet(),
         inventory: [],
-        characterSpells: []
+        characterSpells: [],
+        conditionInstances: []
     };
 } 
