@@ -2,6 +2,7 @@ using DMToolkit.API;
 using DMToolkit.API.Data;
 using DMToolkit.API.Data.Seed;
 using DMToolkit.API.Models;
+using DMToolkit.API.Repositories;
 using DMToolkit.API.Services;
 using Microsoft.EntityFrameworkCore;
 

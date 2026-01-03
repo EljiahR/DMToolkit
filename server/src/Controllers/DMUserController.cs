@@ -1,12 +1,16 @@
 using DMToolkit.API.Models;
+using DMToolkit.API.Models.Dtos;
+using DMToolkit.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
+namespace DMToolkit.API.Controllers;
+
 [Authorize]
 [Route("[controller]")]
 [ApiController]
-public class DMUserController
+public class DMUserController : ControllerBase
 {
     private readonly SignInManager<DMUser> _signInManager;
     private readonly UserManager<DMUser> _userManager;
@@ -19,7 +23,29 @@ public class DMUserController
         _dmUserService = dMUserService;
     }
 
-    [HttpPost]
+    [HttpPost("SignIn")]
     [AllowAnonymous]
-    
+    public async Task<IActionResult> SignIn([FromBody] SignInDto model)
+    {
+        var user = await _userManager.FindByNameAsync(model.Username);
+        if (user == null)
+        {
+            return Unauthorized(new { message = "Username and/or password incorrect." });
+        }
+
+        var passwordMatches = await _userManager.CheckPasswordAsync(user, model.Password);
+        if (!passwordMatches)
+        {
+            return Unauthorized(new { message = "Username and/or password incorrect."});
+        }
+
+        var userDto = await _dmUserService.GetDMUserDtoAsync(user.Id);
+        if (userDto == null)
+        {
+            return NotFound("User was not found in database.");
+        }
+        // Token shit here
+
+        return Ok(new { user = userDto });
+    }
 }

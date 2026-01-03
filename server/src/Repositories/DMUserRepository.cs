@@ -1,6 +1,8 @@
 using DMToolkit.API.Models;
 using Microsoft.EntityFrameworkCore;
 
+namespace DMToolkit.API.Repositories;
+
 public class DMUserRepository : IDMUserRepository
 {
     private readonly DbContext _context;

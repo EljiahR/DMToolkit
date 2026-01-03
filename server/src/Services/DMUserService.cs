@@ -1,4 +1,8 @@
 using DMToolkit.API.Helpers;
+using DMToolkit.API.Repositories;
+using SharedModels.Models.Dtos;
+
+namespace DMToolkit.API.Services;
 
 public class DMUserService : IDMUserService
 {
