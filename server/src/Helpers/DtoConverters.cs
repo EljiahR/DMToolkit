@@ -1,3 +1,4 @@
+using DMToolkit.API.Models;
 using DMToolkit.API.Models.DMToolkitModels.Collections;
 using DMToolkit.API.Models.DMToolkitModels.Definitions;
 using DMToolkit.API.Models.DMToolkitModels.Entities;
@@ -19,6 +20,15 @@ namespace DMToolkit.API.Helpers;
 
 public static class DtoConverters
 {
+    public static DMUserDto ConvertDMUser(DMUser user)
+    {
+        return new DMUserDto
+        {
+            Characters = user.Characters.Select(ConvertCharacter).ToList()
+        };
+    }
+    
+    
     // Definitions
     public static StartupDataDto ConvertStartupData(StartupData startupData)
     {
@@ -327,9 +337,9 @@ public static class DtoConverters
             Alignment = character.Alignment,
             Hp = character.Hp,
             TempHp = character.TempHp,
-            PrimaryCharacterClassInstanceDto = ConvertCharacterClassInstance(character.PrimaryCharacterClassInstance), 
-            SecondaryCharacterClassInstanceDto = ConvertCharacterClassInstance(character.SecondaryCharacterClassInstance),
-            TertiaryCharacterClassInstanceDto = ConvertCharacterClassInstance(character.TertiaryCharacterClassInstance),
+            PrimaryCharacterClassInstance = ConvertCharacterClassInstance(character.PrimaryCharacterClassInstance), 
+            SecondaryCharacterClassInstance = ConvertCharacterClassInstance(character.SecondaryCharacterClassInstance),
+            TertiaryCharacterClassInstance = ConvertCharacterClassInstance(character.TertiaryCharacterClassInstance),
             BackgroundInstance = character.BackgroundInstance != null ? ConvertBackgroundInstance(character.BackgroundInstance) : null,
             SpeciesInstance = null,
             ScoreInstances = character.AbilityScoreInstances.Select(ConvertAbilityScoreInstance).ToList(),
@@ -348,7 +358,7 @@ public static class DtoConverters
             },
             Inventory = character.ItemInstanceBases.Select(ConvertItemInstanceBase).ToList(),
             CharacterSpells = character.CharacterSpells.Select(CharacterSpellConverter).ToList(),
-            ConditionInstanceDtos = character.ConditionInstances.Select(ConvertConditionInstance).ToList()
+            ConditionInstances = character.ConditionInstances.Select(ConvertConditionInstance).ToList()
         };
     }
 

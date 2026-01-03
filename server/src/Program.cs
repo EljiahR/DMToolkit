@@ -54,6 +54,8 @@ builder.Services.AddIdentityApiEndpoints<DMUser>().AddEntityFrameworkStores<DMDb
 builder.Services.AddAuthorization();
 
 // Added services to container
+builder.Services.AddScoped<IDMUserRepository, DMUserRepository>();
+builder.Services.AddScoped<IDMUserService, DMUserService>();
 builder.Services.AddScoped<IStartupDataService, StartupDataService>();
 
 builder.Services.AddControllers();
