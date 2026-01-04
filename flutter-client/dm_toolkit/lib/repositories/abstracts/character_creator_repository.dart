@@ -1,4 +1,4 @@
-import 'package:dm_toolkit/models/dm_toolkit/collections/character.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/character.dart';
 
 abstract class CharacterCreatorRepository {
   Future<Character> fetchCharacter();
