@@ -1,7 +1,7 @@
 
 import 'dart:developer';
 
-import 'package:dm_toolkit/models/dm_toolkit/collections/character.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/character.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/background_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/character_class_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/definitions/species_definition.dart';
