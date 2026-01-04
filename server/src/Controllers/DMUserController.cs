@@ -4,6 +4,7 @@ using DMToolkit.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SharedModels.Models.Dtos.User;
 
 namespace DMToolkit.API.Controllers;
 
@@ -46,7 +47,7 @@ public class DMUserController : ControllerBase
         }
         // Token shit here
 
-        return Ok(new { user = userDto });
+        return Ok(new LoginReturnDto { User = userDto, AccessToken = "", RefreshToken = "" });
     }
 
     [HttpPost("Register")]
@@ -78,6 +79,6 @@ public class DMUserController : ControllerBase
             return NotFound("User was not found in database.");
         }
 
-        return Ok(new { user = userDto });
+        return Ok(new LoginReturnDto { User = userDto, AccessToken = "", RefreshToken = "" });
     }
 }

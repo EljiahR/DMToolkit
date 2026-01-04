@@ -1,6 +1,6 @@
 using SharedModels.Models.Dtos.Instances;
 
-namespace SharedModels.Models.Dtos;
+namespace SharedModels.Models.Dtos.User;
 
 public class DMUserDto
 {

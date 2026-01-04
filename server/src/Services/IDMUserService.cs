@@ -1,4 +1,4 @@
-using SharedModels.Models.Dtos;
+using SharedModels.Models.Dtos.User;
 
 namespace DMToolkit.API.Services;
 
