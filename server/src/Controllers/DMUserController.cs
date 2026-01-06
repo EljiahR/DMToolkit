@@ -1,4 +1,6 @@
+using DMToolkit.API.Helpers;
 using DMToolkit.API.Models;
+using DMToolkit.API.Models.Config;
 using DMToolkit.API.Models.Dtos;
 using DMToolkit.API.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -16,12 +18,14 @@ public class DMUserController : ControllerBase
     private readonly SignInManager<DMUser> _signInManager;
     private readonly UserManager<DMUser> _userManager;
     private readonly IDMUserService _dmUserService;
+    private readonly JwtSettings _jwtSettings;
 
-    public DMUserController(SignInManager<DMUser> signInManager, UserManager<DMUser> userManager, IDMUserService dMUserService)
+    public DMUserController(SignInManager<DMUser> signInManager, UserManager<DMUser> userManager, IDMUserService dMUserService, JwtSettings jwtSettings)
     {
         _signInManager = signInManager;
         _userManager = userManager;
         _dmUserService = dMUserService;
+        _jwtSettings = jwtSettings;
     }
 
     [HttpPost("SignIn")]
@@ -45,9 +49,18 @@ public class DMUserController : ControllerBase
         {
             return NotFound("User was not found in database.");
         }
-        // Token shit here
+        var accessToken = TokenGenerator.GenerateAccessToken(user.UserName!, user.Id, _jwtSettings);
+        var requesterIp = ""; // Old way didn't work so needs figured out
+        var refreshToken = new RefreshToken
+        {
+            Token = TokenGenerator.GenerateRefreshToken(),
+            UserId = user.Id,
+            ExpiresAt = DateTime.Now.AddDays(7),
+            CreatedByIp = requesterIp
+        };
+        // Refresh token service here!!! 
 
-        return Ok(new LoginReturnDto { User = userDto, AccessToken = "", RefreshToken = "" });
+        return Ok(new LoginReturnDto { User = userDto, AccessToken = accessToken, RefreshToken = refreshToken.Token });
     }
 
     [HttpPost("Register")]

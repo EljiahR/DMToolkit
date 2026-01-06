@@ -1,5 +1,9 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using DMToolkit.API.Models.Config;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DMToolkit.API.Helpers;
 
@@ -10,7 +14,35 @@ public static class TokenGenerator
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, userName),
-            
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(JwtRegisteredClaimNames.Name, userName)
         };
+
+        var securityKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(jwtSettings.Key)
+        );
+
+        var credentials = new SigningCredentials(
+            securityKey,
+            SecurityAlgorithms.HmacSha256
+        );
+
+        var token = new JwtSecurityToken(
+            issuer: jwtSettings.Issuer,
+            audience: jwtSettings.Audience,
+            claims: claims,
+            expires: DateTime.Now.AddSeconds(jwtSettings.ExpiriationInSeconds),
+            signingCredentials: credentials
+        );
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    public static string GenerateRefreshToken()
+    {
+        var randomBytes = new byte[64];
+        using var rng = RandomNumberGenerator.Create();
+        rng.GetBytes(randomBytes);
+        return Convert.ToBase64String(randomBytes);
     }
 }
