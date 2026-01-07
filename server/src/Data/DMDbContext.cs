@@ -53,6 +53,8 @@ public class DMDbContext : IdentityDbContext<DMUser>
     public DbSet<CharacterClassDefinitionFeatDefinition> CharacterClassDefinitionFeatDefinitions { get; set; }
     public DbSet<BackgroundDefinitionItemDefinitionBase> BackgroundDefinitionItemDefinitionBases { get; set; }
     public DbSet<CharacterClassDefinitionItemDefinitionBase> CharacterClassDefinitionItemDefinitionBases { get; set; }
+    // Token
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         var isSqlite = Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite";
