@@ -1,7 +1,6 @@
 using DMToolkit.API.Helpers;
 using DMToolkit.API.Models;
 using DMToolkit.API.Models.Config;
-using DMToolkit.API.Models.Dtos;
 using DMToolkit.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -62,7 +61,7 @@ public class DMUserController : ControllerBase
         };
         await _refreshTokenService.AddRefreshTokenAsync(refreshToken);
 
-        return Ok(new LoginReturnDto { User = userDto, AccessToken = accessToken, RefreshToken = refreshToken.Token });
+        return Ok(new SignInReturnDto { User = userDto, AccessToken = accessToken, RefreshToken = refreshToken.Token });
     }
 
     [HttpPost("Register")]
@@ -104,10 +103,30 @@ public class DMUserController : ControllerBase
         };
         await _refreshTokenService.AddRefreshTokenAsync(refreshToken);
 
-        return Ok(new LoginReturnDto { User = userDto, AccessToken = accessToken, RefreshToken = refreshToken.Token });
+        return Ok(new SignInReturnDto { User = userDto, AccessToken = accessToken, RefreshToken = refreshToken.Token });
     }
 
     [HttpPost("Refresh")]
     [AllowAnonymous]
-    public async Task<IActionResult> RefreshToken([FromBody] )
+    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenDto model)
+    {
+        var existingToken = await _refreshTokenService.GetRefreshTokenAsync(model.RefreshToken);
+
+        if (existingToken is not { IsRevoked: false })
+        {
+            return Unauthorized("Refresh token is invalid.");
+        }
+
+        var userDto = await _dmUserService.GetDMUserDtoAsync(existingToken.UserId);
+
+        if (userDto == null)
+        {
+            return NotFound("User was not found in database."); 
+        }
+
+        var accessToken = TokenGenerator.GenerateAccessToken(userDto.UserName, model.UserId, _jwtSettings);
+        // TODO: New or update refresh token within a certain timeframe here.
+
+        return Ok(new SignInReturnDto { User = userDto, AccessToken = accessToken, RefreshToken = model.RefreshToken });        
+    }
 }

@@ -15,6 +15,7 @@ using SharedModels.Models.Dtos.Items.Bases;
 using SharedModels.Models.Dtos.Items.Definitions;
 using SharedModels.Models.Dtos.Items.Instances;
 using SharedModels.Models.Dtos.Joins;
+using SharedModels.Models.Dtos.User;
 
 namespace DMToolkit.API.Helpers;
 
@@ -24,6 +25,7 @@ public static class DtoConverters
     {
         return new DMUserDto
         {
+            UserName = user.UserName!,
             Characters = user.Characters.Select(ConvertCharacter).ToList()
         };
     }

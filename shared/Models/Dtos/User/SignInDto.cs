@@ -1,4 +1,4 @@
-namespace DMToolkit.API.Models.Dtos;
+namespace SharedModels.Models.Dtos.User;
 
 public class SignInDto
 {

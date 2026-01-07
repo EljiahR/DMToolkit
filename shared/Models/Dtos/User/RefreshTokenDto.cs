@@ -1,5 +1,4 @@
-namespace DMToolkit.API.Models.Dtos;
-
+namespace SharedModels.Models.Dtos.User;
 public class RefreshTokenDto
 {
     public string UserId { get; set; } = string.Empty;

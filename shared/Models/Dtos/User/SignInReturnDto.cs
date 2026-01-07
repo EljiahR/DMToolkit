@@ -1,6 +1,6 @@
 namespace SharedModels.Models.Dtos.User;
 
-public class LoginReturnDto
+public class SignInReturnDto
 {
     public required DMUserDto User { get; set; }
     public required string AccessToken { get; set; }
