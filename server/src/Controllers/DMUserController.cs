@@ -18,13 +18,15 @@ public class DMUserController : ControllerBase
     private readonly SignInManager<DMUser> _signInManager;
     private readonly UserManager<DMUser> _userManager;
     private readonly IDMUserService _dmUserService;
+    private readonly IRefreshTokenService _refreshTokenService;
     private readonly JwtSettings _jwtSettings;
 
-    public DMUserController(SignInManager<DMUser> signInManager, UserManager<DMUser> userManager, IDMUserService dMUserService, JwtSettings jwtSettings)
+    public DMUserController(SignInManager<DMUser> signInManager, UserManager<DMUser> userManager, IDMUserService dMUserService, IRefreshTokenService refreshTokenService, JwtSettings jwtSettings)
     {
         _signInManager = signInManager;
         _userManager = userManager;
         _dmUserService = dMUserService;
+        _refreshTokenService = refreshTokenService;
         _jwtSettings = jwtSettings;
     }
 
@@ -58,7 +60,7 @@ public class DMUserController : ControllerBase
             ExpiresAt = DateTime.Now.AddDays(7),
             CreatedByIp = requesterIp
         };
-        // Refresh token service here!!! 
+        await _refreshTokenService.AddRefreshTokenAsync(refreshToken);
 
         return Ok(new LoginReturnDto { User = userDto, AccessToken = accessToken, RefreshToken = refreshToken.Token });
     }
@@ -91,7 +93,17 @@ public class DMUserController : ControllerBase
         {
             return NotFound("User was not found in database.");
         }
+        var accessToken = TokenGenerator.GenerateAccessToken(user.UserName!, user.Id, _jwtSettings);
+        var requesterIp = ""; // Old way didn't work so needs figured out
+        var refreshToken = new RefreshToken
+        {
+            Token = TokenGenerator.GenerateRefreshToken(),
+            UserId = user.Id,
+            ExpiresAt = DateTime.Now.AddDays(7),
+            CreatedByIp = requesterIp
+        };
+        await _refreshTokenService.AddRefreshTokenAsync(refreshToken);
 
-        return Ok(new LoginReturnDto { User = userDto, AccessToken = "", RefreshToken = "" });
+        return Ok(new LoginReturnDto { User = userDto, AccessToken = accessToken, RefreshToken = refreshToken.Token });
     }
 }
