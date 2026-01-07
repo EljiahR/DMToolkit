@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using DMToolkit.API.Helpers;
 using DMToolkit.API.Models;
 using DMToolkit.API.Models.Config;
@@ -128,5 +129,19 @@ public class DMUserController : ControllerBase
         // TODO: New or update refresh token within a certain timeframe here.
 
         return Ok(new SignInReturnDto { User = userDto, AccessToken = accessToken, RefreshToken = model.RefreshToken });        
+    }
+
+    [HttpPost("SignOut")]
+    public async  Task<IActionResult> SignOutUser()
+    {
+        var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrEmpty(currentUserId))
+        {
+            return BadRequest("Issue with current user's claims");
+        }
+
+        await _refreshTokenService.DeleteAllUserRefreshTokensAsync(currentUserId);
+
+        return Ok("User successfully signed out");
     }
 }

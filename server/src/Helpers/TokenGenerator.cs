@@ -13,7 +13,7 @@ public static class TokenGenerator
     {
         var claims = new[]
         {
-            new Claim(ClaimTypes.NameIdentifier, userName),
+            new Claim(ClaimTypes.NameIdentifier, userId),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(JwtRegisteredClaimNames.Name, userName)
         };
