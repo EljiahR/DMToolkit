@@ -1,3 +1,4 @@
+using DMToolkit.API.Data;
 using DMToolkit.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -5,10 +6,10 @@ namespace DMToolkit.API.Repositories;
 
 public class RefreshTokenRepository : IRefreshTokenRepository
 {
-    private readonly DbContext _context;
+    private readonly DMDbContext _context;
     private readonly DbSet<RefreshToken> _refreshTokenSet;
 
-    public RefreshTokenRepository(DbContext context)
+    public RefreshTokenRepository(DMDbContext context)
     {
         _context = context;
         _refreshTokenSet = context.Set<RefreshToken>();

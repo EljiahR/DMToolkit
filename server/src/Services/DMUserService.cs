@@ -1,6 +1,7 @@
 using DMToolkit.API.Helpers;
 using DMToolkit.API.Repositories;
 using SharedModels.Models.Dtos;
+using SharedModels.Models.Dtos.User;
 
 namespace DMToolkit.API.Services;
 

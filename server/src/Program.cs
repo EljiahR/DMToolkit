@@ -2,9 +2,11 @@ using DMToolkit.API;
 using DMToolkit.API.Data;
 using DMToolkit.API.Data.Seed;
 using DMToolkit.API.Models;
+using DMToolkit.API.Models.Config;
 using DMToolkit.API.Repositories;
 using DMToolkit.API.Services;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,7 +53,25 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Services.AddIdentityApiEndpoints<DMUser>().AddEntityFrameworkStores<DMDbContext>();
+builder.Services.AddIdentity<DMUser, IdentityRole>()
+    .AddEntityFrameworkStores<DMDbContext>();
+
+var jwtSettings = builder.Configuration
+    .GetSection("Jwt")
+    .Get<JwtSettings>();
+
+if (jwtSettings == null || string.IsNullOrWhiteSpace(jwtSettings.Key))
+{
+    jwtSettings = new JwtSettings
+    {
+        Key = builder.Configuration["Key"] ?? "",
+        Issuer = builder.Configuration["Issuer"] ?? "",
+        Audience = builder.Configuration["Audience"] ?? "",
+        ExpiriationInSeconds = int.Parse(builder.Configuration["ExpirationInSeconds"] ?? "7200") 
+    };
+}
+
+builder.Services.AddAuthentication();
 
 builder.Services.AddAuthorization();
 
