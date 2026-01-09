@@ -1,3 +1,4 @@
+using System.Text;
 using DMToolkit.API;
 using DMToolkit.API.Data;
 using DMToolkit.API.Data.Seed;
@@ -5,9 +6,11 @@ using DMToolkit.API.Models;
 using DMToolkit.API.Models.Config;
 using DMToolkit.API.Repositories;
 using DMToolkit.API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,7 +74,20 @@ if (jwtSettings == null || string.IsNullOrWhiteSpace(jwtSettings.Key))
     };
 }
 
-builder.Services.AddAuthentication();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtSettings.Issuer,
+            ValidAudience = jwtSettings.Audience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
+        };
+    });
 
 builder.Services.AddAuthorization();
 
