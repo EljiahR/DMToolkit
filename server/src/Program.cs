@@ -4,6 +4,7 @@ using DMToolkit.API.Data.Seed;
 using DMToolkit.API.Models;
 using DMToolkit.API.Repositories;
 using DMToolkit.API.Services;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,14 +59,35 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<IDMUserRepository, DMUserRepository>();
 builder.Services.AddScoped<IDMUserService, DMUserService>();
 builder.Services.AddScoped<IStartupDataService, StartupDataService>();
+builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
 
 builder.Services.AddControllers();
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = 
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    
+    // Uncomment the following line if using Azure, AWS, or another cloud provider
+    // options.KnownNetworks.Clear(); // Allow all private IPs (adjust for your network)
+    // options.KnownProxies.Clear();  // Allow specific proxy IPs
+
+    // TODO
+    // Production must explicitly trust proxy's ip address, which I do not have atm
+    // options.KnownProxies.Add(IPAddress.Parse("192.168.1.100")); // Proxy 1
+    // options.KnownProxies.Add(IPAddress.Parse("10.0.0.5"));       // Proxy 2
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+// Use Forwarded Headers MIDDLEWARE (MUST come BEFORE other middleware like UseHttpsRedirection)
+app.UseForwardedHeaders();
+
 app.Logger.LogInformation("Allowed Origins: {allowedOrigins}", allowedOrigins);
 
 if (string.IsNullOrWhiteSpace(dbConnection))
