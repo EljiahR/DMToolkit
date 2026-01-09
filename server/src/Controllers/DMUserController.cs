@@ -15,15 +15,13 @@ namespace DMToolkit.API.Controllers;
 [ApiController]
 public class DMUserController : ControllerBase
 {
-    private readonly SignInManager<DMUser> _signInManager;
     private readonly UserManager<DMUser> _userManager;
     private readonly IDMUserService _dmUserService;
     private readonly IRefreshTokenService _refreshTokenService;
     private readonly JwtSettings _jwtSettings;
 
-    public DMUserController(SignInManager<DMUser> signInManager, UserManager<DMUser> userManager, IDMUserService dMUserService, IRefreshTokenService refreshTokenService, JwtSettings jwtSettings)
+    public DMUserController(UserManager<DMUser> userManager, IDMUserService dMUserService, IRefreshTokenService refreshTokenService, JwtSettings jwtSettings)
     {
-        _signInManager = signInManager;
         _userManager = userManager;
         _dmUserService = dMUserService;
         _refreshTokenService = refreshTokenService;
