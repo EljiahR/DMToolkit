@@ -51,18 +51,10 @@ public class DMUserController : ControllerBase
         {
             return NotFound("User was not found in database.");
         }
-        var accessToken = TokenGenerator.GenerateAccessToken(user.UserName!, user.Id, _jwtSettings);
-        var requesterIp = ""; // Old way didn't work so needs figured out
-        var refreshToken = new RefreshToken
-        {
-            Token = TokenGenerator.GenerateRefreshToken(),
-            UserId = user.Id,
-            ExpiresAt = DateTime.Now.AddDays(7),
-            CreatedByIp = requesterIp
-        };
-        await _refreshTokenService.AddRefreshTokenAsync(refreshToken);
+        
+        var signInReturn = await GetNewTokensAsync(userDto);
 
-        return Ok(new SignInReturnDto { User = userDto, AccessToken = accessToken, RefreshToken = refreshToken.Token });
+        return Ok(signInReturn);
     }
 
     [HttpPost("Register")]
@@ -93,18 +85,10 @@ public class DMUserController : ControllerBase
         {
             return NotFound("User was not found in database.");
         }
-        var accessToken = TokenGenerator.GenerateAccessToken(user.UserName!, user.Id, _jwtSettings);
-        var requesterIp = ""; // Old way didn't work so needs figured out
-        var refreshToken = new RefreshToken
-        {
-            Token = TokenGenerator.GenerateRefreshToken(),
-            UserId = user.Id,
-            ExpiresAt = DateTime.Now.AddDays(7),
-            CreatedByIp = requesterIp
-        };
-        await _refreshTokenService.AddRefreshTokenAsync(refreshToken);
 
-        return Ok(new SignInReturnDto { User = userDto, AccessToken = accessToken, RefreshToken = refreshToken.Token });
+        var signInReturn = await GetNewTokensAsync(userDto);
+
+        return Ok(signInReturn);
     }
 
     [HttpPost("Refresh")]
@@ -125,14 +109,13 @@ public class DMUserController : ControllerBase
             return NotFound("User was not found in database."); 
         }
 
-        var accessToken = TokenGenerator.GenerateAccessToken(userDto.UserName, model.UserId, _jwtSettings);
-        // TODO: New or update refresh token within a certain timeframe here.
+        var signInReturn = await GetNewTokensAsync(userDto);
 
-        return Ok(new SignInReturnDto { User = userDto, AccessToken = accessToken, RefreshToken = model.RefreshToken });        
+        return Ok(signInReturn);        
     }
 
     [HttpPost("SignOut")]
-    public async  Task<IActionResult> SignOutUser()
+    public async Task<IActionResult> SignOutUser()
     {
         var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (string.IsNullOrEmpty(currentUserId))
@@ -143,5 +126,26 @@ public class DMUserController : ControllerBase
         await _refreshTokenService.DeleteAllUserRefreshTokensAsync(currentUserId);
 
         return Ok("User successfully signed out");
+    }
+
+    private async Task<SignInReturnDto> GetNewTokensAsync(DMUserDto userDto)
+    {
+        var accessToken = TokenGenerator.GenerateAccessToken(userDto.UserName, userDto.Id, _jwtSettings);
+        var requesterIp = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "null"; 
+        var refreshToken = new RefreshToken
+        {
+            Token = TokenGenerator.GenerateRefreshToken(),
+            UserId = userDto.Id,
+            ExpiresAt = DateTime.Now.AddDays(7),
+            CreatedByIp = requesterIp
+        };
+        await _refreshTokenService.AddRefreshTokenAsync(refreshToken);
+
+        return new SignInReturnDto
+        {
+            User = userDto,
+            AccessToken = accessToken,
+            RefreshToken = refreshToken.Token
+        };
     }
 }

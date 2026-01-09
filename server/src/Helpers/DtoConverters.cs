@@ -23,8 +23,10 @@ public static class DtoConverters
 {
     public static DMUserDto ConvertDMUser(DMUser user)
     {
+        
         return new DMUserDto
         {
+            Id = user.Id,
             UserName = user.UserName!,
             Characters = user.Characters.Select(ConvertCharacter).ToList()
         };
