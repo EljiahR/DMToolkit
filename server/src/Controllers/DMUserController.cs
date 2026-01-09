@@ -44,13 +44,12 @@ public class DMUserController : ControllerBase
             return Unauthorized(new { message = "Username and/or password incorrect."});
         }
 
-        var userDto = await _dmUserService.GetDMUserDtoAsync(user.Id);
-        if (userDto == null)
+        var signInReturn = await GetNewTokensAsync(user.Id);
+
+        if (signInReturn == null)
         {
-            return NotFound("User was not found in database.");
+            return NotFound("User was not found in database."); 
         }
-        
-        var signInReturn = await GetNewTokensAsync(userDto);
 
         return Ok(signInReturn);
     }
@@ -78,13 +77,12 @@ public class DMUserController : ControllerBase
             return BadRequest(result.Errors);
         }
 
-        var userDto = await _dmUserService.GetDMUserDtoAsync(user.Id);
-        if (userDto == null)
-        {
-            return NotFound("User was not found in database.");
-        }
+        var signInReturn = await GetNewTokensAsync(user.Id);
 
-        var signInReturn = await GetNewTokensAsync(userDto);
+        if (signInReturn == null)
+        {
+            return NotFound("User was not found in database."); 
+        }
 
         return Ok(signInReturn);
     }
@@ -100,14 +98,12 @@ public class DMUserController : ControllerBase
             return Unauthorized("Refresh token is invalid.");
         }
 
-        var userDto = await _dmUserService.GetDMUserDtoAsync(existingToken.UserId);
+        var signInReturn = await GetNewTokensAsync(existingToken.UserId);
 
-        if (userDto == null)
+        if (signInReturn == null)
         {
             return NotFound("User was not found in database."); 
         }
-
-        var signInReturn = await GetNewTokensAsync(userDto);
 
         return Ok(signInReturn);        
     }
@@ -126,8 +122,14 @@ public class DMUserController : ControllerBase
         return Ok("User successfully signed out");
     }
 
-    private async Task<SignInReturnDto> GetNewTokensAsync(DMUserDto userDto)
+    private async Task<SignInReturnDto?> GetNewTokensAsync(string userId)
     {
+        var userDto = await _dmUserService.GetDMUserDtoAsync(userId);
+        if (userDto == null)
+        {
+            return null;
+        }
+        
         var accessToken = TokenGenerator.GenerateAccessToken(userDto.UserName, userDto.Id, _jwtSettings);
         var requesterIp = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "null"; 
         var refreshToken = new RefreshToken
