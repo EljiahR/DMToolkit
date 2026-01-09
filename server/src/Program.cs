@@ -64,6 +64,8 @@ builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
 
 builder.Services.AddControllers();
 
+// Following code found on: https://www.codegenes.net/blog/asp-net-core-how-to-get-remote-ip-address/#4-solutions-to-get-remote-ip-address-correctly
+// Visit link for trouble shooting related to ip address issues
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders = 
