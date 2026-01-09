@@ -94,9 +94,13 @@ builder.Services.AddAuthorization();
 // Added services to container
 builder.Services.AddScoped<IDMUserRepository, DMUserRepository>();
 builder.Services.AddScoped<IDMUserService, DMUserService>();
+
 builder.Services.AddScoped<IStartupDataService, StartupDataService>();
+
 builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
+
+builder.Services.AddSingleton(jwtSettings);
 
 builder.Services.AddControllers();
 
@@ -137,8 +141,6 @@ if (string.IsNullOrWhiteSpace(dbConnection))
         seeder.Seed();
     }
 }
-
-app.MapIdentityApi<DMUser>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
