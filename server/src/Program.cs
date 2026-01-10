@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 var logger = LoggerFactory.Create(logging =>
@@ -75,7 +74,11 @@ var jwtSettings = new JwtSettings
 };
 
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
@@ -88,49 +91,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidAudience = jwtSettings.Audience,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
         };
-
-        options.Events = new JwtBearerEvents
-        {
-            OnMessageReceived = context =>
-            {
-                var accessToken = context.Request.Query["access_token"];
-                if (!string.IsNullOrWhiteSpace(accessToken))
-                {
-                    context.Token = accessToken;
-                }
-                
-                return Task.CompletedTask;
-            },
-            OnAuthenticationFailed = context =>
-            {
-                
-                context.Response.StatusCode = 401;
-                logger.LogError($"Auth failed: {context.Exception.Message}");
-                return Task.CompletedTask;
-            },
-            OnTokenValidated = context =>
-            {
-                logger.LogInformation("Token validated!");
-                return Task.CompletedTask;
-            },
-            OnChallenge = context =>
-            {
-                context.HandleResponse();
-                context.Response.StatusCode = 401;
-                context.Response.ContentType = "application/json";
-                var result = JsonConvert.SerializeObject(new { error = "Authentication failed." });
-                return context.Response.WriteAsync(result);
-            },
-            OnForbidden = context =>
-            {
-                
-                context.Response.StatusCode = 403;
-                context.Response.ContentType = "application/json";
-                var result = JsonConvert.SerializeObject(new { error = "You do not have access to this resource." });
-                return context.Response.WriteAsync(result);
-            }
-        };
-
     });
 
 builder.Services.AddAuthorization();
@@ -222,7 +182,6 @@ app.UseHttpsRedirection();
 app.UseCors("AllowClient");
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 app.MapControllers();
 
