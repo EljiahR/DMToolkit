@@ -1,5 +1,4 @@
 using System.Text;
-using DMToolkit.API;
 using DMToolkit.API.Data;
 using DMToolkit.API.Data.Seed;
 using DMToolkit.API.Models;
@@ -11,8 +10,14 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
+var logger = LoggerFactory.Create(logging =>
+{
+    logging.AddConsole();
+}).CreateLogger("Startup");
 
 string? dbConnection = builder.Configuration["DatabaseConnectionString"];
 
@@ -57,22 +62,18 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddIdentity<DMUser, IdentityRole>()
-    .AddEntityFrameworkStores<DMDbContext>();
+    .AddEntityFrameworkStores<DMDbContext>()
+    .AddDefaultTokenProviders();
 
-var jwtSettings = builder.Configuration
-    .GetSection("Jwt")
-    .Get<JwtSettings>();
 
-if (jwtSettings == null || string.IsNullOrWhiteSpace(jwtSettings.Key))
+var jwtSettings = new JwtSettings
 {
-    jwtSettings = new JwtSettings
-    {
-        Key = builder.Configuration["Key"] ?? "",
-        Issuer = builder.Configuration["Issuer"] ?? "",
-        Audience = builder.Configuration["Audience"] ?? "",
-        ExpiriationInSeconds = int.Parse(builder.Configuration["ExpirationInSeconds"] ?? "7200") 
-    };
-}
+    Key = builder.Configuration["Key"] ?? "",
+    Issuer = builder.Configuration["Issuer"] ?? "",
+    Audience = builder.Configuration["Audience"] ?? "",
+    ExpiriationInSeconds = int.Parse(builder.Configuration["ExpirationInSeconds"] ?? "7200") 
+};
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -87,6 +88,49 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidAudience = jwtSettings.Audience,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
         };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                var accessToken = context.Request.Query["access_token"];
+                if (!string.IsNullOrWhiteSpace(accessToken))
+                {
+                    context.Token = accessToken;
+                }
+                
+                return Task.CompletedTask;
+            },
+            OnAuthenticationFailed = context =>
+            {
+                
+                context.Response.StatusCode = 401;
+                logger.LogError($"Auth failed: {context.Exception.Message}");
+                return Task.CompletedTask;
+            },
+            OnTokenValidated = context =>
+            {
+                logger.LogInformation("Token validated!");
+                return Task.CompletedTask;
+            },
+            OnChallenge = context =>
+            {
+                context.HandleResponse();
+                context.Response.StatusCode = 401;
+                context.Response.ContentType = "application/json";
+                var result = JsonConvert.SerializeObject(new { error = "Authentication failed." });
+                return context.Response.WriteAsync(result);
+            },
+            OnForbidden = context =>
+            {
+                
+                context.Response.StatusCode = 403;
+                context.Response.ContentType = "application/json";
+                var result = JsonConvert.SerializeObject(new { error = "You do not have access to this resource." });
+                return context.Response.WriteAsync(result);
+            }
+        };
+
     });
 
 builder.Services.AddAuthorization();
@@ -122,8 +166,33 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    // Include 'SecurityScheme' to use JWT Authentication
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
+        BearerFormat = "JWT",
+        Name = "JWT Authentication",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = JwtBearerDefaults.AuthenticationScheme,
+        Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
+
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
+    });
+});
 
 var app = builder.Build();
 
@@ -154,50 +223,7 @@ app.UseCors("AllowClient");
 app.UseAuthentication();
 app.UseAuthorization();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
-
-app.MapGet("/weatherforecastsecure", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecastWithAuth")
-.WithOpenApi()
-.RequireAuthorization();
 
 app.MapControllers();
 
 app.Run();
-
-namespace DMToolkit.API
-{
-    record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-    {
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-    }
-}
