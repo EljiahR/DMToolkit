@@ -10,6 +10,7 @@ import 'package:dm_toolkit/models/dm_toolkit/definitions/species_definition.dart
 import 'package:dm_toolkit/models/dm_toolkit/entities/effect.dart';
 import 'package:dm_toolkit/models/dm_toolkit/entities/school.dart';
 import 'package:dm_toolkit/models/dm_toolkit/entities/spell.dart';
+import 'package:dm_toolkit/models/dm_toolkit/instances/character.dart';
 import 'package:dm_toolkit/models/dm_toolkit/items/bases/item_definition_base.dart';
 import 'package:dm_toolkit/models/dm_toolkit/items/definitions/armor_definition.dart';
 import 'package:dm_toolkit/models/dm_toolkit/items/definitions/item_definition.dart';
@@ -20,6 +21,7 @@ class StartupData {
   final List<AbilityScoreDefinition> abilityScoreDefinitions;
   final List<BackgroundDefinition> backgroundDefinitions;
   final List<CharacterClassDefinition> characterClassDefinitions;
+  final List<Character> characters;
   final List<ConditionDefinition> conditionDefinitions;
   final List<Effect> effects;
   final List<FeatDefinition> featDefinitions;
@@ -31,6 +33,7 @@ class StartupData {
   static const List<AbilityScoreDefinition> defaultAbilityScoreDefinitions = [];
   static const List<BackgroundDefinition> defaultBackgroundDefinitions = [];
   static const List<CharacterClassDefinition> defaultCharacterClassDefinitions = [];
+  static const List<Character> defaultCharacters = [];
   static const List<ConditionDefinition> defaultConditionDefinitions = [];
   static const List<Effect> defaultEffects = [];
   static const List<FeatDefinition> defaultFeatDefinitions = [];
@@ -43,6 +46,7 @@ class StartupData {
     this.abilityScoreDefinitions = defaultAbilityScoreDefinitions,
     this.backgroundDefinitions = defaultBackgroundDefinitions,
     this.characterClassDefinitions = defaultCharacterClassDefinitions,
+    this.characters = defaultCharacters,
     this.conditionDefinitions = defaultConditionDefinitions,
     this.effects = defaultEffects,
     this.featDefinitions = defaultFeatDefinitions,

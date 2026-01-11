@@ -6,12 +6,14 @@ import type { SpeciesDefinition, SpeciesDefinitionDto } from "../definitions/spe
 import type { Effect, EffectDto } from "../entities/effect";
 import type { School, SchoolDto } from "../entities/school";
 import type { Spell, SpellDto } from "../entities/spell";
+import type { Character, CharacterDto } from "../instances/character";
 import type { ItemDefinitionBase, ItemDefinitionBaseDto } from "../items/bases/itemDefinitionBase";
 
 export interface StartupData {
     abilityScoreDefinitions: AbilityScoreDefinition[];
     backgroundDefinitions: BackgroundDefinition[];
     characterClassDefinitions: CharacterClassDefinition[];
+    characters: Character[];
     featDefinitions: FeatDefinition[];
     speciesDefinitions: SpeciesDefinition[];
     effects: Effect[];
@@ -24,6 +26,7 @@ export interface StartupDataDto {
     abilityScoreDefinitions: AbilityScoreDefinitionDto[];
     backgroundDefinitions: BackgroundDefinitionDto[];
     characterClassDefinitions: CharacterClassDefinitionDto[];
+    characters: CharacterDto[];
     featDefinitions: FeatDefinitionDto[];
     speciesDefinitions: SpeciesDefinitionDto[];
     effects: EffectDto[];
