@@ -8,23 +8,18 @@ export const api = axios.create({
     baseURL: BACKEND_URL != "" && BACKEND_URL != null && BACKEND_URL != undefined ? BACKEND_URL : "https://localhost:7179"
 });
 
-export const apiLogin = async (email: string, password: string) => {
-    const response = await api.post<Token>("/login", { email, password }, { withCredentials: true });
+export const apiSignIn = async (username: string, password: string) => {
+    const response = await api.post<Token>("/dmUser/signIn", { username, password }, { withCredentials: true });
     return response.data;
 }; 
 
-export const apiRegister = async (email: string, password: string) => {
-    const response = await api.post<RegisterErrors | null>("/register", {email, password});
+export const apiRegister = async (username: string, password: string) => {
+    const response = await api.post<RegisterErrors | null>("/dmUser/register", { username, password });
     return response.data;
 }; 
 
 export const apiRefreshToken = async (refreshToken: string) => {
     const response = await api.post<Token>("/refresh", { refreshToken });
-    return response.data;
-}
-
-export const apiInfo = async (accessToken: string) => {
-    const response = await api.get<{email: string, isEmailConfirmed: boolean}>("/manage/info", {headers: {Authorization: `Bearer ${accessToken}`}})
     return response.data;
 }
 
