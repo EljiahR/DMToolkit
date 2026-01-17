@@ -17,8 +17,8 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) 
     const dispatch = useAppDispatch();
     const accessToken = useAppSelector((state) => state.auth.accessToken);
     
-    const login = async (email: string, password: string) => {
-        const data = await apiLogin(email, password);
+    const login = async (username: string, password: string) => {
+        const data = await apiLogin(username, password);
         dispatch(setAccessToken(data.accessToken));
         localStorage.setItem("refreshToken", data.refreshToken);
     };

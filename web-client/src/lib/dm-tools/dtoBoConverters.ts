@@ -163,15 +163,17 @@ export const subclassInstanceToBo = (subclassDto: SubclassInstanceDto, subclasse
     }
 }
 
-export const classInstanceToBo = (classDto: CharacterClassInstanceDto, characterClasses: CharacterClassDefinition[], subclasses: SubclassDefinition[], effects: Effect[], featDefinitions: FeatDefinition[]): CharacterClassInstance => {
+export const classInstanceToBo = (classDto: CharacterClassInstanceDto, characterClasses: CharacterClassDefinition[], effects: Effect[], featDefinitions: FeatDefinition[]): CharacterClassInstance => {
+    const definition = characterClasses.find((classDefinition) => classDefinition.id == classDto.definitionId)!
+    
     return {
         id: classDto.id,
         level: classDto.level,
         hpRolls: classDto.hpRolls,
-        subclassInstance: classDto.subclassInstance == null ? null : subclassInstanceToBo(classDto.subclassInstance, subclasses, effects, featDefinitions),
+        subclassInstance: classDto.subclassInstance == null ? null : subclassInstanceToBo(classDto.subclassInstance, definition.subclassDefinitions, effects, featDefinitions),
         featInstances: featInstancesToBo(classDto.featInstances, effects, featDefinitions),
         selectedItemSet: classDto.selectedItemSet,
-        definition: characterClasses.find((classDefinition) => classDefinition.id == classDto.definitionId)!
+        definition
     }
     
 }
@@ -369,12 +371,12 @@ export const characterSpellsToBo = (characterSpells: CharacterSpellDto[], allSpe
     })
 }
 
-export const characterToBo = (abilityScoreDefinitions: AbilityScoreDefinition[], characterDto: CharacterDto, classDefinitions: CharacterClassDefinition[], backgroundDefinitions: BackgroundDefinition[], subclasses: SubclassDefinition[], speciesDefinitions: SpeciesDefinition[], effects: Effect[], featDefinitions: FeatDefinition[], allItems: ItemDefinitionBase[], allSpells: Spell[]): Character => {
+export const characterToBo = (abilityScoreDefinitions: AbilityScoreDefinition[], characterDto: CharacterDto, classDefinitions: CharacterClassDefinition[], backgroundDefinitions: BackgroundDefinition[], speciesDefinitions: SpeciesDefinition[], effects: Effect[], featDefinitions: FeatDefinition[], allItems: ItemDefinitionBase[], allSpells: Spell[]): Character => {
     return {
         ...characterDto,
-        primaryCharacterClassInstance: !characterDto.primaryCharacterClassInstance ? null : classInstanceToBo(characterDto.primaryCharacterClassInstance, classDefinitions, subclasses, effects, featDefinitions),
-        secondaryCharacterClassInstance: !characterDto.secondaryCharacterClassInstance ? null : classInstanceToBo(characterDto.secondaryCharacterClassInstance, classDefinitions, subclasses, effects, featDefinitions),
-        tertiaryCharacterClassInstance: !characterDto.tertiaryCharacterClassInstance ? null : classInstanceToBo(characterDto.tertiaryCharacterClassInstance, classDefinitions, subclasses, effects, featDefinitions),
+        primaryCharacterClassInstance: !characterDto.primaryCharacterClassInstance ? null : classInstanceToBo(characterDto.primaryCharacterClassInstance, classDefinitions, effects, featDefinitions),
+        secondaryCharacterClassInstance: !characterDto.secondaryCharacterClassInstance ? null : classInstanceToBo(characterDto.secondaryCharacterClassInstance, classDefinitions, effects, featDefinitions),
+        tertiaryCharacterClassInstance: !characterDto.tertiaryCharacterClassInstance ? null : classInstanceToBo(characterDto.tertiaryCharacterClassInstance, classDefinitions, effects, featDefinitions),
         backgroundInstance: characterDto.backgroundInstance != null ? backgroundInstanceToBo(characterDto.backgroundInstance, backgroundDefinitions, effects, featDefinitions, abilityScoreDefinitions) : null,
         speciesInstance: characterDto.speciesInstance != null ? speciesInstanceToBo(characterDto.speciesInstance, speciesDefinitions, effects, featDefinitions) : null,
         scores: scoresToBo(characterDto.scoreInstances, abilityScoreDefinitions),
@@ -395,17 +397,21 @@ export const startupDataToBo = (data: StartupDataDto): StartupData => {
     }, [] as SkillDefinition[]);
     const itemDefinitionBases = itemDefinitionBaseToBo(data.itemDefinitionBases, data.effects);
     const characterClassDefinitions = data.characterClassDefinitions.map(c => characterClassDefinitionToBo(c, featDefinitions, itemDefinitionBases, abilityScoreDefinitions, allSkillDefinitions));
-
+    const backgroundDefinitions = data.backgroundDefinitions.map(b => backgroundDefinitionToBo(b, featDefinitions, abilityScoreDefinitions, allSkillDefinitions, itemDefinitionBases));
+    const speciesDefinitions = data.speciesDefinitions.map(s => speciesDefinitionToBo(s, featDefinitions));
+    const spells = data.spells.map(s => spellToBo(s, data.schools, characterClassDefinitions, data.effects));
+    const characters = data.characters.map((c) => characterToBo(abilityScoreDefinitions, c, characterClassDefinitions, backgroundDefinitions, speciesDefinitions, data.effects, featDefinitions, itemDefinitionBases, spells));
 
     return {
         abilityScoreDefinitions,
-        backgroundDefinitions: data.backgroundDefinitions.map(b => backgroundDefinitionToBo(b, featDefinitions, abilityScoreDefinitions, allSkillDefinitions, itemDefinitionBases)),
+        backgroundDefinitions,
         characterClassDefinitions,
+        characters,
         featDefinitions,
-        speciesDefinitions: data.speciesDefinitions.map(s => speciesDefinitionToBo(s, featDefinitions)),
+        speciesDefinitions,
         effects: data.effects,
         itemDefinitionBases,
         schools: data.schools,
-        spells: data.spells.map(s => spellToBo(s, data.schools, characterClassDefinitions, data.effects)),
+        spells
     }
 }

@@ -7,6 +7,7 @@ const initialState: StartupData = {
     abilityScoreDefinitions: [],
     backgroundDefinitions: [],
     characterClassDefinitions: [],
+    characters: [],
     featDefinitions: [],
     itemDefinitionBases: [],
     speciesDefinitions: [],
