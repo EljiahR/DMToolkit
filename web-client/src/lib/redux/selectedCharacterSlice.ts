@@ -4,7 +4,6 @@ import type { GeneratedTraits } from "../dm-tools/traitGenerator";
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
 import type { RootState } from "./store";
 import type { StringAndNumber, ZeroOrOne } from "../types/miscTypes";
-import { generateEmptyCharacter, generateEmptyWallet } from "./initialCharacterSliceState";
 import type { CharacterClassDefinition } from "../types/dm-tool-types/definitions/characterClassDefinition";
 import type { BackgroundDefinition } from "../types/dm-tool-types/definitions/backgroundDefinition";
 import type { SpeciesDefinition } from "../types/dm-tool-types/definitions/speciesDefinition";
@@ -24,172 +23,199 @@ import { ArmorCategory } from "../types/dm-tool-types/enums/armorCategory";
 import type { SubclassInstance } from "../types/dm-tool-types/instances/subclassInstance";
 import { itemDefinitionTableToInstance } from "../dm-tools/instanceGenerators";
 import { ScoreAbbreviations, StandardScoresArray } from "../dm-tools/staticElements";
-import type { AbilityScoreDefinition } from "../types/dm-tool-types/definitions/abilityScoreDefinition";
-
-const initialState: Character = generateEmptyCharacter();
 
 export const selectedCharacterSlice = createSlice({
     name: "selectedCharacter",
-    initialState,
+    initialState: null as Character | null,
     reducers: {
-        setNewCharacter: (state, action: PayloadAction<{defaultScores: AbilityScoreDefinition[], defaultClass: CharacterClassDefinition, defaultBackground: BackgroundDefinition, defaultSpecies: SpeciesDefinition }>) => {
-            state.id = "";
-            state.name = "";
-            state.alignment = "";
-            state.hp = 1;
-            state.tempHp = 0;
-            state.primaryCharacterClassInstance = classDefinitionReset(action.payload.defaultClass, "");
-            state.backgroundInstance = backgroundDefinitionReset(action.payload.defaultBackground, "");
-            state.speciesInstance = speciesDefinitionReset(action.payload.defaultSpecies, action.payload.defaultSpecies.sizes, "", "");
-            state.scores = getStandardScores(action.payload.defaultScores);
-            state.physicalDescription = "";
-            state.personality = "";
-            state.ideals = "";
-            state.bonds = "";
-            state.flaws = "";
-            state.coins = generateEmptyWallet();
-            state.inventory = [];
-            state.characterSpells = [];
+        setNewCharacter: (_state, action: PayloadAction<Character>) => {
+            return action.payload;
         },
         setName: (state, action: PayloadAction<string>) => {
-            state.name = action.payload
+            if (state) {
+                state.name = action.payload
+            }
         },
         setAlignment: (state, action: PayloadAction<string>) => {
-            state.alignment = action.payload;
+            if (state) {
+                state.alignment = action.payload;
+            }
         },
         setCharacterClassDefinition: (state, action: PayloadAction<CharacterClassDefinition>) => {
-            state.primaryCharacterClassInstance = classDefinitionReset(action.payload, state.primaryCharacterClassInstance?.id ?? "");
+            if (state) {
+                state.primaryCharacterClassInstance = classDefinitionReset(action.payload, state.primaryCharacterClassInstance?.id ?? "");
+            }
         },
         setCharacterClassItemSet: (state, action: PayloadAction<boolean>) => {
-            if (state.primaryCharacterClassInstance) {
+            if (state && state.primaryCharacterClassInstance) {
                 state.primaryCharacterClassInstance.selectedItemSet = action.payload;
             }
         },
         setBackgroundDefinition: (state, action: PayloadAction<BackgroundDefinition>) => {
-            state.backgroundInstance = backgroundDefinitionReset(action.payload, state.backgroundInstance?.id ?? "");
+            if (state) {
+                state.backgroundInstance = backgroundDefinitionReset(action.payload, state.backgroundInstance?.id ?? "");
+            }
         },
         setBackgroundScores: (state, action: PayloadAction<{scoreAbbreviation: AbilityScoreAbbreviations | "", index: ZeroOrOne}>) => {
-            if (action.payload.index == 0 && state.backgroundInstance) {
+            if (state && action.payload.index == 0 && state.backgroundInstance) {
                 state.backgroundInstance.abilityScoreDefinitionPlusTwo = action.payload.scoreAbbreviation == "" ? null : state.scores[action.payload.scoreAbbreviation].definition;
-            } else if (action.payload.index == 1 && state.backgroundInstance) {
+            } else if (state && action.payload.index == 1 && state.backgroundInstance) {
                 state.backgroundInstance.abilityScoreDefinitionPlusOne = action.payload.scoreAbbreviation == "" ? null : state.scores[action.payload.scoreAbbreviation].definition;
             }
         },
         setBackgroundItemSet: (state, action: PayloadAction<boolean>) => {
-            if (state.backgroundInstance) {
+            if (state && state.backgroundInstance) {
                 state.backgroundInstance.selectedItemSet = action.payload;
             }
         },
         setSpeciesDefinition: (state, action: PayloadAction<SpeciesDefinition>) => {
-            state.speciesInstance = speciesDefinitionReset(action.payload, action.payload.sizes, state.speciesInstance?.id ?? "", state.speciesInstance?.lineageInstance?.id ?? "");
+            if (state) {
+                state.speciesInstance = speciesDefinitionReset(action.payload, action.payload.sizes, state.speciesInstance?.id ?? "", state.speciesInstance?.lineageInstance?.id ?? "");
+            }
         },
         setLineageDefinition: (state, action: PayloadAction<LineageDefinition>) => {
-            if (state.speciesInstance) {
+            if (state && state.speciesInstance) {
                 state.speciesInstance.lineageInstance = lineageDefinitionReset(action.payload, state.speciesInstance.lineageInstance?.id ?? "")
             }
         },
         setScore: (state, action: PayloadAction<{scoreAbbreviation: AbilityScoreAbbreviations, amount: string}>) => {
-            let filteredAmount = parseInt(action.payload.amount);
-            filteredAmount = filteredAmount > 20 ? 20 : filteredAmount < 1 ? 1 : filteredAmount;
-            state.scores[action.payload.scoreAbbreviation].score = filteredAmount;
+            if (state) {
+                let filteredAmount = parseInt(action.payload.amount);
+                filteredAmount = filteredAmount > 20 ? 20 : filteredAmount < 1 ? 1 : filteredAmount;
+                state.scores[action.payload.scoreAbbreviation].score = filteredAmount;
+            }
         },
         setScores: (state, action: PayloadAction<AbilityScores>) => {
-            state.scores = action.payload;
+            if (state) {
+                state.scores = action.payload;
+            }
         },
         swapScores: (state, action: PayloadAction<{scoreAbbreviationA: AbilityScoreAbbreviations, scoreAbbreviationB: AbilityScoreAbbreviations}>) => {
-            const { scoreAbbreviationA, scoreAbbreviationB } = action.payload;
-            [state.scores[scoreAbbreviationA].score, state.scores[scoreAbbreviationB].score] = [state.scores[scoreAbbreviationB].score, state.scores[scoreAbbreviationA].score]
+            if (state) {
+                const { scoreAbbreviationA, scoreAbbreviationB } = action.payload;
+            [state.scores[scoreAbbreviationA].score, state.scores[scoreAbbreviationB].score] = [state.scores[scoreAbbreviationB].score, state.scores[scoreAbbreviationA].score];
+            }
         },
         shiftStandardScores: (state, action: PayloadAction<{scoreAbbreviationA: AbilityScoreAbbreviations, scoreAbbreviationB: AbilityScoreAbbreviations}>) => {
-            const {scoreAbbreviationA, scoreAbbreviationB } = action.payload;
-            const initialIndex = StandardScoresArray.findIndex((num) => num == state.scores[scoreAbbreviationA].score);
-            const targetIndex = StandardScoresArray.findIndex((num) => num == state.scores[scoreAbbreviationB].score);
-            const wentDown = initialIndex < targetIndex;
-            ScoreAbbreviations.forEach((abbreviation) => {
-                if (abbreviation == scoreAbbreviationA) {
-                    state.scores[abbreviation].score = StandardScoresArray[targetIndex]
-                } else if (wentDown && state.scores[abbreviation].score < StandardScoresArray[initialIndex] && state.scores[abbreviation].score >= StandardScoresArray[targetIndex]) {
-                    const currentIndex = StandardScoresArray.findIndex((num) => num == state.scores[abbreviation].score);
-                    state.scores[abbreviation].score = StandardScoresArray[currentIndex - 1];
-                } else if (!wentDown && state.scores[abbreviation].score > StandardScoresArray[initialIndex] && state.scores[abbreviation].score <= StandardScoresArray[targetIndex]) {
-                    const currentIndex = StandardScoresArray.findIndex((num) => num == state.scores[abbreviation].score);
-                    state.scores[abbreviation].score = StandardScoresArray[currentIndex + 1];
-                }
-            });
+            if (state) {
+                const {scoreAbbreviationA, scoreAbbreviationB } = action.payload;
+                const initialIndex = StandardScoresArray.findIndex((num) => num == state.scores[scoreAbbreviationA].score);
+                const targetIndex = StandardScoresArray.findIndex((num) => num == state.scores[scoreAbbreviationB].score);
+                const wentDown = initialIndex < targetIndex;
+                ScoreAbbreviations.forEach((abbreviation) => {
+                    if (abbreviation == scoreAbbreviationA) {
+                        state.scores[abbreviation].score = StandardScoresArray[targetIndex]
+                    } else if (wentDown && state.scores[abbreviation].score < StandardScoresArray[initialIndex] && state.scores[abbreviation].score >= StandardScoresArray[targetIndex]) {
+                        const currentIndex = StandardScoresArray.findIndex((num) => num == state.scores[abbreviation].score);
+                        state.scores[abbreviation].score = StandardScoresArray[currentIndex - 1];
+                    } else if (!wentDown && state.scores[abbreviation].score > StandardScoresArray[initialIndex] && state.scores[abbreviation].score <= StandardScoresArray[targetIndex]) {
+                        const currentIndex = StandardScoresArray.findIndex((num) => num == state.scores[abbreviation].score);
+                        state.scores[abbreviation].score = StandardScoresArray[currentIndex + 1];
+                    }
+                });
+            }
         },
         setScoresToStandard: (state) => {
-            state.scores.str.score = StandardScoresArray[0];
-            state.scores.dex.score = StandardScoresArray[1];
-            state.scores.con.score = StandardScoresArray[2];
-            state.scores.int.score = StandardScoresArray[3];
-            state.scores.wis.score = StandardScoresArray[4];
-            state.scores.cha.score = StandardScoresArray[5];
+            if (state) {
+                state.scores.str.score = StandardScoresArray[0];
+                state.scores.dex.score = StandardScoresArray[1];
+                state.scores.con.score = StandardScoresArray[2];
+                state.scores.int.score = StandardScoresArray[3];
+                state.scores.wis.score = StandardScoresArray[4];
+                state.scores.cha.score = StandardScoresArray[5];
+            }
         },
         setScoresToBase: (state) => {
-            state.scores.str.score = 8;
-            state.scores.dex.score = 8;
-            state.scores.con.score = 8;
-            state.scores.int.score = 8;
-            state.scores.wis.score = 8;
-            state.scores.cha.score = 8;
+            if (state) {
+                state.scores.str.score = 8;
+                state.scores.dex.score = 8;
+                state.scores.con.score = 8;
+                state.scores.int.score = 8;
+                state.scores.wis.score = 8;
+                state.scores.cha.score = 8;
+            }
         },
         setScoresToMinimum: (state) => {
-            state.scores.str.score = 1;
-            state.scores.dex.score = 1;
-            state.scores.con.score = 1;
-            state.scores.int.score = 1;
-            state.scores.wis.score = 1;
-            state.scores.cha.score = 1;
+            if (state) {
+                state.scores.str.score = 1;
+                state.scores.dex.score = 1;
+                state.scores.con.score = 1;
+                state.scores.int.score = 1;
+                state.scores.wis.score = 1;
+                state.scores.cha.score = 1;
+            }
         },
         setScoreToRandom: (state, action: PayloadAction<AbilityScoreAbbreviations>) => {
-            state.scores[action.payload].score = rollStat();
+            if (state) {
+                state.scores[action.payload].score = rollStat();
+            }
         },
         setScoresToRandom: (state) => {
-            state.scores.str.score = rollStat();
-            state.scores.dex.score = rollStat();
-            state.scores.con.score = rollStat();
-            state.scores.int.score = rollStat();
-            state.scores.wis.score = rollStat();
-            state.scores.cha.score = rollStat();
+            if (state) {
+                state.scores.str.score = rollStat();
+                state.scores.dex.score = rollStat();
+                state.scores.con.score = rollStat();
+                state.scores.int.score = rollStat();
+                state.scores.wis.score = rollStat();
+                state.scores.cha.score = rollStat();
+            }
         },
         addOneToScore: (state, action: PayloadAction<AbilityScoreAbbreviations>) => {
-            state.scores[action.payload].score += 1;
+            if (state) {
+                state.scores[action.payload].score += 1;
+            }
         },
         subtractOneFromScore: (state, action: PayloadAction<AbilityScoreAbbreviations>) => {
-            state.scores[action.payload].score -= 1;
+            if (state) {
+                state.scores[action.payload].score -= 1;
+            }
         },
         setScoresToClassDefault: (state, action: PayloadAction<number[] | undefined>) => {
-            if (state.scores == null) {
-                state.scores = getStandardScores();
+            if (state) {
+                if (state.scores == null) {
+                    state.scores = getStandardScores();
+                }
+                state.scores.str.score = action.payload ? action.payload[0] : state.primaryCharacterClassInstance?.definition.defaultStr ?? 8;
+                state.scores.dex.score = action.payload ? action.payload[1] : state.primaryCharacterClassInstance?.definition.defaultDex ?? 8;
+                state.scores.con.score = action.payload ? action.payload[2] : state.primaryCharacterClassInstance?.definition.defaultCon ?? 8;
+                state.scores.int.score = action.payload ? action.payload[3] : state.primaryCharacterClassInstance?.definition.defaultInt ?? 8;
+                state.scores.wis.score = action.payload ? action.payload[4] : state.primaryCharacterClassInstance?.definition.defaultWis ?? 8;
+                state.scores.cha.score = action.payload ? action.payload[5] : state.primaryCharacterClassInstance?.definition.defaultCha ?? 8;
             }
-            state.scores.str.score = action.payload ? action.payload[0] : state.primaryCharacterClassInstance?.definition.defaultStr ?? 8;
-            state.scores.dex.score = action.payload ? action.payload[1] : state.primaryCharacterClassInstance?.definition.defaultDex ?? 8;
-            state.scores.con.score = action.payload ? action.payload[2] : state.primaryCharacterClassInstance?.definition.defaultCon ?? 8;
-            state.scores.int.score = action.payload ? action.payload[3] : state.primaryCharacterClassInstance?.definition.defaultInt ?? 8;
-            state.scores.wis.score = action.payload ? action.payload[4] : state.primaryCharacterClassInstance?.definition.defaultWis ?? 8;
-            state.scores.cha.score = action.payload ? action.payload[5] : state.primaryCharacterClassInstance?.definition.defaultCha ?? 8;
         },
         setPhysicalDescription: (state, action: PayloadAction<string>) => {
-            state.physicalDescription = action.payload;
+            if (state) {
+                state.physicalDescription = action.payload;
+            }
         },
         setPersonality: (state, action: PayloadAction<string>) => {
-            state.personality = action.payload;
+            if (state) {
+                state.personality = action.payload;
+            }
         },
         setTraits: (state, action: PayloadAction<GeneratedTraits>) => {
-            state.physicalDescription = action.payload.physical;
-            state.personality = action.payload.personality;
+            if (state) {
+                state.physicalDescription = action.payload.physical;
+                state.personality = action.payload.personality;
+            }
         },
         setIdeals: (state, action: PayloadAction<string>) => {
-            state.ideals = action.payload;
+            if (state) {
+                state.ideals = action.payload;
+            }
         },
         setBonds: (state, action: PayloadAction<string>) => {
-            state.bonds = action.payload;
+            if (state) {
+                state.bonds = action.payload;
+            }
         },
         setFlaws: (state, action: PayloadAction<string>) => {
-            state.flaws = action.payload;
+            if (state) {
+                state.flaws = action.payload;
+            }
         },
         initializeNewCharacter: (state) => {
-            if (state.backgroundInstance && state.backgroundInstance.selectedItemSet) {
+            if (state && state.backgroundInstance && state.backgroundInstance.selectedItemSet) {
                 state.inventory = [
                     ...state.inventory,
                     ...state.backgroundInstance.definition.itemDefinitionBaseQuantities.map(itemBase => {
@@ -197,7 +223,7 @@ export const selectedCharacterSlice = createSlice({
                 })]
             }
 
-            if (state.primaryCharacterClassInstance && state.primaryCharacterClassInstance.selectedItemSet) {
+            if (state && state.primaryCharacterClassInstance && state.primaryCharacterClassInstance.selectedItemSet) {
                 state.inventory = [
                     ...state.inventory,
                     ...state.primaryCharacterClassInstance.definition.startingEquipmentQuantityTables.map(itemBase => {
@@ -205,14 +231,13 @@ export const selectedCharacterSlice = createSlice({
                 })]
             }
         },
-        setNewCharacterId: (state) => {
-            state.id = "1";
-        },
         setItemEquipped: (state, action: PayloadAction<string>) => {
-            const item = state.inventory.find(i => i.id == action.payload);
+            if (state) {
+                const item = state.inventory.find(i => i.id == action.payload);
 
-            if (item) {
-                item.isEquipped = !item.isEquipped;
+                if (item) {
+                    item.isEquipped = !item.isEquipped;
+                }
             }
         }
     }
@@ -550,5 +575,5 @@ export const selectPreparedSpells = createSelector(
 
 export const selectCharacterId = (state: RootState) => state.selectedCharacter.id;
 
-export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setCharacterClassItemSet, setBackgroundDefinition, setBackgroundScores, setBackgroundItemSet, setSpeciesDefinition, setLineageDefinition, setScore, setScores, swapScores, shiftStandardScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws, initializeNewCharacter, setNewCharacterId, setItemEquipped } = selectedCharacterSlice.actions;
+export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setCharacterClassItemSet, setBackgroundDefinition, setBackgroundScores, setBackgroundItemSet, setSpeciesDefinition, setLineageDefinition, setScore, setScores, swapScores, shiftStandardScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws, initializeNewCharacter, setItemEquipped } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;
