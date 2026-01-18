@@ -10,9 +10,9 @@ import type { LineageInstance } from "../types/dm-tool-types/instances/lineageIn
 import type { SpeciesInstance } from "../types/dm-tool-types/instances/speciesInstance";
 
 
-export const classDefinitionReset = (definition: CharacterClassDefinition, id: string): CharacterClassInstance => {
+export const classDefinitionReset = (definition: CharacterClassDefinition, id?: string): CharacterClassInstance => {
     return {
-        id,
+        id: id ?? "",
         level: 1,
         subclassInstance: null,
         featInstances: definition.featTables.reduce((instances: FeatInstance[], featGroup) => {
@@ -28,9 +28,9 @@ export const classDefinitionReset = (definition: CharacterClassDefinition, id: s
     }
 }
 
-export const backgroundDefinitionReset = (definition: BackgroundDefinition, id: string): BackgroundInstance => {
+export const backgroundDefinitionReset = (definition: BackgroundDefinition, id?: string): BackgroundInstance => {
     return {
-        id,
+        id: id ?? "",
         abilityScoreDefinitionPlusTwo: null,
         abilityScoreDefinitionPlusOne: null,
         featInstance: featDefinitionResest(definition.featDefinition, "1"),
@@ -47,12 +47,12 @@ export const lineageDefinitionReset = (definition: LineageDefinition, id: string
     }
 } 
 
-export const speciesDefinitionReset = (definition: SpeciesDefinition, sizes: string[], id: string, lineageId: string): SpeciesInstance => {
+export const speciesDefinitionReset = (definition: SpeciesDefinition, id?: string, lineageId?: string): SpeciesInstance => {
     return {
-        id,
+        id: id ?? "",
         featInstances: definition.featDefinitions.map((feat) => featDefinitionResest(feat, "")!),
-        size: sizes[0],
-        lineageInstance: lineageDefinitionReset(definition.lineageDefinitions[0], lineageId),
+        size: definition.sizes[0],
+        lineageInstance: lineageDefinitionReset(definition.lineageDefinitions[0], lineageId ?? ""),
         definition
     }
 }

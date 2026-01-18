@@ -23,12 +23,17 @@ import { ArmorCategory } from "../types/dm-tool-types/enums/armorCategory";
 import type { SubclassInstance } from "../types/dm-tool-types/instances/subclassInstance";
 import { itemDefinitionTableToInstance } from "../dm-tools/instanceGenerators";
 import { ScoreAbbreviations, StandardScoresArray } from "../dm-tools/staticElements";
+import { generateEmptyCharacter } from "./initialCharacterSliceState";
+import type { AbilityScoreDefinition } from "../types/dm-tool-types/definitions/abilityScoreDefinition";
 
 export const selectedCharacterSlice = createSlice({
     name: "selectedCharacter",
     initialState: null as Character | null,
     reducers: {
-        setNewCharacter: (_state, action: PayloadAction<Character>) => {
+        setNewCharacter: (_state, action: PayloadAction<{characterClassDefinition: CharacterClassDefinition, backgroundDefinition: BackgroundDefinition, speciesDefinition: SpeciesDefinition, scoreDefinitions: AbilityScoreDefinition[]}>) => {
+            return generateEmptyCharacter(action.payload.characterClassDefinition, action.payload.backgroundDefinition, action.payload.speciesDefinition, action.payload.scoreDefinitions);
+        },
+        setCharacter: (_state, action: PayloadAction<Character>) => {
             return action.payload;
         },
         setName: (state, action: PayloadAction<string>) => {
@@ -70,7 +75,7 @@ export const selectedCharacterSlice = createSlice({
         },
         setSpeciesDefinition: (state, action: PayloadAction<SpeciesDefinition>) => {
             if (state) {
-                state.speciesInstance = speciesDefinitionReset(action.payload, action.payload.sizes, state.speciesInstance?.id ?? "", state.speciesInstance?.lineageInstance?.id ?? "");
+                state.speciesInstance = speciesDefinitionReset(action.payload, state.speciesInstance?.id ?? "", state.speciesInstance?.lineageInstance?.id ?? "");
             }
         },
         setLineageDefinition: (state, action: PayloadAction<LineageDefinition>) => {
@@ -575,5 +580,5 @@ export const selectPreparedSpells = createSelector(
 
 export const selectCharacterId = (state: RootState) => state.selectedCharacter.id;
 
-export const { setNewCharacter, setName, setAlignment, setCharacterClassDefinition, setCharacterClassItemSet, setBackgroundDefinition, setBackgroundScores, setBackgroundItemSet, setSpeciesDefinition, setLineageDefinition, setScore, setScores, swapScores, shiftStandardScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws, initializeNewCharacter, setItemEquipped } = selectedCharacterSlice.actions;
+export const { setNewCharacter, setCharacter, setName, setAlignment, setCharacterClassDefinition, setCharacterClassItemSet, setBackgroundDefinition, setBackgroundScores, setBackgroundItemSet, setSpeciesDefinition, setLineageDefinition, setScore, setScores, swapScores, shiftStandardScores, setScoresToStandard, setScoresToBase, setScoresToMinimum, setScoreToRandom, setScoresToRandom, addOneToScore, subtractOneFromScore, setScoresToClassDefault, setPhysicalDescription, setPersonality, setTraits, setIdeals, setBonds, setFlaws, initializeNewCharacter, setItemEquipped } = selectedCharacterSlice.actions;
 export default selectedCharacterSlice.reducer;

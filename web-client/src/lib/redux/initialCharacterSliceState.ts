@@ -1,5 +1,7 @@
 import { getStandardScores } from "../dm-tools/abilityScoreConstructors";
+import { backgroundDefinitionReset, classDefinitionReset, speciesDefinitionReset } from "../dm-tools/definitionResetConverters";
 import { Copper, Electum, Gold, Platinum, Silver } from "../dm-tools/staticElements";
+import type { AbilityScoreDefinition } from "../types/dm-tool-types/definitions/abilityScoreDefinition";
 import type { BackgroundDefinition } from "../types/dm-tool-types/definitions/backgroundDefinition";
 import type { CharacterClassDefinition } from "../types/dm-tool-types/definitions/characterClassDefinition";
 import type { LineageDefinition } from "../types/dm-tool-types/definitions/lineageDefinition";
@@ -139,19 +141,19 @@ export const generateEmptyWallet = (): Worth => {
     }
 }
 
-export const generateEmptyCharacter = (): Character => {
+export const generateEmptyCharacter = (characterClassDefinition?: CharacterClassDefinition, backgroundDefinition?: BackgroundDefinition, speciesDefinition?: SpeciesDefinition, scoreDefinitions?: AbilityScoreDefinition[]): Character => {
     return {
         id: "",
         name: "",
         alignment: "unaligned",
         hp: 1,
         tempHp: 0, 
-        primaryCharacterClassInstance: characterClass,
+        primaryCharacterClassInstance: characterClassDefinition != null ? classDefinitionReset(characterClassDefinition) : characterClass,
         secondaryCharacterClassInstance: null,
         tertiaryCharacterClassInstance: null,
-        backgroundInstance: background,
-        speciesInstance: species,
-        scores: getStandardScores(),
+        backgroundInstance: backgroundDefinition != null ? backgroundDefinitionReset(backgroundDefinition) :  background,
+        speciesInstance: speciesDefinition != null ? speciesDefinitionReset(speciesDefinition) : species,
+        scores: getStandardScores(scoreDefinitions),
         physicalDescription: "",
         personality: "",
         ideals: "",
