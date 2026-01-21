@@ -9,7 +9,7 @@ const NavigationLinks = ({className= "", btnClassNames = ""}: {className?: strin
             <NavLink to="/create-a-character" className={"btn btn-tertiary " + btnClassNames}>
                 <p>Create a Character</p>
             </NavLink>
-            <NavLink to="/character-display" className={"btn btn-tertiary " + btnClassNames}>
+            <NavLink to="/character-selection" className={"btn btn-tertiary " + btnClassNames}>
                 <p>Characters</p>
             </NavLink>
         </nav>

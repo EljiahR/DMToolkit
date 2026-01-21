@@ -1,3 +1,5 @@
+import type { DMUserDto } from "./dm-tool-types/user/dmUser";
+
 // Auth
 export type Token = {
     tokenType: string;
@@ -26,4 +28,10 @@ export type RegisterErrors = {
     additionalProp1: string;
     additionalProp2: string;
     additionalProp3: string;
+}
+
+export interface SignInReturn {
+    user: DMUserDto;
+    accessToken: string;
+    refreshToken: string;
 }

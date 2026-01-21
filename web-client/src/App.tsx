@@ -4,7 +4,6 @@ import CreatePlayerCharacterPage from "./pages/CreatePlayerCharacterPage";
 import Layout from "./Layout";
 import SignInPage from "./pages/SignInPage";
 import RegisterPage from "./pages/RegisterPage"
-import CharacterDisplay from "./pages/CharacterDisplay";
 import { TestProtectedPage } from "./pages/TestProtectedPage";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -12,6 +11,7 @@ import { apiGetStartupData } from "./lib/api";
 import { setAllFromDto } from "./lib/redux/dmToolsSlice";
 import seedData from "./assets/dm_seed_data.json"
 import { useAppSelector } from "./lib/redux/hooks";
+import CharacterSelectionPage from "./pages/CharacterSelectionPage";
 
 const App = () => {
     const abilityScoreDefinitions = useAppSelector((state) => state.dmTools.abilityScoreDefinitions);
@@ -47,7 +47,7 @@ const App = () => {
             <Route path="/" element={<Layout />} >
                 <Route index element={<HomePage />} />
                 <Route path="create-a-character" element={<CreatePlayerCharacterPage />} />
-                <Route path="character-display" element={<CharacterDisplay />} />
+                <Route path="character-selection" element={<CharacterSelectionPage />} />
                 <Route path="auth">
                     <Route path="sign-in" element={<SignInPage />} />
                     <Route path="register" element={<RegisterPage />} />

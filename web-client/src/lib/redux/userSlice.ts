@@ -1,22 +1,27 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { UserSlice } from "./types";
+import type { DMUser } from "../types/dm-tool-types/user/dmUser";
+import type { RootState } from "./store";
 
-const initialState: UserSlice = {
-    username: null
+const initialState: DMUser = {
+    id: null,
+    username: null,
+    characters: []
 };
 
 export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<string>) => {
-            state.username = action.payload;
+        setUser: (_state, action: PayloadAction<DMUser>) => {
+            return action.payload;
         },
-        clearUser: (state) => {
-            state.username = null;
+        clearUser: (_state) => {
+            return { id: null, username: null, characters: [] };
         }
     }
 });
+
+export const selectAllCharacters = (state: RootState) => state.user.characters;
 
 export const { setUser, clearUser } = userSlice.actions;
 
